@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Formularios"
+    android:background="@color/azul_novi"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del cliente"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nombreCliente"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                ></EditText>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellido del cliente"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/apellidoCliente"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Documento de identidad"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ciCliente"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:inputType="number"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Extension"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/extensionCliente"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lote a : "
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:id="@+id/radiogroup"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/aPlazo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plazo"
+                android:textColor="@color/white"
+                android:theme="@style/radiobuttonWhite"
+                android:shadowColor="@color/white"
+                android:textColorHighlight="@color/white"
+
+                />
+            <RadioButton
+                android:id="@+id/aContado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:theme="@style/radiobuttonWhite"
+                android:shadowColor="@color/white"
+                android:textColorHighlight="@color/white"
+                android:text="Contado"
+
+                />
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urbanizacion"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+
+        <Spinner
+            android:id="@+id/urbanizacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/SpinnerUrbanizacion"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proyecto: "
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/idProyecto"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UV: "
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/uv"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MZ: "
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mz"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lote: "
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lt"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cat: "
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cat"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asesor de Venta"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fullnameAsesor"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Codigo Asesor"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            ></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/codigoAsesor"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btguardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar y Generar"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/azul_novi"
+            android:textStyle="bold"
+            >
+        </Button>
+    </LinearLayout>
+
+
+</LinearLayout>
