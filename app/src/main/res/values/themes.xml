@@ -1,14 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.NovitierraApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.NovitierraApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/azul_novi</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/azul_novi</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/azul_novi</item>
-        <item name="colorSecondaryVariant">@color/amarillo</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/azul_novi</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -17,6 +17,17 @@
     <style name="Theme.NovitierraApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/azul_novi</item>
+        <item name="colorPrimaryVariant">@color/azul_novi</item>
+        <item name="colorOnPrimary">@color/azul_novi</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/azul_novi</item>
+        <item name="colorSecondaryVariant">@color/azul_novi</item>
+        <item name="colorOnSecondary">@color/azul_novi</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="radiobuttonWhite" parent="Theme.MaterialComponents.DayNight.DarkActionBar">

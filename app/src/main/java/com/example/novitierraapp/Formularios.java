@@ -1,13 +1,25 @@
 package com.example.novitierraapp;
 
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +33,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Formularios extends Fragment {
@@ -34,6 +51,9 @@ public class Formularios extends Fragment {
     Button guardar;
     Proyectos proyectos;
     ArrayList<Proyectos> listaProyectos = new ArrayList<>();
+    Bitmap bmp, scaledbmp;
+
+    int pageWidth=1200;
 
     public static Formularios newInstance() {
         return new Formularios();
@@ -58,6 +78,8 @@ public class Formularios extends Fragment {
         spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+        scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
 
         rb_plazo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +103,17 @@ public class Formularios extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        ActivityCompat.requestPermissions(getActivity(),new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generarPDF(v);
+                Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -116,6 +149,71 @@ public class Formularios extends Fragment {
         listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
+    }
+
+    public void generarPDF (View v){
+        PdfDocument myPDF = new PdfDocument();
+        Paint myPaint = new Paint();
+        Paint titlePaint = new Paint();
+        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+        PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
+        Canvas canvas = myPage1.getCanvas();
+
+        //logo
+        canvas.drawBitmap(scaledbmp,20,20,myPaint);
+
+
+
+//        titlePaint.setTextAlign(Paint.Align.CENTER);
+//        titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+//        titlePaint.setTextSize(70);
+//        canvas.drawText("Novitierra",pageWidth/2,270,titlePaint);
+
+        myPaint.setTextAlign(Paint.Align.LEFT);
+        myPaint.setTextSize(30f);
+        myPaint.setColor(Color.BLACK);
+        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+
+        titlePaint.setTextAlign(Paint.Align.LEFT);
+        titlePaint.setTextSize(30f);
+        titlePaint.setColor(Color.BLACK);
+
+        canvas.drawText("Urbanizacion: ",350,190,myPaint);
+        canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),570,190,titlePaint);
+        canvas.drawText("Nombre del Cliente: ",30,250,myPaint);
+        canvas.drawText(nombre_cliente.getText().toString()+" "+apellido_cliente.getText().toString(),340,250,titlePaint);
+        canvas.drawText("Documento de Identidad: ",30,290,myPaint);
+        canvas.drawText(ci_cliente.getText().toString(),380,290,titlePaint);
+        canvas.drawText("Extension: ",550,290,myPaint);
+        canvas.drawText(extension_cliente.getText().toString(),710,290,titlePaint);
+        canvas.drawText("N° de Reserva: ",780,290,myPaint);
+        canvas.drawText("Codigo del Cliente: ",30,330,myPaint);
+        canvas.drawText("Pago a: ",410,330,myPaint);
+        canvas.drawText(rbSelected.getText().toString(),520,330,titlePaint);
+        canvas.drawText("N° de Contrato: ",780,330,myPaint);
+        canvas.drawText("Proyecto: ",30,370,myPaint);
+        canvas.drawText(codigo_proyecto.getText().toString(),170,370,titlePaint);
+        canvas.drawText("UV: ",240,370,myPaint);
+        canvas.drawText(uv.getText().toString(),310,370,titlePaint);
+        canvas.drawText("Mz: ",360,370,myPaint);
+        canvas.drawText(mz.getText().toString(),420,370,titlePaint);
+        canvas.drawText("Lote: ",480,370,myPaint);
+        canvas.drawText(lt.getText().toString(),560,370,titlePaint);
+        canvas.drawText("Categoria: ",620,370,myPaint);
+        canvas.drawText(cat.getText().toString(),780,370,titlePaint);
+        canvas.drawText("Nombre y Apellido del Asesor de Inversion: ",30,410,myPaint);
+        canvas.drawText(asesor.getText().toString(),620,410,titlePaint);
+        canvas.drawText("Codigo Asesor: ",30,450,myPaint);
+        canvas.drawText(codigo_asesor.getText().toString(),250,450,titlePaint);
+        myPDF.finishPage(myPage1);
+        File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
+        try {
+            myPDF.writeTo(new FileOutputStream(file));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        myPDF.close();
     }
 
 }
