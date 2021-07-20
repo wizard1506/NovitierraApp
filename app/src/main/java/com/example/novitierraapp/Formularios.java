@@ -159,16 +159,13 @@ public class Formularios extends Fragment {
         PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
         Canvas canvas = myPage1.getCanvas();
 
-        //logo
+        //logo e imagen final
         canvas.drawBitmap(scaledbmp,20,20,myPaint);
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
+        scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,47,false);
+        canvas.drawBitmap(scaledbmp,0,490,myPaint);
 
-
-
-//        titlePaint.setTextAlign(Paint.Align.CENTER);
-//        titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-//        titlePaint.setTextSize(70);
-//        canvas.drawText("Novitierra",pageWidth/2,270,titlePaint);
-
+        ////PAGINA 1 //////
         myPaint.setTextAlign(Paint.Align.LEFT);
         myPaint.setTextSize(30f);
         myPaint.setColor(Color.BLACK);
@@ -205,6 +202,12 @@ public class Formularios extends Fragment {
         canvas.drawText(asesor.getText().toString(),620,410,titlePaint);
         canvas.drawText("Codigo Asesor: ",30,450,myPaint);
         canvas.drawText(codigo_asesor.getText().toString(),250,450,titlePaint);
+        //// FIN PAGINA 1/////
+
+
+
+
+
         myPDF.finishPage(myPage1);
         File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
         try {
