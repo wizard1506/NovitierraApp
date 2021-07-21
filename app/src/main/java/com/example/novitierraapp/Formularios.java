@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,17 +42,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
-    EditText nombre_cliente, apellido_cliente, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor;
+    EditText nombre_cliente, apellido_cliente, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac;
     RadioGroup radioGroup;
     RadioButton rb_plazo, rb_contado, rbSelected;
     Spinner spinner_urbanizacion;
     TextView codigo_proyecto;
-    Button guardar;
+    Button guardar, btFechaNac;
     Proyectos proyectos;
+    DatePickerDialog datePickerDialog;
     ArrayList<Proyectos> listaProyectos = new ArrayList<>();
     Bitmap bmp, scaledbmp;
 
@@ -66,6 +71,7 @@ public class Formularios extends Fragment {
         apellido_cliente= view.findViewById(R.id.apellidoCliente);
         ci_cliente = view.findViewById(R.id.ciCliente);
         extension_cliente = view.findViewById(R.id.extensionCliente);
+        fechaNac = view.findViewById(R.id.fechaNacimiento);
         uv= view.findViewById(R.id.uv);
         mz=view.findViewById(R.id.mz);
         lt= view.findViewById(R.id.lt);
@@ -78,6 +84,16 @@ public class Formularios extends Fragment {
         spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
+        btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
+        fechaNac.setText(fechaHoy());
+        ////boton fecha nacimiento
+        btFechaNac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDatePicker(v);
+            }
+        });
+        iniciarDatePicker();
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
         scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
 
@@ -118,6 +134,41 @@ public class Formularios extends Fragment {
         });
 
     }
+
+    private String fechaHoy(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month=month+1;
+        int day= cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day,month,year);
+    }
+
+    private void iniciarDatePicker() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month+1;
+                String date = makeDateString(day,month,year);
+                fechaNac.setText(date);
+            }
+        };
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day= cal.get(Calendar.DAY_OF_MONTH);
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+        datePickerDialog = new DatePickerDialog(getContext(),style,dateSetListener,year,month,day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+    }
+
+    private String makeDateString(int day, int month, int year) {
+        return day+"/"+month+"/" + year;
+    }
+    public void openDatePicker(View v){
+        datePickerDialog.show();
+    }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

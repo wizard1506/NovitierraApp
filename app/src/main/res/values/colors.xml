@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="amarillo">#F8E64A</color>
+    <color name="amarillo">#FFC107</color>
     <color name="verde">#0C972A</color>
     <color name="azul_novi">#153FBC</color>
     <color name="teal_200">#FF03DAC5</color>
