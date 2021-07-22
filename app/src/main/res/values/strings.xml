@@ -13,4 +13,10 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="SpinnerUrbanizacion">Urbanizaciones</string>
+    <string name="SpinnerIdentificacion">Tipo de Identificacion</string>
+    <string name="SpinnerEstadoCivil">Estado Civil</string>
+    <string name="SpinnerNivelEstudio">Nivel de Estudio</string>
+    <string name="SpinnerTipoVivienda">Tipo de Vivienda</string>
+    <string name="SpinnerDpto">Departamento</string>
+    <string name="SpinnerTenencia">Tenencia</string>
 </resources>

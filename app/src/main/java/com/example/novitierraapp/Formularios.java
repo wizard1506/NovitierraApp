@@ -4,7 +4,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
@@ -36,11 +35,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.novitierraapp.entidades.Proyectos;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -48,14 +47,20 @@ public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
     EditText nombre_cliente, apellido_cliente, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac;
-    RadioGroup radioGroup;
-    RadioButton rb_plazo, rb_contado, rbSelected;
-    Spinner spinner_urbanizacion;
+    RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos;
+    RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero,rbSelectedMonedaVivienda,rbViviendaBs,rbViviendaDolar, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos;
+    Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia;
     TextView codigo_proyecto;
     Button guardar, btFechaNac;
     Proyectos proyectos;
     DatePickerDialog datePickerDialog;
     ArrayList<Proyectos> listaProyectos = new ArrayList<>();
+    ArrayList<String> listaIdentificacion = new ArrayList<>();
+    ArrayList<String> listaEstadoCivil = new ArrayList<>();
+    ArrayList<String> listaNivelEstudio = new ArrayList<>();
+    ArrayList<String> listaTipoVivienda = new ArrayList<>();
+    ArrayList<String> listaDpto = new ArrayList<>();
+    ArrayList<String> listaTenencia = new ArrayList<>();
     Bitmap bmp, scaledbmp;
 
     int pageWidth=1200;
@@ -78,10 +83,30 @@ public class Formularios extends Fragment {
         cat=view.findViewById(R.id.lt);
         asesor=view.findViewById(R.id.fullnameAsesor);
         codigo_asesor= view.findViewById(R.id.codigoAsesor);
+        ////radioButtons y RadioGroups
         radioGroup = view.findViewById(R.id.radiogroup);
+        radioGroupGenero=view.findViewById(R.id.radiogroupGenero);
+        radioGroupVivienda = view.findViewById(R.id.radiogroupVivienda);
+        radioGroupIngresos = view.findViewById(R.id.radiogroupIngresos);
+
         rb_plazo = view.findViewById(R.id.aPlazo);
         rb_contado= view.findViewById(R.id.aContado);
+        rbMasculino= view.findViewById(R.id.masculino);
+        rbFemenino= view.findViewById(R.id.femenino);
+        rbViviendaBs=view.findViewById(R.id.viviendaBs);
+        rbViviendaDolar=view.findViewById(R.id.viviendaDolar);
+        rbIngresosBs=view.findViewById(R.id.ingresosBs);
+        rbIngresosDolar=view.findViewById(R.id.ingresosDolar);
+
+
         spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
+        spinnerIdentificacion= view.findViewById(R.id.tipoIdentificacion);
+        spinnerEstadoCivil= view.findViewById(R.id.estadoCivil);
+        spinnerNivelEstudio= view.findViewById(R.id.nivelEstudio);
+        spinnerTipoVivienda= view.findViewById(R.id.tipoVivienda);
+        spinnerDpto= view.findViewById(R.id.dptoBolivia);
+        spinnerTenencia= view.findViewById(R.id.tenencia);
+
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
         btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
@@ -97,6 +122,8 @@ public class Formularios extends Fragment {
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
         scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
 
+
+        ////funcion de los Radiobutton y radioGroups
         rb_plazo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +136,51 @@ public class Formularios extends Fragment {
                 RBseleccionado(v);
             }
         });
+        rbMasculino.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbSeleccionGenero(v);
+            }
+
+        });
+        rbFemenino.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbSeleccionGenero(v);
+            }
+        });
+        rbViviendaBs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbMonedaVivienda(v);
+            }
+        });
+        rbViviendaDolar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbMonedaVivienda(v);
+            }
+        });
+        rbIngresosBs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbSeleccionIngresos(v);
+            }
+        });
+        rbIngresosDolar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbSeleccionIngresos(v);
+            }
+        });
+        /////cargamos los spinners
+        cargarListaTipoIdentificacion(view);
+        cargarListaEstadoCivil(view);
         cargarListaUrbanizacion(view);
+        cargarListaNivelEstudio(view);
+        cargarListaTipoVivienda(view);
+        cargarListaDpto(view);
+        cargarListaTenencia(view);
         spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -121,6 +192,8 @@ public class Formularios extends Fragment {
 
             }
         });
+
+
 
         ActivityCompat.requestPermissions(getActivity(),new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
@@ -134,6 +207,9 @@ public class Formularios extends Fragment {
         });
 
     }
+
+
+
 
     private String fechaHoy(){
         Calendar cal = Calendar.getInstance();
@@ -187,8 +263,22 @@ public class Formularios extends Fragment {
     public void RBseleccionado(View v){
         int radiobtid = radioGroup.getCheckedRadioButtonId();
         rbSelected = v.findViewById(radiobtid);
-        Toast.makeText(getContext(),"seleccionaste: "+ rbSelected.getText(),Toast.LENGTH_SHORT).show();
     }
+
+    private void rbSeleccionGenero(View v) {
+        int radiobtid = radioGroupGenero.getCheckedRadioButtonId();
+        rbSelectedGenero = v.findViewById(radiobtid);
+    }
+
+    private void rbMonedaVivienda(View v) {
+        int radiobtid = radioGroupVivienda.getCheckedRadioButtonId();
+        rbSelectedMonedaVivienda = v.findViewById(radiobtid);
+    }
+    private void rbSeleccionIngresos(View v) {
+        int radiobtid = radioGroupIngresos.getCheckedRadioButtonId();
+        rbSelectedIngresos = v.findViewById(radiobtid);
+    }
+
 
     public void cargarListaUrbanizacion(View v){
 
@@ -202,6 +292,68 @@ public class Formularios extends Fragment {
         spinner_urbanizacion.setAdapter(adapter);
     }
 
+    public void cargarListaTipoIdentificacion(View v){
+        listaIdentificacion.add("Carnet de Identidad");
+        listaIdentificacion.add("Pasaporte");
+        listaIdentificacion.add("Carnet Extranjero");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaIdentificacion);
+        spinnerIdentificacion.setAdapter(adapter);
+    }
+
+    public void cargarListaEstadoCivil(View v){
+        listaEstadoCivil.add("Casado");
+        listaEstadoCivil.add("Soltero");
+        listaEstadoCivil.add("Divorciado");
+        listaEstadoCivil.add("Viudo");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaEstadoCivil);
+        spinnerEstadoCivil.setAdapter(adapter);
+    }
+
+    public void cargarListaNivelEstudio(View v){
+        listaNivelEstudio.add("Primaria");
+        listaNivelEstudio.add("Secundaria");
+        listaNivelEstudio.add("Tecnico Medio");
+        listaNivelEstudio.add("Tecnico Superior");
+        listaNivelEstudio.add("Licenciatura");
+        listaNivelEstudio.add("Ninguno");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaNivelEstudio);
+        spinnerNivelEstudio.setAdapter(adapter);
+    }
+
+    public void cargarListaTipoVivienda(View v){
+        listaTipoVivienda.add("Dpto");
+        listaTipoVivienda.add("Casa");
+        listaTipoVivienda.add("Cuarto");
+        listaTipoVivienda.add("Terreno");
+        listaTipoVivienda.add("Otro");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTipoVivienda);
+        spinnerTipoVivienda.setAdapter(adapter);
+    }
+
+    public void cargarListaDpto(View v){
+        listaDpto.add("Santa Cruz");
+        listaDpto.add("La Paz");
+        listaDpto.add("Cochabamba");
+        listaDpto.add("Beni");
+        listaDpto.add("Pando");
+        listaDpto.add("Oruro");
+        listaDpto.add("Potosi");
+        listaDpto.add("Tarija");
+        listaDpto.add("Chuquisaca");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
+        spinnerDpto.setAdapter(adapter);
+    }
+
+    public void cargarListaTenencia(View view) {
+        listaTenencia.add("Propia");
+        listaTenencia.add("Alquiler");
+        listaTenencia.add("Anticretico");
+        listaTenencia.add("Otro");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTenencia);
+        spinnerTenencia.setAdapter(adapter);
+    }
+
+/////boton generador de pdf/////
     public void generarPDF (View v){
         PdfDocument myPDF = new PdfDocument();
         Paint myPaint = new Paint();

@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
-                android:prompt="@string/SpinnerUrbanizacion"
+                android:prompt="@string/SpinnerIdentificacion"
                 />
 
         </LinearLayout>
@@ -264,7 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
-                android:prompt="@string/SpinnerUrbanizacion"
+                android:prompt="@string/SpinnerEstadoCivil"
                 />
         </LinearLayout>
 
@@ -330,7 +330,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
-                android:prompt="@string/SpinnerUrbanizacion"
+                android:prompt="@string/SpinnerNivelEstudio"
                 />
 
         </LinearLayout>
@@ -394,7 +394,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
-                android:prompt="@string/SpinnerUrbanizacion"
+                android:prompt="@string/SpinnerTipoVivienda"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tenencia:"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                ></TextView>
+
+            <Spinner
+                android:id="@+id/tenencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:prompt="@string/SpinnerTenencia"
                 />
 
         </LinearLayout>
@@ -413,13 +437,41 @@
                 android:layout_marginStart="10dp"
                 ></TextView>
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/costoAprox"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
                 ></EditText>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:id="@+id/radiogroupVivienda"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/viviendaBs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bs"
+                    android:textColor="@color/white"
+                    android:theme="@style/radiobuttonWhite"
+                    android:shadowColor="@color/white"
+                    android:textColorHighlight="@color/white"
+
+                    />
+                <RadioButton
+                    android:id="@+id/viviendaDolar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:theme="@style/radiobuttonWhite"
+                    android:shadowColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:text="$us"
+                    />
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -512,7 +564,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
-                android:prompt="@string/SpinnerUrbanizacion"
+                android:prompt="@string/SpinnerDpto"
                 />
 
         </LinearLayout>
@@ -825,7 +877,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
-                    android:id="@+id/bs"
+                    android:id="@+id/ingresosBs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bs."
@@ -836,7 +888,7 @@
 
                     />
                 <RadioButton
-                    android:id="@+id/dolar"
+                    android:id="@+id/ingresosDolar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"

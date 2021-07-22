@@ -1,4 +1,4 @@
-package com.example.novitierraapp;
+package com.example.novitierraapp.entidades;
 
 import androidx.annotation.NonNull;
 
