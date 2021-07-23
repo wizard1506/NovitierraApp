@@ -1,5 +1,6 @@
 package com.example.novitierraapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -354,10 +356,12 @@ public class Formularios extends Fragment {
     }
 
 /////boton generador de pdf/////
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (View v){
         PdfDocument myPDF = new PdfDocument();
         Paint myPaint = new Paint();
         Paint titlePaint = new Paint();
+        Paint formas = new Paint();
         PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
         PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
         Canvas canvas = myPage1.getCanvas();
@@ -378,10 +382,17 @@ public class Formularios extends Fragment {
         titlePaint.setTextSize(30f);
         titlePaint.setColor(Color.BLACK);
 
+        formas.setColor(Color.BLACK);
+        formas.setStyle(Paint.Style.STROKE);
+        formas.setStrokeWidth(3);
+
+
         canvas.drawText("Urbanizacion: ",350,190,myPaint);
+        canvas.drawRoundRect(1100,200,560,160,10,10,formas);
         canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),570,190,titlePaint);
         canvas.drawText("Nombre del Cliente: ",30,250,myPaint);
         canvas.drawText(nombre_cliente.getText().toString()+" "+apellido_cliente.getText().toString(),340,250,titlePaint);
+        canvas.drawRoundRect(1100,258,320,220,10,10,formas);
         canvas.drawText("Documento de Identidad: ",30,290,myPaint);
         canvas.drawText(ci_cliente.getText().toString(),380,290,titlePaint);
         canvas.drawText("Extension: ",550,290,myPaint);
