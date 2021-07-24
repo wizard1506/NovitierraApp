@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.system.ErrnoException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ import com.example.novitierraapp.entidades.Proyectos;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -82,7 +84,7 @@ public class Formularios extends Fragment {
         uv= view.findViewById(R.id.uv);
         mz=view.findViewById(R.id.mz);
         lt= view.findViewById(R.id.lt);
-        cat=view.findViewById(R.id.lt);
+        cat=view.findViewById(R.id.cat);
         asesor=view.findViewById(R.id.fullnameAsesor);
         codigo_asesor= view.findViewById(R.id.codigoAsesor);
         ////radioButtons y RadioGroups
@@ -121,9 +123,6 @@ public class Formularios extends Fragment {
             }
         });
         iniciarDatePicker();
-        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
-        scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
-
 
         ////funcion de los Radiobutton y radioGroups
         rb_plazo.setOnClickListener(new View.OnClickListener() {
@@ -196,15 +195,21 @@ public class Formularios extends Fragment {
         });
 
 
-
+        ////para el boton del pdf
         ActivityCompat.requestPermissions(getActivity(),new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generarPDF(v);
-                Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
+                if (rb_contado.isChecked()||rb_plazo.isChecked()){
+                    generarPDF(v);
+                    Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(getContext(),"Selecciona plazo o contado",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -358,79 +363,132 @@ public class Formularios extends Fragment {
 /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (View v){
-        PdfDocument myPDF = new PdfDocument();
-        Paint myPaint = new Paint();
-        Paint titlePaint = new Paint();
-        Paint formas = new Paint();
-        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
-        PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
-        Canvas canvas = myPage1.getCanvas();
 
-        //logo e imagen final
-        canvas.drawBitmap(scaledbmp,20,20,myPaint);
-        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
-        scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,47,false);
-        canvas.drawBitmap(scaledbmp,0,490,myPaint);
+            PdfDocument myPDF = new PdfDocument();
+            Paint myPaint = new Paint();
+            Paint titlePaint = new Paint();
+            Paint formas = new Paint();
+            Paint formas2 = new Paint();
 
-        ////PAGINA 1 //////
-        myPaint.setTextAlign(Paint.Align.LEFT);
-        myPaint.setTextSize(30f);
-        myPaint.setColor(Color.BLACK);
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+            myPaint.setTextAlign(Paint.Align.LEFT);
+            myPaint.setTextSize(30f);
+            myPaint.setColor(Color.BLACK);
+            myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
 
-        titlePaint.setTextAlign(Paint.Align.LEFT);
-        titlePaint.setTextSize(30f);
-        titlePaint.setColor(Color.BLACK);
+            titlePaint.setTextAlign(Paint.Align.LEFT);
+            titlePaint.setTextSize(30f);
+            titlePaint.setColor(Color.BLACK);
 
-        formas.setColor(Color.BLACK);
-        formas.setStyle(Paint.Style.STROKE);
-        formas.setStrokeWidth(3);
+            formas.setColor(Color.BLACK);
+            formas.setStyle(Paint.Style.STROKE);
+            formas.setStrokeWidth(2);
+
+            formas2.setColor(Color.BLACK);
+            formas2.setStyle(Paint.Style.STROKE);
+            formas2.setStrokeWidth(2);
+
+            ////definimos pagina 1
+            PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+            PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
+            Canvas canvas = myPage1.getCanvas();
+
+            ////PAGINA 1 //////
+
+            //logo e imagen final
+            ////dibujamos el logo principal
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
+            canvas.drawBitmap(scaledbmp,20,20,myPaint);
+            ////dibujamos la parte inferior
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,47,false);
+            canvas.drawBitmap(scaledbmp,0,490,myPaint);
+
+            canvas.drawText("Urbanizacion: ",350,190,myPaint);
+            canvas.drawRoundRect(1100,200,560,160,10,10,formas);
+            canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),570,190,titlePaint);
+            canvas.drawText("Nombre del Cliente: ",30,250,myPaint);
+            canvas.drawText(nombre_cliente.getText().toString()+" "+apellido_cliente.getText().toString(),340,250,titlePaint);
+            canvas.drawRoundRect(1100,258,320,220,10,10,formas);
+            canvas.drawText("Documento de Identidad: ",30,290,myPaint);
+            canvas.drawText(ci_cliente.getText().toString(),380,290,titlePaint);
+            canvas.drawRoundRect(545,301,376,265,10,10,formas);
+            canvas.drawText("Extension: ",550,290,myPaint);
+            canvas.drawText(extension_cliente.getText().toString(),710,290,titlePaint);
+            canvas.drawRoundRect(697,301,777,265,10,10,formas2);
+            canvas.drawText("N° de Reserva: ",780,290,myPaint);
+            canvas.drawRoundRect(1100,301,990,265,10,10,formas);
+            canvas.drawText("Codigo del Cliente: ",30,330,myPaint);
+            canvas.drawRoundRect(297,305,400,335,10,10,formas2);
+            canvas.drawText("Pago a: ",410,330,myPaint);
+            canvas.drawText(rbSelected.getText().toString(),520,330,titlePaint);
+            canvas.drawRoundRect(513,305,690,335,10,10,formas);
+            canvas.drawText("N° de Contrato: ",780,330,myPaint);
+            canvas.drawRoundRect(1100,305,997,335,10,10,formas2);
+            canvas.drawText("Proyecto: ",30,370,myPaint);
+            canvas.drawText(codigo_proyecto.getText().toString(),170,370,titlePaint);
+            canvas.drawText("UV: ",240,370,myPaint);
+            canvas.drawText(uv.getText().toString(),310,370,titlePaint);
+            canvas.drawText("Mz: ",360,370,myPaint);
+            canvas.drawText(mz.getText().toString(),420,370,titlePaint);
+            canvas.drawText("Lote: ",480,370,myPaint);
+            canvas.drawText(lt.getText().toString(),560,370,titlePaint);
+            canvas.drawText("Categoria: ",620,370,myPaint);
+            canvas.drawText(cat.getText().toString(),780,370,titlePaint);
+            canvas.drawText("Nombre y Apellido del Asesor de Inversion: ",30,410,myPaint);
+            canvas.drawText(asesor.getText().toString(),620,410,titlePaint);
+            canvas.drawRoundRect(1100,384,617,419,10,10,formas);
+            canvas.drawText("Codigo Asesor: ",30,450,myPaint);
+            canvas.drawText(codigo_asesor.getText().toString(),250,450,titlePaint);
+            canvas.drawRoundRect(1100,425,240,460,10,10,formas2);
+            myPDF.finishPage(myPage1);
+            //// FIN PAGINA 1/////
+
+            //////PAGINA 2
+        ////definimos pagina 2
+            PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+            PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
+            Canvas canvas2 = myPage2.getCanvas();
+
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
+            canvas2.drawBitmap(scaledbmp,20,20,myPaint);
+
+            titlePaint.setTextAlign(Paint.Align.CENTER);
+            titlePaint.setTextSize(40f);
+            titlePaint.setColor(Color.BLACK);
+            titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+            canvas2.drawText("DATOS PERSONALES DEL CLIENTE",600,200,titlePaint);
+
+            titlePaint.setTextAlign(Paint.Align.LEFT);
+            titlePaint.setTextSize(30f);
+            titlePaint.setColor(Color.BLACK);
+
+            canvas2.drawText("Codigo Cliente",800,250,myPaint);
+            canvas2.drawRoundRect(1100,255,800,310,10,10,formas2);
+            canvas2.drawText("Apellido Paterno",100,320,myPaint);
+            canvas2.drawRoundRect(100,325,400,380,10,10,formas);
+            canvas2.drawText("Apellido Materno",500,320,myPaint);
+            canvas2.drawRoundRect(500,325,800,380,10,10,formas2);
+            canvas2.drawText("Nombres",100,420,myPaint);
+            canvas2.drawRoundRect(100,425,400,480,10,10,formas);
+
+            myPDF.finishPage(myPage2);
 
 
-        canvas.drawText("Urbanizacion: ",350,190,myPaint);
-        canvas.drawRoundRect(1100,200,560,160,10,10,formas);
-        canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),570,190,titlePaint);
-        canvas.drawText("Nombre del Cliente: ",30,250,myPaint);
-        canvas.drawText(nombre_cliente.getText().toString()+" "+apellido_cliente.getText().toString(),340,250,titlePaint);
-        canvas.drawRoundRect(1100,258,320,220,10,10,formas);
-        canvas.drawText("Documento de Identidad: ",30,290,myPaint);
-        canvas.drawText(ci_cliente.getText().toString(),380,290,titlePaint);
-        canvas.drawText("Extension: ",550,290,myPaint);
-        canvas.drawText(extension_cliente.getText().toString(),710,290,titlePaint);
-        canvas.drawText("N° de Reserva: ",780,290,myPaint);
-        canvas.drawText("Codigo del Cliente: ",30,330,myPaint);
-        canvas.drawText("Pago a: ",410,330,myPaint);
-        canvas.drawText(rbSelected.getText().toString(),520,330,titlePaint);
-        canvas.drawText("N° de Contrato: ",780,330,myPaint);
-        canvas.drawText("Proyecto: ",30,370,myPaint);
-        canvas.drawText(codigo_proyecto.getText().toString(),170,370,titlePaint);
-        canvas.drawText("UV: ",240,370,myPaint);
-        canvas.drawText(uv.getText().toString(),310,370,titlePaint);
-        canvas.drawText("Mz: ",360,370,myPaint);
-        canvas.drawText(mz.getText().toString(),420,370,titlePaint);
-        canvas.drawText("Lote: ",480,370,myPaint);
-        canvas.drawText(lt.getText().toString(),560,370,titlePaint);
-        canvas.drawText("Categoria: ",620,370,myPaint);
-        canvas.drawText(cat.getText().toString(),780,370,titlePaint);
-        canvas.drawText("Nombre y Apellido del Asesor de Inversion: ",30,410,myPaint);
-        canvas.drawText(asesor.getText().toString(),620,410,titlePaint);
-        canvas.drawText("Codigo Asesor: ",30,450,myPaint);
-        canvas.drawText(codigo_asesor.getText().toString(),250,450,titlePaint);
-        //// FIN PAGINA 1/////
 
 
+//            //////FIN PAGINA 2 /////
 
+            File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
+            try {
+                myPDF.writeTo(new FileOutputStream(file));
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            myPDF.close();
 
-        myPDF.finishPage(myPage1);
-        File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
-        try {
-            myPDF.writeTo(new FileOutputStream(file));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        myPDF.close();
     }
 
 }

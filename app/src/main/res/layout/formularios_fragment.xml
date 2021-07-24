@@ -1084,18 +1084,19 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/radiogroup"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
+
                 <RadioButton
                     android:id="@+id/aPlazo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:shadowColor="@color/white"
                     android:text="Plazo"
                     android:textColor="@color/white"
-                    android:theme="@style/radiobuttonWhite"
-                    android:shadowColor="@color/white"
                     android:textColorHighlight="@color/white"
-
-                    />
+                    android:theme="@style/radiobuttonWhite" />
                 <RadioButton
                     android:id="@+id/aContado"
                     android:layout_width="wrap_content"
@@ -1157,10 +1158,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -1170,12 +1171,13 @@
                 android:layout_marginStart="10dp"
                 ></TextView>
             <EditText
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/uv"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 ></EditText>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -1185,7 +1187,7 @@
                 android:layout_marginStart="10dp"
                 ></TextView>
             <EditText
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/mz"
                 android:layout_marginEnd="10dp"
@@ -1200,7 +1202,7 @@
                 android:layout_marginStart="10dp"
                 ></TextView>
             <EditText
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lt"
                 android:layout_marginEnd="10dp"
@@ -1215,12 +1217,13 @@
                 android:layout_marginStart="10dp"
                 ></TextView>
             <EditText
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cat"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 ></EditText>
+
         </LinearLayout>
 
         <LinearLayout
