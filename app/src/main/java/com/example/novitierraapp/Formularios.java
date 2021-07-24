@@ -472,12 +472,24 @@ public class Formularios extends Fragment {
             canvas2.drawRoundRect(500,325,800,380,10,10,formas2);
             canvas2.drawText("Nombres",100,420,myPaint);
             canvas2.drawRoundRect(100,425,400,480,10,10,formas);
-
+            canvas2.drawText("Apellido de Casada",500,420,myPaint);
+            canvas2.drawRoundRect(500,425,800,480,10,10,formas2);
+            canvas2.drawText("Prefijo",850,420,myPaint);
+            canvas2.drawRoundRect(850,425,1100,480,10,10,formas);
+            canvas2.drawText("Tipo de Identificacion:",100,520,myPaint);
+            canvas2.drawText("N° de Documento:",100,550,myPaint);
+            canvas2.drawText("Extension:",100,580,myPaint);
+            canvas2.drawText("Nacionalidad:",100,610,myPaint);
+            canvas2.drawText("Fecha de Nacimiento:",100,640,myPaint);
+            canvas2.drawText("Estado Civil:",100,670,myPaint);
+            canvas2.drawText("Sexo:",100,700,myPaint);
+            canvas2.drawText("Nivel de Estudio:",600,550,myPaint);
+            canvas2.drawText("Profesion/Ocupacion:",600,580,myPaint);
+            canvas2.drawText("Datos de Vivienda:",600,610,myPaint);
+            canvas2.drawText("Tipo de Vivienda:",600,640,myPaint);
+            canvas2.drawText("Tipo de Vivienda:",600,670,myPaint);
+            canvas2.drawRoundRect(95,490,1100,720,10,10,formas);
             myPDF.finishPage(myPage2);
-
-
-
-
 //            //////FIN PAGINA 2 /////
 
             File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
