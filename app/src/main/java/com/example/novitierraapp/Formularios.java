@@ -50,7 +50,7 @@ import java.util.Calendar;
 public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
-    EditText nombre_cliente, apellido_cliente, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac;
+    EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero,rbSelectedMonedaVivienda,rbViviendaBs,rbViviendaDolar, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia;
@@ -77,7 +77,8 @@ public class Formularios extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         nombre_cliente = view.findViewById(R.id.nombreCliente);
-        apellido_cliente= view.findViewById(R.id.apellidoCliente);
+        apellidoPaterno= view.findViewById(R.id.apellidoPCliente);
+        apellidoMaterno= view.findViewById(R.id.apellidoMCliente);
         ci_cliente = view.findViewById(R.id.ciCliente);
         extension_cliente = view.findViewById(R.id.extensionCliente);
         fechaNac = view.findViewById(R.id.fechaNacimiento);
@@ -371,12 +372,12 @@ public class Formularios extends Fragment {
             Paint formas2 = new Paint();
 
             myPaint.setTextAlign(Paint.Align.LEFT);
-            myPaint.setTextSize(30f);
+            myPaint.setTextSize(20f);
             myPaint.setColor(Color.BLACK);
             myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
 
             titlePaint.setTextAlign(Paint.Align.LEFT);
-            titlePaint.setTextSize(30f);
+            titlePaint.setTextSize(20f);
             titlePaint.setColor(Color.BLACK);
 
             formas.setColor(Color.BLACK);
@@ -401,46 +402,60 @@ public class Formularios extends Fragment {
             canvas.drawBitmap(scaledbmp,20,20,myPaint);
             ////dibujamos la parte inferior
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,47,false);
-            canvas.drawBitmap(scaledbmp,0,490,myPaint);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
+            canvas.drawBitmap(scaledbmp,0,600,myPaint);
 
             canvas.drawText("Urbanizacion: ",350,190,myPaint);
-            canvas.drawRoundRect(1100,200,560,160,10,10,formas);
-            canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),570,190,titlePaint);
-            canvas.drawText("Nombre del Cliente: ",30,250,myPaint);
-            canvas.drawText(nombre_cliente.getText().toString()+" "+apellido_cliente.getText().toString(),340,250,titlePaint);
-            canvas.drawRoundRect(1100,258,320,220,10,10,formas);
-            canvas.drawText("Documento de Identidad: ",30,290,myPaint);
-            canvas.drawText(ci_cliente.getText().toString(),380,290,titlePaint);
-            canvas.drawRoundRect(545,301,376,265,10,10,formas);
-            canvas.drawText("Extension: ",550,290,myPaint);
-            canvas.drawText(extension_cliente.getText().toString(),710,290,titlePaint);
-            canvas.drawRoundRect(697,301,777,265,10,10,formas2);
-            canvas.drawText("N° de Reserva: ",780,290,myPaint);
-            canvas.drawRoundRect(1100,301,990,265,10,10,formas);
-            canvas.drawText("Codigo del Cliente: ",30,330,myPaint);
-            canvas.drawRoundRect(297,305,400,335,10,10,formas2);
-            canvas.drawText("Pago a: ",410,330,myPaint);
-            canvas.drawText(rbSelected.getText().toString(),520,330,titlePaint);
-            canvas.drawRoundRect(513,305,690,335,10,10,formas);
-            canvas.drawText("N° de Contrato: ",780,330,myPaint);
-            canvas.drawRoundRect(1100,305,997,335,10,10,formas2);
-            canvas.drawText("Proyecto: ",30,370,myPaint);
-            canvas.drawText(codigo_proyecto.getText().toString(),170,370,titlePaint);
-            canvas.drawText("UV: ",240,370,myPaint);
-            canvas.drawText(uv.getText().toString(),310,370,titlePaint);
-            canvas.drawText("Mz: ",360,370,myPaint);
-            canvas.drawText(mz.getText().toString(),420,370,titlePaint);
-            canvas.drawText("Lote: ",480,370,myPaint);
-            canvas.drawText(lt.getText().toString(),560,370,titlePaint);
-            canvas.drawText("Categoria: ",620,370,myPaint);
-            canvas.drawText(cat.getText().toString(),780,370,titlePaint);
-            canvas.drawText("Nombre y Apellido del Asesor de Inversion: ",30,410,myPaint);
-            canvas.drawText(asesor.getText().toString(),620,410,titlePaint);
-            canvas.drawRoundRect(1100,384,617,419,10,10,formas);
-            canvas.drawText("Codigo Asesor: ",30,450,myPaint);
-            canvas.drawText(codigo_asesor.getText().toString(),250,450,titlePaint);
-            canvas.drawRoundRect(1100,425,240,460,10,10,formas2);
+            canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),500,190,titlePaint);
+            canvas.drawRoundRect(480,160,1100,200,10,10,formas);
+
+            canvas.drawText("Nombre del Cliente: ",100,250,myPaint);
+            canvas.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),300,250,titlePaint);
+            canvas.drawRoundRect(290,220,1100,260,10,10,formas2);
+
+            canvas.drawText("Documento de Identidad: ",100,310,myPaint);
+            canvas.drawText(ci_cliente.getText().toString(),360,310,titlePaint);
+            canvas.drawRoundRect(340,280,500,320,10,10,formas);
+
+            canvas.drawText("Extension: ",550,310,myPaint);
+            canvas.drawText(extension_cliente.getText().toString(),660,310,titlePaint);
+            canvas.drawRoundRect(650,280,770,320,10,10,formas2);
+
+            canvas.drawText("N° de Reserva: ",800,310,myPaint);
+            canvas.drawRoundRect(950,280,1100,320,10,10,formas);
+
+            canvas.drawText("Codigo del Cliente: ",100,370,myPaint);
+            canvas.drawRoundRect(290,340,390,380,10,10,formas2);
+
+            canvas.drawText("Pago a: ",400,370,myPaint);
+            canvas.drawText(rbSelected.getText().toString(),500,370,titlePaint);
+            canvas.drawRoundRect(480,340,590,380,10,10,formas);
+
+            canvas.drawText("N° de Contrato: ",630,370,myPaint);
+            canvas.drawRoundRect(790,340,1100,380,10,10,formas2);
+
+            canvas.drawText("Proyecto: ",100,430,myPaint);
+            canvas.drawText(codigo_proyecto.getText().toString(),220,430,titlePaint);
+            canvas.drawRoundRect(200,400,280,440,10,10,formas);
+            canvas.drawText("UV: ",300,430,myPaint);
+            canvas.drawText(uv.getText().toString(),360,430,titlePaint);
+            canvas.drawRoundRect(340,400,420,440,10,10,formas);
+            canvas.drawText("Mz: ",460,430,myPaint);
+            canvas.drawText(mz.getText().toString(),540,430,titlePaint);
+            canvas.drawRoundRect(520,400,600,440,10,10,formas);
+            canvas.drawText("Lote: ",640,430,myPaint);
+            canvas.drawText(lt.getText().toString(),720,430,titlePaint);
+            canvas.drawRoundRect(700,400,780,440,10,10,formas);
+            canvas.drawText("Categoria: ",820,430,myPaint);
+            canvas.drawText(cat.getText().toString(),940,430,titlePaint);
+            canvas.drawRoundRect(920,400,1100,440,10,10,formas);
+
+            canvas.drawText("Nombre y Apellido del Asesor de Inversion: ",100,490,myPaint);
+            canvas.drawText(asesor.getText().toString(),520,490,titlePaint);
+            canvas.drawRoundRect(510,460,1100,500,10,10,formas);
+            canvas.drawText("Codigo Asesor: ",100,550,myPaint);
+            canvas.drawText(codigo_asesor.getText().toString(),260,550,titlePaint);
+            canvas.drawRoundRect(240,520,400,560,10,10,formas2);
             myPDF.finishPage(myPage1);
             //// FIN PAGINA 1/////
 
@@ -461,34 +476,129 @@ public class Formularios extends Fragment {
             canvas2.drawText("DATOS PERSONALES DEL CLIENTE",600,200,titlePaint);
 
             titlePaint.setTextAlign(Paint.Align.LEFT);
-            titlePaint.setTextSize(30f);
+            titlePaint.setTextSize(20f);
             titlePaint.setColor(Color.BLACK);
+            titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.NORMAL));
 
-            canvas2.drawText("Codigo Cliente",800,250,myPaint);
-            canvas2.drawRoundRect(1100,255,800,310,10,10,formas2);
-            canvas2.drawText("Apellido Paterno",100,320,myPaint);
-            canvas2.drawRoundRect(100,325,400,380,10,10,formas);
-            canvas2.drawText("Apellido Materno",500,320,myPaint);
-            canvas2.drawRoundRect(500,325,800,380,10,10,formas2);
-            canvas2.drawText("Nombres",100,420,myPaint);
-            canvas2.drawRoundRect(100,425,400,480,10,10,formas);
-            canvas2.drawText("Apellido de Casada",500,420,myPaint);
-            canvas2.drawRoundRect(500,425,800,480,10,10,formas2);
-            canvas2.drawText("Prefijo",850,420,myPaint);
-            canvas2.drawRoundRect(850,425,1100,480,10,10,formas);
-            canvas2.drawText("Tipo de Identificacion:",100,520,myPaint);
-            canvas2.drawText("N° de Documento:",100,550,myPaint);
-            canvas2.drawText("Extension:",100,580,myPaint);
-            canvas2.drawText("Nacionalidad:",100,610,myPaint);
-            canvas2.drawText("Fecha de Nacimiento:",100,640,myPaint);
-            canvas2.drawText("Estado Civil:",100,670,myPaint);
-            canvas2.drawText("Sexo:",100,700,myPaint);
-            canvas2.drawText("Nivel de Estudio:",600,550,myPaint);
-            canvas2.drawText("Profesion/Ocupacion:",600,580,myPaint);
-            canvas2.drawText("Datos de Vivienda:",600,610,myPaint);
-            canvas2.drawText("Tipo de Vivienda:",600,640,myPaint);
-            canvas2.drawText("Tipo de Vivienda:",600,670,myPaint);
-            canvas2.drawRoundRect(95,490,1100,720,10,10,formas);
+            canvas2.drawText("Codigo Cliente",850,250,myPaint);
+            canvas2.drawRoundRect(1100,260,850,310,10,10,formas2);
+            canvas2.drawText("Apellido Paterno",100,250,myPaint);
+            canvas2.drawRoundRect(100,260,400,310,10,10,formas);
+            canvas2.drawText("Apellido Materno",500,250,myPaint);
+            canvas2.drawRoundRect(500,260,800,310,10,10,formas2);
+            canvas2.drawText("Nombres",100,330,myPaint);
+            canvas2.drawRoundRect(100,340,400,390,10,10,formas);
+            canvas2.drawText("Apellido de Casada",500,330,myPaint);
+            canvas2.drawRoundRect(500,340,800,390,10,10,formas2);
+            canvas2.drawText("Prefijo",850,330,myPaint);
+            canvas2.drawRoundRect(850,340,1100,390,10,10,formas);
+
+            canvas2.drawText("Tipo de Identificacion:",100,420,myPaint);
+            canvas2.drawText("N° de Documento:",100,440,myPaint);
+            canvas2.drawText("Extension:",100,460,myPaint);
+            canvas2.drawText("Nacionalidad:",100,480,myPaint);
+            canvas2.drawText("Fecha de Nacimiento:",100,500,myPaint);
+            canvas2.drawText("Estado Civil:",100,520,myPaint);
+            canvas2.drawText("Sexo:",100,540,myPaint);
+            canvas2.drawText("Nivel de Estudio:",600,440,myPaint);
+            canvas2.drawText("Profesion/Ocupacion:",600,460,myPaint);
+            canvas2.drawText("Datos de Vivienda:",600,480,myPaint);
+            canvas2.drawText("Tipo de Vivienda:",600,500,myPaint);
+            canvas2.drawText("Tipo de Vivienda:",600,520,myPaint);
+            canvas2.drawRoundRect(95,400,1100,550,10,10,formas);
+
+            canvas2.drawText("Costo Aproximado:",100,570,myPaint);
+            canvas2.drawRoundRect(100,580,400,620,10,10,formas2);
+            canvas2.drawText("Nombre Propietario:",500,570,myPaint);
+            canvas2.drawRoundRect(500,580,800,620,10,10,formas);
+            canvas2.drawText("Telefono:",850,570,myPaint);
+            canvas2.drawRoundRect(850,580,1100,620,10,10,formas2);
+
+            canvas2.drawText("Pais:",100,650,myPaint);
+            canvas2.drawText("Dpto:",400,650,myPaint);
+            canvas2.drawText("Ciudad:",700,650,myPaint);
+            canvas2.drawText("Barrio:",100,670,myPaint);
+            canvas2.drawText("Avenida:",100,690,myPaint);
+            canvas2.drawText("Calle:",100,710,myPaint);
+            canvas2.drawText("Numero:",100,730,myPaint);
+            canvas2.drawRoundRect(95,630,1100,740,10,10,formas2);
+
+            canvas2.drawText("Telefono Fijo:",100,770,myPaint);
+            canvas2.drawText("Telefono Movil:",600,770,myPaint);
+            canvas2.drawText("Telefono Fijo-Oficina:",100,800,myPaint);
+            canvas2.drawText("Telefono Movil-Oficina:",600,800,myPaint);
+            canvas2.drawText("Correo:",100,830,myPaint);
+            canvas2.drawRoundRect(95,750,1100,840,10,10,formas);
+
+            canvas2.drawText("Datos Laborales (Empresa):",100,870,myPaint);
+            canvas2.drawText("Direccion:",100,900,myPaint);
+            canvas2.drawText("Rubro:",100,930,myPaint);
+            canvas2.drawText("Ingresos:",100,960,myPaint);
+            canvas2.drawRoundRect(95,850,1100,970,10,10,formas);
+
+            canvas2.drawText("Referencias Personales:",100,990,myPaint);
+            canvas2.drawText("Nombre Conyuge/Familiar Cercano:",100,1010,myPaint);
+            canvas2.drawRoundRect(100,1020,490,1060,10,10,formas2);
+            canvas2.drawText("Parentesco:",500,1010,myPaint);
+            canvas2.drawRoundRect(500,1020,690,1060,10,10,formas2);
+            canvas2.drawText("Telefono:",700,1010,myPaint);
+            canvas2.drawRoundRect(700,1020,1100,1060,10,10,formas2);
+            canvas2.drawText("Nombre otra referencia:",100,1090,myPaint);
+            canvas2.drawRoundRect(100,1100,490,1140,10,10,formas2);
+            canvas2.drawText("Relacion:",500,1090,myPaint);
+            canvas2.drawRoundRect(500,1100,690,1140,10,10,formas2);
+            canvas2.drawText("Telefono:",700,1090,myPaint);
+            canvas2.drawRoundRect(700,1100,1100,1140,10,10,formas2);
+
+            canvas2.drawText("Croquis de Ubicacion:",500,1170,myPaint);
+            ////croquis///
+            canvas2.drawRoundRect(100,1190,200,1240,10,10,formas);
+            canvas2.drawRoundRect(250,1190,350,1240,10,10,formas2);
+            canvas2.drawRoundRect(400,1190,500,1240,10,10,formas);
+            canvas2.drawRoundRect(550,1190,650,1240,10,10,formas2);
+            canvas2.drawRoundRect(700,1190,800,1240,10,10,formas);
+            canvas2.drawRoundRect(850,1190,950,1240,10,10,formas2);
+            canvas2.drawRoundRect(1000,1190,1100,1240,10,10,formas);
+
+            canvas2.drawRoundRect(100,1260,200,1310,10,10,formas);
+            canvas2.drawRoundRect(250,1260,350,1310,10,10,formas2);
+            canvas2.drawRoundRect(400,1260,500,1310,10,10,formas);
+            canvas2.drawRoundRect(550,1260,650,1310,10,10,formas2);
+            canvas2.drawRoundRect(700,1260,800,1310,10,10,formas);
+            canvas2.drawRoundRect(850,1260,950,1310,10,10,formas2);
+            canvas2.drawRoundRect(1000,1260,1100,1310,10,10,formas);
+
+            canvas2.drawRoundRect(100,1330,200,1380,10,10,formas);
+            canvas2.drawRoundRect(250,1330,350,1380,10,10,formas2);
+            canvas2.drawRoundRect(400,1330,500,1380,10,10,formas);
+            canvas2.drawRoundRect(550,1330,650,1380,10,10,formas2);
+            canvas2.drawRoundRect(700,1330,800,1380,10,10,formas);
+            canvas2.drawRoundRect(850,1330,950,1380,10,10,formas2);
+            canvas2.drawRoundRect(1000,1330,1100,1380,10,10,formas);
+
+            canvas2.drawRoundRect(100,1400,200,1450,10,10,formas);
+            canvas2.drawRoundRect(250,1400,350,1450,10,10,formas2);
+            canvas2.drawRoundRect(400,1400,500,1450,10,10,formas);
+            canvas2.drawRoundRect(550,1400,650,1450,10,10,formas2);
+            canvas2.drawRoundRect(700,1400,800,1450,10,10,formas);
+            canvas2.drawRoundRect(850,1400,950,1450,10,10,formas2);
+            canvas2.drawRoundRect(1000,1400,1100,1450,10,10,formas);
+
+            canvas2.drawText("OBSERVACIONES:",100,1480,myPaint);
+            canvas2.drawRoundRect(95,1460,1100,1530,10,10,formas2);
+            canvas2.drawText("Autorizo a Novitierra a confirmar los datos declarados en el presente formulario y recabar antecedentes",100,1550,titlePaint);
+            canvas2.drawText("personales y crediticios tales como el informe de la central de riesgos de la autoridad de supervision del",100,1580,titlePaint);
+            canvas2.drawText("sistema financiero ASFI y otros que estimara necesarios por si misma y/o terceras personas.",100,1610,titlePaint);
+
+            canvas2.drawText("Firma cliente.................................................................",100,1670,myPaint);
+            canvas2.drawText("Firma.....................................................................",700,1670,myPaint);
+            canvas2.drawText("Nombre y Apellidos.....................................................",100,1710,myPaint);
+            canvas2.drawText("Asesor de Inversion..........................................",700,1710,myPaint);
+
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
+            canvas2.drawBitmap(scaledbmp,0,1780,myPaint);
+
             myPDF.finishPage(myPage2);
 //            //////FIN PAGINA 2 /////
 

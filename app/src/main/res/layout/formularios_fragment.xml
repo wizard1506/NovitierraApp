@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apellido del cliente:"
+                android:text="Apellido Paterno:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -70,7 +70,30 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/apellidoCliente"
+                android:id="@+id/apellidoPCliente"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                ></EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido Materno:"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/apellidoMCliente"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 ></EditText>
@@ -1176,6 +1199,7 @@
                 android:id="@+id/uv"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:inputType="number"
                 ></EditText>
 
             <TextView
@@ -1192,6 +1216,7 @@
                 android:id="@+id/mz"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:inputType="number"
                 ></EditText>
             <TextView
                 android:layout_width="wrap_content"
@@ -1207,6 +1232,7 @@
                 android:id="@+id/lt"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:inputType="number"
                 ></EditText>
             <TextView
                 android:layout_width="wrap_content"
