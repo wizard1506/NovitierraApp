@@ -50,7 +50,7 @@ import java.util.Calendar;
 public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
-    EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac;
+    EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac, apellidoCasada,prefijo,nacionalidad,profesion;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero,rbSelectedMonedaVivienda,rbViviendaBs,rbViviendaDolar, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia;
@@ -79,9 +79,13 @@ public class Formularios extends Fragment {
         nombre_cliente = view.findViewById(R.id.nombreCliente);
         apellidoPaterno= view.findViewById(R.id.apellidoPCliente);
         apellidoMaterno= view.findViewById(R.id.apellidoMCliente);
+        apellidoCasada = view.findViewById(R.id.apellidoCasada);
+        prefijo=view.findViewById(R.id.prefijo);
         ci_cliente = view.findViewById(R.id.ciCliente);
         extension_cliente = view.findViewById(R.id.extensionCliente);
+        nacionalidad = view.findViewById(R.id.nacionalidad);
         fechaNac = view.findViewById(R.id.fechaNacimiento);
+        profesion = view.findViewById(R.id.profesion);
         uv= view.findViewById(R.id.uv);
         mz=view.findViewById(R.id.mz);
         lt= view.findViewById(R.id.lt);
@@ -408,32 +412,24 @@ public class Formularios extends Fragment {
             canvas.drawText("Urbanizacion: ",350,190,myPaint);
             canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),500,190,titlePaint);
             canvas.drawRoundRect(480,160,1100,200,10,10,formas);
-
             canvas.drawText("Nombre del Cliente: ",100,250,myPaint);
             canvas.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),300,250,titlePaint);
             canvas.drawRoundRect(290,220,1100,260,10,10,formas2);
-
             canvas.drawText("Documento de Identidad: ",100,310,myPaint);
             canvas.drawText(ci_cliente.getText().toString(),360,310,titlePaint);
             canvas.drawRoundRect(340,280,500,320,10,10,formas);
-
             canvas.drawText("Extension: ",550,310,myPaint);
             canvas.drawText(extension_cliente.getText().toString(),660,310,titlePaint);
             canvas.drawRoundRect(650,280,770,320,10,10,formas2);
-
             canvas.drawText("N° de Reserva: ",800,310,myPaint);
             canvas.drawRoundRect(950,280,1100,320,10,10,formas);
-
             canvas.drawText("Codigo del Cliente: ",100,370,myPaint);
             canvas.drawRoundRect(290,340,390,380,10,10,formas2);
-
             canvas.drawText("Pago a: ",400,370,myPaint);
             canvas.drawText(rbSelected.getText().toString(),500,370,titlePaint);
             canvas.drawRoundRect(480,340,590,380,10,10,formas);
-
             canvas.drawText("N° de Contrato: ",630,370,myPaint);
             canvas.drawRoundRect(790,340,1100,380,10,10,formas2);
-
             canvas.drawText("Proyecto: ",100,430,myPaint);
             canvas.drawText(codigo_proyecto.getText().toString(),220,430,titlePaint);
             canvas.drawRoundRect(200,400,280,440,10,10,formas);
@@ -449,7 +445,6 @@ public class Formularios extends Fragment {
             canvas.drawText("Categoria: ",820,430,myPaint);
             canvas.drawText(cat.getText().toString(),940,430,titlePaint);
             canvas.drawRoundRect(920,400,1100,440,10,10,formas);
-
             canvas.drawText("Nombre y Apellido del Asesor de Inversion: ",100,490,myPaint);
             canvas.drawText(asesor.getText().toString(),520,490,titlePaint);
             canvas.drawRoundRect(510,460,1100,500,10,10,formas);
@@ -483,28 +478,44 @@ public class Formularios extends Fragment {
             canvas2.drawText("Codigo Cliente",850,250,myPaint);
             canvas2.drawRoundRect(1100,260,850,310,10,10,formas2);
             canvas2.drawText("Apellido Paterno",100,250,myPaint);
+            canvas2.drawText(apellidoPaterno.getText().toString(),210,285,titlePaint);
             canvas2.drawRoundRect(100,260,400,310,10,10,formas);
             canvas2.drawText("Apellido Materno",500,250,myPaint);
+            canvas2.drawText(apellidoMaterno.getText().toString(),610,285,titlePaint);
             canvas2.drawRoundRect(500,260,800,310,10,10,formas2);
             canvas2.drawText("Nombres",100,330,myPaint);
+            canvas2.drawText(nombre_cliente.getText().toString(),210,375,titlePaint);
             canvas2.drawRoundRect(100,340,400,390,10,10,formas);
             canvas2.drawText("Apellido de Casada",500,330,myPaint);
+            canvas2.drawText(apellidoCasada.getText().toString(),610,375,titlePaint);
             canvas2.drawRoundRect(500,340,800,390,10,10,formas2);
             canvas2.drawText("Prefijo",850,330,myPaint);
+            canvas2.drawText(prefijo.getText().toString(),960,375,titlePaint);
             canvas2.drawRoundRect(850,340,1100,390,10,10,formas);
 
             canvas2.drawText("Tipo de Identificacion:",100,420,myPaint);
+            canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),320,420,titlePaint);
             canvas2.drawText("N° de Documento:",100,440,myPaint);
+            canvas2.drawText(ci_cliente.getText().toString(),280,440,titlePaint);
             canvas2.drawText("Extension:",100,460,myPaint);
+            canvas2.drawText(extension_cliente.getText().toString(),220,460,titlePaint);
             canvas2.drawText("Nacionalidad:",100,480,myPaint);
+            canvas2.drawText(nacionalidad.getText().toString(),240,480,titlePaint);
             canvas2.drawText("Fecha de Nacimiento:",100,500,myPaint);
+            canvas2.drawText(fechaNac.getText().toString(),320,500,titlePaint);
             canvas2.drawText("Estado Civil:",100,520,myPaint);
+            canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),220,520,titlePaint);
             canvas2.drawText("Sexo:",100,540,myPaint);
+            canvas2.drawText(rbSelectedGenero.getText().toString(),200,540,titlePaint);
             canvas2.drawText("Nivel de Estudio:",600,440,myPaint);
+            canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),780,440,titlePaint);
             canvas2.drawText("Profesion/Ocupacion:",600,460,myPaint);
-            canvas2.drawText("Datos de Vivienda:",600,480,myPaint);
+            canvas2.drawText(profesion.getText().toString(),820,460,titlePaint);
+            canvas2.drawText("Datos de Vivienda",600,480,myPaint);
             canvas2.drawText("Tipo de Vivienda:",600,500,myPaint);
-            canvas2.drawText("Tipo de Vivienda:",600,520,myPaint);
+            canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),780,500,titlePaint);
+            canvas2.drawText("Tenencia:",600,520,myPaint);
+            canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),720,520,titlePaint);
             canvas2.drawRoundRect(95,400,1100,550,10,10,formas);
 
             canvas2.drawText("Costo Aproximado:",100,570,myPaint);
