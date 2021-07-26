@@ -774,7 +774,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telf. fijo Oficina:"
+                android:text="Fijo Oficina:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -791,7 +791,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telf. Movil Oficina:"
+                android:text="Movil Oficina:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -803,6 +803,28 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
+                ></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo:"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/correoPersonal"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
                 ></EditText>
         </LinearLayout>
 
