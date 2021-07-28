@@ -239,11 +239,11 @@ public class Formularios extends Fragment {
                             if(rbViviendaBs.isChecked()|| rbViviendaDolar.isChecked()){
                                 generarPDF(v);
                                 Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
-                            }else{Toast.makeText(getContext(),"Falto seleccionar costo de vivienda en Bs o $us.",Toast.LENGTH_SHORT).show();}
-                        }else{Toast.makeText(getContext(),"Falto seleccionar Ingresos en Bs o $us.",Toast.LENGTH_SHORT).show();}
-                    }else{Toast.makeText(getContext(),"Falto seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
+                            }else{Toast.makeText(getContext(),"Falta seleccionar costo de vivienda en Bs o $us.",Toast.LENGTH_SHORT).show();}
+                        }else{Toast.makeText(getContext(),"Falta seleccionar Ingresos en Bs o $us.",Toast.LENGTH_SHORT).show();}
+                    }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
                 }else{
-                Toast.makeText(getContext(),"Falto seleccionar plazo o contado.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Falta seleccionar plazo o contado.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -402,6 +402,7 @@ public class Formularios extends Fragment {
             PdfDocument myPDF = new PdfDocument();
             Paint myPaint = new Paint();
             Paint titlePaint = new Paint();
+            Paint titulos = new Paint();
             Paint formas = new Paint();
             Paint formas2 = new Paint();
 
@@ -669,6 +670,94 @@ public class Formularios extends Fragment {
 
             myPDF.finishPage(myPage2);
 //            //////FIN PAGINA 2 /////
+
+
+        ////// INICIA PAGINA 3 ///////
+        PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+        PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
+        Canvas canvas3 = myPage3.getCanvas();
+
+        titulos.setTextAlign(Paint.Align.CENTER);
+        titulos.setTextSize(45f);
+        titulos.setColor(Color.BLACK);
+        titulos.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+
+
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+        scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
+        canvas3.drawBitmap(scaledbmp,20,20,myPaint);
+
+        canvas3.drawText("ACTA DE ENTREGA DE LOTE",600,200,titulos);
+        titulos.setTextAlign(Paint.Align.LEFT);
+        titulos.setTextSize(30f);
+        titulos.setColor(Color.BLACK);
+        titulos.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+
+
+        canvas3.drawRoundRect(100,250,400,400,10,10,formas);
+        canvas3.drawLine(100,300,400,300,formas2);
+        canvas3.drawLine(200,250,200,400,formas);
+        canvas3.drawLine(300,250,300,400,formas2);
+        canvas3.drawText("DIA",130,290,titulos);
+        canvas3.drawText("MES",230,290,titulos);
+        canvas3.drawText("AÑO",330,290,titulos);
+
+        titulos.setTextSize(35f);
+        canvas3.drawRoundRect(100,450,550,600,10,10,formas2);
+        canvas3.drawLine(100,500,550,500,formas2);
+        canvas3.drawText("URBANIZACION",200,495,titulos);
+
+        canvas3.drawRoundRect(650,450,1100,600,10,10,formas2);
+        canvas3.drawLine(650,500,1100,500,formas2);
+        canvas3.drawText("N° DE CONTRATO",750,495,titulos);
+
+        canvas3.drawText("N° DE PROYECTO",100,660,myPaint);
+        canvas3.drawRoundRect(100,670,280,740,10,10,formas);
+        canvas3.drawText("U.V.",350,660,myPaint);
+        canvas3.drawRoundRect(290,670,470,740,10,10,formas2);
+        canvas3.drawText("MANZANO",530,660,myPaint);
+        canvas3.drawRoundRect(480,670,660,740,10,10,formas);
+        canvas3.drawText("LOTE",720,660,myPaint);
+        canvas3.drawRoundRect(670,670,850,740,10,10,formas2);
+        canvas3.drawText("CATEGORIA",900,660,myPaint);
+        canvas3.drawRoundRect(860,670,1040,740,10,10,formas);
+
+        canvas3.drawText("TIPO DE VENTA",100,800,myPaint);
+        canvas3.drawRoundRect(100,810,280,880,10,10,formas);
+        canvas3.drawText("SUPERFICIE M2",310,800,myPaint);
+        canvas3.drawRoundRect(290,810,470,880,10,10,formas2);
+        canvas3.drawText("VALOR CUOTA",510,800,myPaint);
+        canvas3.drawRoundRect(480,810,660,880,10,10,formas);
+        canvas3.drawText("PLAZO",720,800,myPaint);
+        canvas3.drawRoundRect(670,810,850,880,10,10,formas2);
+        canvas3.drawText("FECHA PRIMERA CUOTA",860,800,myPaint);
+        canvas3.drawRoundRect(860,810,1040,880,10,10,formas);
+
+        canvas3.drawText("Yo "+nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString()+" con documento de identidad N° "+ci_cliente.getText().toString()+" expedido en "+extension_cliente.getText().toString(),100,920,titlePaint);
+        canvas3.drawText("al firmar el presente documento certifico estoy conforme con el lote de terreno que estoy adquiriendo, y que",100,940,titlePaint);
+        canvas3.drawText("me encuentro completamente de acuerdo con los datos detallados previamente",100,960,titlePaint);
+
+        canvas3.drawText("Por tanto, en caso de presentar algun reclamo en el futuro por los datos aqui manifestados me ajustare a las ",100,1000,titlePaint);
+        canvas3.drawText("politicas de la empresa asumiendo los costos que deriven de mi decision de compra.",100,1020,titlePaint);
+
+        canvas3.drawText("Aviso importante:",100,1060,myPaint);
+        canvas3.drawText("Estimado Cliente, antes de iniciar cualquier mejora en su lote de terreno debe comunicarse con el Area de",100,1080,titlePaint);
+        canvas3.drawText("Atencion al Cliente de la Empresa para proceder a la verificacion de medidas y colindancias, y posterior",100,1100,titlePaint);
+        canvas3.drawText("autorizacion en la Alcaldia correspondiente. Caso contrario, de ocurrir algun problema posterior (construccion,",100,1120,titlePaint);
+        canvas3.drawText("alambrado, embardado o cualquier tipo de mejora fuera de los limites del terreno)",100,1140,titlePaint);
+        canvas3.drawText("SERA DE SU ENTERA RESPONSABILIDAD",100,1160,myPaint);
+        canvas3.drawRoundRect(95,1040,1100,1170,10,10,formas);
+
+
+
+
+
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
+        scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
+        canvas3.drawBitmap(scaledbmp,0,1780,myPaint);
+
+        myPDF.finishPage(myPage3);
+        /////FIN PAGINA 3/////////
 
             File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
             try {
