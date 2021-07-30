@@ -51,7 +51,7 @@ public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
     EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac, apellidoCasada,prefijo,nacionalidad,profesion,costoAprox;
-    EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal;
+    EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal,expedido,mts2;
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero,rbSelectedMonedaVivienda,rbViviendaBs,rbViviendaDolar, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos;
@@ -84,6 +84,7 @@ public class Formularios extends Fragment {
         apellidoCasada = view.findViewById(R.id.apellidoCasada);
         prefijo=view.findViewById(R.id.prefijo);
         ci_cliente = view.findViewById(R.id.ciCliente);
+        expedido=view.findViewById(R.id.expedido);
         extension_cliente = view.findViewById(R.id.extensionCliente);
         nacionalidad = view.findViewById(R.id.nacionalidad);
         fechaNac = view.findViewById(R.id.fechaNacimiento);
@@ -116,6 +117,7 @@ public class Formularios extends Fragment {
         mz=view.findViewById(R.id.mz);
         lt= view.findViewById(R.id.lt);
         cat=view.findViewById(R.id.cat);
+        mts2=view.findViewById(R.id.mts2);
         asesor=view.findViewById(R.id.fullnameAsesor);
         codigo_asesor= view.findViewById(R.id.codigoAsesor);
         ////radioButtons y RadioGroups
@@ -661,8 +663,8 @@ public class Formularios extends Fragment {
             canvas2.drawText("Firma.............................................................................",620,1670,myPaint);
             canvas2.drawText("Nombre y Apellidos:",100,1710,myPaint);
             canvas2.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),300,1710,titlePaint);
-            canvas2.drawText("Asesor de Inversion:",620,1710,myPaint);
-            canvas2.drawText(asesor.getText().toString(),820,1710,titlePaint);
+            canvas2.drawText("Asesor de Inversion:",100,1750,myPaint);
+            canvas2.drawText(asesor.getText().toString(),310,1750,titlePaint);
 
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
             scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
@@ -706,25 +708,35 @@ public class Formularios extends Fragment {
         canvas3.drawRoundRect(100,450,550,600,10,10,formas2);
         canvas3.drawLine(100,500,550,500,formas2);
         canvas3.drawText("URBANIZACION",200,495,titulos);
-
         canvas3.drawRoundRect(650,450,1100,600,10,10,formas2);
         canvas3.drawLine(650,500,1100,500,formas2);
         canvas3.drawText("N° DE CONTRATO",750,495,titulos);
+        titulos.setTextSize(30f);
+        canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),200,550,titulos);
+        titulos.setTextSize(35f);
+
 
         canvas3.drawText("N° DE PROYECTO",100,660,myPaint);
+        canvas3.drawText(codigo_proyecto.getText().toString(),160,710,myPaint);
         canvas3.drawRoundRect(100,670,280,740,10,10,formas);
         canvas3.drawText("U.V.",350,660,myPaint);
+        canvas3.drawText(uv.getText().toString(),360,710,myPaint);
         canvas3.drawRoundRect(290,670,470,740,10,10,formas2);
         canvas3.drawText("MANZANO",530,660,myPaint);
+        canvas3.drawText(mz.getText().toString(),550,710,myPaint);
         canvas3.drawRoundRect(480,670,660,740,10,10,formas);
         canvas3.drawText("LOTE",720,660,myPaint);
+        canvas3.drawText(lt.getText().toString(),750,710,myPaint);
         canvas3.drawRoundRect(670,670,850,740,10,10,formas2);
         canvas3.drawText("CATEGORIA",900,660,myPaint);
+        canvas3.drawText(cat.getText().toString(),940,710,myPaint);
         canvas3.drawRoundRect(860,670,1040,740,10,10,formas);
 
         canvas3.drawText("TIPO DE VENTA",100,800,myPaint);
+        canvas3.drawText(rbSelected.getText().toString(),160,850,myPaint);
         canvas3.drawRoundRect(100,810,280,880,10,10,formas);
         canvas3.drawText("SUPERFICIE M2",310,800,myPaint);
+        canvas3.drawText(mts2.getText().toString(),350,850,myPaint);
         canvas3.drawRoundRect(290,810,470,880,10,10,formas2);
         canvas3.drawText("VALOR CUOTA",510,800,myPaint);
         canvas3.drawRoundRect(480,810,660,880,10,10,formas);
@@ -733,31 +745,79 @@ public class Formularios extends Fragment {
         canvas3.drawText("FECHA PRIMERA CUOTA",860,800,myPaint);
         canvas3.drawRoundRect(860,810,1040,880,10,10,formas);
 
-        canvas3.drawText("Yo "+nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString()+" con documento de identidad N° "+ci_cliente.getText().toString()+" expedido en "+extension_cliente.getText().toString(),100,920,titlePaint);
-        canvas3.drawText("al firmar el presente documento certifico estoy conforme con el lote de terreno que estoy adquiriendo, y que",100,940,titlePaint);
-        canvas3.drawText("me encuentro completamente de acuerdo con los datos detallados previamente",100,960,titlePaint);
+        canvas3.drawText("Yo ..................................................................................................................................................................",100,920,titlePaint);
+        canvas3.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),230,915,myPaint);
+        canvas3.drawText("con documento de identidad N° .......................... expedido en ................................ al firmar el presente documento",100,940,titlePaint);
+        canvas3.drawText(ci_cliente.getText().toString(),390,939,myPaint);
+        canvas3.drawText(expedido.getText().toString(),640,939,myPaint);
+        canvas3.drawText("certifico estoy conforme con el lote de terreno que estoy adquiriendo, y que me encuentro completamente de",100,960,titlePaint);
+        canvas3.drawText("acuerdo con los datos detallados previamente",100,980,titlePaint);
 
-        canvas3.drawText("Por tanto, en caso de presentar algun reclamo en el futuro por los datos aqui manifestados me ajustare a las ",100,1000,titlePaint);
-        canvas3.drawText("politicas de la empresa asumiendo los costos que deriven de mi decision de compra.",100,1020,titlePaint);
+        canvas3.drawText("Por tanto, en caso de presentar algun reclamo en el futuro por los datos aqui manifestados me ajustare a las ",100,1020,titlePaint);
+        canvas3.drawText("politicas de la empresa asumiendo los costos que deriven de mi decision de compra.",100,1040,titlePaint);
 
-        canvas3.drawText("Aviso importante:",100,1060,myPaint);
-        canvas3.drawText("Estimado Cliente, antes de iniciar cualquier mejora en su lote de terreno debe comunicarse con el Area de",100,1080,titlePaint);
-        canvas3.drawText("Atencion al Cliente de la Empresa para proceder a la verificacion de medidas y colindancias, y posterior",100,1100,titlePaint);
-        canvas3.drawText("autorizacion en la Alcaldia correspondiente. Caso contrario, de ocurrir algun problema posterior (construccion,",100,1120,titlePaint);
-        canvas3.drawText("alambrado, embardado o cualquier tipo de mejora fuera de los limites del terreno)",100,1140,titlePaint);
-        canvas3.drawText("SERA DE SU ENTERA RESPONSABILIDAD",100,1160,myPaint);
-        canvas3.drawRoundRect(95,1040,1100,1170,10,10,formas);
+        canvas3.drawText("Aviso importante:",100,1080,myPaint);
+        canvas3.drawText("Estimado Cliente, antes de iniciar cualquier mejora en su lote de terreno debe comunicarse con el Area de",100,1100,titlePaint);
+        canvas3.drawText("Atencion al Cliente de la Empresa para proceder a la verificacion de medidas y colindancias, y posterior",100,1120,titlePaint);
+        canvas3.drawText("autorizacion en la Alcaldia correspondiente. Caso contrario, de ocurrir algun problema posterior (construccion,",100,1140,titlePaint);
+        canvas3.drawText("alambrado, embardado o cualquier tipo de mejora fuera de los limites del terreno)",100,1160,titlePaint);
+        canvas3.drawText("SERA DE SU ENTERA RESPONSABILIDAD",100,1180,myPaint);
+        canvas3.drawRoundRect(95,1060,1100,1190,10,10,formas);
 
+        canvas3.drawText("Firma del Cliente",150,1330,myPaint);
+        canvas3.drawLine(100,1300,400,1300,formas);
+        canvas3.drawText("Asistente Cartera",800,1330,myPaint);
+        canvas3.drawLine(700,1300,1000,1300,formas);
 
+        canvas3.drawText("Aclaracion de firma.....................................",100,1400,myPaint);
+        canvas3.drawText("Aclaracion de firma.....................................",700,1400,myPaint);
 
-
+        canvas3.drawRect(100,1500,500,1710,formas2);
+        canvas3.drawText("Huella Digital",230,1760,myPaint);
 
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
         scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
-        canvas3.drawBitmap(scaledbmp,0,1780,myPaint);
+        canvas3.drawBitmap(scaledbmp,0,1850,myPaint);
 
         myPDF.finishPage(myPage3);
         /////FIN PAGINA 3/////////
+
+        /////INICIO DE PAGINA 4 ////
+//        PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+//        PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
+//        Canvas canvas4 = myPage4.getCanvas();
+//
+//        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+//        scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
+//        canvas4.drawBitmap(scaledbmp,20,20,myPaint);
+//
+//        titulos.setTextAlign(Paint.Align.CENTER);
+//        titulos.setTextSize(45f);
+//        titulos.setColor(Color.BLACK);
+//        titulos.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+//
+//        canvas4.drawText("RESERVA PARA COMPRA",600,200,titulos);
+//        canvas4.drawText("DE LOTE DE TERRENO",600,240,titulos);
+//
+//        canvas4.drawText("Por el presente documento el/Señor(a) .................................................................................................",100,300,titlePaint);
+//        canvas4.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),500,295,myPaint);
+//        canvas4.drawText("con documento de identidad N° ...................... expedido en ............................... certifica un deposito",100,330,titlePaint);
+//        canvas4.drawText(ci_cliente.getText().toString(),390,325,myPaint);
+//        canvas4.drawText(expedido.getText().toString(),630,325,myPaint);
+//        canvas4.drawText("en dinero por concepto de RESERVA de un lote de terreno ubicado en la urbanizacion ",100,360,titlePaint);
+//        canvas4.drawText(spinner_urbanizacion.getSelectedItem().toString(),860,360,myPaint);
+//        canvas4.drawText("Proyecto: "+codigo_proyecto.getText().toString()+"  UV: "+uv.getText().toString()+"  Mz: "+mz.getText().toString()+"  Lote: "+lt.getText().toString()+"  Categoria: "+cat.getText().toString()+"  Mts2: "+mts2.getText().toString(),100,390,titlePaint);
+//        canvas4.drawText("a la empresa Novitierra, de acuerdo y conforme con las condiciones siguientes: ",100,420,titlePaint);
+//        canvas4.drawText("1. Ha efectuado el deposito de ............ DOLARES DE LOS ESTADOS UNIDOS DE AMERICA/BOLIVIANOS ",100,450,titlePaint);
+//        canvas4.drawText("segun comprobante del Banco ",100,470,titlePaint);
+//
+//
+//        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
+//        scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
+//        canvas4.drawBitmap(scaledbmp,0,1780,myPaint);
+//
+//        myPDF.finishPage(myPage4);
+        ///FIN DE PAGINA 4/////
 
             File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
             try {
