@@ -819,7 +819,7 @@ public class Formularios extends Fragment {
 //        myPDF.finishPage(myPage4);
         ///FIN DE PAGINA 4/////
 
-            File file = new File(Environment.getExternalStorageDirectory(),"/Formulario1.pdf");
+            File file = new File(Environment.getExternalStorageDirectory(),"/Formularios Solicitante.pdf");
             try {
                 myPDF.writeTo(new FileOutputStream(file));
 

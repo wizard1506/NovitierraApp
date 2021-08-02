@@ -27,4 +27,9 @@
         android:name="com.example.novitierraapp.Formularios"
         android:label="Formularios"
         tools:layout="@layout/formularios_fragment" />
+    <fragment
+        android:id="@+id/formCoSolicitante"
+        android:name="com.example.novitierraapp.FormCoSolicitante"
+        android:label="Co-Solicitante"
+        tools:layout="@layout/form_co_solicitante_fragment" />
 </navigation>

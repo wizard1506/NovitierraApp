@@ -20,5 +20,9 @@
             android:id="@+id/formularios"
             android:icon="@drawable/ic_menu_formulario"
             android:title="Formularios" />
+        <item
+            android:id="@+id/formCoSolicitante"
+            android:icon="@drawable/ic_menu_formulario"
+            android:title="Form Co-Solicitante" />
     </group>
 </menu>
