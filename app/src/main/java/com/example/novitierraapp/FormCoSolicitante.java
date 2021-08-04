@@ -245,6 +245,11 @@ public class FormCoSolicitante extends Fragment {
         titlePaint.setTextSize(20f);
         titlePaint.setColor(Color.BLACK);
 
+        titulos.setTextAlign(Paint.Align.CENTER);
+        titulos.setTextSize(45f);
+        titulos.setColor(Color.BLACK);
+        titulos.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+
         formas.setColor(Color.BLACK);
         formas.setStyle(Paint.Style.STROKE);
         formas.setStrokeWidth(2);
@@ -263,10 +268,68 @@ public class FormCoSolicitante extends Fragment {
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
         scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
         canvas.drawBitmap(scaledbmp,20,20,myPaint);
+
+        canvas.drawText("DATOS DEL CO-SOLICITANTE",600,250,titulos);
+        canvas.drawText("Codigo Cliente:",720,300,myPaint);
+        canvas.drawRoundRect(720,320,1100,370,10,10,formas);
+
+        canvas.drawText("Tipo de Relacion con el Titular:",100,420,myPaint);
+        canvas.drawRoundRect(400,390,1100,440,10,10,formas2);
+
+        canvas.drawText("Apellido Paterno:",100,480,myPaint);
+        canvas.drawRoundRect(100,500,550,550,10,10,formas);
+        canvas.drawText("Apellido Materno:",600,480,myPaint);
+        canvas.drawRoundRect(600,500,1100,550,10,10,formas2);
+
+        canvas.drawText("Nombres:",100,580,myPaint);
+        canvas.drawRoundRect(100,600,550,650,10,10,formas);
+        canvas.drawText("Apellido Casada:",600,580,myPaint);
+        canvas.drawRoundRect(600,600,1100,650,10,10,formas2);
+
+        canvas.drawText("Tipo de Identificacion:",100,680,myPaint);
+        canvas.drawText("N° de Documento:",100,710,myPaint);
+        canvas.drawText("Fecha de Nacimiento:",100,740,myPaint);
+        canvas.drawText("Sexo:",100,770,myPaint);
+
+        canvas.drawText("Estado Civil:",600,680,myPaint);
+        canvas.drawText("Nivel de Estudio:",600,710,myPaint);
+        canvas.drawText("Profesion/Ocupacion:",600,740,myPaint);
+        canvas.drawText("Nacionalidad:",600,770,myPaint);
+        canvas.drawText("Departamento:",600,800,myPaint);
+
+        canvas.drawText("Datos Telefonicos:",100,850,myPaint);
+        canvas.drawText("Telefono Fijo:",100,870,myPaint);
+        canvas.drawRoundRect(100,880,250,930,10,10,formas2);
+        canvas.drawText("Telefono Movil:",300,870,myPaint);
+        canvas.drawRoundRect(300,880,450,930,10,10,formas2);
+        canvas.drawText("Oficina Fijo:",100,960,myPaint);
+        canvas.drawRoundRect(100,970,250,1020,10,10,formas2);
+        canvas.drawText("Oficina Movil:",300,960,myPaint);
+        canvas.drawRoundRect(300,970,450,1020,10,10,formas2);
+        canvas.drawText("Correo:",100,1040,myPaint);
+        canvas.drawRoundRect(100,1060,450,1110,10,10,formas);
+
+        canvas.drawText("Datos Laborales (Empresa):",600,870,myPaint);
+        canvas.drawRoundRect(600,880,1100,930,10,10,formas);
+        canvas.drawText("Direccion:",600,960,myPaint);
+        canvas.drawRoundRect(600,970,1100,1020,10,10,formas2);
+        canvas.drawText("Rubro:",600,1040,myPaint);
+        canvas.drawRoundRect(600,1060,1100,1110,10,10,formas);
+
+        canvas.drawText("Autorizo a Novitierra a confirmar los datos declarados en el presente formulario, recabando mis antecedentes ",100,1230,myPaint);
+        canvas.drawText("personales y crediticios tales como, el informe de la central de riesgos de la autoridad de supervision del ",100,1250,myPaint);
+        canvas.drawText("Sistema Financiero ASFI, y otros que estime necesarios por si misma y/o terceras personas.",100,1270,myPaint);
+
+        canvas.drawText("Firma Cliente....................................................",100,1450,myPaint);
+        canvas.drawText("Firma..................................................................",600,1450,myPaint);
+        canvas.drawText("Nombre y Apellidos........................................",100,1490,myPaint);
+        canvas.drawText("Asesor de Inversion.......................................",600,1490,myPaint);
+
+
         ////dibujamos la parte inferior
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
         scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
-        canvas.drawBitmap(scaledbmp,0,600,myPaint);
+        canvas.drawBitmap(scaledbmp,0,1800,myPaint);
 
 
         myPDF.finishPage(myPage1);
