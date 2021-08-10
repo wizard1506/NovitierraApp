@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -23,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.os.StrictMode;
 import android.system.ErrnoException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +81,14 @@ public class Formularios extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ///necesario para poder compartir el pdf
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
+        /////
+
+
         nombre_cliente = view.findViewById(R.id.nombreCliente);
         apellidoPaterno= view.findViewById(R.id.apellidoPCliente);
         apellidoMaterno= view.findViewById(R.id.apellidoMCliente);
@@ -529,62 +540,62 @@ public class Formularios extends Fragment {
             canvas2.drawText("Tipo de Identificacion:",100,420,myPaint);
             canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),320,420,titlePaint);
             canvas2.drawText("N° de Documento:",100,440,myPaint);
-            canvas2.drawText(ci_cliente.getText().toString(),280,440,titlePaint);
+            canvas2.drawText(ci_cliente.getText().toString(),320,440,titlePaint);
             canvas2.drawText("Extension:",100,460,myPaint);
-            canvas2.drawText(extension_cliente.getText().toString(),220,460,titlePaint);
+            canvas2.drawText(extension_cliente.getText().toString(),320,460,titlePaint);
             canvas2.drawText("Nacionalidad:",100,480,myPaint);
-            canvas2.drawText(nacionalidad.getText().toString(),240,480,titlePaint);
+            canvas2.drawText(nacionalidad.getText().toString(),320,480,titlePaint);
             canvas2.drawText("Fecha de Nacimiento:",100,500,myPaint);
             canvas2.drawText(fechaNac.getText().toString(),320,500,titlePaint);
             canvas2.drawText("Estado Civil:",100,520,myPaint);
-            canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),220,520,titlePaint);
+            canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),320,520,titlePaint);
             canvas2.drawText("Sexo:",100,540,myPaint);
-            canvas2.drawText(rbSelectedGenero.getText().toString(),200,540,titlePaint);
+            canvas2.drawText(rbSelectedGenero.getText().toString(),320,540,titlePaint);
             canvas2.drawText("Nivel de Estudio:",600,440,myPaint);
-            canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),780,440,titlePaint);
+            canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),820,440,titlePaint);
             canvas2.drawText("Profesion/Ocupacion:",600,460,myPaint);
             canvas2.drawText(profesion.getText().toString(),820,460,titlePaint);
             canvas2.drawText("Datos de Vivienda",600,480,myPaint);
             canvas2.drawText("Tipo de Vivienda:",600,500,myPaint);
-            canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),780,500,titlePaint);
+            canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),820,500,titlePaint);
             canvas2.drawText("Tenencia:",600,520,myPaint);
-            canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),720,520,titlePaint);
+            canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),820,520,titlePaint);
             canvas2.drawRoundRect(95,400,1100,550,10,10,formas);
 
             canvas2.drawText("Costo Aproximado:",100,570,myPaint);
             canvas2.drawText(costoAprox.getText().toString()+" "+rbSelectedMonedaVivienda.getText().toString(),210,610,titlePaint);
             canvas2.drawRoundRect(100,580,400,620,10,10,formas2);
             canvas2.drawText("Nombre Propietario:",500,570,myPaint);
-            canvas2.drawText(propietarioVivienta.getText().toString(),550,600,titlePaint);
+            canvas2.drawText(propietarioVivienta.getText().toString(),550,610,titlePaint);
             canvas2.drawRoundRect(500,580,800,620,10,10,formas);
             canvas2.drawText("Telefono:",850,570,myPaint);
             canvas2.drawText(telefonoPropietario.getText().toString(),935,610,titlePaint);
             canvas2.drawRoundRect(850,580,1100,620,10,10,formas2);
 
             canvas2.drawText("Pais:",100,650,myPaint);
-            canvas2.drawText(pais.getText().toString(),140,650,titlePaint);
+            canvas2.drawText(pais.getText().toString(),200,650,titlePaint);
             canvas2.drawText("Dpto:",400,650,myPaint);
             canvas2.drawText(spinnerDpto.getSelectedItem().toString(),480,650,titlePaint);
             canvas2.drawText("Ciudad:",700,650,myPaint);
             canvas2.drawText(ciudad.getText().toString(),780,650,titlePaint);
             canvas2.drawText("Barrio:",100,670,myPaint);
-            canvas2.drawText(barrio.getText().toString(),180,670,titlePaint);
+            canvas2.drawText(barrio.getText().toString(),200,670,titlePaint);
             canvas2.drawText("Avenida:",100,690,myPaint);
-            canvas2.drawText(avenida.getText().toString(),180,690,titlePaint);
+            canvas2.drawText(avenida.getText().toString(),200,690,titlePaint);
             canvas2.drawText("Calle:",100,710,myPaint);
-            canvas2.drawText(calle.getText().toString(),160,710,titlePaint);
+            canvas2.drawText(calle.getText().toString(),200,710,titlePaint);
             canvas2.drawText("Numero:",100,730,myPaint);
-            canvas2.drawText(numero.getText().toString(),180,730,titlePaint);
+            canvas2.drawText(numero.getText().toString(),200,730,titlePaint);
             canvas2.drawRoundRect(95,630,1100,740,10,10,formas2);
 
             canvas2.drawText("Telefono Fijo:",100,770,myPaint);
-            canvas2.drawText(telFijo.getText().toString(),240,770,titlePaint);
+            canvas2.drawText(telFijo.getText().toString(),320,770,titlePaint);
             canvas2.drawText("Telefono Movil:",600,770,myPaint);
-            canvas2.drawText(telMovil.getText().toString(),760,770,titlePaint);
+            canvas2.drawText(telMovil.getText().toString(),840,770,titlePaint);
             canvas2.drawText("Telefono Fijo-Oficina:",100,800,myPaint);
             canvas2.drawText(telFijoOfc.getText().toString(),320,800,titlePaint);
             canvas2.drawText("Telefono Movil-Oficina:",600,800,myPaint);
-            canvas2.drawText(telMovOfc.getText().toString(),820,800,titlePaint);
+            canvas2.drawText(telMovOfc.getText().toString(),840,800,titlePaint);
             canvas2.drawText("Correo:",100,830,myPaint);
             canvas2.drawText(correoPersonal.getText().toString(),180,830,titlePaint);
             canvas2.drawRoundRect(95,750,1100,840,10,10,formas);
@@ -592,11 +603,11 @@ public class Formularios extends Fragment {
             canvas2.drawText("Datos Laborales (Empresa):",100,870,myPaint);
             canvas2.drawText(nombreEmpresa.getText().toString(),380,870,titlePaint);
             canvas2.drawText("Direccion:",100,900,myPaint);
-            canvas2.drawText(direccionEmpresa.getText().toString(),220,900,titlePaint);
+            canvas2.drawText(direccionEmpresa.getText().toString(),380,900,titlePaint);
             canvas2.drawText("Rubro:",100,930,myPaint);
-            canvas2.drawText(rubroEmpresa.getText().toString(),200,930,titlePaint);
+            canvas2.drawText(rubroEmpresa.getText().toString(),380,930,titlePaint);
             canvas2.drawText("Ingresos:",100,960,myPaint);
-            canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),200,960,titlePaint);
+            canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),380,960,titlePaint);
             canvas2.drawRoundRect(95,850,1100,970,10,10,formas);
 
             canvas2.drawText("Referencias Personales",100,990,myPaint);
@@ -664,7 +675,7 @@ public class Formularios extends Fragment {
             canvas2.drawText("Nombre y Apellidos:",100,1710,myPaint);
             canvas2.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),300,1710,titlePaint);
             canvas2.drawText("Asesor de Inversion:",100,1750,myPaint);
-            canvas2.drawText(asesor.getText().toString(),310,1750,titlePaint);
+            canvas2.drawText(asesor.getText().toString(),300,1750,titlePaint);
 
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
             scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
@@ -712,7 +723,7 @@ public class Formularios extends Fragment {
         canvas3.drawLine(650,500,1100,500,formas2);
         canvas3.drawText("N° DE CONTRATO",750,495,titulos);
         titulos.setTextSize(30f);
-        canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),200,550,titulos);
+        canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),190,550,titulos);
         titulos.setTextSize(35f);
 
 
@@ -827,6 +838,14 @@ public class Formularios extends Fragment {
                 e.printStackTrace();
             }
             myPDF.close();
+
+        String path = Environment.getExternalStorageDirectory()+"/Formularios Solicitante.pdf";
+        File pdf = new File(path);
+        Intent share = new Intent();
+        share.setAction(Intent.ACTION_SEND);
+        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
+        share.setType("application/pdf");
+        startActivity(share);
 
     }
 
