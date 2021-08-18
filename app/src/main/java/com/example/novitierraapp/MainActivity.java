@@ -25,13 +25,16 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codigo = passwordLogin.getText().toString();
-                if(codigo.contains("novitierra")){
-                    Intent intent = new Intent(getApplicationContext(),navMenu.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getApplicationContext(),"Ingrese su contraseña.",Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent(getApplicationContext(),navMenu.class);
+                startActivity(intent);
+
+//                String codigo = passwordLogin.getText().toString();
+//                if(codigo.contains("novitierra")){
+//                    Intent intent = new Intent(getApplicationContext(),navMenu.class);
+//                    startActivity(intent);
+//                }else {
+//                    Toast.makeText(getApplicationContext(),"Ingrese su contraseña.",Toast.LENGTH_LONG).show();
+//                }
 
             }
         });

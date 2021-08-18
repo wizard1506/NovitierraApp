@@ -19,4 +19,5 @@
     <string name="SpinnerTipoVivienda">Tipo de Vivienda</string>
     <string name="SpinnerDpto">Departamento</string>
     <string name="SpinnerTenencia">Tenencia</string>
+    <string name="SpinnerPrefijo">Prefijo</string>
 </resources>

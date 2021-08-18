@@ -136,13 +136,13 @@
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
                 ></TextView>
-            <EditText
+            <Spinner
+                android:id="@+id/tipoPrefijo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/prefijo"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
-                ></EditText>
+                android:spinnerMode="dialog"
+                android:prompt="@string/SpinnerPrefijo"
+                />
 
         </LinearLayout>
 
@@ -258,6 +258,7 @@
                 android:id="@+id/nacionalidad"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:text="Boliviano"
                 ></EditText>
 
         </LinearLayout>
@@ -1357,6 +1358,7 @@
                 android:id="@+id/codigoAsesor"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:inputType="number"
                 ></EditText>
 
         </LinearLayout>
