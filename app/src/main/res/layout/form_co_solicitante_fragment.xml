@@ -231,6 +231,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Boliviano"
                 android:id="@+id/nacionalidadCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
@@ -372,6 +373,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/profesionCoSol"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                ></EditText>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Direccion"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/amarillo"
+                android:layout_marginStart="10dp"
+                ></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pais:"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bolivia"
+                android:id="@+id/direccionPaisCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 ></EditText>
@@ -586,6 +627,56 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 ></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingresos:"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                ></TextView>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ingresosCoSol"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                android:inputType="number"
+                ></EditText>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:id="@+id/radiogroupIngresosCoSol"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/ingresosCoSolBs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bs"
+                    android:textColor="@color/white"
+                    android:theme="@style/radiobuttonWhite"
+                    android:shadowColor="@color/white"
+                    android:textColorHighlight="@color/white"
+
+                    />
+                <RadioButton
+                    android:id="@+id/ingresosCoSolDolar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:theme="@style/radiobuttonWhite"
+                    android:shadowColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:text="$us"
+                    />
+            </RadioGroup>
         </LinearLayout>
 
         <LinearLayout

@@ -426,8 +426,6 @@ public class Formularios extends Fragment {
             PdfDocument myPDF = new PdfDocument();
             Paint myPaint = new Paint();
             Paint titlePaint = new Paint();
-            Paint formas = new Paint();
-            Paint formas2 = new Paint();
 
             myPaint.setTextAlign(Paint.Align.LEFT);
             myPaint.setTextSize(20f);
@@ -437,14 +435,6 @@ public class Formularios extends Fragment {
             titlePaint.setTextAlign(Paint.Align.LEFT);
             titlePaint.setTextSize(50f);
             titlePaint.setColor(Color.BLACK);
-
-            formas.setColor(Color.BLACK);
-            formas.setStyle(Paint.Style.STROKE);
-            formas.setStrokeWidth(2);
-
-            formas2.setColor(Color.BLACK);
-            formas2.setStyle(Paint.Style.STROKE);
-            formas2.setStrokeWidth(2);
 
             ////definimos pagina 1
             PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
@@ -510,20 +500,74 @@ public class Formularios extends Fragment {
             canvas2.drawText(propietarioVivienta.getText().toString(),760,1410,titlePaint);
             canvas2.drawText(telefonoPropietario.getText().toString(),1950,1410,titlePaint);
 
+            canvas2.drawText(pais.getText().toString(),270,1540,titlePaint);
+            canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1540,titlePaint);
+            canvas2.drawText(ciudad.getText().toString(),300,1660,titlePaint);
+            canvas2.drawText(barrio.getText().toString(),1300,1660,titlePaint);
+            canvas2.drawText(avenida.getText().toString(),300,1810,titlePaint);
+            canvas2.drawText(calle.getText().toString(),1300,1810,titlePaint);
+            canvas2.drawText(numero.getText().toString(),1940,1810,titlePaint);
+
+            canvas2.drawText(telFijo.getText().toString(),250,2040,titlePaint);
+            canvas2.drawText(telFijoOfc.getText().toString(),250,2210,titlePaint);
+            canvas2.drawText(telMovil.getText().toString(),700,2040,titlePaint);
+            canvas2.drawText(telMovOfc.getText().toString(),700,2210,titlePaint);
+            canvas2.drawText(correoPersonal.getText().toString(),250,2370,titlePaint);
+
+            canvas2.drawText(nombreEmpresa.getText().toString(),1300,2040,titlePaint);
+            canvas2.drawText(direccionEmpresa.getText().toString(),1300,2210,titlePaint);
+            canvas2.drawText(rubroEmpresa.getText().toString(),1300,2370,titlePaint);
+            canvas2.drawText(ingresosEmpresa.getText().toString()+rbSelectedIngresos.getText().toString(),2060,2370,titlePaint);
+
+            canvas2.drawText(primerReferencia.getText().toString(),250,2590,titlePaint);
+            canvas2.drawText(segundaReferencia.getText().toString(),250,2740,titlePaint);
+            canvas2.drawText(parentesco.getText().toString(),1510,2590,titlePaint);
+            canvas2.drawText(relacion.getText().toString(),1510,2740,titlePaint);
+            canvas2.drawText(telfReferencia1.getText().toString(),2060,2590,titlePaint);
+            canvas2.drawText(telfReferencia2.getText().toString(),2060,2740,titlePaint);
+            titlePaint.setTextSize(40f);
+            canvas2.drawText(nombre_cliente.getText().toString()
+                    +apellidoPaterno.getText().toString()
+                    +apellidoMaterno.getText().toString()
+                    ,530,3950,titlePaint);
+            canvas2.drawText(asesor.getText().toString(),1870,3950,titlePaint);
+            titlePaint.setTextSize(50f);
+
+
             myPDF.finishPage(myPage2);
               //////FIN PAGINA 2 /////
 //
 //
 //        ////// INICIA PAGINA 3 ///////
-//        PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
-//        PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
-//        Canvas canvas3 = myPage3.getCanvas();
+            PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
+            PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
+            Canvas canvas3 = myPage3.getCanvas();
 
-//        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
-//        scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
-//        canvas3.drawBitmap(scaledbmp,0,1850,myPaint);
-//
-//        myPDF.finishPage(myPage3);
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.formentregalote);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+            canvas3.drawBitmap(scaledbmp,0,0,myPaint);
+
+            myPaint.setTextAlign(Paint.Align.CENTER);
+            myPaint.setTextSize(70f);
+            myPaint.setColor(Color.BLACK);
+            myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+            canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),700,990,myPaint);
+            titlePaint.setTextSize(60f);
+            canvas3.drawText(codigo_proyecto.getText().toString(),270,1280,titlePaint);
+            canvas3.drawText(uv.getText().toString(),740,1280,titlePaint);
+            canvas3.drawText(mz.getText().toString(),1200,1280,titlePaint);
+            canvas3.drawText(lt.getText().toString(),1680,1280,titlePaint);
+            canvas3.drawText(cat.getText().toString(),2180,1280,titlePaint);
+
+            canvas3.drawText(rbSelected.getText().toString(),270,1680,titlePaint);
+            canvas3.drawText(mts2.getText().toString(),740,1680,titlePaint);
+            titlePaint.setTextSize(45f);
+            canvas3.drawText(nombre_cliente.getText().toString()+apellidoPaterno.getText().toString()+
+                    apellidoMaterno.getText().toString(),270,1895,titlePaint);
+            canvas3.drawText(ci_cliente.getText().toString(),840,1952,titlePaint);
+            canvas3.drawText(expedido.getText().toString(),1380,1952,titlePaint);
+
+            myPDF.finishPage(myPage3);
         /////FIN PAGINA 3/////////
 
         /////INICIO DE PAGINA 4 ////

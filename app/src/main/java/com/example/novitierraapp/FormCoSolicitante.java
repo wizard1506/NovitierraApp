@@ -44,11 +44,11 @@ import java.util.Calendar;
 
 public class FormCoSolicitante extends Fragment {
 
-    EditText relacionCoSol,nombre,apellidoP,apellidoM,apellidoCasada,ci,profesion,extension,nacionalidad,telFijo,telMovil,fijoOfi,movilOfi,correo,empresa,direccionEmpresa,rubro,etFechaNac,asesor;
+    EditText relacionCoSol,nombre,apellidoP,apellidoM,apellidoCasada,ci,profesion,extension,nacionalidad,telFijo,telMovil,fijoOfi,movilOfi,correo,empresa,direccionEmpresa,rubro,etFechaNac,asesor,pais,ingresos;
     Spinner spinnerTipoIdent, spinnerEstadoCivil, spinnerNivelEstudio, spinnerDptos;
     DatePickerDialog datePickerDialog;
-    RadioGroup radioGroupGenero;
-    RadioButton rbSelectedGenero, rbMasculinoCoSol,rbFemeninoCoSol;
+    RadioGroup radioGroupGenero, radioGroupIngresos;
+    RadioButton rbSelectedGenero, rbMasculinoCoSol,rbFemeninoCoSol, rbingresoBs, rbingresoDolar, rbSelectedIngreso;
     Button btGenerarPdf, btFechaNac;
     ArrayList<String> listaIdentificacion = new ArrayList<>();
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
@@ -84,6 +84,7 @@ public class FormCoSolicitante extends Fragment {
         extension = view.findViewById(R.id.extensionCoSol);
         profesion=view.findViewById(R.id.profesionCoSol);
         nacionalidad = view.findViewById(R.id.nacionalidadCoSol);
+        pais = view.findViewById(R.id.direccionPaisCoSol);
         telFijo=view.findViewById(R.id.telfFijoCoSol);
         telMovil=view.findViewById(R.id.telfMovilCoSol);
         fijoOfi=view.findViewById(R.id.telfFijoOficinaCoSol);
@@ -92,6 +93,7 @@ public class FormCoSolicitante extends Fragment {
         empresa=view.findViewById(R.id.empresaNombreCoSol);
         direccionEmpresa=view.findViewById(R.id.direccionEmpresaCoSol);
         rubro=view.findViewById(R.id.rubroEmpresaCoSol);
+        ingresos=view.findViewById(R.id.ingresosCoSol);
         etFechaNac=view.findViewById(R.id.fechaNacimientoCoSol);
         asesor=view.findViewById(R.id.fullnameAsesor);
         spinnerTipoIdent=view.findViewById(R.id.tipoIdentificacionCoSol);
@@ -100,7 +102,10 @@ public class FormCoSolicitante extends Fragment {
         spinnerDptos=view.findViewById(R.id.dptoBoliviaCoSol);
         rbMasculinoCoSol=view.findViewById(R.id.masculinoCoSol);
         rbFemeninoCoSol=view.findViewById(R.id.femeninoCoSol);
+        rbingresoBs=view.findViewById(R.id.ingresosCoSolBs);
+        rbingresoDolar=view.findViewById(R.id.ingresosCoSolDolar);
         radioGroupGenero=view.findViewById(R.id.radiogroupGeneroCoSol);
+        radioGroupIngresos=view.findViewById(R.id.radiogroupIngresosCoSol);
         btFechaNac=view.findViewById(R.id.btDatePickerFechaNacCoSol);
         btGenerarPdf=view.findViewById(R.id.btguardarCoSol);
 
@@ -114,6 +119,18 @@ public class FormCoSolicitante extends Fragment {
             @Override
             public void onClick(View v) {
                 rbSeleccionGenero(v);
+            }
+        });
+        rbingresoDolar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbSeleccionIngresos(v);
+            }
+        });
+        rbingresoBs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbSeleccionIngresos(v);
             }
         });
 
@@ -136,10 +153,12 @@ public class FormCoSolicitante extends Fragment {
         btGenerarPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
-                    generarPDF(v);
-                    Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
-                }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
+                if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
+                    if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
+                        generarPDF(v);
+                        Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
+                    }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
+                }else {Toast.makeText(getContext(),"Falta seleccionar Ingresos Bs o Dolar.",Toast.LENGTH_SHORT).show(); }
             }
         });
 
@@ -178,6 +197,11 @@ public class FormCoSolicitante extends Fragment {
         int radiobtid = radioGroupGenero.getCheckedRadioButtonId();
         rbSelectedGenero = v.findViewById(radiobtid);
     }
+    private void rbSeleccionIngresos(View v) {
+        int radiobtid = radioGroupIngresos.getCheckedRadioButtonId();
+        rbSelectedIngreso = v.findViewById(radiobtid);
+    }
+
 
     private String makeDateString(int day, int month, int year) {
         return day+"/"+month+"/" + year;
@@ -246,133 +270,66 @@ public class FormCoSolicitante extends Fragment {
         PdfDocument myPDF = new PdfDocument();
         Paint myPaint = new Paint();
         Paint titlePaint = new Paint();
-        Paint titulos = new Paint();
-        Paint centros = new Paint();
-        Paint formas = new Paint();
-        Paint formas2 = new Paint();
 
         myPaint.setTextAlign(Paint.Align.LEFT);
-        myPaint.setTextSize(20f);
+        myPaint.setTextSize(40f);
         myPaint.setColor(Color.BLACK);
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.NORMAL));
 
         titlePaint.setTextAlign(Paint.Align.LEFT);
-        titlePaint.setTextSize(20f);
+        titlePaint.setTextSize(35f);
         titlePaint.setColor(Color.BLACK);
-
-        titulos.setTextAlign(Paint.Align.CENTER);
-        titulos.setTextSize(45f);
-        titulos.setColor(Color.BLACK);
-        titulos.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-
-        centros.setTextAlign(Paint.Align.CENTER);
-        centros.setTextSize(20f);
-        centros.setColor(Color.BLACK);
-        centros.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-
-        formas.setColor(Color.BLACK);
-        formas.setStyle(Paint.Style.STROKE);
-        formas.setStrokeWidth(2);
-
-        formas2.setColor(Color.BLACK);
-        formas2.setStyle(Paint.Style.STROKE);
-        formas2.setStrokeWidth(2);
+        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
 
         ////definimos pagina 1
-        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
         PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
         Canvas canvas = myPage1.getCanvas();
 
         //logo e imagen final
         ////dibujamos el logo principal
-        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
-        scaledbmp = Bitmap.createScaledBitmap(bmp,400,200,false);
-        canvas.drawBitmap(scaledbmp,20,20,myPaint);
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form4a);
+        scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+        canvas.drawBitmap(scaledbmp,0,0,myPaint);
 
-        canvas.drawText("DATOS DEL CO-SOLICITANTE",600,250,titulos);
-        canvas.drawText("Codigo Cliente:",720,300,myPaint);
-        canvas.drawRoundRect(720,320,1100,370,10,10,formas);
+        canvas.drawText(relacionCoSol.getText().toString(),850,670,myPaint);
+        canvas.drawText(apellidoP.getText().toString(),400,870,myPaint);
+        canvas.drawText(apellidoM.getText().toString(),1600,870,myPaint);
+        canvas.drawText(nombre.getText().toString(),400,1050,myPaint);
+        canvas.drawText(apellidoCasada.getText().toString(),1600,1050,myPaint);
+        canvas.drawText(ci.getText().toString(),1600,1250,myPaint);
+        canvas.drawText(extension.getText().toString(),2080,1250,myPaint);
 
-        canvas.drawText("Tipo de Relacion con el Titular:",100,420,myPaint);
-        canvas.drawText(relacionCoSol.getText().toString(),440,420,myPaint);
-        canvas.drawRoundRect(400,390,1100,440,10,10,formas2);
+        canvas.drawText(spinnerTipoIdent.getSelectedItem().toString(),650,1165,myPaint);
+        canvas.drawText(etFechaNac.getText().toString(),650,1285,myPaint);
+        canvas.drawText(rbSelectedGenero.getText().toString(),650,1340,myPaint);
+        canvas.drawText(spinnerEstadoCivil.getSelectedItem().toString(),650,1390,myPaint);
+        canvas.drawText(spinnerNivelEstudio.getSelectedItem().toString(),650,1450,myPaint);
+        canvas.drawText(profesion.getText().toString(),650,1505,myPaint);
+        canvas.drawText(nacionalidad.getText().toString(),650,1560,myPaint);
 
-        canvas.drawText("Apellido Paterno:",100,480,myPaint);
-        canvas.drawText(apellidoP.getText().toString(),250,530,myPaint);
-        canvas.drawRoundRect(100,500,550,550,10,10,formas);
-        canvas.drawText("Apellido Materno:",600,480,myPaint);
-        canvas.drawText(apellidoM.getText().toString(),750,530,myPaint);
-        canvas.drawRoundRect(600,500,1100,550,10,10,formas2);
+        canvas.drawText(pais.getText().toString(),650,1690,myPaint);
+        canvas.drawText(spinnerDptos.getSelectedItem().toString(),650,1740,myPaint);
 
-        canvas.drawText("Nombres:",100,580,myPaint);
-        canvas.drawText(nombre.getText().toString(),250,630,myPaint);
-        canvas.drawRoundRect(100,600,550,650,10,10,formas);
-        canvas.drawText("Apellido Casada:",600,580,myPaint);
-        canvas.drawText(apellidoCasada.getText().toString(),750,630,myPaint);
-        canvas.drawRoundRect(600,600,1100,650,10,10,formas2);
+        canvas.drawText(telFijo.getText().toString(),250,1955,myPaint);
+        canvas.drawText(telMovil.getText().toString(),750,1955,myPaint);
+        canvas.drawText(fijoOfi.getText().toString(),250,2120,myPaint);
+        canvas.drawText(movilOfi.getText().toString(),750,2120,myPaint);
+        canvas.drawText(correo.getText().toString(),250,2280,myPaint);
 
-        canvas.drawText("Tipo de Identificacion:",100,680,myPaint);
-        canvas.drawText(spinnerTipoIdent.getSelectedItem().toString(),320,680,titlePaint);
-        canvas.drawText("N° de Documento:",100,710,myPaint);
-        canvas.drawText(ci.getText().toString(),320,710,titlePaint);
-        canvas.drawText("Fecha de Nacimiento:",100,740,myPaint);
-        canvas.drawText(etFechaNac.getText().toString(),320,740,titlePaint);
-        canvas.drawText("Sexo:",100,770,myPaint);
-        canvas.drawText(rbSelectedGenero.getText().toString(),320,770,titlePaint);
+        canvas.drawText(empresa.getText().toString(),1350,1955,myPaint);
+        canvas.drawText(direccionEmpresa.getText().toString(),1350,2120,myPaint);
+        canvas.drawText(rubro.getText().toString(),1350,2280,myPaint);
+        canvas.drawText(ingresos.getText().toString()+" "+rbSelectedIngreso.getText().toString(),2080,2280,myPaint);
 
-        canvas.drawText("Estado Civil:",600,680,myPaint);
-        canvas.drawText(spinnerEstadoCivil.getSelectedItem().toString(),820,680,titlePaint);
-        canvas.drawText("Nivel de Estudio:",600,710,myPaint);
-        canvas.drawText(spinnerNivelEstudio.getSelectedItem().toString(),820,710,titlePaint);
-        canvas.drawText("Profesion/Ocupacion:",600,740,myPaint);
-        canvas.drawText(profesion.getText().toString(),820,740,titlePaint);
-        canvas.drawText("Nacionalidad:",600,770,myPaint);
-        canvas.drawText(nacionalidad.getText().toString(),820,770,titlePaint);
-        canvas.drawText("Departamento:",600,800,myPaint);
-        canvas.drawText(spinnerDptos.getSelectedItem().toString(),820,800,titlePaint);
-
-        canvas.drawText("Datos Telefonicos:",100,850,myPaint);
-        canvas.drawText("Telefono Fijo:",100,870,myPaint);
-        canvas.drawText(telFijo.getText().toString(),130,910,titlePaint);
-        canvas.drawRoundRect(100,880,250,930,10,10,formas2);
-        canvas.drawText("Telefono Movil:",300,870,myPaint);
-        canvas.drawText(telMovil.getText().toString(),330,910,titlePaint);
-        canvas.drawRoundRect(300,880,450,930,10,10,formas2);
-        canvas.drawText("Oficina Fijo:",100,960,myPaint);
-        canvas.drawText(fijoOfi.getText().toString(),130,1000,titlePaint);
-        canvas.drawRoundRect(100,970,250,1020,10,10,formas2);
-        canvas.drawText("Oficina Movil:",300,960,myPaint);
-        canvas.drawText(movilOfi.getText().toString(),330,1000,titlePaint);
-        canvas.drawRoundRect(300,970,450,1020,10,10,formas2);
-        canvas.drawText("Correo:",100,1040,myPaint);
-        canvas.drawText(correo.getText().toString(),150,1090,titlePaint);
-        canvas.drawRoundRect(100,1060,450,1110,10,10,formas);
-
-        canvas.drawText("Datos Laborales (Empresa):",600,870,myPaint);
-        canvas.drawText(empresa.getText().toString(),650,910,titlePaint);
-        canvas.drawRoundRect(600,880,1100,930,10,10,formas);
-        canvas.drawText("Direccion:",600,960,myPaint);
-        canvas.drawText(direccionEmpresa.getText().toString(),650,1000,titlePaint);
-        canvas.drawRoundRect(600,970,1100,1020,10,10,formas2);
-        canvas.drawText("Rubro:",600,1040,myPaint);
-        canvas.drawText(rubro.getText().toString(),650,1090,titlePaint);
-        canvas.drawRoundRect(600,1060,1100,1110,10,10,formas);
-
-        canvas.drawText("Autorizo a Novitierra a confirmar los datos declarados en el presente formulario, recabando mis antecedentes ",100,1230,myPaint);
-        canvas.drawText("personales y crediticios tales como, el informe de la central de riesgos de la autoridad de supervision del ",100,1250,myPaint);
-        canvas.drawText("Sistema Financiero ASFI, y otros que estime necesarios por si misma y/o terceras personas.",100,1270,myPaint);
-
-        canvas.drawText("Firma Cliente....................................................",100,1450,myPaint);
-        canvas.drawText("Firma..................................................................",600,1450,myPaint);
-        canvas.drawText(nombre.getText().toString()+" "+apellidoP.getText().toString()+" "+apellidoM.getText().toString(),300,1490,centros);
-        canvas.drawText(asesor.getText().toString(),820,1490,centros);
+        canvas.drawText(nombre.getText().toString()+" "+apellidoP.getText().toString()+" "+
+                apellidoM.getText().toString(),550,3250,titlePaint);
+        canvas.drawText(asesor.getText().toString(),1870,3250,titlePaint);
 
 
 
-        ////dibujamos la parte inferior
-        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1_parte_inferior);
-        scaledbmp = Bitmap.createScaledBitmap(bmp,pageWidth,50,false);
-        canvas.drawBitmap(scaledbmp,0,1800,myPaint);
+
+
 
 
         myPDF.finishPage(myPage1);
