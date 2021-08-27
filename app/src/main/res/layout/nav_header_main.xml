@@ -14,6 +14,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:src="@drawable/casita_sola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
@@ -24,12 +25,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Novitierra"
+        android:text="Nombre"
+        android:id="@+id/nombreSesion"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/usuarioSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+        android:text="Usuario" />
 </LinearLayout>
