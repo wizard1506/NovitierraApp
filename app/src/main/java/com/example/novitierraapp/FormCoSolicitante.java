@@ -36,6 +36,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.novitierraapp.entidades.Global;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -146,6 +148,7 @@ public class FormCoSolicitante extends Fragment {
         cargarListaEstadoCivil(view);
         cargarListaNivelEstudio(view);
         cargarListaTipoIdentificacion(view);
+        asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
 
         ////para el boton del pdf
         ActivityCompat.requestPermissions(getActivity(),new String[]{
@@ -286,8 +289,7 @@ public class FormCoSolicitante extends Fragment {
         PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
         Canvas canvas = myPage1.getCanvas();
 
-        //logo e imagen final
-        ////dibujamos el logo principal
+        //dibujamos el formulario
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form4a);
         scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
         canvas.drawBitmap(scaledbmp,0,0,myPaint);

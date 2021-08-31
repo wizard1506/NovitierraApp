@@ -41,6 +41,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
 
 import java.io.File;
@@ -161,6 +162,9 @@ public class Formularios extends Fragment {
         guardar = view.findViewById(R.id.btguardar);
         btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
         fechaNac.setText(fechaHoy());
+
+        codigo_asesor.setText(Global.codigo.toString());
+        asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
         ////boton fecha nacimiento
         btFechaNac.setOnClickListener(new View.OnClickListener() {
             @Override

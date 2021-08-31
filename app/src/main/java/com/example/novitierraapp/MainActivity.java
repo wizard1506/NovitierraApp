@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton login;
     List<usuarios> userList;
     RequestQueue requestQueue;
-
+    String usu,usu2;
+    String pass,pass2;
     private static final String URL = "https://novitierra.000webhostapp.com/validar_usuario.php" ;
     private static final String URL2 = "https://novitierra.000webhostapp.com/userLogged.php" ;
     @Override
@@ -52,8 +53,11 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validarUsuario(URL);
-                traerUsuario();
+                if (campoVacio()!=true){
+                    traerUsuario();
+                }else {
+                    Toast.makeText(MainActivity.this, "Ingrese sus datos correctamente.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -67,15 +71,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Global.userSesion="";
-//        Global.nombreSesion="";
-//        Global.apellidoSesion="";
-//    }
 
-    private void validarUsuario(String url) {
+    public boolean campoVacio(){
+        if (userLogin.getText().toString().isEmpty()|| passwordLogin.getText().toString().isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    private void validarUsuario(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -85,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(MainActivity.this, "Bienvenido"+" "+Global.nombreSesion.toString(), Toast.LENGTH_LONG).show();
+
                 }else{
                     Toast.makeText(MainActivity.this, "Usuario o Contraseña incorrecta", Toast.LENGTH_LONG).show();
                 }
@@ -121,12 +125,23 @@ public class MainActivity extends AppCompatActivity {
                             Global.nombreSesion=product.getString("nombres");
                             Global.apellidoSesion=product.getString("apellidos");
                             Global.userSesion=product.getString("usuario");
+                            Global.codigo=product.getInt("codigo");
+                            usu=product.getString("usuario");
+                            pass=product.getString("upassword");
+                            usu2=userLogin.getText().toString();
+                            pass2=passwordLogin.getText().toString();
+                            if(usu2.equals(usu)&&pass2.equals(pass)){
+                                validarUsuario(URL);
+                            }else {
+                                Toast.makeText(MainActivity.this, "Usuario o Contraseña incorrecta", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }catch(JSONException e) {
+                        Toast.makeText(MainActivity.this, "Usuario no registrado", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }else{
-                    Toast.makeText(MainActivity.this, "No paso nada", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Ocurrio algun error", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {

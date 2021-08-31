@@ -30,6 +30,7 @@ public class navMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Toast.makeText(getApplicationContext(), "Bienvenido(a)"+" "+Global.nombreSesion.toString(), Toast.LENGTH_LONG).show();
         setContentView(R.layout.activity_nav_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
