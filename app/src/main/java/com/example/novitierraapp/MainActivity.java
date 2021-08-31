@@ -121,13 +121,13 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         JSONArray array = new JSONArray(response);
                         for (int i = 0; i <array.length() ; i++) {
-                            JSONObject product = array.getJSONObject(i);
-                            Global.nombreSesion=product.getString("nombres");
-                            Global.apellidoSesion=product.getString("apellidos");
-                            Global.userSesion=product.getString("usuario");
-                            Global.codigo=product.getInt("codigo");
-                            usu=product.getString("usuario");
-                            pass=product.getString("upassword");
+                            JSONObject respuesta = array.getJSONObject(i);
+                            Global.nombreSesion=respuesta.getString("nombres");
+                            Global.apellidoSesion=respuesta.getString("apellidos");
+                            Global.userSesion=respuesta.getString("usuario");
+                            Global.codigo=respuesta.getInt("codigo");
+                            usu=respuesta.getString("usuario");
+                            pass=respuesta.getString("upassword");
                             usu2=userLogin.getText().toString();
                             pass2=passwordLogin.getText().toString();
                             if(usu2.equals(usu)&&pass2.equals(pass)){
