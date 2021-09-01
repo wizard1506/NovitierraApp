@@ -2,6 +2,8 @@ package com.example.novitierraapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -43,6 +45,7 @@ import android.widget.Toast;
 
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -165,6 +168,11 @@ public class Formularios extends Fragment {
 
         codigo_asesor.setText(Global.codigo.toString());
         asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
+
+        ///fragment mapa
+//        Fragment fragment = new MapFragment();
+//        getChildFragmentManager().beginTransaction().replace(R.id.mapContainer,fragment).commit();
+
         ////boton fecha nacimiento
         btFechaNac.setOnClickListener(new View.OnClickListener() {
             @Override

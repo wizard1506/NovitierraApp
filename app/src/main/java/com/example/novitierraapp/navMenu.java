@@ -8,11 +8,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.novitierraapp.entidades.Global;
+import com.google.android.gms.dynamic.SupportFragmentWrapper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.internal.NavigationMenu;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class navMenu extends AppCompatActivity {
     TextView nombreSesion,userSesion;
+
 //    ImageView casita;
 
     private AppBarConfiguration mAppBarConfiguration;
