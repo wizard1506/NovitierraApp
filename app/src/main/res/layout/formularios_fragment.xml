@@ -278,17 +278,17 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btDatePickerFechaNac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btDatePickerFechaNac"
-                    android:text="Fecha Nacimiento"
-                    android:textColor="@color/white"
                     android:elevation="10dp"
-                    style="?android:spinnerStyle"
                     android:onClick="openDatePicker"
-                    >
-
+                    android:text="Fecha Nacimiento"
+                    android:textStyle="bold"
+                    android:textColor="@color/amarillo"
+                    style="?android:spinnerStyle">
                 </Button>
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

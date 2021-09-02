@@ -7,10 +7,19 @@
 
 <fragment
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="match_parent"
     android:id="@+id/google_map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     />
 
+    <Button
+        android:id="@+id/btCapturarUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capturar Ubicacion"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom">
+
+    </Button>
 
 </FrameLayout>

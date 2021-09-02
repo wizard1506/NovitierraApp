@@ -410,6 +410,7 @@ public class Formularios extends Fragment {
         listaDpto.add("Potosi");
         listaDpto.add("Tarija");
         listaDpto.add("Chuquisaca");
+        listaDpto.add("Ninguno");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
         spinnerDpto.setAdapter(adapter);
     }
@@ -494,7 +495,12 @@ public class Formularios extends Fragment {
             canvas2.drawText(apellidoMaterno.getText().toString(),1550,580,titlePaint);
             canvas2.drawText(nombre_cliente.getText().toString(),450,750,titlePaint);
             canvas2.drawText(apellidoCasada.getText().toString(),1450,750,titlePaint);
-            canvas2.drawText(spinnerPrefijo.getSelectedItem().toString(),2060,750,titlePaint);
+            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
+                canvas2.drawText("",2060,750,titlePaint);
+            }else {
+                canvas2.drawText(spinnerPrefijo.getSelectedItem().toString(),2060,750,titlePaint);
+            }
+
             canvas2.drawText(ci_cliente.getText().toString(),1510,920,titlePaint);
             canvas2.drawText(extension_cliente.getText().toString(),2060,920,titlePaint);
 
@@ -513,7 +519,11 @@ public class Formularios extends Fragment {
             canvas2.drawText(telefonoPropietario.getText().toString(),1950,1410,titlePaint);
 
             canvas2.drawText(pais.getText().toString(),270,1540,titlePaint);
-            canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1540,titlePaint);
+            if(spinnerDpto.getSelectedItem().toString().contains("Ninguno")){
+                canvas2.drawText("",820,1540,titlePaint);
+            }else {
+                canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1540,titlePaint);
+            }
             canvas2.drawText(ciudad.getText().toString(),300,1660,titlePaint);
             canvas2.drawText(barrio.getText().toString(),1300,1660,titlePaint);
             canvas2.drawText(avenida.getText().toString(),300,1810,titlePaint);

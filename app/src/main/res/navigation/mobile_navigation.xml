@@ -11,17 +11,17 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.novitierraapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+<!--    <fragment-->
+<!--        android:id="@+id/nav_gallery"-->
+<!--        android:name="com.example.novitierraapp.ui.gallery.GalleryFragment"-->
+<!--        android:label="@string/menu_gallery"-->
+<!--        tools:layout="@layout/fragment_gallery" />-->
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.novitierraapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+<!--    <fragment-->
+<!--        android:id="@+id/nav_slideshow"-->
+<!--        android:name="com.example.novitierraapp.ui.slideshow.SlideshowFragment"-->
+<!--        android:label="@string/menu_slideshow"-->
+<!--        tools:layout="@layout/fragment_slideshow" />-->
     <fragment
         android:id="@+id/formularios"
         android:name="com.example.novitierraapp.Formularios"
@@ -32,4 +32,9 @@
         android:name="com.example.novitierraapp.FormCoSolicitante"
         android:label="Co-Solicitante"
         tools:layout="@layout/form_co_solicitante_fragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.novitierraapp.MapFragment"
+        android:label="Ubicacion Vivienda"
+        tools:layout="@layout/map_fragment" />
 </navigation>

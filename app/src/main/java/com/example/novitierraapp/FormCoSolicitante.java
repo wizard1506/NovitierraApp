@@ -265,6 +265,7 @@ public class FormCoSolicitante extends Fragment {
         listaDpto.add("Potosi");
         listaDpto.add("Tarija");
         listaDpto.add("Chuquisaca");
+        listaDpto.add("Ninguno");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
         spinnerDptos.setAdapter(adapter);
     }
@@ -311,7 +312,12 @@ public class FormCoSolicitante extends Fragment {
         canvas.drawText(nacionalidad.getText().toString(),650,1560,myPaint);
 
         canvas.drawText(pais.getText().toString(),650,1690,myPaint);
-        canvas.drawText(spinnerDptos.getSelectedItem().toString(),650,1740,myPaint);
+        if(spinnerDptos.getSelectedItem().toString().contains("Ninguno")){
+            canvas.drawText("",650,1740,myPaint);
+        }else {
+            canvas.drawText(spinnerDptos.getSelectedItem().toString(),650,1740,myPaint);
+        }
+
 
         canvas.drawText(telFijo.getText().toString(),250,1955,myPaint);
         canvas.drawText(telMovil.getText().toString(),750,1955,myPaint);
