@@ -48,6 +48,49 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Formulario con ubicacion:"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    ></TextView>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:id="@+id/radiogroupElegirUbicacion"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/conUbicacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Si"
+                        android:textColor="@color/white"
+                        android:theme="@style/radiobuttonWhite"
+                        android:shadowColor="@color/white"
+                        android:textColorHighlight="@color/white"
+
+                        />
+                    <RadioButton
+                        android:id="@+id/sinUbicacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:theme="@style/radiobuttonWhite"
+                        android:shadowColor="@color/white"
+                        android:textColorHighlight="@color/white"
+                        android:text="No"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Nombre del cliente:"
                     android:textSize="14sp"
                     android:textColor="@color/white"

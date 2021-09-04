@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.example.novitierraapp.entidades.Global;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -59,6 +60,7 @@ public class MapFragment extends Fragment {
                 mMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
                     @Override
                     public void onSnapshotReady(@Nullable Bitmap bitmap) {
+                        Global.ubicacion=bitmap;
 
                         File file = new File(Environment.getExternalStorageDirectory(),"/UbicacionCliente.jpg");
                         try {

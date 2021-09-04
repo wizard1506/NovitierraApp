@@ -62,6 +62,8 @@ public class Formularios extends Fragment {
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero,rbSelectedMonedaVivienda,rbViviendaBs,rbViviendaDolar, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos;
+    RadioGroup radioGroupSinConUbicacion;
+    RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo;
     TextView codigo_proyecto;
     Button guardar, btFechaNac;
@@ -78,7 +80,6 @@ public class Formularios extends Fragment {
 
     Bitmap bmp, scaledbmp;
 
-    int pageWidth=1200;
 
     public static Formularios newInstance() {
         return new Formularios();
@@ -141,6 +142,7 @@ public class Formularios extends Fragment {
         radioGroupGenero=view.findViewById(R.id.radiogroupGenero);
         radioGroupVivienda = view.findViewById(R.id.radiogroupVivienda);
         radioGroupIngresos = view.findViewById(R.id.radiogroupIngresos);
+        radioGroupSinConUbicacion=view.findViewById(R.id.radiogroupElegirUbicacion);
 
         rb_plazo = view.findViewById(R.id.aPlazo);
         rb_contado= view.findViewById(R.id.aContado);
@@ -150,6 +152,8 @@ public class Formularios extends Fragment {
         rbViviendaDolar=view.findViewById(R.id.viviendaDolar);
         rbIngresosBs=view.findViewById(R.id.ingresosBs);
         rbIngresosDolar=view.findViewById(R.id.ingresosDolar);
+        rbconUbicacion = view.findViewById(R.id.conUbicacion);
+        rbsinUbicacion=view.findViewById(R.id.sinUbicacion);
 
 
         spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
@@ -232,6 +236,20 @@ public class Formularios extends Fragment {
                 rbSeleccionIngresos(v);
             }
         });
+        rbconUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SeleccionSinConUbicacion(v);
+            }
+        });
+        rbsinUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SeleccionSinConUbicacion(v);
+            }
+        });
+
+
         /////cargamos los spinners
         cargarListaTipoIdentificacion(view);
         cargarListaEstadoCivil(view);
@@ -261,18 +279,26 @@ public class Formularios extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rb_contado.isChecked()||rb_plazo.isChecked()){
-                    if (rbMasculino.isChecked()||rbFemenino.isChecked()){
-                        if ( rbIngresosBs.isChecked()||rbIngresosDolar.isChecked()   ){
-                            if(rbViviendaBs.isChecked()|| rbViviendaDolar.isChecked()){
-                                generarPDF(v);
-                                Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
-                            }else{Toast.makeText(getContext(),"Falta seleccionar costo de vivienda en Bs o $us.",Toast.LENGTH_SHORT).show();}
-                        }else{Toast.makeText(getContext(),"Falta seleccionar Ingresos en Bs o $us.",Toast.LENGTH_SHORT).show();}
-                    }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
-                }else{
-                Toast.makeText(getContext(),"Falta seleccionar plazo o contado.",Toast.LENGTH_SHORT).show();
-                }
+                if (rbconUbicacion.isChecked()||rbsinUbicacion.isChecked()) {
+                    if (rb_contado.isChecked() || rb_plazo.isChecked()) {
+                        if (rbMasculino.isChecked() || rbFemenino.isChecked()) {
+                            if (rbIngresosBs.isChecked() || rbIngresosDolar.isChecked()) {
+                                if (rbViviendaBs.isChecked() || rbViviendaDolar.isChecked()) {
+                                    generarPDF(v);
+                                    Toast.makeText(getContext(), "PDF Generado", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Falta seleccionar costo de vivienda en Bs o $us.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "Falta seleccionar Ingresos en Bs o $us.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Falta seleccionar Masculino o Femenino.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Falta seleccionar plazo o contado.", Toast.LENGTH_SHORT).show();
+                    }
+                }else { Toast.makeText(getContext(), "Falta seleccionar formulario con Ubicacion o Sin ubicacion.", Toast.LENGTH_SHORT).show();}
             }
         });
 
@@ -348,6 +374,11 @@ public class Formularios extends Fragment {
         int radiobtid = radioGroupIngresos.getCheckedRadioButtonId();
         rbSelectedIngresos = v.findViewById(radiobtid);
     }
+    private void SeleccionSinConUbicacion(View v) {
+        int radiobtid = radioGroupSinConUbicacion.getCheckedRadioButtonId();
+        rbSelectedSinConUbicacion = v.findViewById(radiobtid);
+    }
+
 
 
     public void cargarListaUrbanizacion(View v){
@@ -554,6 +585,12 @@ public class Formularios extends Fragment {
                     ,530,3950,titlePaint);
             canvas2.drawText(asesor.getText().toString(),1870,3950,titlePaint);
             titlePaint.setTextSize(50f);
+
+            if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
+                scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2255,650,false);
+                canvas2.drawBitmap(scaledbmp,160,2860,myPaint);
+            }
+
 
 
             myPDF.finishPage(myPage2);

@@ -40,55 +40,76 @@ public class RegistrarseLogin extends AppCompatActivity {
         passwordRepeat=findViewById(R.id.passwordRepeatRegistro);
         registrarUsuario=findViewById(R.id.btRegistrarRegistro);
 
+        Toast.makeText(getApplicationContext(),"Llenar todo los campos para proceder al registro",Toast.LENGTH_LONG).show();
+
         registrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registrar();
+                if(!RegistrosVacios()){
+                    registrar();
+                }else {
+                    Toast.makeText(getApplicationContext(),"LLenar todo los campos para proceder a registrar",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
 
-    private void registrar() {
-        String pass1,pass2;
-        pass1 = password.getText().toString();
-        pass2=passwordRepeat.getText().toString();
-        if (pass1.equals(pass2)){
-            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    if (!response.isEmpty()){
-                        Toast.makeText(getApplicationContext(),"Usuario registrado correctamente",Toast.LENGTH_LONG).show();
-                        limpiarEdits();
-                    }else{
-                        Toast.makeText(RegistrarseLogin.this, "Se ha producido un error", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(RegistrarseLogin.this, error.toString(), Toast.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> parametros = new HashMap<String, String>();
-                    parametros.put("nombres",nombres.getText().toString());
-                    parametros.put("apellidos",apellidos.getText().toString());
-                    parametros.put("ci",ci.getText().toString());
-                    parametros.put("telefono",telf.getText().toString());
-                    parametros.put("codigo",codigo.getText().toString());
-                    parametros.put("usuario",usuario.getText().toString());
-                    parametros.put("password",password.getText().toString());
-                    return parametros;
-                }
-            };
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(request);
+    public Boolean RegistrosVacios(){
+        Boolean result = true;
+        if(nombres.getText().toString().equals("") || apellidos.getText().toString().equals("") || ci.getText().toString().equals("")|| telf.getText().toString().equals("")
+        || codigo.getText().toString().equals("")||usuario.getText().toString().equals("")|| password.getText().toString().equals("")|| passwordRepeat.getText().toString().equals("")){
+            return result;
         }else {
-            Toast.makeText(getApplicationContext(),"Contraseñas no coinciden",Toast.LENGTH_SHORT).show();
+            result=false;
+            return result;
         }
 
     }
+
+    private void registrar() {
+
+            String pass1,pass2;
+            pass1 = password.getText().toString();
+            pass2=passwordRepeat.getText().toString();
+            if (pass1.equals(pass2)){
+                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (!response.isEmpty()){
+                            Toast.makeText(getApplicationContext(),"Usuario registrado correctamente",Toast.LENGTH_LONG).show();
+                            limpiarEdits();
+                        }else{
+                            Toast.makeText(RegistrarseLogin.this, "Se ha producido un error", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegistrarseLogin.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> parametros = new HashMap<String, String>();
+                        parametros.put("nombres",nombres.getText().toString());
+                        parametros.put("apellidos",apellidos.getText().toString());
+                        parametros.put("ci",ci.getText().toString());
+                        parametros.put("telefono",telf.getText().toString());
+                        parametros.put("codigo",codigo.getText().toString());
+                        parametros.put("usuario",usuario.getText().toString());
+                        parametros.put("password",password.getText().toString());
+                        return parametros;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                requestQueue.add(request);
+            }else {
+                Toast.makeText(getApplicationContext(),"Contraseñas no coinciden",Toast.LENGTH_SHORT).show();
+            }
+
+
+            }
 
     private void limpiarEdits() {
         nombres.setText("");

@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-
+                    Toast.makeText(getApplicationContext(), "Bienvenido(a)"+" "+Global.nombreSesion.toString(), Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(MainActivity.this, "Usuario o Contraseña incorrecta", Toast.LENGTH_LONG).show();
                 }
