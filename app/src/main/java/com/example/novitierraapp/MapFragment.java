@@ -95,6 +95,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 mMap = googleMap;
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
 //                // Add a marker in Santa Cruz and move the camera
                 LatLng centro = new LatLng(-17.783438157398255, -63.18229459226132);

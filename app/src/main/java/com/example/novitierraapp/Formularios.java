@@ -586,13 +586,6 @@ public class Formularios extends Fragment {
             canvas2.drawText(asesor.getText().toString(),1870,3950,titlePaint);
             titlePaint.setTextSize(50f);
 
-            if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
-                scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2255,650,false);
-                canvas2.drawBitmap(scaledbmp,160,2860,myPaint);
-            }
-
-
-
             myPDF.finishPage(myPage2);
               //////FIN PAGINA 2 /////
 //
@@ -629,10 +622,37 @@ public class Formularios extends Fragment {
             myPDF.finishPage(myPage3);
         /////FIN PAGINA 3/////////
 
-        /////INICIO DE PAGINA 4 ////
+        ///INICIO DE PAGINA 4 ////
+            PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
+            PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo3);
+            Canvas canvas4 = myPage4.getCanvas();
+            if(Global.ubicacion==null){
+                Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
+            }
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.formmapa);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+            canvas4.drawBitmap(scaledbmp,0,0,myPaint);
 
-//
-//        myPDF.finishPage(myPage4);
+            canvas4.drawText(uv.getText().toString(),600,540,titlePaint);
+            canvas4.drawText(mz.getText().toString(),1190,540,titlePaint);
+            canvas4.drawText(lt.getText().toString(),1780,540,titlePaint);
+            canvas4.drawText(cat.getText().toString(),2250,540,titlePaint);
+            canvas4.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),800,655,titlePaint);
+            canvas4.drawText(ci_cliente.getText().toString(),800,730,titlePaint);
+            canvas4.drawText(barrio.getText().toString()+" "+avenida.getText().toString()+" "+calle.getText().toString()+" "+numero.getText().toString(),800,800,titlePaint);
+            canvas4.drawText(telFijo.getText().toString()+" "+telMovil.getText().toString(),800,880,titlePaint);
+
+
+        if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
+            scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2280,2800,false);
+            canvas4.drawBitmap(scaledbmp,150,950,myPaint);
+            myPDF.finishPage(myPage4);
+        }else {
+            myPDF.finishPage(myPage4);
+        }
+
+
+
         ///FIN DE PAGINA 4/////
 
             File file = new File(Environment.getExternalStorageDirectory(),"/FormularioSolicitante.pdf");

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     TextView tvRegistro;
     EditText userLogin,passwordLogin;
-    ImageButton login;
+    Button login;
     List<usuarios> userList;
     RequestQueue requestQueue;
     String usu,usu2;

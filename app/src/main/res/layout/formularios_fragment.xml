@@ -338,6 +338,7 @@
                     android:id="@+id/fechaNacimiento"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:hint="Seleccionar Fecha"
                     ></EditText>
 
             </LinearLayout>
@@ -540,6 +541,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="0000"
                     ></EditText>
 
                 <RadioGroup
@@ -820,6 +822,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="0000"
                     ></EditText>
 
                 <TextView
@@ -837,6 +840,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="0000"
                     ></EditText>
 
             </LinearLayout>
@@ -861,6 +865,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="0000"
                     ></EditText>
 
                 <TextView
@@ -878,6 +883,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="0000"
                     ></EditText>
             </LinearLayout>
 
@@ -989,6 +995,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="0000"
                     ></EditText>
 
                 <RadioGroup
@@ -1297,6 +1304,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="000"
                     ></EditText>
 
                 <TextView
@@ -1314,6 +1322,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="000"
                     ></EditText>
                 <TextView
                     android:layout_width="wrap_content"
@@ -1330,6 +1339,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:hint="000"
                     ></EditText>
                 <TextView
                     android:layout_width="wrap_content"
@@ -1345,6 +1355,7 @@
                     android:id="@+id/cat"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:hint="Q"
                     ></EditText>
 
             </LinearLayout>

@@ -8,4 +8,6 @@ public class Global {
     public static String apellidoSesion = "";
     public static Integer codigo = 0;
     public static Bitmap ubicacion;
+
+
 }
