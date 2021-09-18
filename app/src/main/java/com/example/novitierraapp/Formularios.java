@@ -168,7 +168,7 @@ public class Formularios extends Fragment {
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
         btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
-        fechaNac.setText(fechaHoy());
+        //fechaNac.setText(fechaHoy());
 
         codigo_asesor.setText(Global.codigo.toString());
         asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
@@ -456,7 +456,7 @@ public class Formularios extends Fragment {
     }
     public void cargarListaPrefijo(View view) {
         listaPrefijo.add("Ninguno");
-        listaPrefijo.add("Vda");
+        listaPrefijo.add("Vda de");
         listaPrefijo.add("de");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPrefijo);
         spinnerPrefijo.setAdapter(adapter);
@@ -466,7 +466,7 @@ public class Formularios extends Fragment {
 /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (View v){
-
+            String prefijoObtenido;
             PdfDocument myPDF = new PdfDocument();
             Paint myPaint = new Paint();
             Paint titlePaint = new Paint();
@@ -479,6 +479,12 @@ public class Formularios extends Fragment {
             titlePaint.setTextAlign(Paint.Align.LEFT);
             titlePaint.setTextSize(50f);
             titlePaint.setColor(Color.BLACK);
+
+            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
+                prefijoObtenido="";
+            }else {
+                prefijoObtenido=spinnerPrefijo.getSelectedItem().toString();
+            }
 
             ////definimos pagina 1
             PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
@@ -526,11 +532,12 @@ public class Formularios extends Fragment {
             canvas2.drawText(apellidoMaterno.getText().toString(),1550,580,titlePaint);
             canvas2.drawText(nombre_cliente.getText().toString(),450,750,titlePaint);
             canvas2.drawText(apellidoCasada.getText().toString(),1450,750,titlePaint);
-            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
-                canvas2.drawText("",2060,750,titlePaint);
-            }else {
-                canvas2.drawText(spinnerPrefijo.getSelectedItem().toString(),2060,750,titlePaint);
-            }
+            canvas2.drawText(prefijoObtenido,2060,750,titlePaint);
+//            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
+//                canvas2.drawText("",2060,750,titlePaint);
+//            }else {
+//                canvas2.drawText(spinnerPrefijo.getSelectedItem().toString(),2060,750,titlePaint);
+//            }
 
             canvas2.drawText(ci_cliente.getText().toString(),1510,920,titlePaint);
             canvas2.drawText(extension_cliente.getText().toString(),2060,920,titlePaint);
@@ -581,7 +588,7 @@ public class Formularios extends Fragment {
             titlePaint.setTextSize(40f);
             canvas2.drawText(nombre_cliente.getText().toString()
                     +apellidoPaterno.getText().toString()
-                    +apellidoMaterno.getText().toString()
+                    +apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString()
                     ,530,3950,titlePaint);
             canvas2.drawText(asesor.getText().toString(),1870,3950,titlePaint);
             titlePaint.setTextSize(50f);
@@ -615,7 +622,7 @@ public class Formularios extends Fragment {
             canvas3.drawText(mts2.getText().toString(),740,1680,titlePaint);
             titlePaint.setTextSize(45f);
             canvas3.drawText(nombre_cliente.getText().toString()+apellidoPaterno.getText().toString()+
-                    apellidoMaterno.getText().toString(),270,1895,titlePaint);
+                    apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),270,1895,titlePaint);
             canvas3.drawText(ci_cliente.getText().toString(),840,1952,titlePaint);
             canvas3.drawText(expedido.getText().toString(),1380,1952,titlePaint);
 
@@ -637,10 +644,11 @@ public class Formularios extends Fragment {
             canvas4.drawText(mz.getText().toString(),1190,540,titlePaint);
             canvas4.drawText(lt.getText().toString(),1780,540,titlePaint);
             canvas4.drawText(cat.getText().toString(),2250,540,titlePaint);
-            canvas4.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),800,655,titlePaint);
+            canvas4.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),800,655,titlePaint);
             canvas4.drawText(ci_cliente.getText().toString(),800,730,titlePaint);
-            canvas4.drawText(barrio.getText().toString()+" "+avenida.getText().toString()+" "+calle.getText().toString()+" "+numero.getText().toString(),800,800,titlePaint);
-            canvas4.drawText(telFijo.getText().toString()+" "+telMovil.getText().toString(),800,880,titlePaint);
+            canvas4.drawText(telMovil.getText().toString()+" "+telFijo.getText().toString(),1700,730,titlePaint);
+            canvas4.drawText(barrio.getText().toString()+" "+avenida.getText().toString()+" "+calle.getText().toString(),800,800,titlePaint);
+            canvas4.drawText(numero.getText().toString(),800,880,titlePaint);
 
 
         if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
@@ -667,9 +675,12 @@ public class Formularios extends Fragment {
         String path = Environment.getExternalStorageDirectory()+"/FormularioSolicitante.pdf";
         File pdf = new File(path);
         Intent share = new Intent();
-        share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
-        share.setType("application/pdf");
+        share.setAction(Intent.ACTION_VIEW);
+        share.setDataAndType(Uri.fromFile(pdf),"application/pdf");
+        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        share.setAction(Intent.ACTION_SEND);
+//        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
+//        share.setType("application/pdf");
         startActivity(share);
 
     }

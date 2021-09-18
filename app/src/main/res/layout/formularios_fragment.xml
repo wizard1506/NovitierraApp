@@ -242,7 +242,6 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:ems="10"
-                    android:inputType="number"
                     ></EditText>
 
             </LinearLayout>
@@ -1355,7 +1354,7 @@
                     android:id="@+id/cat"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
-                    android:hint="Q"
+                    android:hint="XYZ"
                     ></EditText>
 
             </LinearLayout>
@@ -1443,13 +1442,30 @@
                     android:id="@+id/btguardar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Guardar y Generar"
+                    android:text="Generar y Visualizar"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/azul_novi"
                     android:textStyle="bold"
                     >
                 </Button>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btRegistrarFormulario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar Datos"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/azul_novi"
+                    android:textStyle="bold"
+                    >
+                </Button>
+            </LinearLayout>
+
 
 
         </LinearLayout>
