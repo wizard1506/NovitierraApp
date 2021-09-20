@@ -43,6 +43,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -53,6 +60,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Formularios extends Fragment {
 
@@ -66,7 +75,7 @@ public class Formularios extends Fragment {
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo;
     TextView codigo_proyecto;
-    Button guardar, btFechaNac;
+    Button guardar, btFechaNac, registrarForm;
     Proyectos proyectos;
     DatePickerDialog datePickerDialog;
     ArrayList<Proyectos> listaProyectos = new ArrayList<>();
@@ -80,6 +89,7 @@ public class Formularios extends Fragment {
 
     Bitmap bmp, scaledbmp;
 
+    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
 
     public static Formularios newInstance() {
         return new Formularios();
@@ -168,6 +178,7 @@ public class Formularios extends Fragment {
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
         btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
+        registrarForm = view.findViewById((R.id.btRegistrarDatosForm));
         //fechaNac.setText(fechaHoy());
 
         codigo_asesor.setText(Global.codigo.toString());
@@ -279,32 +290,99 @@ public class Formularios extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rbconUbicacion.isChecked()||rbsinUbicacion.isChecked()) {
-                    if (rb_contado.isChecked() || rb_plazo.isChecked()) {
-                        if (rbMasculino.isChecked() || rbFemenino.isChecked()) {
-                            if (rbIngresosBs.isChecked() || rbIngresosDolar.isChecked()) {
-                                if (rbViviendaBs.isChecked() || rbViviendaDolar.isChecked()) {
-                                    generarPDF(v);
-                                    Toast.makeText(getContext(), "PDF Generado", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Falta seleccionar costo de vivienda en Bs o $us.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(getContext(), "Falta seleccionar Ingresos en Bs o $us.", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), "Falta seleccionar Masculino o Femenino.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(getContext(), "Falta seleccionar plazo o contado.", Toast.LENGTH_SHORT).show();
-                    }
-                }else { Toast.makeText(getContext(), "Falta seleccionar formulario con Ubicacion o Sin ubicacion.", Toast.LENGTH_SHORT).show();}
+                if(validarForm()){
+                    generarPDF(v);
+                    Toast.makeText(getContext(), "PDF Generado", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        registrarForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validarForm()) {
+                    registrarTitular();
+                    Toast.makeText(getContext(), "Registrando.....", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
+    private void registrarTitular() {
+        StringRequest request = new StringRequest(Request.Method.POST, URL_addtitular, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (!response.isEmpty()){
+                        if(response.contains("algo salio mal")){
+                            Toast.makeText(getContext(),"Faltan datos por ingresar (*) obligatorios",Toast.LENGTH_LONG).show();
+                        }
+                        else{Toast.makeText(getContext(),"Titular registrado correctamente",Toast.LENGTH_LONG).show();}
 
+                    }else{
+                        Toast.makeText(getContext(), "Se ha producido un error", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> parametros = new HashMap<String, String>();
+                    parametros.put("nombres",nombre_cliente.getText().toString());
+                    parametros.put("apellidoP",apellidoPaterno.getText().toString());
+                    parametros.put("apellidoM",apellidoMaterno.getText().toString());
+                    parametros.put("apellidoC",apellidoCasada.getText().toString());
+                    parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
+                    parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
+                    parametros.put("nro_documento",ci_cliente.getText().toString());
+                    parametros.put("extension",extension_cliente.getText().toString());
+                    parametros.put("nacionalidad",nacionalidad.getText().toString());
+                    parametros.put("fecha_nacimiento",fechaNac.getText().toString());
+                    parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
+                    parametros.put("sexo",rbSelected.getText().toString());
+                    parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
+                    parametros.put("profesion_ocupacion",profesion.getText().toString());
+                    parametros.put("telf_fijo",telFijo.getText().toString());
+                    parametros.put("telf_movil",telMovil.getText().toString());
+                    parametros.put("telf_fijoOficina",telFijoOfc.getText().toString());
+                    parametros.put("telf_movilOficina",telMovOfc.getText().toString());
+                    parametros.put("correo",correoPersonal.getText().toString());
+                    parametros.put("referencia1",primerReferencia.getText().toString());
+                    parametros.put("relacion1",parentesco.getText().toString());
+                    parametros.put("telf_referencia1",telfReferencia1.getText().toString());
+                    parametros.put("referencia2",segundaReferencia.getText().toString());
+                    parametros.put("relacion2",relacion.getText().toString());
+                    parametros.put("telf_referencia2",telfReferencia2.getText().toString());
+                    parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
+                    parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
+                    parametros.put("costo_vivienda",costoAprox.getText().toString());
+                    parametros.put("moneda_costoVivienda",rbSelectedMonedaVivienda.getText().toString());
+                    parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
+                    parametros.put("telf_propietario",telefonoPropietario.getText().toString());
+                    parametros.put("pais_vivienda",pais.getText().toString());
+                    parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
+                    parametros.put("ciudad",ciudad.getText().toString());
+                    parametros.put("barrio",barrio.getText().toString());
+                    parametros.put("avenida",avenida.getText().toString());
+                    parametros.put("calle",calle.getText().toString());
+                    parametros.put("numero",numero.getText().toString());
+                    parametros.put("nombre_empresa",nombreEmpresa.getText().toString());
+                    parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
+                    parametros.put("rubro",rubroEmpresa.getText().toString());
+                    parametros.put("ingresos",ingresosEmpresa.getText().toString());
+                    parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            requestQueue.add(request);
+
+    }
 
 
     private String fechaHoy(){
@@ -314,6 +392,32 @@ public class Formularios extends Fragment {
         month=month+1;
         int day= cal.get(Calendar.DAY_OF_MONTH);
         return makeDateString(day,month,year);
+    }
+
+    public Boolean validarForm(){
+        Boolean valor;
+        valor=false;
+        if (rbconUbicacion.isChecked()||rbsinUbicacion.isChecked()) {
+            if (rb_contado.isChecked() || rb_plazo.isChecked()) {
+                if (rbMasculino.isChecked() || rbFemenino.isChecked()) {
+                    if (rbIngresosBs.isChecked() || rbIngresosDolar.isChecked()) {
+                        if (rbViviendaBs.isChecked() || rbViviendaDolar.isChecked()) {
+                            valor=true;
+                            return valor;
+                        } else {
+                            Toast.makeText(getContext(), "Falta seleccionar costo de vivienda en Bs o $us.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Falta seleccionar Ingresos en Bs o $us.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Falta seleccionar Masculino o Femenino.", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getContext(), "Falta seleccionar plazo o contado.", Toast.LENGTH_SHORT).show();
+            }
+        }else { Toast.makeText(getContext(), "Falta seleccionar formulario con Ubicacion o Sin ubicacion.", Toast.LENGTH_SHORT).show();}
+        return valor;
     }
 
     private void iniciarDatePicker() {

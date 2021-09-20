@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre del cliente:"
+                    android:text="*Nombre del cliente:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Apellido Paterno:"
+                    android:text="*Apellido Paterno:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -137,7 +137,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Apellido Materno:"
+                    android:text="*Apellido Materno:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -230,7 +230,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Documento de identidad:"
+                    android:text="*Documento de identidad:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -298,7 +298,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nacionalidad:"
+                    android:text="*Nacionalidad:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -325,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
                     android:onClick="openDatePicker"
-                    android:text="Fecha Nacimiento"
+                    android:text="*Fecha Nacimiento"
                     android:textStyle="bold"
                     android:textColor="@color/amarillo"
                     style="?android:spinnerStyle">
@@ -350,7 +350,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estado Civil:"
+                    android:text="*Estado Civil:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -373,7 +373,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sexo: "
+                    android:text="*Sexo: "
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -416,7 +416,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nivel de Estudio:"
+                    android:text="*Nivel de Estudio:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -440,7 +440,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profesion/Ocupacion:"
+                    android:text="*Profesion/Ocupacion:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -480,7 +480,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de vivienda:"
+                    android:text="*Tipo de vivienda:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -504,7 +504,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tenencia:"
+                    android:text="*Tenencia:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -541,6 +541,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="0000"
+                    android:text="0"
                     ></EditText>
 
                 <RadioGroup
@@ -616,6 +617,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:text="0"
                     ></EditText>
 
             </LinearLayout>
@@ -628,7 +630,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pais:"
+                    android:text="*Pais:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -676,7 +678,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ciudad:"
+                    android:text="*Ciudad:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -699,7 +701,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Barrio:"
+                    android:text="*Barrio:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -722,7 +724,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Avenida:"
+                    android:text="*Avenida:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -745,7 +747,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calle:"
+                    android:text="*Calle:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -780,6 +782,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:text="0"
                     ></EditText>
 
             </LinearLayout>
@@ -822,12 +825,13 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="0000"
+                    android:text="0"
                     ></EditText>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telf. Movil:"
+                    android:text="*Telf. Movil:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -840,6 +844,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="0000"
+                    android:text="0"
                     ></EditText>
 
             </LinearLayout>
@@ -865,6 +870,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="0000"
+                    android:text="0"
                     ></EditText>
 
                 <TextView
@@ -883,6 +889,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="0000"
+                    android:text="0"
                     ></EditText>
             </LinearLayout>
 
@@ -960,7 +967,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rubro:"
+                    android:text="*Rubro:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -982,7 +989,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ingresos:"
+                    android:text="*Ingresos:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -995,6 +1002,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="0000"
+                    android:text="0"
                     ></EditText>
 
                 <RadioGroup
@@ -1050,7 +1058,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre Conyuge o familiar cercano:"
+                    android:text="*Nombre Conyuge o familiar cercano:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -1072,7 +1080,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Parentesco:"
+                    android:text="*Parentesco:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -1094,7 +1102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telf. Familiar Cercano:"
+                    android:text="*Telf. Familiar Cercano:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -1106,6 +1114,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:text="0"
                     ></EditText>
             </LinearLayout>
 
@@ -1117,7 +1126,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre de otra Referencia:"
+                    android:text="*Nombre de otra Referencia:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -1139,7 +1148,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Relacion:"
+                    android:text="*Relacion:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -1161,7 +1170,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telf. Otra Referencia:"
+                    android:text="*Telf. Otra Referencia:"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
@@ -1173,6 +1182,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:text="0"
                     ></EditText>
             </LinearLayout>
 
@@ -1304,6 +1314,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="000"
+                    android:text="0"
                     ></EditText>
 
                 <TextView
@@ -1322,6 +1333,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="000"
+                    android:text="0"
                     ></EditText>
                 <TextView
                     android:layout_width="wrap_content"
@@ -1339,6 +1351,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:hint="000"
+                    android:text="0"
                     ></EditText>
                 <TextView
                     android:layout_width="wrap_content"
@@ -1378,6 +1391,7 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:text="0"
                     ></EditText>
             </LinearLayout>
 
@@ -1455,7 +1469,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/btRegistrarFormulario"
+                    android:id="@+id/btRegistrarDatosForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Registrar Datos"
