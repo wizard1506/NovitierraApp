@@ -302,8 +302,13 @@ public class Formularios extends Fragment {
             @Override
             public void onClick(View v) {
                 if (validarForm()) {
-                    registrarTitular();
-                    Toast.makeText(getContext(), "Registrando.....", Toast.LENGTH_SHORT).show();
+                    if(!validarCamposObligatorios()){
+                        registrarTitular();
+                        Toast.makeText(getContext(),"Registrando...", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getContext(), "Rellene los campos marcados en *.", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -316,7 +321,7 @@ public class Formularios extends Fragment {
                 public void onResponse(String response) {
                     if (!response.isEmpty()){
                         if(response.contains("algo salio mal")){
-                            Toast.makeText(getContext(),"Faltan datos por ingresar (*) obligatorios",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
                         }
                         else{Toast.makeText(getContext(),"Titular registrado correctamente",Toast.LENGTH_LONG).show();}
 
@@ -376,6 +381,20 @@ public class Formularios extends Fragment {
                     parametros.put("rubro",rubroEmpresa.getText().toString());
                     parametros.put("ingresos",ingresosEmpresa.getText().toString());
                     parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
+                    parametros.put("proyecto",codigo_proyecto.getText().toString());
+                    parametros.put("uv",uv.getText().toString());
+                    parametros.put("mz",mz.getText().toString());
+                    parametros.put("lt",lt.getText().toString());
+                    parametros.put("cat",cat.getText().toString());
+                    parametros.put("asesor",asesor.getText().toString());
+                    parametros.put("codigo_asesor",codigo_asesor.getText().toString());
+                    parametros.put("fecha",fechaHoy());
+
+                    parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
+                    parametros.put("metros2",mts2.getText().toString());
+                    parametros.put("tipo_venta",rbSelected.getText().toString());
+
+
                     return parametros;
                 }
             };
@@ -391,7 +410,12 @@ public class Formularios extends Fragment {
         int month = cal.get(Calendar.MONTH);
         month=month+1;
         int day= cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day,month,year);
+        Integer hora = cal.get(Calendar.HOUR_OF_DAY);
+        Integer min = cal.get(Calendar.MINUTE);
+        Integer seg = cal.get(Calendar.SECOND);
+        String now = makeDateString(day,month,year);
+        now = now+" "+hora.toString()+":"+min.toString()+":"+seg.toString();
+        return now;
     }
 
     public Boolean validarForm(){
@@ -418,6 +442,34 @@ public class Formularios extends Fragment {
             }
         }else { Toast.makeText(getContext(), "Falta seleccionar formulario con Ubicacion o Sin ubicacion.", Toast.LENGTH_SHORT).show();}
         return valor;
+    }
+
+    public Boolean validarCamposObligatorios(){
+        if(nombre_cliente.getText().toString().length()==0 ||
+                apellidoPaterno.getText().toString().length()==0 ||
+                apellidoMaterno.getText().toString().length()==0 ||
+        ci_cliente.getText().toString().length()==0 ||
+        nacionalidad.getText().toString().length()==0 ||
+        fechaNac.getText().toString().length()==0 ||
+        profesion.getText().toString().length()==0 ||
+        pais.getText().toString().length()==0 ||
+        ciudad.getText().toString().length()==0 ||
+        barrio.getText().toString().length()==0 ||
+        avenida.getText().toString().length()==0 ||
+        calle.getText().toString().length()==0 ||
+        rubroEmpresa.getText().toString().length()==0 ||
+        ingresosEmpresa.getText().toString().length()==0 ||
+        primerReferencia.getText().toString().length()==0 ||
+        relacion.getText().toString().length()==0 ||
+        telfReferencia1.getText().toString().length()==0 ||
+        segundaReferencia.getText().toString().length()==0 ||
+        parentesco.getText().toString().length()==0 ||
+        telfReferencia2.getText().toString().length()==0 ){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     private void iniciarDatePicker() {
