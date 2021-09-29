@@ -102,6 +102,8 @@
                     android:id="@+id/nombreCliente"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapWords"
                     ></EditText>
 
             </LinearLayout>
@@ -125,6 +127,8 @@
                     android:id="@+id/apellidoPCliente"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -148,6 +152,8 @@
                     android:id="@+id/apellidoMCliente"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -171,6 +177,8 @@
                     android:id="@+id/apellidoCasada"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -242,6 +250,8 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:ems="10"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapCharacters"
                     ></EditText>
 
             </LinearLayout>
@@ -265,28 +275,8 @@
                     android:id="@+id/extensionCliente"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
-                    ></EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Expedido en:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/expedido"
-                    android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapCharacters"
                     ></EditText>
             </LinearLayout>
 
@@ -310,6 +300,8 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:text="Boliviano"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -337,7 +329,9 @@
                     android:id="@+id/fechaNacimiento"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
-                    android:hint="Seleccionar Fecha"
+                    android:hint="Tocar Fecha Nacimiento"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapWords"
                     ></EditText>
 
             </LinearLayout>
@@ -451,6 +445,8 @@
                     android:id="@+id/profesion"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -593,6 +589,8 @@
                     android:id="@+id/propietarioVivienda"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapWords"
                     ></EditText>
 
             </LinearLayout>
@@ -618,6 +616,8 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:text="0"
+                    android:textColorHighlight="@color/black"
+                    android:maxLength="8"
                     ></EditText>
 
             </LinearLayout>
@@ -642,6 +642,8 @@
                     android:text="Bolivia"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -689,6 +691,33 @@
                     android:id="@+id/ciudadVivienda"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
+                    ></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*Zona:"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    ></TextView>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/zonaVivienda"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -712,6 +741,8 @@
                     android:id="@+id/barrioVivienda"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -735,6 +766,8 @@
                     android:id="@+id/avenidadVivienda"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -758,6 +791,8 @@
                     android:id="@+id/calleVivienda"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
 
             </LinearLayout>
@@ -783,6 +818,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:text="0"
+                    android:onClick="vaciarCampo"
                     ></EditText>
 
             </LinearLayout>
@@ -826,6 +862,8 @@
                     android:inputType="number"
                     android:hint="0000"
                     android:text="0"
+                    android:maxLength="8"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <TextView
@@ -845,6 +883,8 @@
                     android:inputType="number"
                     android:hint="0000"
                     android:text="0"
+                    android:maxLength="8"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
 
             </LinearLayout>
@@ -871,6 +911,8 @@
                     android:inputType="number"
                     android:hint="0000"
                     android:text="0"
+                    android:maxLength="8"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <TextView
@@ -890,6 +932,8 @@
                     android:inputType="number"
                     android:hint="0000"
                     android:text="0"
+                    android:maxLength="8"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -912,6 +956,8 @@
                     android:id="@+id/correoPersonal"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textAutoComplete"
                     ></EditText>
             </LinearLayout>
 
@@ -934,6 +980,8 @@
                     android:id="@+id/empresaNombre"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
             </LinearLayout>
 
@@ -956,6 +1004,8 @@
                     android:id="@+id/direccionEmpresa"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
             </LinearLayout>
 
@@ -978,6 +1028,8 @@
                     android:id="@+id/rubroEmpresa"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
             </LinearLayout>
 
@@ -1003,6 +1055,7 @@
                     android:inputType="number"
                     android:hint="0000"
                     android:text="0"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <RadioGroup
@@ -1069,6 +1122,8 @@
                     android:id="@+id/nombreFamiliarCercano"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapWords"
                     ></EditText>
             </LinearLayout>
 
@@ -1091,6 +1146,8 @@
                     android:id="@+id/parentescoFamiliar"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
             </LinearLayout>
 
@@ -1115,6 +1172,8 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:text="0"
+                    android:maxLength="8"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -1137,6 +1196,8 @@
                     android:id="@+id/otraReferencia"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapWords"
                     ></EditText>
             </LinearLayout>
 
@@ -1159,6 +1220,8 @@
                     android:id="@+id/relacionReferencia"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapSentences"
                     ></EditText>
             </LinearLayout>
 
@@ -1183,6 +1246,8 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:text="0"
+                    android:maxLength="8"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -1315,6 +1380,8 @@
                     android:inputType="number"
                     android:hint="000"
                     android:text="0"
+                    android:maxLength="3"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <TextView
@@ -1334,6 +1401,8 @@
                     android:inputType="number"
                     android:hint="000"
                     android:text="0"
+                    android:maxLength="3"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
                 <TextView
                     android:layout_width="wrap_content"
@@ -1352,6 +1421,8 @@
                     android:inputType="number"
                     android:hint="000"
                     android:text="0"
+                    android:maxLength="3"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
                 <TextView
                     android:layout_width="wrap_content"
@@ -1360,6 +1431,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
+
                     ></TextView>
                 <EditText
                     android:layout_width="wrap_content"
@@ -1367,7 +1439,10 @@
                     android:id="@+id/cat"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
-                    android:hint="XYZ"
+                    android:hint="Q"
+                    android:maxLength="1"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapCharacters"
                     ></EditText>
 
             </LinearLayout>
@@ -1392,6 +1467,7 @@
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:text="0"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -1413,6 +1489,8 @@
                     android:id="@+id/fullnameAsesor"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:inputType="textCapWords"
                     ></EditText>
             </LinearLayout>
 
@@ -1436,17 +1514,10 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
                     android:inputType="number"
+                    android:textColorHighlight="@color/black"
                     ></EditText>
 
             </LinearLayout>
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:id="@+id/mapContainer"-->
-<!--                >-->
-<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

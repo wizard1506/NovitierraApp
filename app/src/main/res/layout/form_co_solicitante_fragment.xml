@@ -48,6 +48,8 @@
                 android:id="@+id/relacionCoSolTitular"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -71,6 +73,8 @@
                 android:id="@+id/nombreCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapWords"
                 ></EditText>
 
         </LinearLayout>
@@ -94,6 +98,8 @@
                 android:id="@+id/apellidoPCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -117,6 +123,8 @@
                 android:id="@+id/apellidoMCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -140,6 +148,8 @@
                 android:id="@+id/apellidoCasadaCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -188,7 +198,8 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:ems="10"
-                android:inputType="number"
+                android:inputType="textCapCharacters"
+                android:textColorHighlight="@color/black"
                 ></EditText>
 
         </LinearLayout>
@@ -212,6 +223,8 @@
                 android:id="@+id/extensionCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapCharacters"
                 ></EditText>
         </LinearLayout>
 
@@ -235,6 +248,8 @@
                 android:id="@+id/nacionalidadCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -263,6 +278,8 @@
                 android:id="@+id/fechaNacimientoCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -376,6 +393,8 @@
                 android:id="@+id/profesionCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -416,6 +435,8 @@
                 android:id="@+id/direccionPaisCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
 
         </LinearLayout>
@@ -481,6 +502,7 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
+                android:maxLength="8"
                 ></EditText>
 
             <TextView
@@ -498,6 +520,7 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
+                android:maxLength="8"
                 ></EditText>
 
         </LinearLayout>
@@ -522,6 +545,7 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
+                android:maxLength="8"
                 ></EditText>
 
             <TextView
@@ -539,6 +563,7 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
+                android:maxLength="8"
                 ></EditText>
         </LinearLayout>
 
@@ -561,6 +586,8 @@
                 android:id="@+id/correoCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textAutoComplete"
                 ></EditText>
         </LinearLayout>
 
@@ -583,6 +610,8 @@
                 android:id="@+id/empresaNombreCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
         </LinearLayout>
 
@@ -605,6 +634,8 @@
                 android:id="@+id/direccionEmpresaCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
         </LinearLayout>
 
@@ -627,6 +658,8 @@
                 android:id="@+id/rubroEmpresaCoSol"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapSentences"
                 ></EditText>
         </LinearLayout>
 
@@ -698,6 +731,8 @@
                 android:id="@+id/fullnameAsesor"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:inputType="textCapWords"
                 ></EditText>
         </LinearLayout>
 
