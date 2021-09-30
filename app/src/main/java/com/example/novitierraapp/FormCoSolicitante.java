@@ -158,12 +158,38 @@ public class FormCoSolicitante extends Fragment {
             public void onClick(View v) {
                 if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
-                        generarPDF(v);
-                        Toast.makeText(getContext(),"PDF Generado",Toast.LENGTH_SHORT).show();
+                        if(!validarCamposObligatorios()){
+                            generarPDF(v);
+                            Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
+                        }
+
                     }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
                 }else {Toast.makeText(getContext(),"Falta seleccionar Ingresos Bs o Dolar.",Toast.LENGTH_SHORT).show(); }
             }
         });
+
+    }
+
+    public Boolean validarCamposObligatorios(){
+        if(nombre.getText().toString().length()==0 ||
+                apellidoP.getText().toString().length()==0 ||
+                apellidoM.getText().toString().length()==0 ||
+                ci.getText().toString().length()==0 ||
+                extension.getText().toString().length()==0 ||
+                nacionalidad.getText().toString().length()==0 ||
+                etFechaNac.getText().toString().length()==0 ||
+                profesion.getText().toString().length()==0 ||
+                nacionalidad.getText().toString().length()==0 ||
+                telMovil.getText().toString().length()==0||
+                asesor.getText().toString().length()==0
+                ){
+
+            return true;
+        }else {
+            return false;
+        }
 
     }
 
@@ -334,16 +360,10 @@ public class FormCoSolicitante extends Fragment {
                 apellidoM.getText().toString(),550,3250,titlePaint);
         canvas.drawText(asesor.getText().toString(),1870,3250,titlePaint);
 
-
-
-
-
-
-
         myPDF.finishPage(myPage1);
         /// fin pagina 1
 
-        File file = new File(Environment.getExternalStorageDirectory(),"/Formulario_Co_Solicitante.pdf");
+        File file = new File(Environment.getExternalStorageDirectory(),"/Form_CoSolicitante.pdf");
         try {
             myPDF.writeTo(new FileOutputStream(file));
 
@@ -352,12 +372,15 @@ public class FormCoSolicitante extends Fragment {
         }
         myPDF.close();
 ///desde aca
-        String path = Environment.getExternalStorageDirectory()+"/Formulario_Co_Solicitante.pdf";
+        String path = Environment.getExternalStorageDirectory()+"/Form_CoSolicitante.pdf";
         File pdf = new File(path);
         Intent share = new Intent();
-        share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
-        share.setType("application/pdf");
+        share.setAction(Intent.ACTION_VIEW);
+        share.setDataAndType(Uri.fromFile(pdf),"application/pdf");
+        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        share.setAction(Intent.ACTION_SEND);
+//        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
+//        share.setType("application/pdf");
         startActivity(share);
     ///hasta aca
     }

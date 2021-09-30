@@ -292,8 +292,13 @@ public class Formularios extends Fragment {
             @Override
             public void onClick(View v) {
                 if(validarForm()){
-                    generarPDF(v);
-                    Toast.makeText(getContext(), "PDF Generado", Toast.LENGTH_SHORT).show();
+                    if(!validarCamposObligatorios()){
+                        generarPDF(v);
+                        Toast.makeText(getContext(), "Generando PDF.....", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getContext(), "Rellene los campos marcados en *.", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
@@ -433,6 +438,9 @@ public class Formularios extends Fragment {
             case 3:
                 result=numero;
                 break;
+            case 4:
+                result=numero;
+                break;
         }
         return result;
     }
@@ -467,23 +475,38 @@ public class Formularios extends Fragment {
         if(nombre_cliente.getText().toString().length()==0 ||
                 apellidoPaterno.getText().toString().length()==0 ||
                 apellidoMaterno.getText().toString().length()==0 ||
-        ci_cliente.getText().toString().length()==0 ||
-        nacionalidad.getText().toString().length()==0 ||
-        fechaNac.getText().toString().length()==0 ||
-        profesion.getText().toString().length()==0 ||
-        pais.getText().toString().length()==0 ||
-        ciudad.getText().toString().length()==0 ||
-        barrio.getText().toString().length()==0 ||
-        avenida.getText().toString().length()==0 ||
-        calle.getText().toString().length()==0 ||
-        rubroEmpresa.getText().toString().length()==0 ||
-        ingresosEmpresa.getText().toString().length()==0 ||
-        primerReferencia.getText().toString().length()==0 ||
-        relacion.getText().toString().length()==0 ||
-        telfReferencia1.getText().toString().length()==0 ||
-        segundaReferencia.getText().toString().length()==0 ||
-        parentesco.getText().toString().length()==0 ||
-        telfReferencia2.getText().toString().length()==0 ){
+                ci_cliente.getText().toString().length()==0 ||
+                extension_cliente.getText().toString().length()==0 ||
+                nacionalidad.getText().toString().length()==0 ||
+                fechaNac.getText().toString().length()==0 ||
+                profesion.getText().toString().length()==0 ||
+                costoAprox.getText().toString().length()==0 ||
+                propietarioVivienta.getText().toString().length()==0 ||
+                telefonoPropietario.getText().toString().length()==0 ||
+                pais.getText().toString().length()==0 ||
+                ciudad.getText().toString().length()==0 ||
+                barrio.getText().toString().length()==0 ||
+                avenida.getText().toString().length()==0 ||
+                calle.getText().toString().length()==0 ||
+                numero.getText().toString().length()==0||
+                telFijo.getText().toString().length()==0 ||
+                telMovil.getText().toString().length()==0 ||
+                nombreEmpresa.getText().toString().length()==0||
+                rubroEmpresa.getText().toString().length()==0 ||
+                ingresosEmpresa.getText().toString().length()==0 ||
+                primerReferencia.getText().toString().length()==0 ||
+                relacion.getText().toString().length()==0 ||
+                telfReferencia1.getText().toString().length()==0 ||
+                segundaReferencia.getText().toString().length()==0 ||
+                parentesco.getText().toString().length()==0 ||
+                telfReferencia2.getText().toString().length()==0 ||
+                uv.getText().toString().length()==0||
+                mz.getText().toString().length()==0||
+                lt.getText().toString().length()==0||
+                cat.getText().toString().length()==0||
+                asesor.getText().toString().length()==0||
+                codigo_asesor.getText().toString().length()==0 ){
+
             return true;
         }else {
             return false;
@@ -751,7 +774,7 @@ public class Formularios extends Fragment {
 
             canvas2.drawText(nombreEmpresa.getText().toString(),1300,2040,titlePaint);
             canvas2.drawText(direccionEmpresa.getText().toString(),1300,2210,titlePaint);
-            canvas2.drawText(rubroEmpresa.getText().toString(),1300,2370,titlePaint);
+            canvas2.drawText(rubroEmpresa.getText().toString(),1270,2370,titlePaint);
             canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),2060,2370,titlePaint);
 
             canvas2.drawText(primerReferencia.getText().toString(),250,2590,titlePaint);

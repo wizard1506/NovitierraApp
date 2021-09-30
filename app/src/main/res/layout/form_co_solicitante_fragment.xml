@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Relacion con el titular:"
+                android:text="*Relacion con el titular:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombres:"
+                android:text="*Nombres:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apellido Paterno:"
+                android:text="*Apellido Paterno:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -112,7 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apellido Materno:"
+                android:text="*Apellido Materno:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -162,7 +162,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo de Identificacion:"
+                android:text="*Tipo de Identificacion:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -186,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Documento de identidad:"
+                android:text="*Documento de identidad:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -212,7 +212,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Extension:"
+                android:text="*Extension:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -225,6 +225,7 @@
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapCharacters"
+                android:maxLength="2"
                 ></EditText>
         </LinearLayout>
 
@@ -236,7 +237,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nacionalidad:"
+                android:text="*Nacionalidad:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -292,7 +293,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estado Civil:"
+                android:text="*Estado Civil:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -315,7 +316,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sexo: "
+                android:text="*Sexo: "
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -358,7 +359,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nivel de Estudio:"
+                android:text="*Nivel de Estudio:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -382,7 +383,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profesion/Ocupacion:"
+                android:text="*Profesion/Ocupacion:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -423,7 +424,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pais:"
+                android:text="*Pais:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -449,7 +450,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dpto:"
+                android:text="*Dpto:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -508,7 +509,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telf. Movil:"
+                android:text="*Telf. Movil:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
@@ -720,7 +721,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Asesor de Venta:"
+                android:text="*Asesor de Venta:"
                 android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="10dp"
