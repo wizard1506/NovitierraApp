@@ -685,110 +685,110 @@ public class Formularios extends Fragment {
             }
 
             ////definimos pagina 1
-            PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
+            PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
             Canvas canvas = myPage1.getCanvas();
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
             canvas.drawBitmap(scaledbmp,0,0,myPaint);
 
             Bitmap check,scaled2;
             check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
             scaled2 = Bitmap.createScaledBitmap(check,100,100,false);
 
-            canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),920,330,titlePaint);
-            canvas.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),600,490,titlePaint);
-            canvas.drawText(ci_cliente.getText().toString(),680,630,titlePaint);
-            canvas.drawText(extension_cliente.getText().toString(),1470,630,titlePaint);
+            canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),920,305,titlePaint);
+            canvas.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString(),600,460,titlePaint);
+            canvas.drawText(ci_cliente.getText().toString(),680,585,titlePaint);
+            canvas.drawText(extension_cliente.getText().toString(),1480,585,titlePaint);
             String plazoContado = rbSelected.getText().toString();
             if(plazoContado.contains("Plazo")){
-                canvas.drawBitmap(scaled2,980,700,myPaint);
+                canvas.drawBitmap(scaled2,980,640,myPaint);
             }else {
-                canvas.drawBitmap(scaled2,1430,700,myPaint);
+                canvas.drawBitmap(scaled2,1430,640,myPaint);
             }
-            canvas.drawText(codigo_proyecto.getText().toString(),400,910,titlePaint);
-            canvas.drawText(tresDigitos(uv.getText().toString()),880,910,titlePaint);
-            canvas.drawText(tresDigitos(mz.getText().toString()),1310,910,titlePaint);
-            canvas.drawText(tresDigitos(lt.getText().toString()),1730,910,titlePaint);
-            canvas.drawText(cat.getText().toString(),2230,910,titlePaint);
-            canvas.drawText(asesor.getText().toString(),250,1080,titlePaint);
-            canvas.drawText(codigo_asesor.getText().toString(),1730,1080,titlePaint);
+            canvas.drawText(codigo_proyecto.getText().toString(),400,835,titlePaint);
+            canvas.drawText(tresDigitos(uv.getText().toString()),880,835,titlePaint);
+            canvas.drawText(tresDigitos(mz.getText().toString()),1310,835,titlePaint);
+            canvas.drawText(tresDigitos(lt.getText().toString()),1730,835,titlePaint);
+            canvas.drawText(cat.getText().toString(),2230,835,titlePaint);
+            canvas.drawText(asesor.getText().toString(),250,995,titlePaint);
+            canvas.drawText(codigo_asesor.getText().toString(),1730,995,titlePaint);
 
             myPDF.finishPage(myPage1);
             //// FIN PAGINA 1/////
 
             //////PAGINA 2
-            PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
+            PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
             Canvas canvas2 = myPage2.getCanvas();
 
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
             canvas2.drawBitmap(scaledbmp,0,0,myPaint);
 
-            canvas2.drawText(apellidoPaterno.getText().toString(),450,570,titlePaint);
-            canvas2.drawText(apellidoMaterno.getText().toString(),1450,570,titlePaint);
-            canvas2.drawText(nombre_cliente.getText().toString(),450,740,titlePaint);
-            canvas2.drawText(apellidoCasada.getText().toString(),1450,740,titlePaint);
-            canvas2.drawText(prefijoObtenido,2060,740,titlePaint);
+            canvas2.drawText(apellidoPaterno.getText().toString(),450,520,titlePaint);
+            canvas2.drawText(apellidoMaterno.getText().toString(),1450,520,titlePaint);
+            canvas2.drawText(nombre_cliente.getText().toString(),450,685,titlePaint);
+            canvas2.drawText(apellidoCasada.getText().toString(),1450,685,titlePaint);
+            canvas2.drawText(prefijoObtenido,2060,685,titlePaint);
 //            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
 //                canvas2.drawText("",2060,750,titlePaint);
 //            }else {
 //                canvas2.drawText(spinnerPrefijo.getSelectedItem().toString(),2060,750,titlePaint);
 //            }
 
-            canvas2.drawText(ci_cliente.getText().toString(),1450,910,titlePaint);
-            canvas2.drawText(extension_cliente.getText().toString(),2060,910,titlePaint);
+            canvas2.drawText(ci_cliente.getText().toString(),1450,840,titlePaint);
+            canvas2.drawText(extension_cliente.getText().toString(),2060,840,titlePaint);
 
-            canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),650,865,titlePaint);
-            canvas2.drawText(nacionalidad.getText().toString(),650,930,titlePaint);
-            canvas2.drawText(fechaNac.getText().toString(),650,985,titlePaint);
-            canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),650,1030,titlePaint);
-            canvas2.drawText(rbSelectedGenero.getText().toString(),650,1085,titlePaint);
-            canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),650,1135,titlePaint);
-            canvas2.drawText(profesion.getText().toString(),650,1190,titlePaint);
-            canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),1120,1245,titlePaint);
-            canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),1740,1245,titlePaint);
+            canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),650,803,titlePaint);
+            canvas2.drawText(nacionalidad.getText().toString(),650,850,titlePaint);
+            canvas2.drawText(fechaNac.getText().toString(),650,903,titlePaint);
+            canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),650,950,titlePaint);
+            canvas2.drawText(rbSelectedGenero.getText().toString(),650,990,titlePaint);
+            canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),650,1042,titlePaint);
+            canvas2.drawText(profesion.getText().toString(),650,1093,titlePaint);
+            canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),1120,1153,titlePaint);
+            canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),1740,1153,titlePaint);
 
-            canvas2.drawText(costoAprox.getText().toString()+" "+rbSelectedMonedaVivienda.getText().toString(),250,1400,titlePaint);
-            canvas2.drawText(propietarioVivienta.getText().toString(),780,1400,titlePaint);
-            canvas2.drawText(telefonoPropietario.getText().toString(),1950,1400,titlePaint);
+            canvas2.drawText(costoAprox.getText().toString()+" "+rbSelectedMonedaVivienda.getText().toString(),250,1280,titlePaint);
+            canvas2.drawText(propietarioVivienta.getText().toString(),780,1280,titlePaint);
+            canvas2.drawText(telefonoPropietario.getText().toString(),1950,1280,titlePaint);
 
-            canvas2.drawText(pais.getText().toString(),270,1530,titlePaint);
+            canvas2.drawText(pais.getText().toString(),270,1400,titlePaint);
             if(spinnerDpto.getSelectedItem().toString().contains("Ninguno")){
-                canvas2.drawText("",820,1530,titlePaint);
+                canvas2.drawText("",820,1400,titlePaint);
             }else {
-                canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1530,titlePaint);
+                canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1400,titlePaint);
             }
-            canvas2.drawText(ciudad.getText().toString(),300,1660,titlePaint);
-            canvas2.drawText(barrio.getText().toString(),1300,1660,titlePaint);
-            canvas2.drawText(avenida.getText().toString(),300,1810,titlePaint);
-            canvas2.drawText(calle.getText().toString(),1300,1810,titlePaint);
-            canvas2.drawText(numero.getText().toString(),2060,1810,titlePaint);
+            canvas2.drawText(ciudad.getText().toString(),300,1530,titlePaint);
+            canvas2.drawText(barrio.getText().toString(),1300,1530,titlePaint);
+            canvas2.drawText(avenida.getText().toString(),300,1680,titlePaint);
+            canvas2.drawText(calle.getText().toString(),1300,1680,titlePaint);
+            canvas2.drawText(numero.getText().toString(),2060,1680,titlePaint);
 
-            canvas2.drawText(telFijo.getText().toString(),250,2040,titlePaint);
-            canvas2.drawText(telFijoOfc.getText().toString(),250,2210,titlePaint);
-            canvas2.drawText(telMovil.getText().toString(),750,2040,titlePaint);
-            canvas2.drawText(telMovOfc.getText().toString(),750,2210,titlePaint);
-            canvas2.drawText(correoPersonal.getText().toString(),250,2370,titlePaint);
+            canvas2.drawText(telFijo.getText().toString(),250,1875,titlePaint);
+            canvas2.drawText(telFijoOfc.getText().toString(),250,2030,titlePaint);
+            canvas2.drawText(telMovil.getText().toString(),750,1875,titlePaint);
+            canvas2.drawText(telMovOfc.getText().toString(),750,2030,titlePaint);
+            canvas2.drawText(correoPersonal.getText().toString(),250,2180,titlePaint);
 
-            canvas2.drawText(nombreEmpresa.getText().toString(),1300,2040,titlePaint);
-            canvas2.drawText(direccionEmpresa.getText().toString(),1300,2210,titlePaint);
-            canvas2.drawText(rubroEmpresa.getText().toString(),1270,2370,titlePaint);
-            canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),2060,2370,titlePaint);
+            canvas2.drawText(nombreEmpresa.getText().toString(),1300,1875,titlePaint);
+            canvas2.drawText(direccionEmpresa.getText().toString(),1300,2030,titlePaint);
+            canvas2.drawText(rubroEmpresa.getText().toString(),1270,2180,titlePaint);
+            canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),2060,2180,titlePaint);
 
-            canvas2.drawText(primerReferencia.getText().toString(),250,2590,titlePaint);
-            canvas2.drawText(segundaReferencia.getText().toString(),250,2740,titlePaint);
-            canvas2.drawText(parentesco.getText().toString(),1300,2590,titlePaint);
-            canvas2.drawText(relacion.getText().toString(),1300,2740,titlePaint);
-            canvas2.drawText(telfReferencia1.getText().toString(),2060,2590,titlePaint);
-            canvas2.drawText(telfReferencia2.getText().toString(),2060,2740,titlePaint);
+            canvas2.drawText(primerReferencia.getText().toString(),250,2380,titlePaint);
+            canvas2.drawText(segundaReferencia.getText().toString(),250,2530,titlePaint);
+            canvas2.drawText(parentesco.getText().toString(),1300,2380,titlePaint);
+            canvas2.drawText(relacion.getText().toString(),1300,2530,titlePaint);
+            canvas2.drawText(telfReferencia1.getText().toString(),2060,2380,titlePaint);
+            canvas2.drawText(telfReferencia2.getText().toString(),2060,2530,titlePaint);
             titlePaint.setTextSize(40f);
-            canvas2.drawText(nombre_cliente.getText().toString()
-                    +apellidoPaterno.getText().toString()
+            canvas2.drawText(nombre_cliente.getText().toString()+" "
+                    +apellidoPaterno.getText().toString()+" "
                     +apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString()
-                    ,520,3945,titlePaint);
-            canvas2.drawText(asesor.getText().toString(),1855,3945,titlePaint);
+                    ,500,3635,titlePaint);
+            canvas2.drawText(asesor.getText().toString(),1800,3635,titlePaint);
             titlePaint.setTextSize(50f);
 
             myPDF.finishPage(myPage2);
@@ -796,12 +796,12 @@ public class Formularios extends Fragment {
 //
 //
 //        ////// INICIA PAGINA 3 ///////
-            PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
+            PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
             Canvas canvas3 = myPage3.getCanvas();
 
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.newentrega);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
             canvas3.drawBitmap(scaledbmp,0,0,myPaint);
 
             Calendar cal = Calendar.getInstance();
@@ -814,59 +814,59 @@ public class Formularios extends Fragment {
             myPaint.setTextSize(70f);
             myPaint.setColor(Color.BLACK);
             myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-            canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),700,990,myPaint);
+            canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),700,900,myPaint);
             myPaint.setTextAlign(Paint.Align.LEFT);
-            canvas3.drawText(day.toString(),230,630,myPaint);
-            canvas3.drawText(month.toString(),480,630,myPaint);
-            canvas3.drawText(year.toString(),660,630,myPaint);
+            canvas3.drawText(day.toString(),235,590,myPaint);
+            canvas3.drawText(month.toString(),470,590,myPaint);
+            canvas3.drawText(year.toString(),660,590,myPaint);
             titlePaint.setTextSize(60f);
-            canvas3.drawText(codigo_proyecto.getText().toString(),270,1280,titlePaint);
-            canvas3.drawText(tresDigitos(uv.getText().toString()),740,1280,titlePaint);
-            canvas3.drawText(tresDigitos(mz.getText().toString()),1200,1280,titlePaint);
-            canvas3.drawText(tresDigitos(lt.getText().toString()),1680,1280,titlePaint);
-            canvas3.drawText(cat.getText().toString(),2180,1280,titlePaint);
+            canvas3.drawText(codigo_proyecto.getText().toString(),270,1200,titlePaint);
+            canvas3.drawText(tresDigitos(uv.getText().toString()),740,1200,titlePaint);
+            canvas3.drawText(tresDigitos(mz.getText().toString()),1200,1200,titlePaint);
+            canvas3.drawText(tresDigitos(lt.getText().toString()),1680,1200,titlePaint);
+            canvas3.drawText(cat.getText().toString(),2180,1200,titlePaint);
 
-            canvas3.drawText(rbSelected.getText().toString(),270,1680,titlePaint);
-            canvas3.drawText(mts2.getText().toString(),740,1680,titlePaint);
+            canvas3.drawText(rbSelected.getText().toString(),270,1555,titlePaint);
+            canvas3.drawText(mts2.getText().toString(),740,1555,titlePaint);
             titlePaint.setTextSize(45f);
             canvas3.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+
-                    apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),245,1895,titlePaint);
-            canvas3.drawText(ci_cliente.getText().toString(),1960,1895,titlePaint);
-            canvas3.drawText(extension_cliente.getText().toString(),270,1952,titlePaint);
+                    apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),245,1750,titlePaint);
+            canvas3.drawText(ci_cliente.getText().toString(),1950,1750,titlePaint);
+            canvas3.drawText(extension_cliente.getText().toString(),270,1808,titlePaint);
 
-            canvas3.drawText(nombre_cliente.getText().toString()
-                        +apellidoPaterno.getText().toString()
-                        +apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),570,3205,titlePaint);
-            canvas3.drawText(asesor.getText().toString(),1910,3205,titlePaint);
+            canvas3.drawText(nombre_cliente.getText().toString()+" "
+                        +apellidoPaterno.getText().toString()+" "
+                        +apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),570,2960,titlePaint);
+            canvas3.drawText(asesor.getText().toString(),1910,2960,titlePaint);
 
             myPDF.finishPage(myPage3);
         /////FIN PAGINA 3/////////
 
         ///INICIO DE PAGINA 4 ////
-            PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2550,4200,1).create();
+            PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo3);
             Canvas canvas4 = myPage4.getCanvas();
             if(Global.ubicacion==null){
                 Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
             }
             bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,2550,4200,false);
+            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
             canvas4.drawBitmap(scaledbmp,0,0,myPaint);
 
-            canvas4.drawText(tresDigitos(uv.getText().toString()),600,500,titlePaint);
-            canvas4.drawText(tresDigitos(mz.getText().toString()),1190,500,titlePaint);
-            canvas4.drawText(tresDigitos(lt.getText().toString()),1780,500,titlePaint);
-            canvas4.drawText(cat.getText().toString(),2250,500,titlePaint);
-            canvas4.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),800,615,titlePaint);
-            canvas4.drawText(ci_cliente.getText().toString(),800,690,titlePaint);
-            canvas4.drawText(telMovil.getText().toString()+" - "+telFijo.getText().toString(),1700,690,titlePaint);
-            canvas4.drawText(barrio.getText().toString()+" "+avenida.getText().toString()+" "+calle.getText().toString()+" "+numero.getText().toString(),800,760,titlePaint);
-            canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),800,840,titlePaint);
-            canvas4.drawText(zona.getText().toString(),800,920,titlePaint);
+            canvas4.drawText(tresDigitos(uv.getText().toString()),600,460,titlePaint);
+            canvas4.drawText(tresDigitos(mz.getText().toString()),1190,460,titlePaint);
+            canvas4.drawText(tresDigitos(lt.getText().toString()),1780,460,titlePaint);
+            canvas4.drawText(cat.getText().toString(),2250,460,titlePaint);
+            canvas4.drawText(nombre_cliente.getText().toString()+" "+apellidoPaterno.getText().toString()+" "+apellidoMaterno.getText().toString()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString(),800,575,titlePaint);
+            canvas4.drawText(ci_cliente.getText().toString(),800,637,titlePaint);
+            canvas4.drawText(telMovil.getText().toString()+" - "+telFijo.getText().toString(),1700,637,titlePaint);
+            canvas4.drawText(barrio.getText().toString()+" "+avenida.getText().toString()+" "+calle.getText().toString()+" "+numero.getText().toString(),800,705,titlePaint);
+            canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),800,775,titlePaint);
+            canvas4.drawText(zona.getText().toString(),800,850,titlePaint);
 
         if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
-            scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2280,2800,false);
-            canvas4.drawBitmap(scaledbmp,150,950,myPaint);
+            scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2280,2500,false);
+            canvas4.drawBitmap(scaledbmp,150,900,myPaint);
             myPDF.finishPage(myPage4);
         }else {
             myPDF.finishPage(myPage4);
