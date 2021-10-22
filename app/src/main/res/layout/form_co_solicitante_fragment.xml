@@ -278,6 +278,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/fechaNacimientoCoSol"
                 android:layout_marginEnd="10dp"
+                android:text="Seleccionar Fecha Nacimiento"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
@@ -504,6 +506,7 @@
                 android:textColor="@color/white"
                 android:inputType="number"
                 android:maxLength="8"
+                android:text="0"
                 ></EditText>
 
             <TextView
@@ -522,6 +525,7 @@
                 android:textColor="@color/white"
                 android:inputType="number"
                 android:maxLength="8"
+                android:text="0"
                 ></EditText>
 
         </LinearLayout>
@@ -547,6 +551,7 @@
                 android:textColor="@color/white"
                 android:inputType="number"
                 android:maxLength="8"
+                android:text="0"
                 ></EditText>
 
             <TextView
@@ -565,6 +570,7 @@
                 android:textColor="@color/white"
                 android:inputType="number"
                 android:maxLength="8"
+                android:text="0"
                 ></EditText>
         </LinearLayout>
 
@@ -684,6 +690,7 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:inputType="number"
+                android:text="0"
                 ></EditText>
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -746,7 +753,23 @@
                 android:id="@+id/btguardarCoSol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Guardar y Generar"
+                android:text="Generar y Visualizar"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/azul_novi"
+                android:textStyle="bold"
+                >
+            </Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btRegistrarCosol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registrar datos"
                 android:backgroundTint="@color/white"
                 android:textColor="@color/azul_novi"
                 android:textStyle="bold"

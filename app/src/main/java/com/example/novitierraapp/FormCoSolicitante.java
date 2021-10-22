@@ -36,6 +36,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 
 import java.io.File;
@@ -43,6 +50,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormCoSolicitante extends Fragment {
 
@@ -51,7 +60,7 @@ public class FormCoSolicitante extends Fragment {
     DatePickerDialog datePickerDialog;
     RadioGroup radioGroupGenero, radioGroupIngresos;
     RadioButton rbSelectedGenero, rbMasculinoCoSol,rbFemeninoCoSol, rbingresoBs, rbingresoDolar, rbSelectedIngreso;
-    Button btGenerarPdf, btFechaNac;
+    Button btGenerarPdf, btFechaNac, btRegistrarCoSol;
     ArrayList<String> listaIdentificacion = new ArrayList<>();
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
     ArrayList<String> listaNivelEstudio = new ArrayList<>();
@@ -59,7 +68,7 @@ public class FormCoSolicitante extends Fragment {
     ArrayList<String> listaDpto = new ArrayList<>();
 
     Bitmap bmp, scaledbmp;
-//    int pageWidth=1200;
+    private String URL_add_cosol = "https://novitierra.000webhostapp.com/api/addCoSol.php";
 
     private FormCoSolicitanteViewModel mViewModel;
 
@@ -110,6 +119,7 @@ public class FormCoSolicitante extends Fragment {
         radioGroupIngresos=view.findViewById(R.id.radiogroupIngresosCoSol);
         btFechaNac=view.findViewById(R.id.btDatePickerFechaNacCoSol);
         btGenerarPdf=view.findViewById(R.id.btguardarCoSol);
+        btRegistrarCoSol=view.findViewById(R.id.btRegistrarCosol);
 
         rbMasculinoCoSol.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +146,7 @@ public class FormCoSolicitante extends Fragment {
             }
         });
 
-        etFechaNac.setText(fechaHoy());
+//        etFechaNac.setText(fechaHoy());
         btFechaNac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +171,23 @@ public class FormCoSolicitante extends Fragment {
                         if(!validarCamposObligatorios()){
                             generarPDF(v);
                             Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
+                }else {Toast.makeText(getContext(),"Falta seleccionar Ingresos Bs o Dolar.",Toast.LENGTH_SHORT).show(); }
+            }
+        });
+
+        btRegistrarCoSol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
+                    if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
+                        if(!validarCamposObligatorios()){
+                            registrarCoSol();
+                            Toast.makeText(getContext(),"Registrando Co-Solicitante.......espere un momento",Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
                         }
@@ -200,7 +227,12 @@ public class FormCoSolicitante extends Fragment {
         int month = cal.get(Calendar.MONTH);
         month=month+1;
         int day= cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day,month,year);
+        Integer hora = cal.get(Calendar.HOUR_OF_DAY);
+        Integer min = cal.get(Calendar.MINUTE);
+        Integer seg = cal.get(Calendar.SECOND);
+        String now = makeDateString(day,month,year);
+        now = now+" "+hora.toString()+":"+min.toString()+":"+seg.toString();
+        return now;
     }
 
 
@@ -294,6 +326,65 @@ public class FormCoSolicitante extends Fragment {
         listaDpto.add("Ninguno");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
         spinnerDptos.setAdapter(adapter);
+    }
+
+    private void registrarCoSol() {
+        StringRequest request = new StringRequest(Request.Method.POST, URL_add_cosol, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    if(response.contains("algo salio mal")){
+                        Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
+                    }
+                    else{Toast.makeText(getContext(),"Co-Solicitante registrado correctamente",Toast.LENGTH_LONG).show();}
+
+                }else{
+                    Toast.makeText(getContext(), "Se ha producido un error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("relacion",relacionCoSol.getText().toString());
+                parametros.put("nombres",nombre.getText().toString());
+                parametros.put("apellidoP",apellidoP.getText().toString());
+                parametros.put("apellidoM",apellidoM.getText().toString());
+                parametros.put("apellidoC",apellidoCasada.getText().toString());
+                parametros.put("tipo_identificacion",spinnerTipoIdent.getSelectedItem().toString());
+                parametros.put("nro_documento",ci.getText().toString());
+                parametros.put("extension",extension.getText().toString());
+                parametros.put("fecha_nacimiento",etFechaNac.getText().toString());
+                parametros.put("sexo",rbSelectedGenero.getText().toString());
+                parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
+                parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
+                parametros.put("profesion_ocupacion",profesion.getText().toString());
+                parametros.put("nacionalidad",nacionalidad.getText().toString());
+                parametros.put("pais",pais.getText().toString());
+                parametros.put("departamento",spinnerDptos.getSelectedItem().toString());
+                parametros.put("telf_fijo",telFijo.getText().toString());
+                parametros.put("telf_movil",telMovil.getText().toString());
+                parametros.put("fijo_oficina",fijoOfi.getText().toString());
+                parametros.put("movil_oficina",movilOfi.getText().toString());
+                parametros.put("correo",correo.getText().toString());
+                parametros.put("nombre_empresa",empresa.getText().toString());
+                parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
+                parametros.put("rubro",rubro.getText().toString());
+                parametros.put("ingresos",ingresos.getText().toString());
+                parametros.put("moneda_ingresos",rbSelectedIngreso.getText().toString());
+                parametros.put("asesor",asesor.getText().toString());
+                parametros.put("fecha",fechaHoy());
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+
     }
 
     private void generarPDF(View v) {
