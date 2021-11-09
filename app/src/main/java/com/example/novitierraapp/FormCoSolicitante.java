@@ -66,7 +66,7 @@ public class FormCoSolicitante extends Fragment {
     ArrayList<String> listaNivelEstudio = new ArrayList<>();
 //    ArrayList<String> listaTipoVivienda = new ArrayList<>();
     ArrayList<String> listaDpto = new ArrayList<>();
-    //int v = 0;
+
 
     Bitmap bmp, scaledbmp;
     private String URL_add_cosol = "https://novitierra.000webhostapp.com/api/addCoSol.php";
