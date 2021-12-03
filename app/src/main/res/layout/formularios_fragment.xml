@@ -6,22 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="Formularios"
-    android:background="@color/azul_novi"
     android:orientation="vertical"
     >
 
     <ScrollView
+        android:id="@+id/scrollViewForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="Formularios"
-        android:id="@+id/scrollViewForm"
-        >
+        tools:context="Formularios">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,12 +29,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Datos Personales del Cliente"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/amarillo"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Datos Personales del Cliente"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
 
@@ -48,38 +45,35 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Formulario con ubicacion:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Formulario con ubicacion:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
                     android:id="@+id/radiogroupElegirUbicacion"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/conUbicacion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Si"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold">
 
-                        />
+                    </RadioButton>
+
                     <RadioButton
                         android:id="@+id/sinUbicacion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
                         android:text="No"
-                        />
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"></RadioButton>
                 </RadioGroup>
             </LinearLayout>
 
@@ -91,20 +85,58 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Cliente es:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <RadioGroup
+                    android:id="@+id/rgDependienteIndependiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/independiente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Independiente"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold">
+
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/dependiente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dependiente"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"></RadioButton>
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Nombre del cliente:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/nombreCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapWords"
-                    ></EditText>
+                    android:inputType="textCapWords"></EditText>
 
             </LinearLayout>
 
@@ -116,20 +148,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Apellido Paterno:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold">
+
+                </TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/apellidoPCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences">
+
+                </EditText>
 
             </LinearLayout>
 
@@ -141,45 +175,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Apellido Materno:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/apellidoMCliente"
-                    android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apellido de Casada:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/apellidoCasada"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -191,18 +198,41 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Prefijo:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Apellido de Casada:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/apellidoCasada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Prefijo:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <Spinner
                     android:id="@+id/tipoPrefijo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerPrefijo"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -214,19 +244,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de Identificacion:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Tipo de Identificacion:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/tipoIdentificacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerIdentificacion"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -238,21 +267,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Documento de identidad:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/ciCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:ems="10"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapCharacters"
-                    ></EditText>
+                    android:inputType="textCapCharacters"></EditText>
 
             </LinearLayout>
 
@@ -264,21 +291,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Extension:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/extensionCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/extensionCliente"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
                     android:inputType="textCapCharacters"
-                    android:maxLength="2"
-                    ></EditText>
+                    android:maxLength="2"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -289,21 +314,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Nacionalidad:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Nacionalidad:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/nacionalidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nacionalidad"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:text="Boliviano"
-                    android:textColorHighlight="@color/black"
                     android:inputType="textCapSentences"
-                    ></EditText>
+                    android:text="Boliviano"></EditText>
 
             </LinearLayout>
 
@@ -314,26 +337,23 @@
 
                 <Button
                     android:id="@+id/btDatePickerFechaNac"
+                    style="?android:spinnerStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
                     android:onClick="openDatePicker"
                     android:text="*Fecha Nacimiento"
-                    android:textStyle="bold"
-                    android:textColor="@color/amarillo"
-                    style="?android:spinnerStyle">
-                </Button>
+                    android:textSize="18sp"
+                    android:textColor="@color/azul_novi"
+                    android:textStyle="bold"></Button>
 
                 <EditText
+                    android:id="@+id/fechaNacimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fechaNacimiento"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:hint="Tocar Fecha Nacimiento"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapWords"
-                    ></EditText>
+                    android:inputType="textCapWords"></EditText>
 
             </LinearLayout>
 
@@ -345,19 +365,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Estado Civil:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Estado Civil:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/estadoCivil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerEstadoCivil"
-                    />
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout
@@ -368,38 +387,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Sexo: "
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Sexo: "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
                     android:id="@+id/radiogroupGenero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/masculino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Masculino"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
 
-                        />
                     <RadioButton
                         android:id="@+id/femenino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
                         android:text="Femenino"
-                        />
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -411,19 +425,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Nivel de Estudio:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Nivel de Estudio:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/nivelEstudio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerNivelEstudio"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -435,20 +448,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Profesion/Ocupacion:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Profesion/Ocupacion:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/profesion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/profesion"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -460,12 +471,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Datos de Vivienda"
+                    android:textColor="@color/azul_novi"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/amarillo"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
 
@@ -477,19 +487,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Tipo de vivienda:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Tipo de vivienda:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/tipoVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerTipoVivienda"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -501,19 +510,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Tenencia:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Tenencia:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/tenencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerTenencia"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -525,48 +533,42 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Costo Aproximado:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Costo Aproximado:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/costoAprox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/costoAprox"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="0000"
-                    android:text="0"
+                    android:inputType="number"
                     ></EditText>
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
                     android:id="@+id/radiogroupVivienda"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/viviendaBs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bs"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
 
-                        />
                     <RadioButton
                         android:id="@+id/viviendaDolar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
                         android:text="$us"
-                        />
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -579,20 +581,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Nombre de Propietario:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Nombre de Propietario:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/propietarioVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/propietarioVivienda"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapWords"
-                    ></EditText>
+                    android:inputType="textCapWords"></EditText>
 
             </LinearLayout>
 
@@ -604,20 +604,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Telefono:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Telefono:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/telefonoPropietario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/telefonoPropietario"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:inputType="number"
-                    android:text="0"
-                    android:textColorHighlight="@color/black"
                     android:maxLength="8"
                     ></EditText>
 
@@ -631,21 +629,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Pais:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Pais:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/paisVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/paisVivienda"
-                    android:text="Bolivia"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
                     android:inputType="textCapSentences"
-                    ></EditText>
+                    android:text="Bolivia"></EditText>
 
             </LinearLayout>
 
@@ -657,19 +653,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dpto:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Dpto:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <Spinner
                     android:id="@+id/dptoBolivia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerDpto"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -681,20 +676,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Ciudad:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/ciudadVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -706,20 +699,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Zona:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/zonaVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -731,20 +722,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Barrio:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/barrioVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -756,20 +745,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Avenida:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/avenidadVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -781,20 +768,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Calle:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/calleVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -806,21 +791,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Numero:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/numeroVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:inputType="number"
-                    android:text="0"
-                    ></EditText>
+                    >
 
+                </EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -831,12 +816,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Datos Telefono/Laboral(Empresa)"
+                    android:textColor="@color/azul_novi"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/amarillo"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
 
@@ -848,43 +832,39 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Telf. Fijo:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/telfFijoCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="0000"
-                    android:text="0"
+                    android:inputType="number"
                     android:maxLength="8"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Telf. Movil:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/telfMovilCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="0000"
-                    android:text="0"
+                    android:inputType="number"
                     android:maxLength="8"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
 
             </LinearLayout>
@@ -897,43 +877,39 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Fijo Oficina:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/telfFijoOficina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="0000"
-                    android:text="0"
+                    android:inputType="number"
                     android:maxLength="8"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Movil Oficina:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/telfMovilOficina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="0000"
-                    android:text="0"
+                    android:inputType="number"
                     android:maxLength="8"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -945,20 +921,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Correo:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/correoPersonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textAutoComplete"
-                    ></EditText>
+                    android:inputType="textAutoComplete"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -969,20 +943,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Empresa:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/empresaNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -993,45 +965,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Direccion:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/direccionEmpresa"
-                    android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*Rubro:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rubroEmpresa"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    android:maxLength="28"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1042,49 +987,73 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Ingresos:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Rubro (Si es independiente explicar ocupacion)"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <EditText
+                    android:id="@+id/rubroEmpresa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    android:maxLength="28"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Ingresos:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
                     android:id="@+id/ingresos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="0000"
-                    android:text="0"
-                    android:textColorHighlight="@color/black"
+                    android:inputType="number"
                     ></EditText>
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
                     android:id="@+id/radiogroupIngresos"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/ingresosBs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bs."
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
                         android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
+                        android:text="Bs."
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
 
-                        />
                     <RadioButton
                         android:id="@+id/ingresosDolar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
                         android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
                         android:text="$us"
-                        />
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -1095,13 +1064,12 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
                     android:text="Referencias Personales"
+                    android:textColor="@color/azul_novi"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/amarillo"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -1112,20 +1080,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Nombre Conyuge o familiar cercano:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Referencia 1:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/nombreFamiliarCercano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapWords"
-                    ></EditText>
+                    android:inputType="textCapWords"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1136,20 +1102,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Parentesco:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/parentescoFamiliar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
+                    android:inputType="textCapSentences"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1160,21 +1124,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Telf. Familiar Cercano:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Telf. Referencia 1"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/telfFamiliarCercano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:inputType="number"
-                    android:text="0"
                     android:maxLength="8"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -1186,20 +1148,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Nombre de otra Referencia:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Referencia 2:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/otraReferencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapWords"
-                    ></EditText>
+                    android:inputType="textCapWords"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1210,45 +1170,41 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Relacion:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/relacionReferencia"
-                    android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapSentences"
-                    ></EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*Telf. Otra Referencia:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/telfOtraReferencia"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
+                    android:inputType="textCapSentences"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Telf. Referencia 2:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/telfOtraReferencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:inputType="number"
-                    android:text="0"
                     android:maxLength="8"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
             </LinearLayout>
 
@@ -1260,12 +1216,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Informacion del Lote"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/amarillo"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Informacion del Lote"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -1276,39 +1231,36 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lote a : "
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Lote a : "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
                     android:id="@+id/radiogroup"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/aPlazo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:shadowColor="@color/white"
-                        android:text="Plazo"
-                        android:textColor="@color/white"
-                        android:textColorHighlight="@color/white"
-                        android:theme="@style/radiobuttonWhite" />
+                        android:text="A plazo"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold">
+
+                    </RadioButton>
+
                     <RadioButton
                         android:id="@+id/aContado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:theme="@style/radiobuttonWhite"
-                        android:shadowColor="@color/white"
-                        android:textColorHighlight="@color/white"
                         android:text="Contado"
-                        />
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -1320,19 +1272,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Urbanizacion:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Urbanizacion:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"></TextView>
 
                 <Spinner
                     android:id="@+id/urbanizacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
                     android:prompt="@string/SpinnerUrbanizacion"
-                    />
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -1344,107 +1294,101 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Proyecto: "
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="Proyecto: "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <TextView
+                    android:id="@+id/idProyecto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/idProyecto"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:text="Codigo de proyecto"
-                    ></TextView>
+                    android:textColor="@color/azul_novi"
+                    android:textStyle="bold"></TextView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*UV: "
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/uv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
+                    android:hint="0000"
                     android:inputType="textCapCharacters"
-                    android:hint="000"
-                    android:text="0"
                     android:maxLength="4"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*MZ: "
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/mz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="000"
-                    android:text="0"
+                    android:inputType="number"
                     android:maxLength="3"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Lote: "
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/lt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
                     android:hint="000"
-                    android:text="0"
+                    android:inputType="number"
                     android:maxLength="3"
-                    android:textColorHighlight="@color/black"
                     ></EditText>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Cat: "
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"></TextView>
 
-                    ></TextView>
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/cat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:hint="Q"
-                    android:maxLength="1"
-                    android:textColorHighlight="@color/black"
                     android:inputType="textCapCharacters"
-                    ></EditText>
+                    android:maxLength="1"></EditText>
 
             </LinearLayout>
 
@@ -1452,23 +1396,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Mts2:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/mts2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
                     android:inputType="number"
-                    android:text="0"
-                    android:textColorHighlight="@color/black"
+                    android:hint="1200"
                     ></EditText>
             </LinearLayout>
 
@@ -1476,23 +1420,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="*Asesor de Venta:"
+                    android:textColor="@color/azul_novi"
                     android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/fullnameAsesor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fullnameAsesor"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:inputType="textCapWords"
-                    ></EditText>
+                    android:inputType="textCapWords"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1503,20 +1446,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Codigo Asesor:"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:layout_marginStart="10dp"
-                    ></TextView>
+                    android:text="*Codigo Asesor:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
                 <EditText
+                    android:id="@+id/codigoAsesor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/codigoAsesor"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/white"
-                    android:inputType="number"
-                    android:textColorHighlight="@color/black"
-                    ></EditText>
+                    android:inputType="number"></EditText>
 
             </LinearLayout>
 
@@ -1524,34 +1465,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btguardar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Generar y Visualizar"
-                    android:backgroundTint="@color/white"
-                    android:textColor="@color/azul_novi"
-                    android:textStyle="bold"
-                    >
-                </Button>
+                    android:textColor="@color/white"
+                    android:textStyle="bold"></Button>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btRegistrarDatosForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Registrar Datos"
-                    android:backgroundTint="@color/white"
-                    android:textColor="@color/azul_novi"
-                    android:textStyle="bold"
-                    >
-                </Button>
+                    android:textColor="@color/white"
+                    android:textStyle="bold"></Button>
             </LinearLayout>
-
 
 
         </LinearLayout>

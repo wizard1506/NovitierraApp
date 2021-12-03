@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azul_novi"
     tools:context=".FormCoSolicitante">
 
     <LinearLayout
@@ -23,7 +22,7 @@
                 android:text="Datos Personales del Co-Solicitante"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/amarillo"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
                 ></TextView>
 
@@ -39,15 +38,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Relacion con el titular:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/relacionCoSolTitular"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -64,15 +64,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Nombres:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/nombreCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapWords"
                 ></EditText>
@@ -89,15 +90,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Apellido Paterno:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/apellidoPCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -114,15 +116,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Apellido Materno:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/apellidoMCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -139,15 +142,16 @@
                 android:layout_height="wrap_content"
                 android:text="Apellido de Casada:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/apellidoCasadaCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -164,8 +168,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Tipo de Identificacion:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
 
             <Spinner
@@ -188,15 +193,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Documento de identidad:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ciCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:ems="10"
                 android:inputType="textCapCharacters"
                 android:textColorHighlight="@color/black"
@@ -214,15 +220,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Extension:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/extensionCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapCharacters"
                 android:maxLength="2"
@@ -239,8 +246,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Nacionalidad:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
@@ -248,7 +256,7 @@
                 android:text="Boliviano"
                 android:id="@+id/nacionalidadCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -265,9 +273,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btDatePickerFechaNacCoSol"
                 android:text="Fecha Nacimiento"
-                android:textColor="@color/amarillo"
+                android:textColor="@color/azul_novi"
                 android:textStyle="bold"
                 android:elevation="10dp"
+                android:textSize="18sp"
                 style="?android:spinnerStyle"
                 android:onClick="openDatePicker"
                 >
@@ -278,9 +287,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/fechaNacimientoCoSol"
                 android:layout_marginEnd="10dp"
-                android:text="Seleccionar Fecha Nacimiento"
+                android:hint="Tocar Fecha Nacimiento"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -297,8 +306,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Estado Civil:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
 
             <Spinner
@@ -320,8 +330,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Sexo: "
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
 
             <RadioGroup
@@ -334,21 +345,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Masculino"
-                    android:textColor="@color/white"
-                    android:theme="@style/radiobuttonWhite"
-                    android:shadowColor="@color/white"
-                    android:textColorHighlight="@color/white"
-
+                    android:textStyle="bold"
+                    android:textColor="@color/azul_novi"
                     />
                 <RadioButton
                     android:id="@+id/femeninoCoSol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:theme="@style/radiobuttonWhite"
-                    android:shadowColor="@color/white"
-                    android:textColorHighlight="@color/white"
+                    android:textColor="@color/azul_novi"
                     android:text="Femenino"
+                    android:textStyle="bold"
                     />
             </RadioGroup>
         </LinearLayout>
@@ -363,8 +369,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Nivel de Estudio:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
 
             <Spinner
@@ -387,15 +394,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Profesion/Ocupacion:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/profesionCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -412,7 +420,7 @@
                 android:text="Direccion"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/amarillo"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
                 ></TextView>
 
@@ -428,8 +436,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Pais:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
@@ -437,7 +446,7 @@
                 android:text="Bolivia"
                 android:id="@+id/direccionPaisCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -454,8 +463,9 @@
                 android:layout_height="wrap_content"
                 android:text="*Dpto:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
 
             <Spinner
@@ -479,7 +489,7 @@
                 android:text="Datos Telefono/Laboral(Empresa)"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/amarillo"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
                 ></TextView>
 
@@ -495,18 +505,19 @@
                 android:layout_height="wrap_content"
                 android:text="Telf. Fijo:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/telfFijoCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:inputType="number"
                 android:maxLength="8"
-                android:text="0"
+                android:hint="0000"
                 ></EditText>
 
             <TextView
@@ -514,18 +525,19 @@
                 android:layout_height="wrap_content"
                 android:text="*Telf. Movil:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/telfMovilCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:inputType="number"
                 android:maxLength="8"
-                android:text="0"
+                android:hint="0000"
                 ></EditText>
 
         </LinearLayout>
@@ -540,18 +552,19 @@
                 android:layout_height="wrap_content"
                 android:text="Fijo Oficina:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/telfFijoOficinaCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:inputType="number"
                 android:maxLength="8"
-                android:text="0"
+                android:hint="0000"
                 ></EditText>
 
             <TextView
@@ -559,18 +572,19 @@
                 android:layout_height="wrap_content"
                 android:text="Movil Oficina:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/telfMovilOficinaCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:inputType="number"
                 android:maxLength="8"
-                android:text="0"
+                android:hint="0000"
                 ></EditText>
         </LinearLayout>
 
@@ -584,15 +598,16 @@
                 android:layout_height="wrap_content"
                 android:text="Correo:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/correoCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textAutoComplete"
                 ></EditText>
@@ -608,15 +623,16 @@
                 android:layout_height="wrap_content"
                 android:text="Empresa:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/empresaNombreCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -632,15 +648,16 @@
                 android:layout_height="wrap_content"
                 android:text="Direccion:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/direccionEmpresaCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -656,15 +673,16 @@
                 android:layout_height="wrap_content"
                 android:text="Rubro:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rubroEmpresaCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
                 ></EditText>
@@ -680,17 +698,18 @@
                 android:layout_height="wrap_content"
                 android:text="Ingresos:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ingresosCoSol"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:inputType="number"
-                android:text="0"
+                android:hint="0000"
                 ></EditText>
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -702,20 +721,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bs"
-                    android:textColor="@color/white"
-                    android:theme="@style/radiobuttonWhite"
-                    android:shadowColor="@color/white"
-                    android:textColorHighlight="@color/white"
-
+                    android:textColor="@color/azul_novi"
+                    android:textStyle="bold"
                     />
                 <RadioButton
                     android:id="@+id/ingresosCoSolDolar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:theme="@style/radiobuttonWhite"
-                    android:shadowColor="@color/white"
-                    android:textColorHighlight="@color/white"
+                    android:textColor="@color/azul_novi"
+                    android:textStyle="bold"
                     android:text="$us"
                     />
             </RadioGroup>
@@ -730,15 +744,16 @@
                 android:layout_height="wrap_content"
                 android:text="*Asesor de Venta:"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:layout_marginStart="10dp"
+                android:textStyle="bold"
                 ></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/fullnameAsesor"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapWords"
                 ></EditText>
@@ -754,8 +769,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Generar y Visualizar"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/azul_novi"
+                android:backgroundTint="@color/azul_novi"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 >
             </Button>
@@ -770,8 +785,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Registrar datos"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/azul_novi"
+                android:backgroundTint="@color/azul_novi"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 >
             </Button>

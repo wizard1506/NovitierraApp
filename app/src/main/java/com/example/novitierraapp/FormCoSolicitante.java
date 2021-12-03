@@ -170,6 +170,8 @@ public class FormCoSolicitante extends Fragment {
                 if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
                         if(!validarCamposObligatorios()){
+                            //        verificamos las variables con numeros si se encuentran vacias
+                            numerosVacios();
                             generarPDF(v);
                             Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
                         }else {
@@ -187,6 +189,8 @@ public class FormCoSolicitante extends Fragment {
                 if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
                         if(!validarCamposObligatorios()){
+                            //        verificamos las variables con numeros si se encuentran vacias
+                            numerosVacios();
                             registrarCoSol();
                             Toast.makeText(getContext(),"Registrando Co-Solicitante.......espere un momento",Toast.LENGTH_SHORT).show();
                         }else {
@@ -221,6 +225,23 @@ public class FormCoSolicitante extends Fragment {
 
     }
 
+    public void numerosVacios(){
+        if (telFijo.getText().toString().length()==0){
+            telFijo.setText("0");
+        }
+        if(telMovil.getText().toString().length()==0){
+            telMovil.setText("0");
+        }
+        if(fijoOfi.getText().toString().length()==0){
+            fijoOfi.setText("0");
+        }
+        if(movilOfi.getText().toString().length()==0){
+            movilOfi.setText("0");
+        }
+        if(ingresos.getText().toString().length()==0){
+            ingresos.setText("0");
+        }
+    }
 
     private String fechaHoy(){
         Calendar cal = Calendar.getInstance();
@@ -389,6 +410,7 @@ public class FormCoSolicitante extends Fragment {
     }
 
     private void generarPDF(View v) {
+
         PdfDocument myPDF = new PdfDocument();
         Paint myPaint = new Paint();
         Paint titlePaint = new Paint();
