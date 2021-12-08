@@ -44,6 +44,8 @@ public class MapFragment extends Fragment {
     private MapViewModel mViewModel;
     private GoogleMap mMap;
     OutputStream outputStream;
+    private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/UbicacionCliente.jpg";
+    private File file = new File(path);
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -52,17 +54,16 @@ public class MapFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         btUbicacion = view.findViewById(R.id.btCapturarUbicacion);
         btUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(), "Funcionamiento aun en desarrollo..", Toast.LENGTH_LONG).show();
+
                 mMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
                     @Override
                     public void onSnapshotReady(@Nullable Bitmap bitmap) {
                         Global.ubicacion=bitmap;
-
-                        File file = new File(Environment.getExternalStorageDirectory(),"/UbicacionCliente.jpg");
                         try {
                             outputStream = new FileOutputStream(file);
                         } catch (FileNotFoundException e) {

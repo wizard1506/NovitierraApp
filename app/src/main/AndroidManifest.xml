@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_novitierra_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NovitierraApp.NoActionBar">
+        android:requestLegacyExternalStorage="true"
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -31,6 +32,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <provider
+            android:authorities="com.example.novitierraapp"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

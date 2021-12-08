@@ -2,6 +2,7 @@ package com.example.novitierraapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -91,6 +92,9 @@ public class Formularios extends Fragment {
     Bitmap bmp, scaledbmp;
 
     private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
+    //***PARA PDF****
+    private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormSolicitante.pdf";
+    private File file = new File(path);
 
     public static Formularios newInstance() {
         return new Formularios();
@@ -101,11 +105,11 @@ public class Formularios extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ///necesario para poder compartir el pdf
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        builder.detectFileUriExposure();
+//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//        StrictMode.setVmPolicy(builder.build());
+//        builder.detectFileUriExposure();
         /////
-
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         nombre_cliente = view.findViewById(R.id.nombreCliente);
         //nombre_cliente.setRawInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
@@ -298,11 +302,6 @@ public class Formularios extends Fragment {
 
             }
         });
-
-
-        ////para el boton del pdf
-        ActivityCompat.requestPermissions(getActivity(),new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -951,7 +950,6 @@ public class Formularios extends Fragment {
 
         ///FIN DE PAGINA 4/////
 
-            File file = new File(Environment.getExternalStorageDirectory(),"/FormularioSolicitante.pdf");
             try {
                 myPDF.writeTo(new FileOutputStream(file));
 
@@ -960,16 +958,33 @@ public class Formularios extends Fragment {
             }
             myPDF.close();
 
-        String path = Environment.getExternalStorageDirectory()+"/FormularioSolicitante.pdf";
-        File pdf = new File(path);
-        Intent share = new Intent();
-        share.setAction(Intent.ACTION_VIEW);
-        share.setDataAndType(Uri.fromFile(pdf),"application/pdf");
-        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            Uri uri = FileProvider.getUriForFile(getContext(),"com.example.novitierraapp",file);
+
+            Intent share = new Intent();
+            share.setAction(Intent.ACTION_VIEW);
+            share.setDataAndType(uri,"application/pdf");
+            share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(share);
+
+
+
+/// ****** este es el bueno para android 9 inferior************
+//        String path = Environment.getExternalStorageDirectory()+"/FormularioSolicitante.pdf";
+//        File pdf = new File(path);
+//        Intent share = new Intent();
+//        share.setAction(Intent.ACTION_VIEW);
+//        share.setDataAndType(Uri.fromFile(pdf),"application/pdf");
+//        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
 //        share.setAction(Intent.ACTION_SEND);
 //        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
 //        share.setType("application/pdf");
-        startActivity(share);
+
+
+//        startActivity(share);
 
     }
 

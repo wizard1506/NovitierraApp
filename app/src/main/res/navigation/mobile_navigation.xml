@@ -37,4 +37,9 @@
         android:name="com.example.novitierraapp.MapFragment"
         android:label="Ubicacion Vivienda"
         tools:layout="@layout/map_fragment" />
+    <fragment
+        android:id="@+id/test"
+        android:name="com.example.novitierraapp.test"
+        android:label="test_fragment"
+        tools:layout="@layout/test_fragment" />
 </navigation>

@@ -28,5 +28,9 @@
             android:id="@+id/mapFragment"
             android:icon="@drawable/ic_baseline_map_24"
             android:title="Ubicacion" />
+        <item
+            android:id="@+id/test"
+            android:icon="@drawable/ic_baseline_map_24"
+            android:title="Pruebas" />
     </group>
 </menu>

@@ -1,6 +1,7 @@
 package com.example.novitierraapp;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -71,6 +72,10 @@ public class FormCoSolicitante extends Fragment {
     Bitmap bmp, scaledbmp;
     private String URL_add_cosol = "https://novitierra.000webhostapp.com/api/addCoSol.php";
 
+    //***PARA PDF****
+    private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormCoSolicitante.pdf";
+    private File file = new File(path);
+
     private FormCoSolicitanteViewModel mViewModel;
 
     public static FormCoSolicitante newInstance() {
@@ -81,11 +86,13 @@ public class FormCoSolicitante extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ///necesario para poder compartir el pdf
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        builder.detectFileUriExposure();
-        /////
+//        ///necesario para poder compartir el pdf
+//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//        StrictMode.setVmPolicy(builder.build());
+//        builder.detectFileUriExposure();
+//        /////
+
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         relacionCoSol=view.findViewById(R.id.relacionCoSolTitular);
         nombre = view.findViewById(R.id.nombreCoSol);
@@ -436,10 +443,10 @@ public class FormCoSolicitante extends Fragment {
         canvas.drawBitmap(scaledbmp,0,0,myPaint);
 
         canvas.drawText(relacionCoSol.getText().toString(),850,620,myPaint);
-        canvas.drawText(apellidoP.getText().toString(),400,810,myPaint);
-        canvas.drawText(apellidoM.getText().toString(),1600,810,myPaint);
-        canvas.drawText(nombre.getText().toString(),400,970,myPaint);
-        canvas.drawText(apellidoCasada.getText().toString(),1600,970,myPaint);
+        canvas.drawText(apellidoP.getText().toString().toUpperCase(),400,810,myPaint);
+        canvas.drawText(apellidoM.getText().toString().toUpperCase(),1600,810,myPaint);
+        canvas.drawText(nombre.getText().toString().toUpperCase(),400,970,myPaint);
+        canvas.drawText(apellidoCasada.getText().toString().toUpperCase(),1600,970,myPaint);
         canvas.drawText(ci.getText().toString(),1600,1150,myPaint);
         canvas.drawText(extension.getText().toString(),2080,1150,myPaint);
 
@@ -469,14 +476,13 @@ public class FormCoSolicitante extends Fragment {
         canvas.drawText(rubro.getText().toString(),1350,2110,myPaint);
         canvas.drawText(ingresos.getText().toString()+" "+rbSelectedIngreso.getText().toString(),2080,2110,myPaint);
 
-        canvas.drawText(nombre.getText().toString()+" "+apellidoP.getText().toString()+" "+
-                apellidoM.getText().toString(),550,3000,titlePaint);
-        canvas.drawText(asesor.getText().toString(),1870,3000,titlePaint);
+        canvas.drawText(nombre.getText().toString().toUpperCase()+" "+apellidoP.getText().toString().toUpperCase()+" "+
+                apellidoM.getText().toString().toUpperCase(),550,3000,titlePaint);
+        canvas.drawText(asesor.getText().toString().toUpperCase(),1870,3000,titlePaint);
 
         myPDF.finishPage(myPage1);
         /// fin pagina 1
 
-        File file = new File(Environment.getExternalStorageDirectory(),"/Form_CoSolicitante.pdf");
         try {
             myPDF.writeTo(new FileOutputStream(file));
 
@@ -484,18 +490,14 @@ public class FormCoSolicitante extends Fragment {
             e.printStackTrace();
         }
         myPDF.close();
-///desde aca
-        String path = Environment.getExternalStorageDirectory()+"/Form_CoSolicitante.pdf";
-        File pdf = new File(path);
+        Uri uri = FileProvider.getUriForFile(getContext(),"com.example.novitierraapp",file);
+
         Intent share = new Intent();
         share.setAction(Intent.ACTION_VIEW);
-        share.setDataAndType(Uri.fromFile(pdf),"application/pdf");
+        share.setDataAndType(uri,"application/pdf");
         share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//        share.setAction(Intent.ACTION_SEND);
-//        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
-//        share.setType("application/pdf");
+        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(share);
-    ///hasta aca
     }
 
     ///fin del fragment
