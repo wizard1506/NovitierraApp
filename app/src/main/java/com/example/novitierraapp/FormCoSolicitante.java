@@ -178,7 +178,7 @@ public class FormCoSolicitante extends Fragment {
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
                         if(!validarCamposObligatorios()){
                             //        verificamos las variables con numeros si se encuentran vacias
-                            numerosVacios();
+//                            numerosVacios();
                             generarPDF(v);
                             Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
                         }else {
@@ -197,7 +197,7 @@ public class FormCoSolicitante extends Fragment {
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
                         if(!validarCamposObligatorios()){
                             //        verificamos las variables con numeros si se encuentran vacias
-                            numerosVacios();
+//                            numerosVacios();
                             registrarCoSol();
                             Toast.makeText(getContext(),"Registrando Co-Solicitante.......espere un momento",Toast.LENGTH_SHORT).show();
                         }else {
@@ -211,44 +211,57 @@ public class FormCoSolicitante extends Fragment {
 
     }
 
-    public Boolean validarCamposObligatorios(){
-        if(nombre.getText().toString().length()==0 ||
-                apellidoP.getText().toString().length()==0 ||
-                apellidoM.getText().toString().length()==0 ||
-                ci.getText().toString().length()==0 ||
-                extension.getText().toString().length()==0 ||
-                nacionalidad.getText().toString().length()==0 ||
-                etFechaNac.getText().toString().length()==0 ||
-                profesion.getText().toString().length()==0 ||
-                nacionalidad.getText().toString().length()==0 ||
-                telMovil.getText().toString().length()==0||
-                asesor.getText().toString().length()==0
-                ){
+    public void mensaje(String mensaje){
+        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+    }
 
-            return true;
-        }else {
+    public Boolean validarCamposObligatorios(){
+        if(nombre.getText().toString().length()==0){
+            mensaje("Falta nombre");
+        }else{
+            if(apellidoP.getText().toString().length()==0){
+                mensaje("Falta apellido paterno");
+            }else {
+                if(apellidoM.getText().toString().length()==0){mensaje("Falta apellido materno");}else{
+                    if(ci.getText().toString().length()==0){mensaje("Falta CI");}else{
+                        if(nacionalidad.getText().toString().length()==0){mensaje("Falta nacionalidad");}else{
+                            if(etFechaNac.getText().toString().length()==0){mensaje("Falta fecha nacimiento");}else{
+                              if(profesion.getText().toString().length()==0){mensaje("Falta profesion");}else{
+                                  if(nacionalidad.getText().toString().length()==0){mensaje("Falta nacionalidad");}else{
+                                        if(telMovil.getText().toString().length()==0){mensaje("Falta telefono movil");}else{
+                                            if(asesor.getText().toString().length()==0){mensaje("Falta asesor");}else{
+                                                return true;
+                                            }
+                                        }
+                                  }
+                              }
+                            }
+                        }
+                    }
+                }
+            }
             return false;
         }
+        return false;
+        }
 
-    }
-
-    public void numerosVacios(){
-        if (telFijo.getText().toString().length()==0){
-            telFijo.setText("0");
-        }
-        if(telMovil.getText().toString().length()==0){
-            telMovil.setText("0");
-        }
-        if(fijoOfi.getText().toString().length()==0){
-            fijoOfi.setText("0");
-        }
-        if(movilOfi.getText().toString().length()==0){
-            movilOfi.setText("0");
-        }
-        if(ingresos.getText().toString().length()==0){
-            ingresos.setText("0");
-        }
-    }
+//    public void numerosVacios(){
+//        if (telFijo.getText().toString().length()==0){
+//            telFijo.setText("0");
+//        }
+//        if(telMovil.getText().toString().length()==0){
+//            telMovil.setText("0");
+//        }
+//        if(fijoOfi.getText().toString().length()==0){
+//            fijoOfi.setText("0");
+//        }
+//        if(movilOfi.getText().toString().length()==0){
+//            movilOfi.setText("0");
+//        }
+//        if(ingresos.getText().toString().length()==0){
+//            ingresos.setText("0");
+//        }
+//    }
 
     private String fechaHoy(){
         Calendar cal = Calendar.getInstance();

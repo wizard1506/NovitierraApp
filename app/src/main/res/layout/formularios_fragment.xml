@@ -338,14 +338,23 @@
                 <Button
                     android:id="@+id/btDatePickerFechaNac"
                     style="?android:spinnerStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
                     android:onClick="openDatePicker"
-                    android:text="*Fecha Nacimiento"
+                    android:text="*FECHA NACIMIENTO"
                     android:textSize="18sp"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:background="@color/azul_novi"
                     android:textStyle="bold"></Button>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/fechaNacimiento"
@@ -353,6 +362,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:hint="Tocar Fecha Nacimiento"
+                    android:textAlignment="center"
                     android:inputType="textCapWords"></EditText>
 
             </LinearLayout>
@@ -534,7 +544,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Costo Aproximado:"
+                    android:text="Costo Aproximado:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -582,7 +592,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Nombre de Propietario:"
+                    android:text="Nombre de Propietario:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -605,7 +615,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Telefono:"
+                    android:text="Telefono:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -700,7 +710,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Zona:"
+                    android:text="Zona:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -746,7 +756,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Avenida:"
+                    android:text="Avenida:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -769,7 +779,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Calle:"
+                    android:text="Calle:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -833,7 +843,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Telf. Fijo:"
+                    android:text="Telf. Fijo:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>

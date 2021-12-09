@@ -269,19 +269,30 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btDatePickerFechaNacCoSol"
                 android:text="Fecha Nacimiento"
-                android:textColor="@color/azul_novi"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:elevation="10dp"
                 android:textSize="18sp"
+                android:textAlignment="center"
+                android:background="@color/azul_novi"
                 style="?android:spinnerStyle"
                 android:onClick="openDatePicker"
                 >
 
             </Button>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -289,6 +300,7 @@
                 android:layout_marginEnd="10dp"
                 android:hint="Tocar Fecha Nacimiento"
                 android:textStyle="bold"
+                android:textAlignment="center"
                 android:textColor="@color/azul_novi"
                 android:textColorHighlight="@color/black"
                 android:inputType="textCapSentences"
