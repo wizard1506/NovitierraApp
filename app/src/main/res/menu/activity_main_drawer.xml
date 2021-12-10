@@ -19,15 +19,17 @@
         <item
             android:id="@+id/mapFragment"
             android:icon="@drawable/ic_baseline_map_24"
-            android:title="Ubicacion" />
+            android:title="1. Ubicacion" />
         <item
             android:id="@+id/formularios"
             android:icon="@drawable/ic_menu_formulario"
-            android:title="Formularios" />
+            android:title="2. Solicitante Titular" />
         <item
             android:id="@+id/formCoSolicitante"
             android:icon="@drawable/ic_menu_formulario"
-            android:title="Form Co-Solicitante" />
+            android:title="3. Co-Solicitante" />
+
+
 
 <!--        <item-->
 <!--            android:id="@+id/test"-->

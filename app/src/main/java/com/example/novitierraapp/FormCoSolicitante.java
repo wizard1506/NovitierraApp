@@ -56,8 +56,8 @@ import java.util.Map;
 
 public class FormCoSolicitante extends Fragment {
 
-    EditText relacionCoSol,nombre,apellidoP,apellidoM,apellidoCasada,ci,profesion,extension,nacionalidad,telFijo,telMovil,fijoOfi,movilOfi,correo,empresa,direccionEmpresa,rubro,etFechaNac,asesor,pais,ingresos;
-    Spinner spinnerTipoIdent, spinnerEstadoCivil, spinnerNivelEstudio, spinnerDptos;
+    EditText relacionCoSol,nombre,apellidoP,apellidoM,apellidoCasada,ci,profesion,nacionalidad,telFijo,telMovil,fijoOfi,movilOfi,correo,empresa,direccionEmpresa,rubro,etFechaNac,asesor,pais,ingresos;
+    Spinner spinnerTipoIdent, spinnerEstadoCivil, spinnerNivelEstudio, spinnerDptos,spinnerExtension;
     DatePickerDialog datePickerDialog;
     RadioGroup radioGroupGenero, radioGroupIngresos;
     RadioButton rbSelectedGenero, rbMasculinoCoSol,rbFemeninoCoSol, rbingresoBs, rbingresoDolar, rbSelectedIngreso;
@@ -65,6 +65,8 @@ public class FormCoSolicitante extends Fragment {
     ArrayList<String> listaIdentificacion = new ArrayList<>();
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
     ArrayList<String> listaNivelEstudio = new ArrayList<>();
+    ArrayList<String> listaExtension = new ArrayList<>();
+
 //    ArrayList<String> listaTipoVivienda = new ArrayList<>();
     ArrayList<String> listaDpto = new ArrayList<>();
 
@@ -100,7 +102,6 @@ public class FormCoSolicitante extends Fragment {
         apellidoM = view.findViewById(R.id.apellidoMCoSol);
         apellidoCasada = view.findViewById(R.id.apellidoCasadaCoSol);
         ci = view.findViewById(R.id.ciCoSol);
-        extension = view.findViewById(R.id.extensionCoSol);
         profesion=view.findViewById(R.id.profesionCoSol);
         nacionalidad = view.findViewById(R.id.nacionalidadCoSol);
         pais = view.findViewById(R.id.direccionPaisCoSol);
@@ -119,6 +120,7 @@ public class FormCoSolicitante extends Fragment {
         spinnerEstadoCivil=view.findViewById(R.id.estadoCivilCoSol);
         spinnerNivelEstudio=view.findViewById(R.id.nivelEstudioCoSol);
         spinnerDptos=view.findViewById(R.id.dptoBoliviaCoSol);
+        spinnerExtension=view.findViewById(R.id.spinnerExtensionCoSol);
         rbMasculinoCoSol=view.findViewById(R.id.masculinoCoSol);
         rbFemeninoCoSol=view.findViewById(R.id.femeninoCoSol);
         rbingresoBs=view.findViewById(R.id.ingresosCoSolBs);
@@ -166,6 +168,8 @@ public class FormCoSolicitante extends Fragment {
         cargarListaEstadoCivil(view);
         cargarListaNivelEstudio(view);
         cargarListaTipoIdentificacion(view);
+        cargarListaExtensiones(view);
+
         asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
 
         ////para el boton del pdf
@@ -176,13 +180,13 @@ public class FormCoSolicitante extends Fragment {
             public void onClick(View v) {
                 if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
-                        if(!validarCamposObligatorios()){
+                        if(validarCamposObligatorios()){
                             //        verificamos las variables con numeros si se encuentran vacias
 //                            numerosVacios();
                             generarPDF(v);
                             Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
                         }
 
                     }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
@@ -195,7 +199,7 @@ public class FormCoSolicitante extends Fragment {
             public void onClick(View v) {
                 if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
                     if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
-                        if(!validarCamposObligatorios()){
+                        if(validarCamposObligatorios()){
                             //        verificamos las variables con numeros si se encuentran vacias
 //                            numerosVacios();
                             registrarCoSol();
@@ -369,6 +373,21 @@ public class FormCoSolicitante extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
         spinnerDptos.setAdapter(adapter);
     }
+    public void cargarListaExtensiones(View v){
+
+        listaExtension.add("SC");
+        listaExtension.add("LP");
+        listaExtension.add("CB");
+        listaExtension.add("PO");
+        listaExtension.add("CH");
+        listaExtension.add("TJ");
+        listaExtension.add("OR");
+        listaExtension.add("BE");
+        listaExtension.add("PD");
+//        listaExtension.add("NINGUNO");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
+        spinnerExtension.setAdapter(adapter);
+    }
 
     private void registrarCoSol() {
         StringRequest request = new StringRequest(Request.Method.POST, URL_add_cosol, new Response.Listener<String>() {
@@ -400,7 +419,7 @@ public class FormCoSolicitante extends Fragment {
                 parametros.put("apellidoC",apellidoCasada.getText().toString());
                 parametros.put("tipo_identificacion",spinnerTipoIdent.getSelectedItem().toString());
                 parametros.put("nro_documento",ci.getText().toString());
-                parametros.put("extension",extension.getText().toString());
+                parametros.put("extension",spinnerExtension.getSelectedItem().toString());
                 parametros.put("fecha_nacimiento",etFechaNac.getText().toString());
                 parametros.put("sexo",rbSelectedGenero.getText().toString());
                 parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
@@ -461,8 +480,7 @@ public class FormCoSolicitante extends Fragment {
         canvas.drawText(nombre.getText().toString().toUpperCase(),400,970,myPaint);
         canvas.drawText(apellidoCasada.getText().toString().toUpperCase(),1600,970,myPaint);
         canvas.drawText(ci.getText().toString(),1600,1150,myPaint);
-        canvas.drawText(extension.getText().toString(),2080,1150,myPaint);
-
+        canvas.drawText(spinnerExtension.getSelectedItem().toString(),2080,1150,myPaint);
         canvas.drawText(spinnerTipoIdent.getSelectedItem().toString(),650,1135,myPaint);
         canvas.drawText(etFechaNac.getText().toString(),650,1185,myPaint);
         canvas.drawText(rbSelectedGenero.getText().toString(),650,1235,myPaint);

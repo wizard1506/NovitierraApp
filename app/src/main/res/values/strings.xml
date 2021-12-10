@@ -20,4 +20,6 @@
     <string name="SpinnerDpto">Departamento</string>
     <string name="SpinnerTenencia">Tenencia</string>
     <string name="SpinnerPrefijo">Prefijo</string>
+    <string name="SpinnerExtension">Extension</string>
+    <string name="SpinnerVivienda">Moneda</string>
 </resources>

@@ -297,13 +297,12 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <EditText
-                    android:id="@+id/extensionCliente"
+                <Spinner
+                    android:id="@+id/spinnerExtension"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:inputType="textCapCharacters"
-                    android:maxLength="2"></EditText>
+                    android:prompt="@string/SpinnerExtension"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout
@@ -469,7 +468,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:inputType="textCapSentences"></EditText>
+                    android:inputType="textCapWords"></EditText>
 
             </LinearLayout>
 
@@ -557,29 +556,35 @@
                     android:hint="0000"
                     android:inputType="number"
                     ></EditText>
-
-                <RadioGroup
-                    android:id="@+id/radiogroupVivienda"
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/spinnerMoneda"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:prompt="@string/SpinnerVivienda"
+                    android:spinnerMode="dialog" />
 
-                    <RadioButton
-                        android:id="@+id/viviendaBs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bs"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/radiogroupVivienda"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <RadioButton
-                        android:id="@+id/viviendaDolar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$us"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
-                </RadioGroup>
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/viviendaBs"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Bs"-->
+<!--                        android:textColor="@color/azul_novi"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/viviendaDolar"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="$us"-->
+<!--                        android:textColor="@color/azul_novi"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RadioGroup>-->
 
             </LinearLayout>
 
@@ -954,7 +959,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Empresa:"
+                    android:text="Empresa:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -976,7 +981,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="*Direccion:"
+                    android:text="Direccion:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
@@ -1321,9 +1326,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -1363,6 +1369,14 @@
                     android:maxLength="3"
                     ></EditText>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1381,7 +1395,6 @@
                     android:inputType="number"
                     android:maxLength="3"
                     ></EditText>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1421,8 +1434,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:inputType="number"
-                    android:hint="1200"
+                    android:inputType="numberDecimal"
+                    android:hint="0000"
                     ></EditText>
             </LinearLayout>
 

@@ -68,19 +68,22 @@ import java.util.Map;
 public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
-    EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente, extension_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac, apellidoCasada,nacionalidad,profesion,costoAprox;
+    EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac, apellidoCasada,nacionalidad,profesion,costoAprox;
     EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal,expedido,mts2;
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion,zona;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos, radioGroupIndependienteDependiente;
-    RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero,rbSelectedMonedaVivienda,rbViviendaBs,rbViviendaDolar, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos, rbDependiende, rbIndependiente, rbSelectedIndependienteDependiente;
+    RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos, rbDependiende, rbIndependiente, rbSelectedIndependienteDependiente;
+//    rbSelectedMonedaVivienda
+//    rbViviendaBs,rbViviendaDolar,
     RadioGroup radioGroupSinConUbicacion;
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
-    Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo;
+    Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda;
     TextView codigo_proyecto;
     Button guardar, btFechaNac, registrarForm;
-    Proyectos proyectos;
+//    Proyectos proyectos;
     DatePickerDialog datePickerDialog;
     ArrayList<Proyectos> listaProyectos = new ArrayList<>();
+    ArrayList<String> listaExtension = new ArrayList<>();
     ArrayList<String> listaIdentificacion = new ArrayList<>();
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
     ArrayList<String> listaNivelEstudio = new ArrayList<>();
@@ -88,6 +91,7 @@ public class Formularios extends Fragment {
     ArrayList<String> listaDpto = new ArrayList<>();
     ArrayList<String> listaTenencia = new ArrayList<>();
     ArrayList<String> listaPrefijo = new ArrayList<>();
+    ArrayList<String> listaMoneda = new ArrayList<>();
 
     Bitmap bmp, scaledbmp;
 
@@ -117,7 +121,6 @@ public class Formularios extends Fragment {
         apellidoMaterno= view.findViewById(R.id.apellidoMCliente);
         apellidoCasada = view.findViewById(R.id.apellidoCasada);
         ci_cliente = view.findViewById(R.id.ciCliente);
-        extension_cliente = view.findViewById(R.id.extensionCliente);
         nacionalidad = view.findViewById(R.id.nacionalidad);
         fechaNac = view.findViewById(R.id.fechaNacimiento);
         profesion = view.findViewById(R.id.profesion);
@@ -156,7 +159,7 @@ public class Formularios extends Fragment {
         ////radioButtons y RadioGroups
         radioGroup = view.findViewById(R.id.radiogroup);
         radioGroupGenero=view.findViewById(R.id.radiogroupGenero);
-        radioGroupVivienda = view.findViewById(R.id.radiogroupVivienda);
+//        radioGroupVivienda = view.findViewById(R.id.radiogroupVivienda);
         radioGroupIngresos = view.findViewById(R.id.radiogroupIngresos);
         radioGroupSinConUbicacion=view.findViewById(R.id.radiogroupElegirUbicacion);
         radioGroupIndependienteDependiente = view.findViewById(R.id.rgDependienteIndependiente);
@@ -165,8 +168,8 @@ public class Formularios extends Fragment {
         rb_contado= view.findViewById(R.id.aContado);
         rbMasculino= view.findViewById(R.id.masculino);
         rbFemenino= view.findViewById(R.id.femenino);
-        rbViviendaBs=view.findViewById(R.id.viviendaBs);
-        rbViviendaDolar=view.findViewById(R.id.viviendaDolar);
+//        rbViviendaBs=view.findViewById(R.id.viviendaBs);
+//        rbViviendaDolar=view.findViewById(R.id.viviendaDolar);
         rbIngresosBs=view.findViewById(R.id.ingresosBs);
         rbIngresosDolar=view.findViewById(R.id.ingresosDolar);
         rbconUbicacion = view.findViewById(R.id.conUbicacion);
@@ -184,6 +187,8 @@ public class Formularios extends Fragment {
         spinnerDpto= view.findViewById(R.id.dptoBolivia);
         spinnerTenencia= view.findViewById(R.id.tenencia);
         spinnerPrefijo=view.findViewById(R.id.tipoPrefijo);
+        spinnerExtension=view.findViewById(R.id.spinnerExtension);
+        spinnerMoneda=view.findViewById(R.id.spinnerMoneda);
 
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
@@ -233,18 +238,18 @@ public class Formularios extends Fragment {
                 rbSeleccionGenero(v);
             }
         });
-        rbViviendaBs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rbMonedaVivienda(v);
-            }
-        });
-        rbViviendaDolar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rbMonedaVivienda(v);
-            }
-        });
+//        rbViviendaBs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                rbMonedaVivienda(v);
+//            }
+//        });
+//        rbViviendaDolar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                rbMonedaVivienda(v);
+//            }
+//        });
         rbIngresosBs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,6 +296,9 @@ public class Formularios extends Fragment {
         cargarListaDpto(view);
         cargarListaTenencia(view);
         cargarListaPrefijo(view);
+        cargarListaExtensiones(view);
+        cargarListaMoneda(view);
+
         spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -371,7 +379,7 @@ public class Formularios extends Fragment {
                     parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
                     parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
                     parametros.put("nro_documento",ci_cliente.getText().toString());
-                    parametros.put("extension",extension_cliente.getText().toString());
+                    parametros.put("extension",spinnerExtension.getSelectedItem().toString());
                     parametros.put("nacionalidad",nacionalidad.getText().toString());
                     parametros.put("fecha_nacimiento",fechaNac.getText().toString());
                     parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
@@ -392,7 +400,7 @@ public class Formularios extends Fragment {
                     parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
                     parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
                     parametros.put("costo_vivienda",costoAprox.getText().toString());
-                    parametros.put("moneda_costoVivienda",rbSelectedMonedaVivienda.getText().toString());
+                    parametros.put("moneda_costoVivienda",spinnerMoneda.getSelectedItem().toString());
                     parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
                     parametros.put("telf_propietario",telefonoPropietario.getText().toString());
                     parametros.put("pais_vivienda",pais.getText().toString());
@@ -471,16 +479,12 @@ public class Formularios extends Fragment {
             if (rb_contado.isChecked() || rb_plazo.isChecked()) {
                 if (rbMasculino.isChecked() || rbFemenino.isChecked()) {
                     if (rbIngresosBs.isChecked() || rbIngresosDolar.isChecked()) {
-                        if (rbViviendaBs.isChecked() || rbViviendaDolar.isChecked()) {
                             if(rbIndependiente.isChecked()|| rbDependiende.isChecked()){
                                 valor=true;
                                 return valor;
                             }else {
                                 Toast.makeText(getContext(), "Falta seleccionar cliente Independiente o Dependiente", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            Toast.makeText(getContext(), "Falta seleccionar costo de vivienda en Bs o $us.", Toast.LENGTH_SHORT).show();
-                        }
                     } else {
                         Toast.makeText(getContext(), "Falta seleccionar Ingresos en Bs o $us.", Toast.LENGTH_SHORT).show();
                     }
@@ -511,7 +515,7 @@ public class Formularios extends Fragment {
                     return false;
                 } else {
                     if (ci_cliente.getText().toString().length() == 0) {
-                        mensaje("falta CI cliente");
+                        mensaje("Falta documento de identidad");
                         return false;
                     } else {
                         if (nacionalidad.getText().toString().length() == 0) {
@@ -690,10 +694,10 @@ public class Formularios extends Fragment {
         rbSelectedGenero = v.findViewById(radiobtid);
     }
 
-    private void rbMonedaVivienda(View v) {
-        int radiobtid = radioGroupVivienda.getCheckedRadioButtonId();
-        rbSelectedMonedaVivienda = v.findViewById(radiobtid);
-    }
+//    private void rbMonedaVivienda(View v) {
+//        int radiobtid = radioGroupVivienda.getCheckedRadioButtonId();
+//        rbSelectedMonedaVivienda = v.findViewById(radiobtid);
+//    }
     private void rbSeleccionIngresos(View v) {
         int radiobtid = radioGroupIngresos.getCheckedRadioButtonId();
         rbSelectedIngresos = v.findViewById(radiobtid);
@@ -708,7 +712,6 @@ public class Formularios extends Fragment {
     }
 
     public void cargarListaUrbanizacion(View v){
-
         listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
         listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
         listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
@@ -718,6 +721,30 @@ public class Formularios extends Fragment {
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
     }
+
+    public void cargarListaExtensiones(View v){
+
+        listaExtension.add("SC");
+        listaExtension.add("LP");
+        listaExtension.add("CB");
+        listaExtension.add("PO");
+        listaExtension.add("CH");
+        listaExtension.add("TJ");
+        listaExtension.add("OR");
+        listaExtension.add("BE");
+        listaExtension.add("PD");
+//        listaExtension.add("NINGUNO");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
+        spinnerExtension.setAdapter(adapter);
+    }
+    public void cargarListaMoneda(View v){
+        listaMoneda.add("-");
+        listaMoneda.add("Bs");
+        listaMoneda.add("$us");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaMoneda);
+        spinnerMoneda.setAdapter(adapter);
+    }
+
 
     public void cargarListaTipoIdentificacion(View v){
         listaIdentificacion.add("Carnet de Identidad");
@@ -864,7 +891,7 @@ public class Formularios extends Fragment {
             canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),920,305,titlePaint);
             canvas.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase(),600,460,titlePaint);
             canvas.drawText(ci_cliente.getText().toString(),680,585,titlePaint);
-            canvas.drawText(extension_cliente.getText().toString(),1480,585,titlePaint);
+            canvas.drawText(spinnerExtension.getSelectedItem().toString(),1480,585,titlePaint);
             String plazoContado = rbSelected.getText().toString();
             if(plazoContado.contains("A plazo")){
                 canvas.drawBitmap(scaled2,980,640,myPaint);
@@ -903,7 +930,7 @@ public class Formularios extends Fragment {
 //            }
 
             canvas2.drawText(ci_cliente.getText().toString(),1450,840,titlePaint);
-            canvas2.drawText(extension_cliente.getText().toString(),2060,840,titlePaint);
+            canvas2.drawText(spinnerExtension.getSelectedItem().toString(),2060,840,titlePaint);
 
             canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),650,803,titlePaint);
             canvas2.drawText(nacionalidad.getText().toString(),650,850,titlePaint);
@@ -914,8 +941,7 @@ public class Formularios extends Fragment {
             canvas2.drawText(profesion.getText().toString(),650,1093,titlePaint);
             canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),1120,1153,titlePaint);
             canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),1740,1153,titlePaint);
-
-            canvas2.drawText(costoAprox.getText().toString()+" "+rbSelectedMonedaVivienda.getText().toString(),250,1280,titlePaint);
+            canvas2.drawText(costoAprox.getText().toString()+" "+spinnerMoneda.getSelectedItem().toString(),250,1280,titlePaint);
             canvas2.drawText(propietarioVivienta.getText().toString().toUpperCase(),780,1280,titlePaint);
             canvas2.drawText(telefonoPropietario.getText().toString(),1950,1280,titlePaint);
 
@@ -998,7 +1024,7 @@ public class Formularios extends Fragment {
             canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+
                     apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),245,1750,titlePaint);
             canvas3.drawText(ci_cliente.getText().toString(),1950,1750,titlePaint);
-            canvas3.drawText(extension_cliente.getText().toString(),270,1808,titlePaint);
+            canvas3.drawText(spinnerExtension.getSelectedItem().toString(),270,1808,titlePaint);
 
             canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
                         +apellidoPaterno.getText().toString().toUpperCase()+" "
