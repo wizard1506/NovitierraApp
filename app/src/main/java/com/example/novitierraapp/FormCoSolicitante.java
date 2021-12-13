@@ -339,10 +339,10 @@ public class FormCoSolicitante extends Fragment {
     }
 
     public void cargarListaEstadoCivil(View v){
-        listaEstadoCivil.add("Casado");
-        listaEstadoCivil.add("Soltero");
-        listaEstadoCivil.add("Divorciado");
-        listaEstadoCivil.add("Viudo");
+        listaEstadoCivil.add("Casado(a)");
+        listaEstadoCivil.add("Soltero(a)");
+        listaEstadoCivil.add("Divorciado(a)");
+        listaEstadoCivil.add("Viudo(a)");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaEstadoCivil);
         spinnerEstadoCivil.setAdapter(adapter);
     }
@@ -374,7 +374,7 @@ public class FormCoSolicitante extends Fragment {
         spinnerDptos.setAdapter(adapter);
     }
     public void cargarListaExtensiones(View v){
-
+        listaExtension.add("--");
         listaExtension.add("SC");
         listaExtension.add("LP");
         listaExtension.add("CB");
@@ -384,7 +384,6 @@ public class FormCoSolicitante extends Fragment {
         listaExtension.add("OR");
         listaExtension.add("BE");
         listaExtension.add("PD");
-//        listaExtension.add("NINGUNO");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
         spinnerExtension.setAdapter(adapter);
     }

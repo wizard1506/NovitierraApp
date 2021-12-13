@@ -723,7 +723,7 @@ public class Formularios extends Fragment {
     }
 
     public void cargarListaExtensiones(View v){
-
+        listaExtension.add("--");
         listaExtension.add("SC");
         listaExtension.add("LP");
         listaExtension.add("CB");
@@ -733,7 +733,6 @@ public class Formularios extends Fragment {
         listaExtension.add("OR");
         listaExtension.add("BE");
         listaExtension.add("PD");
-//        listaExtension.add("NINGUNO");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
         spinnerExtension.setAdapter(adapter);
     }
@@ -755,10 +754,10 @@ public class Formularios extends Fragment {
     }
 
     public void cargarListaEstadoCivil(View v){
-        listaEstadoCivil.add("Casado");
-        listaEstadoCivil.add("Soltero");
-        listaEstadoCivil.add("Divorciado");
-        listaEstadoCivil.add("Viudo");
+        listaEstadoCivil.add("Casado(a)");
+        listaEstadoCivil.add("Soltero(a)");
+        listaEstadoCivil.add("Divorciado(a)");
+        listaEstadoCivil.add("Viudo(a)");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaEstadoCivil);
         spinnerEstadoCivil.setAdapter(adapter);
     }
@@ -991,7 +990,7 @@ public class Formularios extends Fragment {
             PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
             Canvas canvas3 = myPage3.getCanvas();
 
-            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal);
+            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
 //          bmp = BitmapFactory.decodeResource(getResources(),R.drawable.newentrega);
             scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
             canvas3.drawBitmap(scaledbmp,0,0,myPaint);
