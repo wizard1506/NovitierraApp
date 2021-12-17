@@ -1288,8 +1288,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:text="Plazos"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+                <Spinner
+                    android:id="@+id/cuotasplazo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/SpinnerPlazo"
+                    android:spinnerMode="dialog" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="Urbanizacion:"
                     android:textColor="@color/azul_novi"
+                    android:textStyle="bold"
                     android:textSize="14sp"></TextView>
 
                 <Spinner
@@ -1481,6 +1504,59 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:inputType="number"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_novi"
+                    android:text="Observaciones"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:gravity="center">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/observacion1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="Observaciones del domicilio"
+                    android:textAlignment="center"
+                    android:inputType="text"
+                    android:maxLength="88"
+                    ></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/observacion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint=""
+                    android:textAlignment="center"
+                    android:maxLength="88"
+                    android:inputType="text"></EditText>
 
             </LinearLayout>
 

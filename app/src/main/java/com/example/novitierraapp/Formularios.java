@@ -71,13 +71,14 @@ public class Formularios extends Fragment {
     EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente,uv,mz,lt,cat,asesor,codigo_asesor,fechaNac, apellidoCasada,nacionalidad,profesion,costoAprox;
     EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal,expedido,mts2;
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion,zona;
+    EditText observacion1, observacion2;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos, radioGroupIndependienteDependiente;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos, rbDependiende, rbIndependiente, rbSelectedIndependienteDependiente;
 //    rbSelectedMonedaVivienda
 //    rbViviendaBs,rbViviendaDolar,
     RadioGroup radioGroupSinConUbicacion;
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
-    Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda;
+    Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda, spinnerPlazo;
     TextView codigo_proyecto;
     Button guardar, btFechaNac, registrarForm;
 //    Proyectos proyectos;
@@ -92,6 +93,7 @@ public class Formularios extends Fragment {
     ArrayList<String> listaTenencia = new ArrayList<>();
     ArrayList<String> listaPrefijo = new ArrayList<>();
     ArrayList<String> listaMoneda = new ArrayList<>();
+    ArrayList<String> listaPlazo = new ArrayList<>();
 
     Bitmap bmp, scaledbmp;
 
@@ -156,6 +158,8 @@ public class Formularios extends Fragment {
         mts2=view.findViewById(R.id.mts2);
         asesor=view.findViewById(R.id.fullnameAsesor);
         codigo_asesor= view.findViewById(R.id.codigoAsesor);
+        observacion1 = view.findViewById(R.id.observacion1);
+        observacion2 = view.findViewById(R.id.observacion2);
         ////radioButtons y RadioGroups
         radioGroup = view.findViewById(R.id.radiogroup);
         radioGroupGenero=view.findViewById(R.id.radiogroupGenero);
@@ -189,6 +193,7 @@ public class Formularios extends Fragment {
         spinnerPrefijo=view.findViewById(R.id.tipoPrefijo);
         spinnerExtension=view.findViewById(R.id.spinnerExtension);
         spinnerMoneda=view.findViewById(R.id.spinnerMoneda);
+        spinnerPlazo= view.findViewById(R.id.cuotasplazo);
 
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         guardar = view.findViewById(R.id.btguardar);
@@ -298,6 +303,7 @@ public class Formularios extends Fragment {
         cargarListaPrefijo(view);
         cargarListaExtensiones(view);
         cargarListaMoneda(view);
+        cargarListaPlazo(view);
 
         spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -743,6 +749,18 @@ public class Formularios extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaMoneda);
         spinnerMoneda.setAdapter(adapter);
     }
+    public void cargarListaPlazo(View v){
+        listaPlazo.add("--");
+        listaPlazo.add("12");
+        listaPlazo.add("24");
+        listaPlazo.add("32");
+        listaPlazo.add("48");
+        listaPlazo.add("60");
+        listaPlazo.add("72");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPlazo);
+        spinnerPlazo.setAdapter(adapter);
+    }
+
 
 
     public void cargarListaTipoIdentificacion(View v){
@@ -813,47 +831,61 @@ public class Formularios extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPrefijo);
         spinnerPrefijo.setAdapter(adapter);
     }
-//    public void numerosVacios(){
-//        if (costoAprox.getText().toString().length()==0){
-//            costoAprox.setText("0");
-//        }
-//        if(telefonoPropietario.getText().toString().length()==0){
-//            telefonoPropietario.setText("0");
-//        }
-//        if(numero.getText().toString().length()==0){
-//            numero.setText("0");
-//        }
-//        if(telFijo.getText().toString().length()==0){
-//            telFijo.setText("0");
-//        }
-//        if(telFijoOfc.getText().toString().length()==0){
-//            telFijoOfc.setText("0");
-//        }
-//        if(telMovil.getText().toString().length()==0){
-//            telMovil.setText("0");
-//        }
-//        if(telMovOfc.getText().toString().length()==0){
-//           telMovOfc.setText("0");
-//        }
-//        if(ingresosEmpresa.getText().toString().length()==0){
-//            ingresosEmpresa.setText("0");
-//        }
-//        if(telfReferencia1.getText().toString().length()==0){
-//            telfReferencia1.setText("0");
-//        }
-//        if(telfReferencia2.getText().toString().length()==0){
-//            telfReferencia2.setText("0");
-//        }
-//        if(mts2.getText().toString().length()==0){
-//            mts2.setText("0");
-//        }
-//    }
+    public String mesLiteral(Integer mes){
+        String result="";
+        switch (mes){
+            case 1:
+                result="Enero";
+                break;
+            case 2:
+                result="Febrero";
+                break;
+            case 3:
+                result="Marzo";
+                break;
+            case 4:
+                result="Abril";
+                break;
+            case 5:
+                result="Mayo";
+                break;
+            case 6:
+                result="Junio";
+                break;
+            case 7:
+                result="Julio";
+                break;
+            case 8:
+                result="Agosto";
+                break;
+            case 9:
+                result="Septiembre";
+                break;
+            case 10:
+                result="Octubre";
+                break;
+            case 11:
+                result="Noviembre";
+                break;
+            case 12:
+                result="Diciembre";
+                break;
+        }
+        return result;
+    }
 
 
 /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (View v){
             String prefijoObtenido;
+            Calendar cal = Calendar.getInstance();
+            Integer year = cal.get(Calendar.YEAR);
+            Integer month = cal.get(Calendar.MONTH);
+            month=month+1;
+            Integer day= cal.get(Calendar.DAY_OF_MONTH);
+            String fechaActual= day.toString()+"/"+month.toString()+"/"+year.toString();
+
             PdfDocument myPDF = new PdfDocument();
             Paint myPaint = new Paint();
             Paint titlePaint = new Paint();
@@ -974,6 +1006,8 @@ public class Formularios extends Fragment {
             canvas2.drawText(telfReferencia1.getText().toString(),2060,2380,titlePaint);
             canvas2.drawText(telfReferencia2.getText().toString(),2060,2530,titlePaint);
             titlePaint.setTextSize(40f);
+            canvas2.drawText(observacion1.getText().toString(),485,3280,titlePaint);
+            canvas2.drawText(observacion2.getText().toString(),200,3330,titlePaint);
             canvas2.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
                     +apellidoPaterno.getText().toString().toUpperCase()+" "
                     +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase()
@@ -995,11 +1029,7 @@ public class Formularios extends Fragment {
             scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
             canvas3.drawBitmap(scaledbmp,0,0,myPaint);
 
-            Calendar cal = Calendar.getInstance();
-            Integer year = cal.get(Calendar.YEAR);
-            Integer month = cal.get(Calendar.MONTH);
-            month=month+1;
-            Integer day= cal.get(Calendar.DAY_OF_MONTH);
+
 
             myPaint.setTextAlign(Paint.Align.CENTER);
             myPaint.setTextSize(70f);
@@ -1016,9 +1046,9 @@ public class Formularios extends Fragment {
             canvas3.drawText(tresDigitos(mz.getText().toString()),1200,1200,titlePaint);
             canvas3.drawText(tresDigitos(lt.getText().toString()),1680,1200,titlePaint);
             canvas3.drawText(cat.getText().toString(),2180,1200,titlePaint);
-
             canvas3.drawText(rbSelected.getText().toString(),270,1555,titlePaint);
             canvas3.drawText(mts2.getText().toString(),740,1555,titlePaint);
+            canvas3.drawText(spinnerPlazo.getSelectedItem().toString(),1680,1555,titlePaint);
             titlePaint.setTextSize(45f);
             canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+
                     apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),245,1750,titlePaint);
@@ -1035,7 +1065,7 @@ public class Formularios extends Fragment {
 
         ///INICIO DE PAGINA 4 ////
             PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
-            PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo3);
+            PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
             Canvas canvas4 = myPage4.getCanvas();
             if(Global.ubicacion==null){
                 Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
@@ -1054,6 +1084,8 @@ public class Formularios extends Fragment {
             canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),800,705,titlePaint);
             canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),800,775,titlePaint);
             canvas4.drawText(zona.getText().toString(),800,850,titlePaint);
+            canvas4.drawText(observacion1.getText().toString(),200,3475,titlePaint);
+            canvas4.drawText(observacion2.getText().toString(),200,3525,titlePaint);
 
         if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
             scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2280,2500,false);
@@ -1062,10 +1094,38 @@ public class Formularios extends Fragment {
         }else {
             myPDF.finishPage(myPage4);
         }
-
-
-
         ///FIN DE PAGINA 4/////
+
+        /////pagina 5 reserva/////
+
+        PdfDocument.PageInfo myPageInfo5 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
+        PdfDocument.Page myPage5 = myPDF.startPage(myPageInfo5);
+        Canvas canvas5 = myPage5.getCanvas();
+
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.reservalote);
+        scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
+        canvas5.drawBitmap(scaledbmp,0,0,myPaint);
+
+        canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),1020,800,titlePaint);
+        canvas5.drawText(ci_cliente.getText().toString(),920,868,titlePaint);
+        canvas5.drawText(spinnerExtension.getSelectedItem().toString(),1700,868,titlePaint);
+        canvas5.drawText(spinner_urbanizacion.getSelectedItem().toString(),300,1000,titlePaint);
+        canvas5.drawText(codigo_proyecto.getText().toString(),340,1075,titlePaint);
+        canvas5.drawText(uv.getText().toString().toUpperCase(),820,1075,titlePaint);
+        canvas5.drawText(mz.getText().toString().toUpperCase(),1190,1075,titlePaint);
+        canvas5.drawText(lt.getText().toString().toUpperCase(),1540,1075,titlePaint);
+        canvas5.drawText(cat.getText().toString().toUpperCase(),1900,1075,titlePaint);
+        canvas5.drawText(mts2.getText().toString().toUpperCase(),2150,1075,titlePaint);
+        canvas5.drawText(fechaActual,400,1458,titlePaint);
+        canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),300,2330,titlePaint);
+        canvas5.drawText(spinnerExtension.getSelectedItem().toString().toUpperCase(),1800,2400,titlePaint);
+        canvas5.drawText(day.toString(),1190,2542,titlePaint);
+        canvas5.drawText(mesLiteral(month),1900,2542,titlePaint);
+        canvas5.drawText(year.toString(),400,2612,titlePaint);
+        canvas5.drawText(ci_cliente.getText().toString()+" "+spinnerExtension.getSelectedItem().toString(),1190,3350,titlePaint);
+
+        myPDF.finishPage(myPage5);
+        ////FIN PAGINA 5 ////
 
             try {
                 myPDF.writeTo(new FileOutputStream(file));
