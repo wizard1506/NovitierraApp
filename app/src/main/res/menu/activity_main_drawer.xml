@@ -28,9 +28,6 @@
             android:id="@+id/formCoSolicitante"
             android:icon="@drawable/ic_menu_formulario"
             android:title="3. Co-Solicitante" />
-
-
-
 <!--        <item-->
 <!--            android:id="@+id/test"-->
 <!--            android:icon="@drawable/ic_baseline_map_24"-->

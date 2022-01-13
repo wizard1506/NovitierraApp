@@ -355,14 +355,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/fechaNacimiento"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:hint="Tocar Fecha Nacimiento"
-                    android:textAlignment="center"
-                    android:inputType="textCapWords"></EditText>
+                    android:id="@+id/fechaNacimiento"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:hint="Tocar el boton fecha nacimiento"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"></TextView>
 
             </LinearLayout>
 
@@ -1538,7 +1542,7 @@
                     android:hint="Observaciones del domicilio"
                     android:textAlignment="center"
                     android:inputType="text"
-                    android:maxLength="88"
+                    android:maxLength="80"
                     ></EditText>
 
             </LinearLayout>
@@ -1555,8 +1559,8 @@
                     android:layout_marginEnd="10dp"
                     android:hint=""
                     android:textAlignment="center"
-                    android:maxLength="88"
-                    android:inputType="text"></EditText>
+                    android:maxLength="80"
+                    android:inputType="textAutoComplete"></EditText>
 
             </LinearLayout>
 
@@ -1574,19 +1578,19 @@
                     android:textStyle="bold"></Button>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
 
-                <Button
-                    android:id="@+id/btRegistrarDatosForm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Registrar Datos"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"></Button>
-            </LinearLayout>
+<!--                <Button-->
+<!--                    android:id="@+id/btRegistrarDatosForm"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Registrar Datos"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textStyle="bold"></Button>-->
+<!--            </LinearLayout>-->
 
 
         </LinearLayout>

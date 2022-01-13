@@ -61,7 +61,7 @@ public class FormCoSolicitante extends Fragment {
     DatePickerDialog datePickerDialog;
     RadioGroup radioGroupGenero, radioGroupIngresos;
     RadioButton rbSelectedGenero, rbMasculinoCoSol,rbFemeninoCoSol, rbingresoBs, rbingresoDolar, rbSelectedIngreso;
-    Button btGenerarPdf, btFechaNac, btRegistrarCoSol;
+    Button btGenerarPdf, btFechaNac; //btRegistrarCoSol;
     ArrayList<String> listaIdentificacion = new ArrayList<>();
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
     ArrayList<String> listaNivelEstudio = new ArrayList<>();
@@ -72,7 +72,9 @@ public class FormCoSolicitante extends Fragment {
 
 
     Bitmap bmp, scaledbmp;
-    private String URL_add_cosol = "https://novitierra.000webhostapp.com/api/addCoSol.php";
+    private String URL_add_cosol = "http://wizardapps.xyz/novitierra/api/addCoSol.php";
+//    private String URL_add_cosol = "https://novitierra.000webhostapp.com/api/addCoSol.php";
+
 
     //***PARA PDF****
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormCoSolicitante.pdf";
@@ -129,7 +131,7 @@ public class FormCoSolicitante extends Fragment {
         radioGroupIngresos=view.findViewById(R.id.radiogroupIngresosCoSol);
         btFechaNac=view.findViewById(R.id.btDatePickerFechaNacCoSol);
         btGenerarPdf=view.findViewById(R.id.btguardarCoSol);
-        btRegistrarCoSol=view.findViewById(R.id.btRegistrarCosol);
+//        btRegistrarCoSol=view.findViewById(R.id.btRegistrarCosol);
 
         rbMasculinoCoSol.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,8 +185,9 @@ public class FormCoSolicitante extends Fragment {
                         if(validarCamposObligatorios()){
                             //        verificamos las variables con numeros si se encuentran vacias
 //                            numerosVacios();
-                            generarPDF(v);
+                            generarPDF();
                             Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
+                            registrarCoSol();
                         }else {
 //                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
                         }
@@ -194,24 +197,24 @@ public class FormCoSolicitante extends Fragment {
             }
         });
 
-        btRegistrarCoSol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
-                    if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
-                        if(validarCamposObligatorios()){
-                            //        verificamos las variables con numeros si se encuentran vacias
-//                            numerosVacios();
-                            registrarCoSol();
-                            Toast.makeText(getContext(),"Registrando Co-Solicitante.......espere un momento",Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
-                }else {Toast.makeText(getContext(),"Falta seleccionar Ingresos Bs o Dolar.",Toast.LENGTH_SHORT).show(); }
-            }
-        });
+//        btRegistrarCoSol.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (rbingresoBs.isChecked()|| rbingresoDolar.isChecked()){
+//                    if(rbMasculinoCoSol.isChecked()|| rbFemeninoCoSol.isChecked()){
+//                        if(validarCamposObligatorios()){
+//                            //        verificamos las variables con numeros si se encuentran vacias
+////                            numerosVacios();
+//                            registrarCoSol();
+//                            Toast.makeText(getContext(),"Registrando Co-Solicitante.......espere un momento",Toast.LENGTH_SHORT).show();
+//                        }else {
+//                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    }else{Toast.makeText(getContext(),"Falta seleccionar Masculino o Femenino.",Toast.LENGTH_SHORT).show();}
+//                }else {Toast.makeText(getContext(),"Falta seleccionar Ingresos Bs o Dolar.",Toast.LENGTH_SHORT).show(); }
+//            }
+//        });
 
     }
 
@@ -249,23 +252,6 @@ public class FormCoSolicitante extends Fragment {
         return false;
         }
 
-//    public void numerosVacios(){
-//        if (telFijo.getText().toString().length()==0){
-//            telFijo.setText("0");
-//        }
-//        if(telMovil.getText().toString().length()==0){
-//            telMovil.setText("0");
-//        }
-//        if(fijoOfi.getText().toString().length()==0){
-//            fijoOfi.setText("0");
-//        }
-//        if(movilOfi.getText().toString().length()==0){
-//            movilOfi.setText("0");
-//        }
-//        if(ingresos.getText().toString().length()==0){
-//            ingresos.setText("0");
-//        }
-//    }
 
     private String fechaHoy(){
         Calendar cal = Calendar.getInstance();
@@ -447,7 +433,7 @@ public class FormCoSolicitante extends Fragment {
 
     }
 
-    private void generarPDF(View v) {
+    private void generarPDF() {
 
         PdfDocument myPDF = new PdfDocument();
         Paint myPaint = new Paint();

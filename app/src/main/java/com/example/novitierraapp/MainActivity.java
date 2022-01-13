@@ -39,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String usu,usu2;
     String pass,pass2;
-    private static final String URL = "https://novitierra.000webhostapp.com/validar_usuario.php" ;
-    private static final String URL2 = "https://novitierra.000webhostapp.com/userLogged.php" ;
+    private static final String URL = "http://wizardapps.xyz/novitierra/validar_usuario.php" ;
+    private static final String URL2 = "http://wizardapps.xyz/novitierra/userLogged.php" ;
+//    private static final String URL = "https://novitierra.000webhostapp.com/validar_usuario.php" ;
+//    private static final String URL2 = "https://novitierra.000webhostapp.com/userLogged.php" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this,error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"No se pudo conectar al servidor", Toast.LENGTH_LONG).show();
             }
         }){
             @Override

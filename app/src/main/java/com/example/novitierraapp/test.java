@@ -15,6 +15,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class test extends Fragment {
     Button bt1;
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/test.pdf";
     private File file = new File(path);
-
+    Uri uriglobal=null;
     public static test newInstance() {
         return new test();
     }
@@ -69,8 +71,17 @@ public class test extends Fragment {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bt1.setEnabled(false);
                 generar();
                 Toast.makeText(getContext(),"Generando...",Toast.LENGTH_LONG).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        bt1.setEnabled(true);
+                    }
+                },5000);
+
+
             }
         });
 
@@ -102,7 +113,7 @@ public class test extends Fragment {
             e.printStackTrace();
         }
         myPDF.close();
-
+        ///// android 11
         Uri uri = FileProvider.getUriForFile(getContext(),"com.example.novitierraapp",file);
 
         Intent share = new Intent();
@@ -111,6 +122,40 @@ public class test extends Fragment {
         share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(share);
+        ///codigo android 11
+
+        ///pruebas android 10
+//        Uri uri=null;
+//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q){
+//            uri=
+//        }
+//        Uri uri = FileProvider.getUriForFile(getContext(),"com.example.novitierraapp",file);
+//
+//        Intent share = new Intent();
+//        share.setAction(Intent.ACTION_VIEW);
+//        share.setDataAndType(uri,"application/pdf");
+//        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        startActivity(share);
+        ///
+
+
+        /// ****** este es el bueno para android 9 inferior************
+//        String path = Environment.getExternalStorageDirectory()+"/FormularioSolicitante.pdf";
+//        File pdf = new File(path);
+//        Intent share = new Intent();
+//        share.setAction(Intent.ACTION_VIEW);
+//        share.setDataAndType(Uri.fromFile(pdf),"application/pdf");
+//        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//
+//
+//        share.setAction(Intent.ACTION_SEND);
+//        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pdf));
+//        share.setType("application/pdf");
+//
+//
+//        startActivity(share);
 
     }
 }
