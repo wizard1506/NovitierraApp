@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.system.ErrnoException;
 import android.text.InputType;
@@ -95,7 +96,7 @@ public class Formularios extends Fragment {
     ArrayList<String> listaMoneda = new ArrayList<>();
     ArrayList<String> listaPlazo = new ArrayList<>();
 
-    Bitmap bmp, scaledbmp;
+    Bitmap imagen,scaled;
 
     private String URL_addtitular="http://wizardapps.xyz/novitierra/api/addTitular.php";
 //    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
@@ -323,11 +324,17 @@ public class Formularios extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(validarCamposObligatorios()){
                     if(validarForm()){
                         if(EsDependiente()){
-                            generarPDF();
-                            registrarTitular();
+                            DeshabilitarBoton();
+                            new Handler().postDelayed(new Runnable(){
+                                public void run(){
+                                    generarPDF();
+                                    registrarTitular();
+                                }
+                            }, 1000); //1000 millisegundos = 1 segundo.
                             Toast.makeText(getContext(), "Generando Formularios espere un momento...", Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(getContext(), "Rellene Nombre Empresa y Direccion Empresa.", Toast.LENGTH_SHORT).show();
@@ -356,6 +363,13 @@ public class Formularios extends Fragment {
 //            }
 //        });
 
+    }
+
+    public void DeshabilitarBoton(){
+        guardar.setEnabled(false);
+    }
+    public void habilitarBoton(){
+        guardar.setEnabled(true);
     }
 
 
@@ -415,6 +429,7 @@ public class Formularios extends Fragment {
                     parametros.put("telf_propietario",telefonoPropietario.getText().toString());
                     parametros.put("pais_vivienda",pais.getText().toString());
                     parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
+                    parametros.put("zona",zona.getText().toString());
                     parametros.put("ciudad",ciudad.getText().toString());
                     parametros.put("barrio",barrio.getText().toString());
                     parametros.put("avenida",avenida.getText().toString());
@@ -433,6 +448,7 @@ public class Formularios extends Fragment {
                     parametros.put("cat",cat.getText().toString());
                     parametros.put("metros2",mts2.getText().toString());
                     parametros.put("tipo_venta",rbSelected.getText().toString());
+                    parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
                     parametros.put("asesor",asesor.getText().toString());
                     parametros.put("codigo_asesor",codigo_asesor.getText().toString());
                     parametros.put("observacion",observacion1.getText().toString()+" "+observacion2.getText().toString());
@@ -443,7 +459,7 @@ public class Formularios extends Fragment {
             };
             RequestQueue requestQueue = Volley.newRequestQueue(getContext());
             requestQueue.add(request);
-
+            habilitarBoton();
     }
 
 
@@ -915,13 +931,15 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
             Canvas canvas = myPage1.getCanvas();
-            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
-            canvas.drawBitmap(scaledbmp,0,0,myPaint);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
+            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+//            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
+//            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
+            canvas.drawBitmap(scaled,0,0,myPaint);
 
-            Bitmap check,scaled2;
+            Bitmap check,scaledcheck;
             check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
-            scaled2 = Bitmap.createScaledBitmap(check,100,100,false);
+            scaledcheck = Bitmap.createScaledBitmap(check,100,100,false);
 
             canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),920,305,titlePaint);
             canvas.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase(),600,460,titlePaint);
@@ -929,9 +947,9 @@ public class Formularios extends Fragment {
             canvas.drawText(spinnerExtension.getSelectedItem().toString(),1480,585,titlePaint);
             String plazoContado = rbSelected.getText().toString();
             if(plazoContado.contains("A plazo")){
-                canvas.drawBitmap(scaled2,980,640,myPaint);
+                canvas.drawBitmap(scaledcheck,980,640,myPaint);
             }else {
-                canvas.drawBitmap(scaled2,1430,640,myPaint);
+                canvas.drawBitmap(scaledcheck,1430,640,myPaint);
             }
             canvas.drawText(codigo_proyecto.getText().toString(),400,835,titlePaint);
             canvas.drawText(tresDigitos(uv.getText().toString()),880,835,titlePaint);
@@ -948,10 +966,11 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
             Canvas canvas2 = myPage2.getCanvas();
-
-            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
-            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
-            canvas2.drawBitmap(scaledbmp,0,0,myPaint);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
+            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+//            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
+//            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
+            canvas2.drawBitmap(scaled,0,0,myPaint);
 
             canvas2.drawText(apellidoPaterno.getText().toString().toUpperCase(),450,520,titlePaint);
             canvas2.drawText(apellidoMaterno.getText().toString().toUpperCase(),1450,520,titlePaint);
@@ -1027,11 +1046,15 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
             Canvas canvas3 = myPage3.getCanvas();
-            Bitmap imagen3,scaled3 ;
-            imagen3 = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
+            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+//        Bitmap imagen3,scaled3 ;
+//        imagen3 = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
+//        scaled3 = Bitmap.createScaledBitmap(imagen3,2539,3874,false);
+
 //          bmp = BitmapFactory.decodeResource(getResources(),R.drawable.newentrega);
-            scaled3 = Bitmap.createScaledBitmap(imagen3,2539,3874,false);
-            canvas3.drawBitmap(scaled3,0,0,myPaint);
+
+            canvas3.drawBitmap(scaled,0,0,myPaint);
             myPaint.setTextAlign(Paint.Align.CENTER);
             myPaint.setTextSize(70f);
             myPaint.setColor(Color.BLACK);
@@ -1068,17 +1091,15 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
             Canvas canvas4 = myPage4.getCanvas();
-
-        if(Global.ubicacion==null){
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
+            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+            if(Global.ubicacion==null){
             Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
-        }
-            Bitmap imagen4,scaled4;
-            imagen4 = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
-            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
-            canvas4.drawBitmap(scaled4,0,0,myPaint);
-
-
-
+            }
+//            Bitmap imagen4,scaled4;
+//            imagen4 = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
+//            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
+            canvas4.drawBitmap(scaled,0,0,myPaint);
             canvas4.drawText(tresDigitos(uv.getText().toString()),600,460,titlePaint);
             canvas4.drawText(tresDigitos(mz.getText().toString()),1190,460,titlePaint);
             canvas4.drawText(tresDigitos(lt.getText().toString()),1780,460,titlePaint);
@@ -1093,8 +1114,8 @@ public class Formularios extends Fragment {
             canvas4.drawText(observacion2.getText().toString(),350,3525,titlePaint);
 
         if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
-            scaledbmp = Bitmap.createScaledBitmap(Global.ubicacion,2280,2500,false);
-            canvas4.drawBitmap(scaledbmp,150,900,myPaint);
+            scaled = Bitmap.createScaledBitmap(Global.ubicacion,2280,2500,false);
+            canvas4.drawBitmap(scaled,150,900,myPaint);
             myPDF.finishPage(myPage4);
         }else {
             myPDF.finishPage(myPage4);
@@ -1109,11 +1130,12 @@ public class Formularios extends Fragment {
         Canvas canvas5 = myPage5.getCanvas();
         titlePaint.setTextSize(47f);
         titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-
-        Bitmap imagen5,scaled5;
-        imagen5 = BitmapFactory.decodeResource(getResources(),R.drawable.reservalote);
-        scaled5 = Bitmap.createScaledBitmap(imagen5,2539,3874,false);
-        canvas5.drawBitmap(scaled5,0,0,myPaint);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservalote);
+        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+//        Bitmap imagen5,scaled5;
+//        imagen5 = BitmapFactory.decodeResource(getResources(),R.drawable.reservalote);
+//        scaled5 = Bitmap.createScaledBitmap(imagen5,2539,3874,false);
+        canvas5.drawBitmap(scaled,0,0,myPaint);
 
         canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),1020,800,titlePaint);
         canvas5.drawText(ci_cliente.getText().toString(),920,868,titlePaint);

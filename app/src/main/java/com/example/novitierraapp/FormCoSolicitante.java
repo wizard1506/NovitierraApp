@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -185,9 +186,15 @@ public class FormCoSolicitante extends Fragment {
                         if(validarCamposObligatorios()){
                             //        verificamos las variables con numeros si se encuentran vacias
 //                            numerosVacios();
-                            generarPDF();
-                            Toast.makeText(getContext(),"Generando PDF.......espere un momento",Toast.LENGTH_SHORT).show();
-                            registrarCoSol();
+                            deshabilitar();
+                            new Handler().postDelayed(new Runnable(){
+                                public void run(){
+                                    generarPDF();
+                                    registrarCoSol();
+                                }
+                            }, 1000); //1000 millisegundos = 1 segundo.
+                            Toast.makeText(getContext(),"Generando Formulario espere un momento..",Toast.LENGTH_SHORT).show();
+
                         }else {
 //                            Toast.makeText(getContext(),"Rellene los campos marcados en *.",Toast.LENGTH_SHORT).show();
                         }
@@ -215,12 +222,18 @@ public class FormCoSolicitante extends Fragment {
 //                }else {Toast.makeText(getContext(),"Falta seleccionar Ingresos Bs o Dolar.",Toast.LENGTH_SHORT).show(); }
 //            }
 //        });
-
     }
 
     public void mensaje(String mensaje){
         Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
     }
+    public void deshabilitar(){
+        btGenerarPdf.setEnabled(false);
+    }
+    public void habilitar(){
+        btGenerarPdf.setEnabled(true);
+    }
+
 
     public Boolean validarCamposObligatorios(){
         if(nombre.getText().toString().length()==0){
@@ -430,7 +443,7 @@ public class FormCoSolicitante extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(request);
-
+        habilitar();
     }
 
     private void generarPDF() {
