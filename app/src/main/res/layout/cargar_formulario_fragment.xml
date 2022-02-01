@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Datos Personales del Cliente"
+                    android:text="Codigo de formulario"
                     android:textColor="@color/azul_novi"
                     android:textSize="18sp"
                     android:textStyle="bold"></TextView>
@@ -42,39 +41,33 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <EditText
+                    android:id="@+id/codigoformulario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Formulario con ubicacion:"
+                    android:hint="Escriba codigo de su formulario"
                     android:textColor="@color/azul_novi"
-                    android:textSize="14sp"
-                    android:textStyle="bold"></TextView>
+                    android:textSize="16sp"
+                    android:textStyle="bold"></EditText>
 
-                <RadioGroup
-                    android:id="@+id/radiogroupElegirUbicacion"
-                    android:layout_width="wrap_content"
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btcargarformulario"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Cargar Datos"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"></Button>
 
-                    <RadioButton
-                        android:id="@+id/conUbicacion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Si"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold">
-
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/sinUbicacion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold"></RadioButton>
-                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -86,35 +79,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Cliente es:"
+                    android:text="Datos Personales del Cliente"
                     android:textColor="@color/azul_novi"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"></TextView>
 
-                <RadioGroup
-                    android:id="@+id/rgDependienteIndependiente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/independiente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Independiente"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold">
-
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/dependiente"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dependiente"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold"></RadioButton>
-                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -132,7 +101,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/nombreCliente"
+                    android:id="@+id/cnombreCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -149,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Apellido Paterno:"
+                    android:text="*Apellido Paterno:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold">
@@ -157,7 +126,7 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/apellidoPCliente"
+                    android:id="@+id/capellidoPCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -176,13 +145,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Apellido Materno:"
+                    android:text="*Apellido Materno:"
                     android:textColor="@color/azul_novi"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/apellidoMCliente"
+                    android:id="@+id/capellidoMCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -205,7 +174,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/apellidoCasada"
+                    android:id="@+id/capellidoCasada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -227,12 +196,12 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/tipoPrefijo"
+                <EditText
+                    android:id="@+id/ctipoPrefijo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerPrefijo"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
 
             </LinearLayout>
 
@@ -250,12 +219,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/tipoIdentificacion"
+                <EditText
+                    android:id="@+id/ctipoIdentificacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerIdentificacion"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    />
 
             </LinearLayout>
 
@@ -274,7 +244,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/ciCliente"
+                    android:id="@+id/cciCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -297,12 +267,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/spinnerExtension"
+                <EditText
+                    android:id="@+id/cExtension"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerExtension"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -320,7 +291,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/nacionalidad"
+                    android:id="@+id/cnacionalidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -334,19 +305,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/btDatePickerFechaNac"
                     style="?android:spinnerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
-                    android:onClick="openDatePicker"
                     android:text="*FECHA NACIMIENTO"
                     android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"
-                    android:background="@color/azul_novi"
-                    android:textStyle="bold"></Button>
+                    android:textColor="@color/azul_novi"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    ></TextView>
 
             </LinearLayout>
 
@@ -355,18 +325,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <EditText
+                    android:id="@+id/cfechaNacimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fechaNacimiento"
-                    android:gravity="center"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:text="Presionar boton Fecha"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="16sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:textStyle="bold"></TextView>
+                    android:inputType="textCapSentences"
+                    ></EditText>
 
             </LinearLayout>
 
@@ -384,12 +350,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/estadoCivil"
+                <EditText
+                    android:id="@+id/cestadoCivil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerEstadoCivil"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -406,28 +373,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <RadioGroup
-                    android:id="@+id/radiogroupGenero"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/csexo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
 
-                    <RadioButton
-                        android:id="@+id/masculino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Masculino"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/femenino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Femenino"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
-                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -444,12 +396,12 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/nivelEstudio"
+                <EditText
+                    android:id="@+id/cnivelEstudio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerNivelEstudio"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences" />
 
             </LinearLayout>
 
@@ -468,7 +420,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/profesion"
+                    android:id="@+id/cprofesion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -506,12 +458,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/tipoVivienda"
+                <EditText
+                    android:id="@+id/ctipoVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerTipoVivienda"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    />
 
             </LinearLayout>
 
@@ -529,12 +482,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <Spinner
-                    android:id="@+id/tenencia"
+                <EditText
+                    android:id="@+id/ctenencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerTenencia"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    />
 
             </LinearLayout>
 
@@ -553,43 +507,20 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/costoAprox"
+                    android:id="@+id/ccostoAprox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
                     ></EditText>
-                <Spinner
-                    android:id="@+id/spinnerMoneda"
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/cMonedaCostoAprox"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerVivienda"
-                    android:spinnerMode="dialog" />
-
-<!--                <RadioGroup-->
-<!--                    android:id="@+id/radiogroupVivienda"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal">-->
-
-<!--                    <RadioButton-->
-<!--                        android:id="@+id/viviendaBs"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Bs"-->
-<!--                        android:textColor="@color/azul_novi"-->
-<!--                        android:textStyle="bold" />-->
-
-<!--                    <RadioButton-->
-<!--                        android:id="@+id/viviendaDolar"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="$us"-->
-<!--                        android:textColor="@color/azul_novi"-->
-<!--                        android:textStyle="bold" />-->
-<!--                </RadioGroup>-->
-
+                    android:hint="Bs o $us"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"/>
             </LinearLayout>
 
             <LinearLayout
@@ -607,7 +538,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/propietarioVivienda"
+                    android:id="@+id/cpropietarioVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -630,7 +561,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telefonoPropietario"
+                    android:id="@+id/ctelefonoPropietario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -655,7 +586,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/paisVivienda"
+                    android:id="@+id/cpaisVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -679,7 +610,7 @@
                     android:textStyle="bold"></TextView>
 
                 <Spinner
-                    android:id="@+id/dptoBolivia"
+                    android:id="@+id/cdptoBolivia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:prompt="@string/SpinnerDpto"
@@ -702,7 +633,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/ciudadVivienda"
+                    android:id="@+id/cciudadVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -725,7 +656,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/zonaVivienda"
+                    android:id="@+id/czonaVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -748,7 +679,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/barrioVivienda"
+                    android:id="@+id/cbarrioVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -771,7 +702,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/avenidadVivienda"
+                    android:id="@+id/cavenidadVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -794,7 +725,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/calleVivienda"
+                    android:id="@+id/ccalleVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -817,7 +748,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/numeroVivienda"
+                    android:id="@+id/cnumeroVivienda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -858,7 +789,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telfFijoCliente"
+                    android:id="@+id/ctelfFijoCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -877,7 +808,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telfMovilCliente"
+                    android:id="@+id/ctelfMovilCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -903,7 +834,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telfFijoOficina"
+                    android:id="@+id/ctelfFijoOficina"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -922,7 +853,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telfMovilOficina"
+                    android:id="@+id/ctelfMovilOficina"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -947,7 +878,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/correoPersonal"
+                    android:id="@+id/ccorreoPersonal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -969,7 +900,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/empresaNombre"
+                    android:id="@+id/cempresaNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -991,7 +922,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/direccionEmpresa"
+                    android:id="@+id/cdireccionEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1019,13 +950,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/rubroEmpresa"
+                    android:id="@+id/crubroEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:inputType="textCapSentences"
                     android:layout_marginStart="10dp"
-                    android:hint="Breve descripcion del rubro"
+                    android:inputType="textCapSentences"
                     android:maxLength="28"></EditText>
             </LinearLayout>
 
@@ -1044,7 +974,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/ingresos"
+                    android:id="@+id/cingresos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1052,30 +982,15 @@
                     android:inputType="number"
                     ></EditText>
 
-                <RadioGroup
-                    android:id="@+id/radiogroupIngresos"
+                <EditText
+                    android:id="@+id/cmonedaIngresos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:hint="Bs o $us"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences">
 
-                    <RadioButton
-                        android:id="@+id/ingresosBs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:shadowColor="@color/white"
-                        android:text="Bs."
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/ingresosDolar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:shadowColor="@color/white"
-                        android:text="$us"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
-                </RadioGroup>
+                </EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1108,7 +1023,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/nombreFamiliarCercano"
+                    android:id="@+id/cReferencia1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1130,7 +1045,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/parentescoFamiliar"
+                    android:id="@+id/cRelacion1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1152,7 +1067,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telfFamiliarCercano"
+                    android:id="@+id/ctelfReferencia1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1176,7 +1091,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/otraReferencia"
+                    android:id="@+id/cReferencia2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1198,7 +1113,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/relacionReferencia"
+                    android:id="@+id/cRelacion2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1220,7 +1135,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/telfOtraReferencia"
+                    android:id="@+id/ctelfReferencia2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1258,31 +1173,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <RadioGroup
-                    android:id="@+id/radiogroup"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/cPlazoContado"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/aPlazo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:text="A plazo"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold">
-
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/aContado"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contado"
-                        android:textColor="@color/azul_novi"
-                        android:textStyle="bold" />
-                </RadioGroup>
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"
+                    ></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1298,12 +1195,12 @@
                     android:textColor="@color/azul_novi"
                     android:textSize="18sp"
                     android:textStyle="bold"></TextView>
-                <Spinner
-                    android:id="@+id/cuotasplazo"
+                <EditText
+                    android:id="@+id/ccuotasplazo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerPlazo"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -1321,12 +1218,12 @@
                     android:textStyle="bold"
                     android:textSize="14sp"></TextView>
 
-                <Spinner
-                    android:id="@+id/urbanizacion"
+                <EditText
+                    android:id="@+id/curbanizacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/SpinnerUrbanizacion"
-                    android:spinnerMode="dialog" />
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences" />
 
             </LinearLayout>
 
@@ -1344,14 +1241,14 @@
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
-                <TextView
-                    android:id="@+id/idProyecto"
+                <EditText
+                    android:id="@+id/cidProyecto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Codigo de proyecto"
+                    android:hint="codigo del proyecto"
                     android:textColor="@color/azul_novi"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -1370,7 +1267,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/uv"
+                    android:id="@+id/cuv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1389,13 +1286,13 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/mz"
+                    android:id="@+id/cmz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:hint="000"
-                    android:inputType="textCapCharacters"
-                    android:maxLength="4"
+                    android:inputType="number"
+                    android:maxLength="3"
                     ></EditText>
 
             </LinearLayout>
@@ -1416,7 +1313,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/lt"
+                    android:id="@+id/clt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1434,7 +1331,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/cat"
+                    android:id="@+id/ccat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1459,7 +1356,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/mts2"
+                    android:id="@+id/cmts2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1483,7 +1380,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/fullnameAsesor"
+                    android:id="@+id/cfullnameAsesor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1505,7 +1402,7 @@
                     android:textStyle="bold"></TextView>
 
                 <EditText
-                    android:id="@+id/codigoAsesor"
+                    android:id="@+id/ccodigoAsesor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1537,13 +1434,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/observacion1"
+                    android:id="@+id/cobservacion1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:hint="Observaciones del domicilio"
                     android:textAlignment="center"
-                    android:inputType="textCapSentences"
+                    android:inputType="text"
                     android:maxLength="80"
                     ></EditText>
 
@@ -1555,7 +1452,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/observacion2"
+                    android:id="@+id/cobservacion2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -1575,25 +1472,10 @@
                     android:id="@+id/btguardar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Generar y Visualizar"
+                    android:text="Generar y Actualizar"
                     android:textColor="@color/white"
                     android:textStyle="bold"></Button>
             </LinearLayout>
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/btRegistrarDatosForm"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Registrar Datos"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textStyle="bold"></Button>-->
-<!--            </LinearLayout>-->
-
 
         </LinearLayout>
 

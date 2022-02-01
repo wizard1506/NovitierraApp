@@ -42,4 +42,10 @@
         android:name="com.example.novitierraapp.test"
         android:label="test_fragment"
         tools:layout="@layout/test_fragment" />
+    <fragment
+        android:id="@+id/cargarTitular"
+        android:name="com.example.novitierraapp.CargarFormulario"
+        android:label="Cargar Formulario"
+        tools:layout="@layout/cargar_formulario_fragment" />
+
 </navigation>

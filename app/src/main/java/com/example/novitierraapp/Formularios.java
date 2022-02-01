@@ -335,7 +335,7 @@ public class Formularios extends Fragment {
                                     registrarTitular();
                                 }
                             }, 1000); //1000 millisegundos = 1 segundo.
-                            Toast.makeText(getContext(), "Generando Formularios espere un momento...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Generando Formularios verifique bien todo los datos...", Toast.LENGTH_LONG).show();
                         }else {
                             Toast.makeText(getContext(), "Rellene Nombre Empresa y Direccion Empresa.", Toast.LENGTH_SHORT).show();
                         }
@@ -451,7 +451,8 @@ public class Formularios extends Fragment {
                     parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
                     parametros.put("asesor",asesor.getText().toString());
                     parametros.put("codigo_asesor",codigo_asesor.getText().toString());
-                    parametros.put("observacion",observacion1.getText().toString()+" "+observacion2.getText().toString());
+                    parametros.put("observacion",observacion1.getText().toString());
+                    parametros.put("observacion2",observacion2.getText().toString());
                     parametros.put("fecha",fechaHoy());
 
                     return parametros;
@@ -505,8 +506,16 @@ public class Formularios extends Fragment {
                 if (rbMasculino.isChecked() || rbFemenino.isChecked()) {
                     if (rbIngresosBs.isChecked() || rbIngresosDolar.isChecked()) {
                             if(rbIndependiente.isChecked()|| rbDependiende.isChecked()){
-                                valor=true;
-                                return valor;
+                                if(rb_plazo.isChecked()){
+                                    if(spinnerPlazo.getSelectedItem().toString().contains("--")){
+                                        mensaje("Seleccione un plazo para venta");
+                                        return false;
+                                    }else {
+                                        return true;
+                                    }
+                                }else{
+                                    return true;
+                                }
                             }else {
                                 Toast.makeText(getContext(), "Falta seleccionar cliente Independiente o Dependiente", Toast.LENGTH_SHORT).show();
                             }
@@ -531,124 +540,127 @@ public class Formularios extends Fragment {
             mensaje("Falta nombre cliente");
             return false;
         } else {
-            if (apellidoPaterno.getText().toString().length() == 0) {
-                mensaje("Falta apellido paterno");
+            if (ci_cliente.getText().toString().length() == 0) {
+                mensaje("Falta documento de identidad");
                 return false;
             } else {
-                if (apellidoMaterno.getText().toString().length() == 0) {
-                    mensaje("Falta apellido materno");
+                if (nacionalidad.getText().toString().length() == 0) {
+                    mensaje("Falta Nacionalidad");
                     return false;
                 } else {
-                    if (ci_cliente.getText().toString().length() == 0) {
-                        mensaje("Falta documento de identidad");
+                    if (profesion.getText().toString().length() == 0) {
+                        mensaje("Falta profesion");
                         return false;
                     } else {
-                        if (nacionalidad.getText().toString().length() == 0) {
-                            mensaje("Falta Nacionalidad");
+                        if (pais.getText().toString().length() == 0) {
+                            mensaje("Falta pais");
                             return false;
                         } else {
-                                if (profesion.getText().toString().length() == 0) {
-                                    mensaje("Falta profesion");
+                            if (ciudad.getText().toString().length() == 0) {
+                                mensaje("Falta ciudad");
+                                return false;
+                            } else {
+                                if (barrio.getText().toString().length() == 0) {
+                                    mensaje("Falta rellenar barrio");
                                     return false;
                                 } else {
-                                    if (pais.getText().toString().length() == 0) {
-                                                    mensaje("Falta pais");
+                                    if (telMovil.getText().toString().length() == 0) {
+                                        mensaje("Falta Telefono Movil");
                                         return false;
                                     } else {
-                                        if (ciudad.getText().toString().length() == 0) {
-                                            mensaje("Falta ciudad");
+                                        if (rubroEmpresa.getText().toString().length() == 0) {
+                                            mensaje("Falta rubro");
                                             return false;
-                                             } else {
-                                                if (barrio.getText().toString().length() == 0) {
-                                                            mensaje("Falta rellenar barrio");
+                                        } else {
+                                            if (ingresosEmpresa.getText().toString().length() == 0) {
+                                                mensaje("Falta ingresos");
+                                                return false;
+                                            } else {
+                                                if (primerReferencia.getText().toString().length() == 0) {
+                                                    mensaje("Falta primer referencia");
                                                     return false;
+                                                } else {
+                                                    if (relacion.getText().toString().length() == 0) {
+                                                        mensaje("Falta relacion de referencia");
+                                                        return false;
+                                                    } else {
+                                                        if (telfReferencia1.getText().toString().length() == 0) {
+                                                            mensaje("Falta telefono referencia 1");
+                                                            return false;
                                                         } else {
-                                                         if (telMovil.getText().toString().length() == 0) {
-                                                                            mensaje("Falta Telefono Movil");
+                                                            if (segundaReferencia.getText().toString().length() == 0) {
+                                                                mensaje("Falta segunda referencia");
+                                                                return false;
+                                                            } else {
+                                                                if (parentesco.getText().toString().length() == 0) {
+                                                                    mensaje("Falta parentesco de referencia ");
+                                                                    return false;
+                                                                } else {
+                                                                    if (telfReferencia2.getText().toString().length() == 0) {
+                                                                        mensaje("Falta telefono referencia 2");
+                                                                        return false;
+                                                                    } else {
+                                                                        if (uv.getText().toString().length() == 0) {
+                                                                            mensaje("Falta UV");
                                                                             return false;
                                                                         } else {
-                                                                            if (rubroEmpresa.getText().toString().length() == 0) {
-                                                                                mensaje("Falta rubro");
+                                                                            if (mz.getText().toString().length() == 0) {
+                                                                                mensaje("Falta MZ");
                                                                                 return false;
                                                                             } else {
-                                                                                if (ingresosEmpresa.getText().toString().length() == 0) {
-                                                                                    mensaje("Falta ingresos");
+                                                                                if (lt.getText().toString().length() == 0) {
+                                                                                    mensaje("Falta LT");
                                                                                     return false;
                                                                                 } else {
-                                                                                    if (primerReferencia.getText().toString().length() == 0) {
-                                                                                        mensaje("Falta primer referencia");
+                                                                                    if (cat.getText().toString().length() == 0) {
+                                                                                        mensaje("Falta Categoria");
                                                                                         return false;
                                                                                     } else {
-                                                                                        if (relacion.getText().toString().length() == 0) {
-                                                                                            mensaje("Falta relacion de referencia");
+                                                                                        if (asesor.getText().toString().length() == 0) {
+                                                                                            mensaje("Falta Asesor");
                                                                                             return false;
                                                                                         } else {
-                                                                                            if (telfReferencia1.getText().toString().length() == 0) {
-                                                                                                mensaje("Falta telefono referencia 1");
+                                                                                            if (codigo_asesor.getText().toString().length() == 0) {
+                                                                                                mensaje("Falta codigo asesor");
                                                                                                 return false;
                                                                                             } else {
-                                                                                                if (segundaReferencia.getText().toString().length() == 0) {
-                                                                                                    mensaje("Falta segunda referencia");
+                                                                                                if (mts2.getText().toString().length() == 0) {
+                                                                                                    mensaje("Falta ingresar superficie metros2");
                                                                                                     return false;
                                                                                                 } else {
-                                                                                                    if (parentesco.getText().toString().length() == 0) {
-                                                                                                        mensaje("Falta parentesco de referencia ");
+                                                                                                    if(tvfechaNacimiento.getText().toString().contains("Presionar boton Fecha")){
+                                                                                                        mensaje("Colocar fecha de nacimiento del cliente");
                                                                                                         return false;
-                                                                                                    } else {
-                                                                                                        if (telfReferencia2.getText().toString().length() == 0) {
-                                                                                                            mensaje("Falta telefono referencia 2");
-                                                                                                            return false;
-                                                                                                        } else {
-                                                                                                            if (uv.getText().toString().length() == 0) {
-                                                                                                                mensaje("Falta UV");
-                                                                                                                return false;
-                                                                                                            } else {
-                                                                                                                if (mz.getText().toString().length() == 0) {
-                                                                                                                    mensaje("Falta MZ");
-                                                                                                                    return false;
-                                                                                                                } else {
-                                                                                                                    if (lt.getText().toString().length() == 0) {
-                                                                                                                        mensaje("Falta LT");
-                                                                                                                        return false;
-                                                                                                                    } else {
-                                                                                                                        if (cat.getText().toString().length() == 0) {
-                                                                                                                            mensaje("Falta Categoria");
-                                                                                                                            return false;
-                                                                                                                        } else {
-                                                                                                                            if (asesor.getText().toString().length() == 0) {
-                                                                                                                                mensaje("Falta Asesor");
-                                                                                                                                return false;
-                                                                                                                            } else {
-                                                                                                                                if (codigo_asesor.getText().toString().length() == 0) {
-                                                                                                                                    mensaje("Falta codigo asesor");
-                                                                                                                                    return false;
-                                                                                                                                } else {
-                                                                                                                                    return true;
-                                                                                                                                }
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            }
-                                                                                                        }
+                                                                                                    }else{
+                                                                                                        return true;
                                                                                                     }
+
                                                                                                 }
+
                                                                                             }
                                                                                         }
-                                                                                     }
-                                                                                       }
-                                                                                   }
+                                                                                    }
                                                                                 }
-
-                                                               }
-                                                     }
-                                             }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
+                                    }
 
                                 }
                             }
                         }
                     }
+
+                }
+            }
+
         }
     }
 
@@ -683,8 +695,15 @@ public class Formularios extends Fragment {
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
-    private String makeDateString(int day, int month, int year) {
-        return day+"/"+month+"/" + year;
+    private String makeDateString(Integer day, Integer month, int year) {
+        String day2=day.toString(),month2=month.toString();
+        if(day.toString().length()==1){
+            day2="0"+day;
+        }
+        if(month.toString().length()==1){
+            month2="0"+month;
+        }
+        return day2+"/"+month2+"/" + year;
     }
     public void openDatePicker(View v){
         datePickerDialog.show();
@@ -899,7 +918,8 @@ public class Formularios extends Fragment {
             Integer month = cal.get(Calendar.MONTH);
             month=month+1;
             Integer day= cal.get(Calendar.DAY_OF_MONTH);
-            String fechaActual= day.toString()+"/"+month.toString()+"/"+year.toString();
+            String fechaActual = makeDateString(day,month,year);
+//            String fechaActual= day.toString()+"/"+month.toString()+"/"+year.toString();
 
             PdfDocument myPDF = new PdfDocument();
             Paint myPaint = new Paint();
@@ -1138,7 +1158,7 @@ public class Formularios extends Fragment {
         canvas5.drawBitmap(scaled,0,0,myPaint);
 
         canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),1020,800,titlePaint);
-        canvas5.drawText(ci_cliente.getText().toString(),920,868,titlePaint);
+        canvas5.drawText(ci_cliente.getText().toString().toUpperCase(),920,868,titlePaint);
         canvas5.drawText(spinnerExtension.getSelectedItem().toString(),1700,868,titlePaint);
         canvas5.drawText(spinner_urbanizacion.getSelectedItem().toString(),300,1000,titlePaint);
         canvas5.drawText(codigo_proyecto.getText().toString(),340,1075,titlePaint);
@@ -1150,6 +1170,7 @@ public class Formularios extends Fragment {
         canvas5.drawText(fechaActual,400,1458,titlePaint);
         canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),300,2330,titlePaint);
         canvas5.drawText(spinnerExtension.getSelectedItem().toString().toUpperCase(),1800,2400,titlePaint);
+        canvas5.drawText(ci_cliente.getText().toString().toUpperCase(),870,2400,titlePaint);
         canvas5.drawText(day.toString(),1190,2542,titlePaint);
         canvas5.drawText(mesLiteral(month),1900,2542,titlePaint);
         canvas5.drawText(year.toString(),400,2612,titlePaint);
