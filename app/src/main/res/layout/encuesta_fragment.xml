@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="Encuesta">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Encuesta Novitierra"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@color/azul_novi"
+            android:gravity="center">
+        </TextView>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="Encuesta">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.- A través  de que medio de Comunicacion publicitario conoce el producto?."
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/azul_novi"
+                >
+            </TextView>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerRespuesta1"
+                android:prompt="@string/SpinnerGenerico"
+                android:spinnerMode="dialog"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                >
+
+            </Spinner>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rgRedesSociales1"
+                    android:layout_marginStart="50dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    >
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbFacebook"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"
+                        android:text="Facebook">
+                    </RadioButton>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbTiktok"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"
+                        android:text="TikTok">
+                    </RadioButton>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbInstagram"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"
+                        android:text="Instagram">
+                    </RadioButton>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbPaginaWeb"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"
+                        android:text="Pagina Web">
+                    </RadioButton>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbPaginaAsesor"
+                        android:textColor="@color/azul_novi"
+                        android:textStyle="bold"
+                        android:text="Pagina-Asesor">
+                    </RadioButton>
+
+                </RadioGroup>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btEnviarRespuesta"
+                    android:text="Enviar Respuesta"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    >
+
+                </Button>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+</LinearLayout>

@@ -28,6 +28,10 @@
             android:id="@+id/formCoSolicitante"
             android:icon="@drawable/ic_menu_formulario"
             android:title="3. Co-Solicitante" />
+        <item
+            android:id="@+id/encuesta"
+            android:icon="@drawable/ic_menu_formulario"
+            android:title="4. Encuesta" />
 <!--        <item-->
 <!--            android:id="@+id/cargarTitular"-->
 <!--            android:icon="@drawable/ic_menu_formulario"-->

@@ -69,6 +69,7 @@ import java.util.Map;
 public class Formularios extends Fragment {
 
     private FormulariosViewModel mViewModel;
+
     EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente,uv,mz,lt,cat,asesor,codigo_asesor, apellidoCasada,nacionalidad,profesion,costoAprox;
     EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal,expedido,mts2;
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion,zona;
@@ -80,7 +81,7 @@ public class Formularios extends Fragment {
     RadioGroup radioGroupSinConUbicacion;
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda, spinnerPlazo;
-    TextView codigo_proyecto,tvfechaNacimiento;
+    TextView codigo_proyecto,tvfechaNacimiento,tvplazo;
     Button guardar, btFechaNac; //registrarForm;
 //    Proyectos proyectos;
     DatePickerDialog datePickerDialog;
@@ -200,6 +201,7 @@ public class Formularios extends Fragment {
 
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         tvfechaNacimiento = view.findViewById(R.id.fechaNacimiento);
+        tvplazo = view.findViewById(R.id.tvplazo);
         guardar = view.findViewById(R.id.btguardar);
         btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
 //        registrarForm = view.findViewById((R.id.btRegistrarDatosForm));
@@ -225,12 +227,16 @@ public class Formularios extends Fragment {
         rb_plazo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvplazo.setVisibility(View.VISIBLE);
+                spinnerPlazo.setVisibility(View.VISIBLE);
                 RBseleccionado(v);
             }
         });
         rb_contado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvplazo.setVisibility(View.GONE);
+                spinnerPlazo.setVisibility(View.GONE);
                 RBseleccionado(v);
             }
         });
@@ -297,17 +303,17 @@ public class Formularios extends Fragment {
         });
 
         /////cargamos los spinners
-        cargarListaTipoIdentificacion(view);
-        cargarListaEstadoCivil(view);
-        cargarListaUrbanizacion(view);
-        cargarListaNivelEstudio(view);
-        cargarListaTipoVivienda(view);
-        cargarListaDpto(view);
-        cargarListaTenencia(view);
-        cargarListaPrefijo(view);
-        cargarListaExtensiones(view);
-        cargarListaMoneda(view);
-        cargarListaPlazo(view);
+        cargarListaTipoIdentificacion();
+        cargarListaEstadoCivil();
+        cargarListaUrbanizacion();
+        cargarListaNivelEstudio();
+        cargarListaTipoVivienda();
+        cargarListaDpto();
+        cargarListaTenencia();
+        cargarListaPrefijo();
+        cargarListaExtensiones();
+        cargarListaMoneda();
+        cargarListaPlazo();
 
         spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -751,7 +757,7 @@ public class Formularios extends Fragment {
         rbSelectedIndependienteDependiente = v.findViewById(radiobtid);
     }
 
-    public void cargarListaUrbanizacion(View v){
+    public void cargarListaUrbanizacion(){
         listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
         listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
         listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
@@ -762,7 +768,7 @@ public class Formularios extends Fragment {
         spinner_urbanizacion.setAdapter(adapter);
     }
 
-    public void cargarListaExtensiones(View v){
+    public void cargarListaExtensiones(){
         listaExtension.add("--");
         listaExtension.add("SC");
         listaExtension.add("LP");
@@ -776,14 +782,14 @@ public class Formularios extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
         spinnerExtension.setAdapter(adapter);
     }
-    public void cargarListaMoneda(View v){
+    public void cargarListaMoneda(){
         listaMoneda.add("Ninguno");
         listaMoneda.add("Bs");
         listaMoneda.add("$us");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaMoneda);
         spinnerMoneda.setAdapter(adapter);
     }
-    public void cargarListaPlazo(View v){
+    public void cargarListaPlazo(){
         listaPlazo.add("--");
         listaPlazo.add("12");
         listaPlazo.add("24");
@@ -797,7 +803,7 @@ public class Formularios extends Fragment {
 
 
 
-    public void cargarListaTipoIdentificacion(View v){
+    public void cargarListaTipoIdentificacion(){
         listaIdentificacion.add("Carnet de Identidad");
         listaIdentificacion.add("Pasaporte");
         listaIdentificacion.add("Carnet Extranjero");
@@ -805,7 +811,7 @@ public class Formularios extends Fragment {
         spinnerIdentificacion.setAdapter(adapter);
     }
 
-    public void cargarListaEstadoCivil(View v){
+    public void cargarListaEstadoCivil(){
         listaEstadoCivil.add("Casado(a)");
         listaEstadoCivil.add("Soltero(a)");
         listaEstadoCivil.add("Divorciado(a)");
@@ -814,7 +820,7 @@ public class Formularios extends Fragment {
         spinnerEstadoCivil.setAdapter(adapter);
     }
 
-    public void cargarListaNivelEstudio(View v){
+    public void cargarListaNivelEstudio(){
         listaNivelEstudio.add("Primaria");
         listaNivelEstudio.add("Secundaria");
         listaNivelEstudio.add("Tecnico Medio");
@@ -825,7 +831,7 @@ public class Formularios extends Fragment {
         spinnerNivelEstudio.setAdapter(adapter);
     }
 
-    public void cargarListaTipoVivienda(View v){
+    public void cargarListaTipoVivienda(){
         listaTipoVivienda.add("Dpto");
         listaTipoVivienda.add("Casa");
         listaTipoVivienda.add("Cuarto");
@@ -835,7 +841,7 @@ public class Formularios extends Fragment {
         spinnerTipoVivienda.setAdapter(adapter);
     }
 
-    public void cargarListaDpto(View v){
+    public void cargarListaDpto(){
         listaDpto.add("Santa Cruz");
         listaDpto.add("La Paz");
         listaDpto.add("Cochabamba");
@@ -850,7 +856,7 @@ public class Formularios extends Fragment {
         spinnerDpto.setAdapter(adapter);
     }
 
-    public void cargarListaTenencia(View view) {
+    public void cargarListaTenencia() {
         listaTenencia.add("Propia");
         listaTenencia.add("Alquiler");
         listaTenencia.add("Anticretico");
@@ -858,7 +864,7 @@ public class Formularios extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTenencia);
         spinnerTenencia.setAdapter(adapter);
     }
-    public void cargarListaPrefijo(View view) {
+    public void cargarListaPrefijo() {
         listaPrefijo.add("Ninguno");
         listaPrefijo.add("Vda de");
         listaPrefijo.add("de");
@@ -913,6 +919,7 @@ public class Formularios extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (){
             String prefijoObtenido,monedaCostoAproximado;
+            String plazoContado = rbSelected.getText().toString();
             Calendar cal = Calendar.getInstance();
             Integer year = cal.get(Calendar.YEAR);
             Integer month = cal.get(Calendar.MONTH);
@@ -965,7 +972,7 @@ public class Formularios extends Fragment {
             canvas.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase(),600,460,titlePaint);
             canvas.drawText(ci_cliente.getText().toString(),680,585,titlePaint);
             canvas.drawText(spinnerExtension.getSelectedItem().toString(),1480,585,titlePaint);
-            String plazoContado = rbSelected.getText().toString();
+
             if(plazoContado.contains("A plazo")){
                 canvas.drawBitmap(scaledcheck,980,640,myPaint);
             }else {
@@ -1092,7 +1099,11 @@ public class Formularios extends Fragment {
             canvas3.drawText(cat.getText().toString(),2180,1200,titlePaint);
             canvas3.drawText(rbSelected.getText().toString(),270,1555,titlePaint);
             canvas3.drawText(mts2.getText().toString(),740,1555,titlePaint);
-            canvas3.drawText(spinnerPlazo.getSelectedItem().toString(),1680,1555,titlePaint);
+            if(plazoContado.contains("Contado")){
+                canvas3.drawText("",1680,1555,titlePaint);
+            }else {
+                canvas3.drawText(spinnerPlazo.getSelectedItem().toString(),1680,1555,titlePaint);
+            }
             titlePaint.setTextSize(45f);
             canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+
                     apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido+" "+apellidoCasada.getText().toString().toUpperCase(),245,1750,titlePaint);

@@ -47,5 +47,10 @@
         android:name="com.example.novitierraapp.CargarFormulario"
         android:label="Cargar Formulario"
         tools:layout="@layout/cargar_formulario_fragment" />
+    <fragment
+        android:id="@+id/encuesta"
+        android:name="com.example.novitierraapp.Encuesta"
+        android:label="Encuesta"
+        tools:layout="@layout/encuesta_fragment" />
 
 </navigation>
