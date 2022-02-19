@@ -3,8 +3,6 @@ package com.example.novitierraapp;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -29,9 +27,6 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.Handler;
-import android.os.StrictMode;
-import android.system.ErrnoException;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +50,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,30 +58,27 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Formularios extends Fragment {
+public class cargarFormulario extends Fragment {
 
-    private FormulariosViewModel mViewModel;
-    String fechaNacBD="";
     EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente,uv,mz,lt,cat,asesor,codigo_asesor, apellidoCasada,nacionalidad,profesion,costoAprox;
     EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal,expedido,mts2;
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion,zona;
     EditText observacion1, observacion2, codigoFormulario;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos, radioGroupIndependienteDependiente;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos, rbDependiende, rbIndependiente, rbSelectedIndependienteDependiente;
-//    rbSelectedMonedaVivienda
+    //    rbSelectedMonedaVivienda
 //    rbViviendaBs,rbViviendaDolar,
     RadioGroup radioGroupSinConUbicacion;
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda, spinnerPlazo;
     TextView codigo_proyecto,tvfechaNacimiento,tvplazo;
     Button guardar, btFechaNac, cargar; //registrarForm;
-//    Proyectos proyectos;
+    //    Proyectos proyectos;
     DatePickerDialog datePickerDialog;
     ArrayList<Proyectos> listaProyectos = new ArrayList<>();
     ArrayList<String> listaExtension = new ArrayList<>();
@@ -111,13 +102,29 @@ public class Formularios extends Fragment {
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormularioNovitierra.pdf";
     private File file = new File(path);
 
-    public static Formularios newInstance() {
-        return new Formularios();
+    private CargarFormularioViewModel mViewModel;
+
+    public static cargarFormulario newInstance() {
+        return new cargarFormulario();
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.cargar_formulario_fragment, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(CargarFormularioViewModel.class);
+        // TODO: Use the ViewModel
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         ///necesario para poder compartir el pdf
 //        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -344,7 +351,6 @@ public class Formularios extends Fragment {
                             new Handler().postDelayed(new Runnable(){
                                 public void run(){
                                     generarPDF();
-                                    registrarTitular();
                                 }
                             }, 1000); //1000 millisegundos = 1 segundo.
                             Toast.makeText(getContext(), "Generando Formularios verifique bien todo los datos...", Toast.LENGTH_LONG).show();
@@ -355,6 +361,14 @@ public class Formularios extends Fragment {
 //                        Toast.makeText(getContext(), "Rellene los campos marcados en *.", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        cargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mensaje("Cargando el formulario");
+                cargarFormulario();
             }
         });
 
@@ -378,19 +392,6 @@ public class Formularios extends Fragment {
 
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.formularios_fragment, container, false);
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(FormulariosViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
     public void DeshabilitarBoton(){
         guardar.setEnabled(false);
@@ -401,96 +402,108 @@ public class Formularios extends Fragment {
 
     private void registrarTitular() {
         StringRequest request = new StringRequest(Request.Method.POST, URL_addtitular, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    if (!response.isEmpty()){
-                        if(response.contains("algo salio mal")){
-                            Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
-                        }
-                        else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
-
-                    }else{
-                        Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    if(response.contains("algo salio mal")){
+                        Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> parametros = new HashMap<String, String>();
-                    parametros.put("nombres",nombre_cliente.getText().toString());
-                    parametros.put("apellidoP",apellidoPaterno.getText().toString());
-                    parametros.put("apellidoM",apellidoMaterno.getText().toString());
-                    parametros.put("apellidoC",apellidoCasada.getText().toString());
-                    parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
-                    parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
-                    parametros.put("nro_documento",ci_cliente.getText().toString());
-                    parametros.put("extension",spinnerExtension.getSelectedItem().toString());
-                    parametros.put("nacionalidad",nacionalidad.getText().toString());
-                    parametros.put("fecha_nacimiento",fechaNacBD);
-                    parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
-                    parametros.put("sexo",rbSelectedGenero.getText().toString());
-                    parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
-                    parametros.put("profesion_ocupacion",profesion.getText().toString());
-                    parametros.put("telf_fijo",telFijo.getText().toString());
-                    parametros.put("telf_movil",telMovil.getText().toString());
-                    parametros.put("telf_fijoOficina",telFijoOfc.getText().toString());
-                    parametros.put("telf_movilOficina",telMovOfc.getText().toString());
-                    parametros.put("correo",correoPersonal.getText().toString());
-                    parametros.put("referencia1",primerReferencia.getText().toString());
-                    parametros.put("relacion1",parentesco.getText().toString());
-                    parametros.put("telf_referencia1",telfReferencia1.getText().toString());
-                    parametros.put("referencia2",segundaReferencia.getText().toString());
-                    parametros.put("relacion2",relacion.getText().toString());
-                    parametros.put("telf_referencia2",telfReferencia2.getText().toString());
-                    parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
-                    parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
-                    parametros.put("costo_vivienda",costoAprox.getText().toString());
-                    parametros.put("moneda_costoVivienda",spinnerMoneda.getSelectedItem().toString());
-                    parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
-                    parametros.put("telf_propietario",telefonoPropietario.getText().toString());
-                    parametros.put("pais_vivienda",pais.getText().toString());
-                    parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
-                    parametros.put("zona",zona.getText().toString());
-                    parametros.put("ciudad",ciudad.getText().toString());
-                    parametros.put("barrio",barrio.getText().toString());
-                    parametros.put("avenida",avenida.getText().toString());
-                    parametros.put("calle",calle.getText().toString());
-                    parametros.put("numero",numero.getText().toString());
-                    parametros.put("nombre_empresa",nombreEmpresa.getText().toString());
-                    parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
-                    parametros.put("rubro",rubroEmpresa.getText().toString());
-                    parametros.put("ingresos",ingresosEmpresa.getText().toString());
-                    parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
-                    parametros.put("proyecto",codigo_proyecto.getText().toString());
-                    parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
-                    parametros.put("uv",uv.getText().toString());
-                    parametros.put("mz",mz.getText().toString());
-                    parametros.put("lt",lt.getText().toString());
-                    parametros.put("cat",cat.getText().toString());
-                    parametros.put("metros2",mts2.getText().toString());
-                    parametros.put("tipo_venta",rbSelected.getText().toString());
-                    parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
-                    parametros.put("asesor",asesor.getText().toString());
-                    parametros.put("codigo_asesor",codigo_asesor.getText().toString());
-                    parametros.put("observacion",observacion1.getText().toString());
-                    parametros.put("observacion2",observacion2.getText().toString());
-                    parametros.put("fecha",fechaHoyBase());
+                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
 
-                    return parametros;
+                }else{
+                    Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
                 }
-            };
-            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-            requestQueue.add(request);
-            habilitarBoton();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("nombres",nombre_cliente.getText().toString());
+                parametros.put("apellidoP",apellidoPaterno.getText().toString());
+                parametros.put("apellidoM",apellidoMaterno.getText().toString());
+                parametros.put("apellidoC",apellidoCasada.getText().toString());
+                parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
+                parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
+                parametros.put("nro_documento",ci_cliente.getText().toString());
+                parametros.put("extension",spinnerExtension.getSelectedItem().toString());
+                parametros.put("nacionalidad",nacionalidad.getText().toString());
+                parametros.put("fecha_nacimiento",tvfechaNacimiento.getText().toString());
+                parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
+                parametros.put("sexo",rbSelectedGenero.getText().toString());
+                parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
+                parametros.put("profesion_ocupacion",profesion.getText().toString());
+                parametros.put("telf_fijo",telFijo.getText().toString());
+                parametros.put("telf_movil",telMovil.getText().toString());
+                parametros.put("telf_fijoOficina",telFijoOfc.getText().toString());
+                parametros.put("telf_movilOficina",telMovOfc.getText().toString());
+                parametros.put("correo",correoPersonal.getText().toString());
+                parametros.put("referencia1",primerReferencia.getText().toString());
+                parametros.put("relacion1",parentesco.getText().toString());
+                parametros.put("telf_referencia1",telfReferencia1.getText().toString());
+                parametros.put("referencia2",segundaReferencia.getText().toString());
+                parametros.put("relacion2",relacion.getText().toString());
+                parametros.put("telf_referencia2",telfReferencia2.getText().toString());
+                parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
+                parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
+                parametros.put("costo_vivienda",costoAprox.getText().toString());
+                parametros.put("moneda_costoVivienda",spinnerMoneda.getSelectedItem().toString());
+                parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
+                parametros.put("telf_propietario",telefonoPropietario.getText().toString());
+                parametros.put("pais_vivienda",pais.getText().toString());
+                parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
+                parametros.put("zona",zona.getText().toString());
+                parametros.put("ciudad",ciudad.getText().toString());
+                parametros.put("barrio",barrio.getText().toString());
+                parametros.put("avenida",avenida.getText().toString());
+                parametros.put("calle",calle.getText().toString());
+                parametros.put("numero",numero.getText().toString());
+                parametros.put("nombre_empresa",nombreEmpresa.getText().toString());
+                parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
+                parametros.put("rubro",rubroEmpresa.getText().toString());
+                parametros.put("ingresos",ingresosEmpresa.getText().toString());
+                parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
+                parametros.put("proyecto",codigo_proyecto.getText().toString());
+                parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
+                parametros.put("uv",uv.getText().toString());
+                parametros.put("mz",mz.getText().toString());
+                parametros.put("lt",lt.getText().toString());
+                parametros.put("cat",cat.getText().toString());
+                parametros.put("metros2",mts2.getText().toString());
+                parametros.put("tipo_venta",rbSelected.getText().toString());
+                parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
+                parametros.put("asesor",asesor.getText().toString());
+                parametros.put("codigo_asesor",codigo_asesor.getText().toString());
+                parametros.put("observacion",observacion1.getText().toString());
+                parametros.put("observacion2",observacion2.getText().toString());
+                parametros.put("fecha",fechaHoy());
+
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+        habilitarBoton();
     }
 
 
-
+    private String fechaHoy(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month=month+1;
+        int day= cal.get(Calendar.DAY_OF_MONTH);
+        Integer hora = cal.get(Calendar.HOUR_OF_DAY);
+        Integer min = cal.get(Calendar.MINUTE);
+        Integer seg = cal.get(Calendar.SECOND);
+        String now = makeDateString(day,month,year);
+        now = now+" "+hora.toString()+":"+min.toString()+":"+seg.toString();
+        return now;
+    }
 
     public String tresDigitos(String numero){
         int digitos = numero.length();
@@ -519,20 +532,20 @@ public class Formularios extends Fragment {
             if (rb_contado.isChecked() || rb_plazo.isChecked()) {
                 if (rbMasculino.isChecked() || rbFemenino.isChecked()) {
                     if (rbIngresosBs.isChecked() || rbIngresosDolar.isChecked()) {
-                            if(rbIndependiente.isChecked()|| rbDependiende.isChecked()){
-                                if(rb_plazo.isChecked()){
-                                    if(spinnerPlazo.getSelectedItem().toString().contains("--")){
-                                        mensaje("Seleccione un plazo para venta");
-                                        return false;
-                                    }else {
-                                        return true;
-                                    }
-                                }else{
+                        if(rbIndependiente.isChecked()|| rbDependiende.isChecked()){
+                            if(rb_plazo.isChecked()){
+                                if(spinnerPlazo.getSelectedItem().toString().contains("--")){
+                                    mensaje("Seleccione un plazo para venta");
+                                    return false;
+                                }else {
                                     return true;
                                 }
-                            }else {
-                                Toast.makeText(getContext(), "Falta seleccionar cliente Independiente o Dependiente", Toast.LENGTH_SHORT).show();
+                            }else{
+                                return true;
                             }
+                        }else {
+                            Toast.makeText(getContext(), "Falta seleccionar cliente Independiente o Dependiente", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(getContext(), "Falta seleccionar Ingresos en Bs o $us.", Toast.LENGTH_SHORT).show();
                     }
@@ -691,30 +704,6 @@ public class Formularios extends Fragment {
         }
     }
 
-    private String fechaHoyBase(){
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month=month+1;
-        int day= cal.get(Calendar.DAY_OF_MONTH);
-        String now = makeDateStringBase(day,month,year);
-        return now;
-    }
-    private String makeDateString(Integer day, Integer month, int year) {
-        String day2=day.toString();
-        String month2=month.toString();
-        if(day.toString().length()==1){
-            day2="0"+day;
-        }
-        if(month.toString().length()==1){
-            month2="0"+month;
-        }
-        return day2+"/"+month2+"/" + year;
-    }
-    private String makeDateStringBase(int day, int month, int year) {
-        return year+"-"+month+"-"+day;
-    }
-
     private void iniciarDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -722,7 +711,6 @@ public class Formularios extends Fragment {
                 month = month+1;
                 String date = makeDateString(day,month,year);
                 tvfechaNacimiento.setText(date);
-                fechaNacBD=makeDateStringBase(day,month,year);
             }
         };
         Calendar cal = Calendar.getInstance();
@@ -734,7 +722,16 @@ public class Formularios extends Fragment {
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
-
+    private String makeDateString(Integer day, Integer month, int year) {
+        String day2=day.toString(),month2=month.toString();
+        if(day.toString().length()==1){
+            day2="0"+day;
+        }
+        if(month.toString().length()==1){
+            month2="0"+month;
+        }
+        return day2+"/"+month2+"/" + year;
+    }
     public void openDatePicker(View v){
         datePickerDialog.show();
     }
@@ -750,7 +747,7 @@ public class Formularios extends Fragment {
         rbSelectedGenero = v.findViewById(radiobtid);
     }
 
-//    private void rbMonedaVivienda(View v) {
+    //    private void rbMonedaVivienda(View v) {
 //        int radiobtid = radioGroupVivienda.getCheckedRadioButtonId();
 //        rbSelectedMonedaVivienda = v.findViewById(radiobtid);
 //    }
@@ -1035,27 +1032,28 @@ public class Formularios extends Fragment {
         }
     }
 
-    public void seleccionarRbMasculinoFemenino(String valor){
-        if(valor.contains("Masculino")){
-            rbMasculino.setChecked(true);
-        }else {
-            rbFemenino.setChecked(true);
-        }
-    }
-    public void elegirRbMonedaIngresos(String valor){
-        if(valor.contains("Bs.")){
-            rbIngresosBs.setChecked(true);
-        }else {
-            rbIngresosDolar.setChecked(true);
-        }
-    }
-    public void elegirRbPlazoContado(String valor){
-        if(valor.contains("Contado")){
-            rb_contado.setChecked(true);
-        }else {
-            rb_plazo.setChecked(true);
-        }
-    }
+//    public void seleccionarRbMasculinoFemenino(String valor){
+//        if(valor.contains("Masculino")){
+//            rbMasculino.setChecked(true);
+//        }else {
+//            rbFemenino.setChecked(true);
+//        }
+//    }
+//    public void elegirRbMonedaIngresos(String valor){
+//        if(valor.contains("Bs.")){
+//            rbIngresosBs.setChecked(true);
+//        }else {
+//            rbIngresosDolar.setChecked(true);
+//        }
+//    }
+//    public void elegirRbPlazoContado(String valor){
+//        if(valor.contains("Contado")){
+//            rb_contado.setChecked(true);
+//
+//        }else {
+//            rb_plazo.setChecked(true);
+//        }
+//    }
     public void cargarFormulario(){
         RequestQueue requestQueue;
 
@@ -1078,7 +1076,7 @@ public class Formularios extends Fragment {
                             nacionalidad.setText(respuesta.getString("nacionalidad"));
                             tvfechaNacimiento.setText(respuesta.getString("fecha_nacimiento"));
                             elegirSpinnerEstadoCivil(respuesta.getString("estado_civil"));
-                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
+//                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
                             elegirSpinnerNivelEstudio(respuesta.getString("nivel_estudio"));
                             profesion.setText(respuesta.getString("profesion_ocupacion"));
                             telFijo.setText(respuesta.getString("telf_fijo"));
@@ -1109,7 +1107,7 @@ public class Formularios extends Fragment {
                             direccionEmpresa.setText(respuesta.getString("direccion_empresa"));
                             rubroEmpresa.setText(respuesta.getString("rubro"));
                             ingresosEmpresa.setText(respuesta.getString("ingresos"));
-                            elegirRbMonedaIngresos(respuesta.getString("moneda_ingresos"));
+//                            elegirRbMonedaIngresos(respuesta.getString("moneda_ingresos"));
                             codigo_proyecto.setText(respuesta.getString("proyecto"));
                             elegirSpinnerUrbanizacion(respuesta.getString("urbanizacion"));
                             uv.setText(respuesta.getString("uv"));
@@ -1117,7 +1115,7 @@ public class Formularios extends Fragment {
                             lt.setText(respuesta.getString("lt"));
                             cat.setText(respuesta.getString("cat"));
                             mts2.setText(respuesta.getString("metros2"));
-                            elegirRbPlazoContado(respuesta.getString("tipo_venta"));
+//                            elegirRbPlazoContado(respuesta.getString("tipo_venta"));
                             elegirSpinnerCuotas(respuesta.getString("cuotas"));
                             asesor.setText(respuesta.getString("asesor"));
                             codigo_asesor.setText(respuesta.getString("codigo_asesor"));
@@ -1153,238 +1151,238 @@ public class Formularios extends Fragment {
     }
 
 
-/////boton generador de pdf/////
+    /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (){
-            String prefijoObtenido,monedaCostoAproximado;
-            String plazoContado = rbSelected.getText().toString();
-            Calendar cal = Calendar.getInstance();
-            Integer year = cal.get(Calendar.YEAR);
-            Integer month = cal.get(Calendar.MONTH);
-            month=month+1;
-            Integer day= cal.get(Calendar.DAY_OF_MONTH);
-            String fechaActual = makeDateString(day,month,year);
+        String prefijoObtenido,monedaCostoAproximado;
+        String plazoContado = rbSelected.getText().toString();
+        Calendar cal = Calendar.getInstance();
+        Integer year = cal.get(Calendar.YEAR);
+        Integer month = cal.get(Calendar.MONTH);
+        month=month+1;
+        Integer day= cal.get(Calendar.DAY_OF_MONTH);
+        String fechaActual = makeDateString(day,month,year);
 //            String fechaActual= day.toString()+"/"+month.toString()+"/"+year.toString();
 
-            PdfDocument myPDF = new PdfDocument();
-            Paint myPaint = new Paint();
-            Paint titlePaint = new Paint();
+        PdfDocument myPDF = new PdfDocument();
+        Paint myPaint = new Paint();
+        Paint titlePaint = new Paint();
 
-            myPaint.setTextAlign(Paint.Align.LEFT);
-            myPaint.setTextSize(20f);
-            myPaint.setColor(Color.BLACK);
-            myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
+        myPaint.setTextAlign(Paint.Align.LEFT);
+        myPaint.setTextSize(20f);
+        myPaint.setColor(Color.BLACK);
+        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
 
-            titlePaint.setTextAlign(Paint.Align.LEFT);
-            titlePaint.setTextSize(50f);
-            titlePaint.setColor(Color.BLACK);
+        titlePaint.setTextAlign(Paint.Align.LEFT);
+        titlePaint.setTextSize(50f);
+        titlePaint.setColor(Color.BLACK);
 
-            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
-                prefijoObtenido="";
-            }else {
-                prefijoObtenido=spinnerPrefijo.getSelectedItem().toString();
-            }
-            if(spinnerMoneda.getSelectedItem().toString().contains("Ninguno")){
-                monedaCostoAproximado="";
-            }else{
-                monedaCostoAproximado=spinnerMoneda.getSelectedItem().toString();
-            }
-            //verificamos los campos numericos si estan vacios se pondran 0
-            //numerosVacios();
+        if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
+            prefijoObtenido="";
+        }else {
+            prefijoObtenido=spinnerPrefijo.getSelectedItem().toString();
+        }
+        if(spinnerMoneda.getSelectedItem().toString().contains("Ninguno")){
+            monedaCostoAproximado="";
+        }else{
+            monedaCostoAproximado=spinnerMoneda.getSelectedItem().toString();
+        }
+        //verificamos los campos numericos si estan vacios se pondran 0
+        //numerosVacios();
 
-            ////definimos pagina 1
-            PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
-            PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
-            Canvas canvas = myPage1.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1);
-  //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
-            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+        ////definimos pagina 1
+        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
+        PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
+        Canvas canvas = myPage1.getCanvas();
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1);
+        //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
+        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
 //            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
-            canvas.drawBitmap(scaled,0,0,myPaint);
+        canvas.drawBitmap(scaled,0,0,myPaint);
 
-            Bitmap check,scaledcheck;
-            check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
-            scaledcheck = Bitmap.createScaledBitmap(check,100,100,false);
+        Bitmap check,scaledcheck;
+        check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
+        scaledcheck = Bitmap.createScaledBitmap(check,100,100,false);
 
-            canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),920,305,titlePaint);
-            canvas.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),600,460,titlePaint);
-            canvas.drawText(ci_cliente.getText().toString(),680,585,titlePaint);
-            canvas.drawText(spinnerExtension.getSelectedItem().toString(),1480,585,titlePaint);
+        canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),920,305,titlePaint);
+        canvas.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),600,460,titlePaint);
+        canvas.drawText(ci_cliente.getText().toString(),680,585,titlePaint);
+        canvas.drawText(spinnerExtension.getSelectedItem().toString(),1480,585,titlePaint);
 
-            if(plazoContado.contains("A plazo")){
-                canvas.drawBitmap(scaledcheck,980,640,myPaint);
-            }else {
-                canvas.drawBitmap(scaledcheck,1430,640,myPaint);
-            }
-            canvas.drawText(codigo_proyecto.getText().toString(),400,835,titlePaint);
-            canvas.drawText(tresDigitos(uv.getText().toString()),880,835,titlePaint);
-            canvas.drawText(tresDigitos(mz.getText().toString()),1310,835,titlePaint);
-            canvas.drawText(tresDigitos(lt.getText().toString()),1730,835,titlePaint);
-            canvas.drawText(cat.getText().toString(),2230,835,titlePaint);
-            canvas.drawText(asesor.getText().toString().toUpperCase(),250,995,titlePaint);
-            canvas.drawText(codigo_asesor.getText().toString(),1730,995,titlePaint);
+        if(plazoContado.contains("A plazo")){
+            canvas.drawBitmap(scaledcheck,980,640,myPaint);
+        }else {
+            canvas.drawBitmap(scaledcheck,1430,640,myPaint);
+        }
+        canvas.drawText(codigo_proyecto.getText().toString(),400,835,titlePaint);
+        canvas.drawText(tresDigitos(uv.getText().toString()),880,835,titlePaint);
+        canvas.drawText(tresDigitos(mz.getText().toString()),1310,835,titlePaint);
+        canvas.drawText(tresDigitos(lt.getText().toString()),1730,835,titlePaint);
+        canvas.drawText(cat.getText().toString(),2230,835,titlePaint);
+        canvas.drawText(asesor.getText().toString().toUpperCase(),250,995,titlePaint);
+        canvas.drawText(codigo_asesor.getText().toString(),1730,995,titlePaint);
 
-            myPDF.finishPage(myPage1);
-            //// FIN PAGINA 1/////
+        myPDF.finishPage(myPage1);
+        //// FIN PAGINA 1/////
 
-            //////PAGINA 2
-            PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
-            PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
-            Canvas canvas2 = myPage2.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4);
-     //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
-            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+        //////PAGINA 2
+        PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
+        PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
+        Canvas canvas2 = myPage2.getCanvas();
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4);
+        //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
+        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
 //            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
-            canvas2.drawBitmap(scaled,0,0,myPaint);
+        canvas2.drawBitmap(scaled,0,0,myPaint);
 
-            canvas2.drawText(apellidoPaterno.getText().toString().toUpperCase(),450,520,titlePaint);
-            canvas2.drawText(apellidoMaterno.getText().toString().toUpperCase(),1450,520,titlePaint);
-            canvas2.drawText(nombre_cliente.getText().toString().toUpperCase(),450,685,titlePaint);
-            canvas2.drawText(apellidoCasada.getText().toString().toUpperCase(),1450,685,titlePaint);
-            canvas2.drawText(prefijoObtenido,2060,685,titlePaint);
+        canvas2.drawText(apellidoPaterno.getText().toString().toUpperCase(),450,520,titlePaint);
+        canvas2.drawText(apellidoMaterno.getText().toString().toUpperCase(),1450,520,titlePaint);
+        canvas2.drawText(nombre_cliente.getText().toString().toUpperCase(),450,685,titlePaint);
+        canvas2.drawText(apellidoCasada.getText().toString().toUpperCase(),1450,685,titlePaint);
+        canvas2.drawText(prefijoObtenido,2060,685,titlePaint);
 //            if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
 //                canvas2.drawText("",2060,750,titlePaint);
 //            }else {
 //                canvas2.drawText(spinnerPrefijo.getSelectedItem().toString(),2060,750,titlePaint);
 //            }
 
-            canvas2.drawText(ci_cliente.getText().toString(),1450,840,titlePaint);
-            canvas2.drawText(spinnerExtension.getSelectedItem().toString(),2060,840,titlePaint);
+        canvas2.drawText(ci_cliente.getText().toString(),1450,840,titlePaint);
+        canvas2.drawText(spinnerExtension.getSelectedItem().toString(),2060,840,titlePaint);
 
-            canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),650,803,titlePaint);
-            canvas2.drawText(nacionalidad.getText().toString(),650,850,titlePaint);
-            canvas2.drawText(tvfechaNacimiento.getText().toString(),650,903,titlePaint);
-            canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),650,950,titlePaint);
-            canvas2.drawText(rbSelectedGenero.getText().toString(),650,990,titlePaint);
-            canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),650,1042,titlePaint);
-            canvas2.drawText(profesion.getText().toString(),650,1093,titlePaint);
-            canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),1120,1153,titlePaint);
-            canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),1740,1153,titlePaint);
-            canvas2.drawText(costoAprox.getText().toString()+" "+monedaCostoAproximado,250,1280,titlePaint);
-            canvas2.drawText(propietarioVivienta.getText().toString().toUpperCase(),780,1280,titlePaint);
-            canvas2.drawText(telefonoPropietario.getText().toString(),1950,1280,titlePaint);
+        canvas2.drawText(spinnerIdentificacion.getSelectedItem().toString(),650,803,titlePaint);
+        canvas2.drawText(nacionalidad.getText().toString(),650,850,titlePaint);
+        canvas2.drawText(tvfechaNacimiento.getText().toString(),650,903,titlePaint);
+        canvas2.drawText(spinnerEstadoCivil.getSelectedItem().toString(),650,950,titlePaint);
+        canvas2.drawText(rbSelectedGenero.getText().toString(),650,990,titlePaint);
+        canvas2.drawText(spinnerNivelEstudio.getSelectedItem().toString(),650,1042,titlePaint);
+        canvas2.drawText(profesion.getText().toString(),650,1093,titlePaint);
+        canvas2.drawText(spinnerTipoVivienda.getSelectedItem().toString(),1120,1153,titlePaint);
+        canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),1740,1153,titlePaint);
+        canvas2.drawText(costoAprox.getText().toString()+" "+monedaCostoAproximado,250,1280,titlePaint);
+        canvas2.drawText(propietarioVivienta.getText().toString().toUpperCase(),780,1280,titlePaint);
+        canvas2.drawText(telefonoPropietario.getText().toString(),1950,1280,titlePaint);
 
-            canvas2.drawText(pais.getText().toString(),270,1410,titlePaint);
-            if(spinnerDpto.getSelectedItem().toString().contains("Ninguno")){
-                canvas2.drawText("",820,1410,titlePaint);
-            }else {
-                canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1410,titlePaint);
-            }
-            canvas2.drawText(ciudad.getText().toString(),200,1530,titlePaint);
-            canvas2.drawText(barrio.getText().toString(),1250,1530,titlePaint);
-            canvas2.drawText(avenida.getText().toString(),200,1680,titlePaint);
-            canvas2.drawText(calle.getText().toString(),1250,1680,titlePaint);
-            canvas2.drawText(numero.getText().toString(),2060,1680,titlePaint);
+        canvas2.drawText(pais.getText().toString(),270,1410,titlePaint);
+        if(spinnerDpto.getSelectedItem().toString().contains("Ninguno")){
+            canvas2.drawText("",820,1410,titlePaint);
+        }else {
+            canvas2.drawText(spinnerDpto.getSelectedItem().toString(),820,1410,titlePaint);
+        }
+        canvas2.drawText(ciudad.getText().toString(),200,1530,titlePaint);
+        canvas2.drawText(barrio.getText().toString(),1250,1530,titlePaint);
+        canvas2.drawText(avenida.getText().toString(),200,1680,titlePaint);
+        canvas2.drawText(calle.getText().toString(),1250,1680,titlePaint);
+        canvas2.drawText(numero.getText().toString(),2060,1680,titlePaint);
 
-            canvas2.drawText(telFijo.getText().toString(),250,1875,titlePaint);
-            canvas2.drawText(telFijoOfc.getText().toString(),250,2030,titlePaint);
-            canvas2.drawText(telMovil.getText().toString(),750,1875,titlePaint);
-            canvas2.drawText(telMovOfc.getText().toString(),750,2030,titlePaint);
-            canvas2.drawText(correoPersonal.getText().toString(),250,2180,titlePaint);
+        canvas2.drawText(telFijo.getText().toString(),250,1875,titlePaint);
+        canvas2.drawText(telFijoOfc.getText().toString(),250,2030,titlePaint);
+        canvas2.drawText(telMovil.getText().toString(),750,1875,titlePaint);
+        canvas2.drawText(telMovOfc.getText().toString(),750,2030,titlePaint);
+        canvas2.drawText(correoPersonal.getText().toString(),250,2180,titlePaint);
 
-            canvas2.drawText(nombreEmpresa.getText().toString(),1250,1875,titlePaint);
-            canvas2.drawText(direccionEmpresa.getText().toString(),1250,2030,titlePaint);
-            canvas2.drawText(rubroEmpresa.getText().toString(),1250,2180,titlePaint);
-            canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),2060,2180,titlePaint);
+        canvas2.drawText(nombreEmpresa.getText().toString(),1250,1875,titlePaint);
+        canvas2.drawText(direccionEmpresa.getText().toString(),1250,2030,titlePaint);
+        canvas2.drawText(rubroEmpresa.getText().toString(),1250,2180,titlePaint);
+        canvas2.drawText(ingresosEmpresa.getText().toString()+" "+rbSelectedIngresos.getText().toString(),2060,2180,titlePaint);
 
-            canvas2.drawText(primerReferencia.getText().toString().toUpperCase(),200,2380,titlePaint);
-            canvas2.drawText(segundaReferencia.getText().toString().toUpperCase(),200,2530,titlePaint);
-            canvas2.drawText(parentesco.getText().toString(),1300,2380,titlePaint);
-            canvas2.drawText(relacion.getText().toString(),1300,2530,titlePaint);
-            canvas2.drawText(telfReferencia1.getText().toString(),2060,2380,titlePaint);
-            canvas2.drawText(telfReferencia2.getText().toString(),2060,2530,titlePaint);
-            titlePaint.setTextSize(40f);
-            canvas2.drawText(observacion1.getText().toString(),485,3280,titlePaint);
-            canvas2.drawText(observacion2.getText().toString(),485,3330,titlePaint);
-            canvas2.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
-                    +apellidoPaterno.getText().toString().toUpperCase()+" "
-                    +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase()
-                    ,400,3635,titlePaint);
-            canvas2.drawText(asesor.getText().toString().toUpperCase(),1780,3635,titlePaint);
-            titlePaint.setTextSize(50f);
+        canvas2.drawText(primerReferencia.getText().toString().toUpperCase(),200,2380,titlePaint);
+        canvas2.drawText(segundaReferencia.getText().toString().toUpperCase(),200,2530,titlePaint);
+        canvas2.drawText(parentesco.getText().toString(),1300,2380,titlePaint);
+        canvas2.drawText(relacion.getText().toString(),1300,2530,titlePaint);
+        canvas2.drawText(telfReferencia1.getText().toString(),2060,2380,titlePaint);
+        canvas2.drawText(telfReferencia2.getText().toString(),2060,2530,titlePaint);
+        titlePaint.setTextSize(40f);
+        canvas2.drawText(observacion1.getText().toString(),485,3280,titlePaint);
+        canvas2.drawText(observacion2.getText().toString(),485,3330,titlePaint);
+        canvas2.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
+                        +apellidoPaterno.getText().toString().toUpperCase()+" "
+                        +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase()
+                ,400,3635,titlePaint);
+        canvas2.drawText(asesor.getText().toString().toUpperCase(),1780,3635,titlePaint);
+        titlePaint.setTextSize(50f);
 
-            myPDF.finishPage(myPage2);
-              //////FIN PAGINA 2 /////
+        myPDF.finishPage(myPage2);
+        //////FIN PAGINA 2 /////
 //
 //
 //        ////// INICIA PAGINA 3 ///////
-            PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
-            PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
-            Canvas canvas3 = myPage3.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3);
+        PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
+        PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
+        Canvas canvas3 = myPage3.getCanvas();
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
-            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //        Bitmap imagen3,scaled3 ;
 //        imagen3 = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
 //        scaled3 = Bitmap.createScaledBitmap(imagen3,2539,3874,false);
 
 //          bmp = BitmapFactory.decodeResource(getResources(),R.drawable.newentrega);
 
-            canvas3.drawBitmap(scaled,0,0,myPaint);
-            myPaint.setTextAlign(Paint.Align.CENTER);
-            myPaint.setTextSize(70f);
-            myPaint.setColor(Color.BLACK);
-            myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.NORMAL));
-            canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),700,900,myPaint);
-            myPaint.setTextAlign(Paint.Align.LEFT);
-            canvas3.drawText(day.toString(),235,590,myPaint);
-            canvas3.drawText(month.toString(),470,590,myPaint);
-            canvas3.drawText(year.toString(),660,590,myPaint);
-            titlePaint.setTextSize(60f);
-            canvas3.drawText(codigo_proyecto.getText().toString(),270,1200,titlePaint);
-            canvas3.drawText(tresDigitos(uv.getText().toString()),740,1200,titlePaint);
-            canvas3.drawText(tresDigitos(mz.getText().toString()),1200,1200,titlePaint);
-            canvas3.drawText(tresDigitos(lt.getText().toString()),1680,1200,titlePaint);
-            canvas3.drawText(cat.getText().toString().toUpperCase(),2180,1200,titlePaint);
-            canvas3.drawText(rbSelected.getText().toString(),270,1555,titlePaint);
-            canvas3.drawText(mts2.getText().toString(),740,1555,titlePaint);
-            if(plazoContado.contains("Contado")){
-                canvas3.drawText("",1680,1555,titlePaint);
-            }else {
-                canvas3.drawText(spinnerPlazo.getSelectedItem().toString(),1680,1555,titlePaint);
-            }
-            titlePaint.setTextSize(45f);
-            canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+
-                    apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),242,1750,titlePaint);
-            canvas3.drawText(ci_cliente.getText().toString(),1980,1750,titlePaint);
-            canvas3.drawText(spinnerExtension.getSelectedItem().toString(),270,1808,titlePaint);
+        canvas3.drawBitmap(scaled,0,0,myPaint);
+        myPaint.setTextAlign(Paint.Align.CENTER);
+        myPaint.setTextSize(70f);
+        myPaint.setColor(Color.BLACK);
+        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.NORMAL));
+        canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),700,900,myPaint);
+        myPaint.setTextAlign(Paint.Align.LEFT);
+        canvas3.drawText(day.toString(),235,590,myPaint);
+        canvas3.drawText(month.toString(),470,590,myPaint);
+        canvas3.drawText(year.toString(),660,590,myPaint);
+        titlePaint.setTextSize(60f);
+        canvas3.drawText(codigo_proyecto.getText().toString(),270,1200,titlePaint);
+        canvas3.drawText(tresDigitos(uv.getText().toString()),740,1200,titlePaint);
+        canvas3.drawText(tresDigitos(mz.getText().toString()),1200,1200,titlePaint);
+        canvas3.drawText(tresDigitos(lt.getText().toString()),1680,1200,titlePaint);
+        canvas3.drawText(cat.getText().toString().toUpperCase(),2180,1200,titlePaint);
+        canvas3.drawText(rbSelected.getText().toString(),270,1555,titlePaint);
+        canvas3.drawText(mts2.getText().toString(),740,1555,titlePaint);
+        if(plazoContado.contains("Contado")){
+            canvas3.drawText("",1680,1555,titlePaint);
+        }else {
+            canvas3.drawText(spinnerPlazo.getSelectedItem().toString(),1680,1555,titlePaint);
+        }
+        titlePaint.setTextSize(45f);
+        canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+
+                apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),242,1750,titlePaint);
+        canvas3.drawText(ci_cliente.getText().toString(),1980,1750,titlePaint);
+        canvas3.drawText(spinnerExtension.getSelectedItem().toString(),270,1808,titlePaint);
 
-            canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
-                        +apellidoPaterno.getText().toString().toUpperCase()+" "
-                        +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),425,2960,titlePaint);
+        canvas3.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
+                +apellidoPaterno.getText().toString().toUpperCase()+" "
+                +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),425,2960,titlePaint);
 //            canvas3.drawText(asesor.getText().toString(),1910,2960,titlePaint);
 
-            myPDF.finishPage(myPage3);
+        myPDF.finishPage(myPage3);
         /////FIN PAGINA 3/////////
 
         ///INICIO DE PAGINA 4 ////
-            PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
-            PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
-            Canvas canvas4 = myPage4.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fm);
+        PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
+        PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
+        Canvas canvas4 = myPage4.getCanvas();
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fm);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
-            scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-            if(Global.ubicacion==null){
+        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+        if(Global.ubicacion==null){
             Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
-            }
+        }
 //            Bitmap imagen4,scaled4;
 //            imagen4 = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
 //            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
-            canvas4.drawBitmap(scaled,0,0,myPaint);
-            canvas4.drawText(tresDigitos(uv.getText().toString()),600,460,titlePaint);
-            canvas4.drawText(tresDigitos(mz.getText().toString()),1190,460,titlePaint);
-            canvas4.drawText(tresDigitos(lt.getText().toString()),1780,460,titlePaint);
-            canvas4.drawText(cat.getText().toString(),2250,460,titlePaint);
-            canvas4.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),800,575,titlePaint);
-            canvas4.drawText(ci_cliente.getText().toString(),800,637,titlePaint);
-            canvas4.drawText(telMovil.getText().toString()+" - "+telFijo.getText().toString(),1700,637,titlePaint);
-            canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),800,705,titlePaint);
-            canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),800,775,titlePaint);
-            canvas4.drawText(zona.getText().toString(),800,850,titlePaint);
-            canvas4.drawText(observacion1.getText().toString(),350,3475,titlePaint);
-            canvas4.drawText(observacion2.getText().toString(),350,3525,titlePaint);
+        canvas4.drawBitmap(scaled,0,0,myPaint);
+        canvas4.drawText(tresDigitos(uv.getText().toString()),600,460,titlePaint);
+        canvas4.drawText(tresDigitos(mz.getText().toString()),1190,460,titlePaint);
+        canvas4.drawText(tresDigitos(lt.getText().toString()),1780,460,titlePaint);
+        canvas4.drawText(cat.getText().toString(),2250,460,titlePaint);
+        canvas4.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),800,575,titlePaint);
+        canvas4.drawText(ci_cliente.getText().toString(),800,637,titlePaint);
+        canvas4.drawText(telMovil.getText().toString()+" - "+telFijo.getText().toString(),1700,637,titlePaint);
+        canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),800,705,titlePaint);
+        canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),800,775,titlePaint);
+        canvas4.drawText(zona.getText().toString(),800,850,titlePaint);
+        canvas4.drawText(observacion1.getText().toString(),350,3475,titlePaint);
+        canvas4.drawText(observacion2.getText().toString(),350,3525,titlePaint);
 
         if(rbSelectedSinConUbicacion.getText().toString().contains("Si")){
             scaled = Bitmap.createScaledBitmap(Global.ubicacion,2280,2500,false);
@@ -1419,8 +1417,8 @@ public class Formularios extends Fragment {
         canvas5.drawText(tresDigitos(uv.getText().toString().toUpperCase()),820,1075,titlePaint);
         canvas5.drawText(tresDigitos(mz.getText().toString().toUpperCase()),1190,1075,titlePaint);
         canvas5.drawText(tresDigitos(lt.getText().toString()),1540,1075,titlePaint);
-        canvas5.drawText(cat.getText().toString().toUpperCase(),1890,1075,titlePaint);
-        canvas5.drawText(mts2.getText().toString().toUpperCase(),2150,1075,titlePaint);
+        canvas5.drawText(cat.getText().toString().toUpperCase(),1900,1075,titlePaint);
+        canvas5.drawText(mts2.getText().toString(),2150,1075,titlePaint);
         canvas5.drawText(fechaActual,400,1458,titlePaint);
         canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),300,2330,titlePaint);
         canvas5.drawText(spinnerExtension.getSelectedItem().toString().toUpperCase(),1800,2400,titlePaint);
@@ -1433,22 +1431,23 @@ public class Formularios extends Fragment {
         myPDF.finishPage(myPage5);
         ////FIN PAGINA 5 ////
 
-            try {
-                myPDF.writeTo(new FileOutputStream(file));
+        try {
+            myPDF.writeTo(new FileOutputStream(file));
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            myPDF.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        myPDF.close();
 
-            Uri uri = FileProvider.getUriForFile(getContext(),"com.example.novitierraapp",file);
+        Uri uri = FileProvider.getUriForFile(getContext(),"com.example.novitierraapp",file);
 
-            Intent share = new Intent();
-            share.setAction(Intent.ACTION_VIEW);
-            share.setDataAndType(uri,"application/pdf");
-            share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(share);
+        Intent share = new Intent();
+        share.setAction(Intent.ACTION_VIEW);
+        share.setDataAndType(uri,"application/pdf");
+        share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(share);
+        habilitarBoton();
 
 
 
@@ -1470,5 +1469,6 @@ public class Formularios extends Fragment {
 //        startActivity(share);
 
     }
+
 
 }

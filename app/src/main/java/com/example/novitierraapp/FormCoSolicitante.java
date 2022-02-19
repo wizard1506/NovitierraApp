@@ -58,7 +58,7 @@ import java.util.Map;
 public class FormCoSolicitante extends Fragment {
 
     EditText relacionCoSol,nombre,apellidoP,apellidoM,apellidoCasada,ci,profesion,nacionalidad,telFijo,telMovil,fijoOfi,movilOfi,correo,empresa,direccionEmpresa,rubro,etFechaNac,asesor,pais,ingresos;
-    Spinner spinnerTipoIdent, spinnerEstadoCivil, spinnerNivelEstudio, spinnerDptos,spinnerExtension;
+    Spinner spinnerTipoIdent, spinnerEstadoCivil, spinnerNivelEstudio, spinnerDptos,spinnerExtension,spinnerPrefijo;
     DatePickerDialog datePickerDialog;
     RadioGroup radioGroupGenero, radioGroupIngresos;
     RadioButton rbSelectedGenero, rbMasculinoCoSol,rbFemeninoCoSol, rbingresoBs, rbingresoDolar, rbSelectedIngreso;
@@ -67,6 +67,9 @@ public class FormCoSolicitante extends Fragment {
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
     ArrayList<String> listaNivelEstudio = new ArrayList<>();
     ArrayList<String> listaExtension = new ArrayList<>();
+    ArrayList<String> listaPrefijo = new ArrayList<>();
+    String fechanacimientoBD="";
+
 
 //    ArrayList<String> listaTipoVivienda = new ArrayList<>();
     ArrayList<String> listaDpto = new ArrayList<>();
@@ -124,6 +127,7 @@ public class FormCoSolicitante extends Fragment {
         spinnerNivelEstudio=view.findViewById(R.id.nivelEstudioCoSol);
         spinnerDptos=view.findViewById(R.id.dptoBoliviaCoSol);
         spinnerExtension=view.findViewById(R.id.spinnerExtensionCoSol);
+        spinnerPrefijo=view.findViewById(R.id.spinnerPrefijoCoSol);
         rbMasculinoCoSol=view.findViewById(R.id.masculinoCoSol);
         rbFemeninoCoSol=view.findViewById(R.id.femeninoCoSol);
         rbingresoBs=view.findViewById(R.id.ingresosCoSolBs);
@@ -167,11 +171,12 @@ public class FormCoSolicitante extends Fragment {
             }
         });
         iniciarDatePicker();
-        cargarListaDpto(view);
-        cargarListaEstadoCivil(view);
-        cargarListaNivelEstudio(view);
-        cargarListaTipoIdentificacion(view);
-        cargarListaExtensiones(view);
+        cargarListaDpto();
+        cargarListaEstadoCivil();
+        cargarListaNivelEstudio();
+        cargarListaTipoIdentificacion();
+        cargarListaExtensiones();
+        cargarListaPrefijo();
 
         asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
 
@@ -239,10 +244,6 @@ public class FormCoSolicitante extends Fragment {
         if(nombre.getText().toString().length()==0){
             mensaje("Falta nombre");
         }else{
-            if(apellidoP.getText().toString().length()==0){
-                mensaje("Falta apellido paterno");
-            }else {
-                if(apellidoM.getText().toString().length()==0){mensaje("Falta apellido materno");}else{
                     if(ci.getText().toString().length()==0){mensaje("Falta CI");}else{
                         if(nacionalidad.getText().toString().length()==0){mensaje("Falta nacionalidad");}else{
                             if(etFechaNac.getText().toString().length()==0){mensaje("Falta fecha nacimiento");}else{
@@ -258,8 +259,6 @@ public class FormCoSolicitante extends Fragment {
                             }
                         }
                     }
-                }
-            }
             return false;
         }
         return false;
@@ -272,12 +271,32 @@ public class FormCoSolicitante extends Fragment {
         int month = cal.get(Calendar.MONTH);
         month=month+1;
         int day= cal.get(Calendar.DAY_OF_MONTH);
-        Integer hora = cal.get(Calendar.HOUR_OF_DAY);
-        Integer min = cal.get(Calendar.MINUTE);
-        Integer seg = cal.get(Calendar.SECOND);
         String now = makeDateString(day,month,year);
-        now = now+" "+hora.toString()+":"+min.toString()+":"+seg.toString();
         return now;
+    }
+
+    private String fechaHoyBase(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month=month+1;
+        int day= cal.get(Calendar.DAY_OF_MONTH);
+        String now = makeDateStringBase(day,month,year);
+        return now;
+    }
+    private String makeDateString(Integer day, Integer month, int year) {
+        String day2=day.toString();
+        String month2=month.toString();
+        if(day.toString().length()==1){
+            day2="0"+day;
+        }
+        if(month.toString().length()==1){
+            month2="0"+month;
+        }
+        return day2+"/"+month2+"/" + year;
+    }
+    private String makeDateStringBase(int day, int month, int year) {
+        return year+"-"+month+"-"+day;
     }
 
 
@@ -288,6 +307,7 @@ public class FormCoSolicitante extends Fragment {
                 month = month+1;
                 String date = makeDateString(day,month,year);
                 etFechaNac.setText(date);
+                fechanacimientoBD=makeDateStringBase(day,month,year);
             }
         };
         Calendar cal = Calendar.getInstance();
@@ -309,9 +329,6 @@ public class FormCoSolicitante extends Fragment {
     }
 
 
-    private String makeDateString(int day, int month, int year) {
-        return day+"/"+month+"/" + year;
-    }
     public void openDatePicker(View v){
         datePickerDialog.show();
     }
@@ -329,7 +346,7 @@ public class FormCoSolicitante extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    public void cargarListaTipoIdentificacion(View v){
+    public void cargarListaTipoIdentificacion(){
         listaIdentificacion.add("Carnet de Identidad");
         listaIdentificacion.add("Pasaporte");
         listaIdentificacion.add("Carnet Extranjero");
@@ -337,7 +354,7 @@ public class FormCoSolicitante extends Fragment {
         spinnerTipoIdent.setAdapter(adapter);
     }
 
-    public void cargarListaEstadoCivil(View v){
+    public void cargarListaEstadoCivil(){
         listaEstadoCivil.add("Casado(a)");
         listaEstadoCivil.add("Soltero(a)");
         listaEstadoCivil.add("Divorciado(a)");
@@ -346,7 +363,7 @@ public class FormCoSolicitante extends Fragment {
         spinnerEstadoCivil.setAdapter(adapter);
     }
 
-    public void cargarListaNivelEstudio(View v){
+    public void cargarListaNivelEstudio(){
         listaNivelEstudio.add("Primaria");
         listaNivelEstudio.add("Secundaria");
         listaNivelEstudio.add("Tecnico Medio");
@@ -358,7 +375,7 @@ public class FormCoSolicitante extends Fragment {
     }
 
 
-    public void cargarListaDpto(View v){
+    public void cargarListaDpto(){
         listaDpto.add("Santa Cruz");
         listaDpto.add("La Paz");
         listaDpto.add("Cochabamba");
@@ -372,7 +389,7 @@ public class FormCoSolicitante extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
         spinnerDptos.setAdapter(adapter);
     }
-    public void cargarListaExtensiones(View v){
+    public void cargarListaExtensiones(){
         listaExtension.add("--");
         listaExtension.add("SC");
         listaExtension.add("LP");
@@ -385,6 +402,13 @@ public class FormCoSolicitante extends Fragment {
         listaExtension.add("PD");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
         spinnerExtension.setAdapter(adapter);
+    }
+    public void cargarListaPrefijo() {
+        listaPrefijo.add("Ninguno");
+        listaPrefijo.add("Vda de");
+        listaPrefijo.add("de");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPrefijo);
+        spinnerPrefijo.setAdapter(adapter);
     }
 
     private void registrarCoSol() {
@@ -418,7 +442,7 @@ public class FormCoSolicitante extends Fragment {
                 parametros.put("tipo_identificacion",spinnerTipoIdent.getSelectedItem().toString());
                 parametros.put("nro_documento",ci.getText().toString());
                 parametros.put("extension",spinnerExtension.getSelectedItem().toString());
-                parametros.put("fecha_nacimiento",etFechaNac.getText().toString());
+                parametros.put("fecha_nacimiento",fechanacimientoBD);
                 parametros.put("sexo",rbSelectedGenero.getText().toString());
                 parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
                 parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
@@ -437,7 +461,7 @@ public class FormCoSolicitante extends Fragment {
                 parametros.put("ingresos",ingresos.getText().toString());
                 parametros.put("moneda_ingresos",rbSelectedIngreso.getText().toString());
                 parametros.put("asesor",asesor.getText().toString());
-                parametros.put("fecha",fechaHoy());
+                parametros.put("fecha",fechaHoyBase());
                 return parametros;
             }
         };
@@ -447,6 +471,7 @@ public class FormCoSolicitante extends Fragment {
     }
 
     private void generarPDF() {
+        String prefijoSeleccionado="";
 
         PdfDocument myPDF = new PdfDocument();
         Paint myPaint = new Paint();
@@ -471,6 +496,12 @@ public class FormCoSolicitante extends Fragment {
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form4a);
         scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
         canvas.drawBitmap(scaledbmp,0,0,myPaint);
+
+        if(spinnerPrefijo.getSelectedItem().toString().contains("Ninguno")){
+            prefijoSeleccionado="";
+        }else {
+            prefijoSeleccionado=spinnerPrefijo.getSelectedItem().toString();
+        }
 
         canvas.drawText(relacionCoSol.getText().toString(),850,620,myPaint);
         canvas.drawText(apellidoP.getText().toString().toUpperCase(),400,810,myPaint);
@@ -506,7 +537,7 @@ public class FormCoSolicitante extends Fragment {
         canvas.drawText(ingresos.getText().toString()+" "+rbSelectedIngreso.getText().toString(),2080,2110,myPaint);
 
         canvas.drawText(nombre.getText().toString().toUpperCase()+" "+apellidoP.getText().toString().toUpperCase()+" "+
-                apellidoM.getText().toString().toUpperCase(),550,3000,titlePaint);
+                apellidoM.getText().toString().toUpperCase()+" "+prefijoSeleccionado.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),550,3000,titlePaint);
         canvas.drawText(asesor.getText().toString().toUpperCase(),1870,3000,titlePaint);
 
         myPDF.finishPage(myPage1);

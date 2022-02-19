@@ -37,20 +37,49 @@
         android:name="com.example.novitierraapp.MapFragment"
         android:label="Ubicacion Vivienda"
         tools:layout="@layout/map_fragment" />
+
     <fragment
-        android:id="@+id/test"
-        android:name="com.example.novitierraapp.test"
-        android:label="test_fragment"
-        tools:layout="@layout/test_fragment" />
+        android:id="@+id/formulario1y3"
+        android:name="com.example.novitierraapp.formulario1y3"
+        android:label="Formularios 1 y 3"
+        tools:layout="@layout/formulario1y3_fragment" />
     <fragment
-        android:id="@+id/cargarTitular"
-        android:name="com.example.novitierraapp.CargarFormulario"
-        android:label="Cargar Formulario"
-        tools:layout="@layout/cargar_formulario_fragment" />
+        android:id="@+id/formulario4"
+        android:name="com.example.novitierraapp.formulario4"
+        android:label="Formulario 4"
+        tools:layout="@layout/formulario4_fragment" />
+    <fragment
+        android:id="@+id/formularioMapa"
+        android:name="com.example.novitierraapp.formularioMapa"
+        android:label="Formulario Mapa"
+        tools:layout="@layout/formulario_mapa_fragment" />
+    <fragment
+        android:id="@+id/misFormularios"
+        android:name="com.example.novitierraapp.misFormularios"
+        android:label="Mis Formularios"
+        tools:layout="@layout/mis_formularios_fragment" />
     <fragment
         android:id="@+id/encuesta"
         android:name="com.example.novitierraapp.Encuesta"
         android:label="Encuesta"
         tools:layout="@layout/encuesta_fragment" />
+    <fragment
+        android:id="@+id/cargarFormulario"
+        android:name="com.example.novitierraapp.cargarFormulario"
+        android:label="Cargar Formulario"
+        tools:layout="@layout/cargar_formulario_fragment" />
+
+    <!--    <navigation android:id="@+id/navigation3"-->
+<!--        app:startDestination="@id/navigation2">-->
+<!--        <navigation-->
+<!--            android:id="@+id/navigation2"-->
+<!--            app:startDestination="@id/navigation">-->
+<!--            <navigation-->
+<!--                android:id="@+id/navigation"-->
+<!--                app:startDestination="@id/encuesta">-->
+<!--                -->
+<!--            </navigation>-->
+<!--        </navigation>-->
+<!--    </navigation>-->
 
 </navigation>

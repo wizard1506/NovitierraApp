@@ -19,8 +19,6 @@
         android:theme="@style/Theme.NovitierraApp.NoActionBar"
         android:usesCleartextTraffic="true"
         >
-
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAXoAIg0ATz_OzF3CmjsKAcnDG0YZqCUic"/>

@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".formularioMapa">
+
+    <ScrollView
+        android:id="@+id/scrollViewForm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="Formularios">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Datos Personales del Cliente"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="24sp"
+                    android:textStyle="bold"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Capturar la ubicacion antes de empezar"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Nombre del cliente:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/nombreCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapWords"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Apellido Paterno:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/apellidoPCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences">
+
+                </EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Apellido Materno:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/apellidoMCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Apellido de Casada:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/apellidoCasada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Prefijo:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <Spinner
+                    android:id="@+id/tipoPrefijo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/SpinnerPrefijo"
+                    android:spinnerMode="dialog" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Documento de identidad:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/ciCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:ems="10"
+                    android:inputType="textCapCharacters"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Extension:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <Spinner
+                    android:id="@+id/spinnerExtension"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/SpinnerExtension"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Zona:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/zonaVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Barrio:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/barrioVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Avenida:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/avenidadVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Calle:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/calleVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapSentences"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Numero:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/numeroVivienda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="number"
+                    >
+
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Telefono del cliente)"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Telf. Movil:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/telfMovilCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="0000"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    ></EditText>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:text="Referencias Personales"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Referencia 1:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/nombreFamiliarCercano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapWords"></EditText>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Telf. Referencia 1"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/telfFamiliarCercano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    ></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Referencia 2:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/otraReferencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="textCapWords"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Telf. Referencia 2:"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/telfOtraReferencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    ></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Informacion del Lote"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*UV: "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/uv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="0000"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="4"
+                    ></EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*MZ: "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/mz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="000"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="4"
+                    ></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Lote: "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/lt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="000"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    ></EditText>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Cat: "
+                    android:textColor="@color/azul_novi"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:id="@+id/cat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="Q"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="1"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_novi"
+                    android:text="Observaciones"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:gravity="center">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/observacion1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint="Observaciones del domicilio"
+                    android:textAlignment="center"
+                    android:inputType="textCapSentences"
+                    android:maxLength="80"
+                    ></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/observacion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:hint=""
+                    android:textAlignment="center"
+                    android:maxLength="80"
+                    android:inputType="textAutoComplete"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btguardar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Generar Formulario Mapa"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"></Button>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

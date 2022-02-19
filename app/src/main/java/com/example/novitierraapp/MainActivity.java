@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONArray array = new JSONArray(response);
                         for (int i = 0; i <array.length() ; i++) {
                             JSONObject respuesta = array.getJSONObject(i);
+//                            Global.id_user=respuesta.getInt("id_usuario");
                             Global.nombreSesion=respuesta.getString("nombres");
                             Global.apellidoSesion=respuesta.getString("apellidos");
                             Global.userSesion=respuesta.getString("usuario");

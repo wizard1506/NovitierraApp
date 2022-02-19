@@ -3,16 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/btlogin.xml" value="0.2866666666666667" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_analytics_24.xml" value="0.2866666666666667" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2866666666666667" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_list_24.xml" value="0.2866666666666667" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_menu_formulario.xml" value="0.2866666666666667" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/activity_nav_menu.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/cargar_formulario_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/content_main.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/encuesta_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/form_co_solicitante_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/formulario1y3_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/formulario4_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/formulario_mapa_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/formularios_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/fragment_gallery.xml" value="0.27076923076923076" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/fragment_home.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/map_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/mis_formularios_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/nav_header_main.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/test_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.275" />

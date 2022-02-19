@@ -7,6 +7,7 @@ public class Global {
     public static String nombreSesion = "";
     public static String apellidoSesion = "";
     public static Integer codigo = 0;
+//    public static Integer id_user = 0;
     public static Bitmap ubicacion;
 
 
