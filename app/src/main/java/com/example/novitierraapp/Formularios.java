@@ -1122,7 +1122,7 @@ public class Formularios extends Fragment {
                             asesor.setText(respuesta.getString("asesor"));
                             codigo_asesor.setText(respuesta.getString("codigo_asesor"));
                             observacion1.setText(respuesta.getString("observacion"));
-                            //observacion2.setText(respuesta.getString("observacion2"));
+                            observacion2.setText(respuesta.getString("observacion2"));
                         }
                         if(tvfechaNacimiento.getText().toString().equals("1970-01-01")){
                             tvfechaNacimiento.setText("Presionar boton Fecha");
@@ -1196,7 +1196,7 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
             Canvas canvas = myPage1.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1png);
   //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
             scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
@@ -1232,7 +1232,7 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
             Canvas canvas2 = myPage2.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4png);
      //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
             scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
@@ -1301,8 +1301,8 @@ public class Formularios extends Fragment {
             canvas2.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
                     +apellidoPaterno.getText().toString().toUpperCase()+" "
                     +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase()
-                    ,400,3635,titlePaint);
-            canvas2.drawText(asesor.getText().toString().toUpperCase(),1780,3635,titlePaint);
+                    ,390,3635,titlePaint);
+            canvas2.drawText(asesor.getText().toString().toUpperCase(),1750,3635,titlePaint);
             titlePaint.setTextSize(50f);
 
             myPDF.finishPage(myPage2);
@@ -1313,7 +1313,7 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
             Canvas canvas3 = myPage3.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3png);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
             scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //        Bitmap imagen3,scaled3 ;
@@ -1363,7 +1363,7 @@ public class Formularios extends Fragment {
             PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
             PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
             Canvas canvas4 = myPage4.getCanvas();
-            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fm);
+            imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
             scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
             if(Global.ubicacion==null){
@@ -1403,7 +1403,7 @@ public class Formularios extends Fragment {
         Canvas canvas5 = myPage5.getCanvas();
         titlePaint.setTextSize(47f);
         titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fr);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservapng);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservalote);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //        Bitmap imagen5,scaled5;

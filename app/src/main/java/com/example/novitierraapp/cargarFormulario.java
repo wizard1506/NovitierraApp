@@ -1031,6 +1031,13 @@ public class cargarFormulario extends Fragment {
             }
         }
     }
+    public String esNull(String dato){
+        if(dato.equals("null") || dato.equals("NULL") || dato.equals("Null")){
+            String valor="";
+            return valor;
+        }
+        return dato;
+    }
 
 //    public void seleccionarRbMasculinoFemenino(String valor){
 //        if(valor.contains("Masculino")){
@@ -1066,24 +1073,24 @@ public class cargarFormulario extends Fragment {
                         for (int i = 0; i <array.length() ; i++) {
                             JSONObject respuesta = array.getJSONObject(i);
                             nombre_cliente.setText(respuesta.getString("nombres"));
-                            apellidoPaterno.setText(respuesta.getString("apellidoP"));
-                            apellidoMaterno.setText(respuesta.getString("apellidoM"));
-                            apellidoCasada.setText(respuesta.getString("apellidoC"));
+                            apellidoPaterno.setText(esNull(respuesta.getString("apellidoP")));
+                            apellidoMaterno.setText(esNull(respuesta.getString("apellidoM")));
+                            apellidoCasada.setText(esNull(respuesta.getString("apellidoC")));
                             elegirSpinnerPrefijo(respuesta.getString("prefijo"));
                             elegirSpinnerTipoIdentificacion(respuesta.getString("tipo_identificacion"));
                             ci_cliente.setText(respuesta.getString("nro_documento"));
                             elegirSpinnerExtension(respuesta.getString("extension"));
-                            nacionalidad.setText(respuesta.getString("nacionalidad"));
-                            tvfechaNacimiento.setText(respuesta.getString("fecha_nacimiento"));
+                            nacionalidad.setText(esNull(respuesta.getString("nacionalidad")));
+                            tvfechaNacimiento.setText(esNull(respuesta.getString("fecha_nacimiento")));
                             elegirSpinnerEstadoCivil(respuesta.getString("estado_civil"));
 //                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
                             elegirSpinnerNivelEstudio(respuesta.getString("nivel_estudio"));
                             profesion.setText(respuesta.getString("profesion_ocupacion"));
-                            telFijo.setText(respuesta.getString("telf_fijo"));
+                            telFijo.setText(esNull(respuesta.getString("telf_fijo")));
                             telMovil.setText(respuesta.getString("telf_movil"));
-                            telFijoOfc.setText(respuesta.getString("telf_fijoOficina"));
-                            telMovOfc.setText(respuesta.getString("telf_movilOficina"));
-                            correoPersonal.setText(respuesta.getString("correo"));
+                            telFijoOfc.setText(esNull(respuesta.getString("telf_fijoOficina")));
+                            telMovOfc.setText(esNull(respuesta.getString("telf_movilOficina")));
+                            correoPersonal.setText(esNull(respuesta.getString("correo")));
                             primerReferencia.setText(respuesta.getString("referencia1"));
                             parentesco.setText(respuesta.getString("relacion1"));
                             telfReferencia1.setText(respuesta.getString("telf_referencia1"));
@@ -1092,19 +1099,19 @@ public class cargarFormulario extends Fragment {
                             telfReferencia2.setText(respuesta.getString("telf_referencia2"));
                             elegirSpinnerTipoVivienda(respuesta.getString("tipo_vivienda"));
                             elegirSpinnerTenencia(respuesta.getString("tenencia"));
-                            costoAprox.setText(respuesta.getString("costo_vivienda"));
+                            costoAprox.setText(esNull(respuesta.getString("costo_vivienda")));
                             elegirSpinnerMonedaCostoVivienda(respuesta.getString("moneda_costoVivienda"));
-                            propietarioVivienta.setText(respuesta.getString("propietario_vivienda"));
-                            telefonoPropietario.setText(respuesta.getString("telf_propietario"));
+                            propietarioVivienta.setText(esNull(respuesta.getString("propietario_vivienda")));
+                            telefonoPropietario.setText(esNull(respuesta.getString("telf_propietario")));
                             pais.setText(respuesta.getString("pais_vivienda"));
                             elegirSpinnerDpto(respuesta.getString("departamento"));
-                            zona.setText(respuesta.getString("zona"));
+                            zona.setText(esNull(respuesta.getString("zona")));
                             ciudad.setText(respuesta.getString("ciudad"));
                             barrio.setText(respuesta.getString("barrio"));
-                            calle.setText(respuesta.getString("calle"));
-                            numero.setText(respuesta.getString("numero"));
-                            nombreEmpresa.setText(respuesta.getString("nombre_empresa"));
-                            direccionEmpresa.setText(respuesta.getString("direccion_empresa"));
+                            calle.setText(esNull(respuesta.getString("calle")));
+                            numero.setText(esNull(respuesta.getString("numero")));
+                            nombreEmpresa.setText(esNull(respuesta.getString("nombre_empresa")));
+                            direccionEmpresa.setText(esNull(respuesta.getString("direccion_empresa")));
                             rubroEmpresa.setText(respuesta.getString("rubro"));
                             ingresosEmpresa.setText(respuesta.getString("ingresos"));
 //                            elegirRbMonedaIngresos(respuesta.getString("moneda_ingresos"));
@@ -1114,13 +1121,13 @@ public class cargarFormulario extends Fragment {
                             mz.setText(respuesta.getString("mz"));
                             lt.setText(respuesta.getString("lt"));
                             cat.setText(respuesta.getString("cat"));
-                            mts2.setText(respuesta.getString("metros2"));
+                            mts2.setText(esNull(respuesta.getString("metros2")));
 //                            elegirRbPlazoContado(respuesta.getString("tipo_venta"));
                             elegirSpinnerCuotas(respuesta.getString("cuotas"));
                             asesor.setText(respuesta.getString("asesor"));
                             codigo_asesor.setText(respuesta.getString("codigo_asesor"));
-                            observacion1.setText(respuesta.getString("observacion"));
-                            //observacion2.setText(respuesta.getString("observacion2"));
+                            observacion1.setText(esNull(respuesta.getString("observacion")));
+                            observacion2.setText(esNull(respuesta.getString("observacion2")));
                         }
                         if(tvfechaNacimiento.getText().toString().equals("1970-01-01")){
                             tvfechaNacimiento.setText("Presionar boton Fecha");
@@ -1194,7 +1201,7 @@ public class cargarFormulario extends Fragment {
         PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
         Canvas canvas = myPage1.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1png);
         //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
@@ -1230,7 +1237,7 @@ public class cargarFormulario extends Fragment {
         PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
         Canvas canvas2 = myPage2.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4png);
         //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
@@ -1299,8 +1306,8 @@ public class cargarFormulario extends Fragment {
         canvas2.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
                         +apellidoPaterno.getText().toString().toUpperCase()+" "
                         +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase()
-                ,400,3635,titlePaint);
-        canvas2.drawText(asesor.getText().toString().toUpperCase(),1780,3635,titlePaint);
+                ,390,3635,titlePaint);
+        canvas2.drawText(asesor.getText().toString().toUpperCase(),1750,3635,titlePaint);
         titlePaint.setTextSize(50f);
 
         myPDF.finishPage(myPage2);
@@ -1311,7 +1318,7 @@ public class cargarFormulario extends Fragment {
         PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
         Canvas canvas3 = myPage3.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3png);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //        Bitmap imagen3,scaled3 ;
@@ -1361,7 +1368,7 @@ public class cargarFormulario extends Fragment {
         PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
         Canvas canvas4 = myPage4.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fm);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
         if(Global.ubicacion==null){
@@ -1401,7 +1408,7 @@ public class cargarFormulario extends Fragment {
         Canvas canvas5 = myPage5.getCanvas();
         titlePaint.setTextSize(47f);
         titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fr);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservapng);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservalote);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //        Bitmap imagen5,scaled5;

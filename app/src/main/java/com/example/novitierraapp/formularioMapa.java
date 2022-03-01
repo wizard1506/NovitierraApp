@@ -239,7 +239,7 @@ public class formularioMapa extends Fragment {
         PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
         Canvas canvas4 = myPage4.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.fm);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
         if(Global.ubicacion==null){

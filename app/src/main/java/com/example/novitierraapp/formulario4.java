@@ -678,7 +678,7 @@ public class formulario4 extends Fragment {
         PdfDocument.PageInfo myPageInfo2 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage2 = myPDF.startPage(myPageInfo2);
         Canvas canvas2 = myPage2.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4png);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoform4);
 //            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
@@ -746,8 +746,8 @@ public class formulario4 extends Fragment {
         canvas2.drawText(nombre_cliente.getText().toString().toUpperCase()+" "
                         +apellidoPaterno.getText().toString().toUpperCase()+" "
                         +apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase()
-                ,400,3635,titlePaint);
-        canvas2.drawText(asesor.getText().toString().toUpperCase(),1800,3635,titlePaint);
+                ,390,3635,titlePaint);
+        canvas2.drawText(asesor.getText().toString().toUpperCase(),1750,3635,titlePaint);
         titlePaint.setTextSize(50f);
 
         myPDF.finishPage(myPage2);

@@ -9,42 +9,43 @@
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Inicio" />
         <item
+            android:id="@+id/encuesta"
+            android:icon="@drawable/ic_baseline_analytics_24"
+            android:title="1.- Encuesta" />
+        <item
             android:id="@+id/mapFragment"
             android:icon="@drawable/ic_baseline_map_24"
-            android:title=" Capturar Ubicacion" />
-        <item
-            android:id="@+id/formularioMapa"
-            android:icon="@drawable/ic_baseline_map_24"
-            android:title=" Solo Formulario Mapa" />
+            android:title="2.- Capturar Ubicacion" />
+<!--        <item-->
+<!--            android:id="@+id/formularioMapa"-->
+<!--            android:icon="@drawable/ic_baseline_map_24"-->
+<!--            android:title=" Solo Formulario Mapa" />-->
         <item
             android:id="@+id/formularios"
             android:icon="@drawable/ic_menu_formulario"
-            android:title=" Registrar Titular Completo" />
+            android:title="3.- Registrar Titular Completo" />
         <item
             android:id="@+id/cargarFormulario"
             android:icon="@drawable/ic_menu_formulario"
-            android:title=" Modificar Titular" />
+            android:title="3.1 .- Modificar Titular" />
         <item
             android:id="@+id/formCoSolicitante"
             android:icon="@drawable/ic_menu_formulario"
-            android:title=" Co-Solicitante" />
-        <item
-            android:id="@+id/formulario1y3"
-            android:icon="@drawable/ic_menu_formulario"
-            android:title=" Solo Formularios 1 y 3" />
-        <item
-            android:id="@+id/formulario4"
-            android:icon="@drawable/ic_menu_formulario"
-            android:title=" Solo Formulario 4" />
+            android:title="4.- Co-Solicitante" />
+<!--        <item-->
+<!--            android:id="@+id/formulario1y3"-->
+<!--            android:icon="@drawable/ic_menu_formulario"-->
+<!--            android:title=" Solo Formularios 1 y 3" />-->
+<!--        <item-->
+<!--            android:id="@+id/formulario4"-->
+<!--            android:icon="@drawable/ic_menu_formulario"-->
+<!--            android:title=" Solo Formulario 4" />-->
 
-        <item
-            android:id="@+id/encuesta"
-            android:icon="@drawable/ic_baseline_analytics_24"
-            android:title=" Encuesta" />
+
         <item
             android:id="@+id/misFormularios"
             android:icon="@drawable/ic_baseline_list_24"
-            android:title=" Mis Formularios" />
+            android:title="5.- Mis Formularios" />
 
     </group>
 </menu>

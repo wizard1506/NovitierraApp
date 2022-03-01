@@ -493,7 +493,7 @@ public class FormCoSolicitante extends Fragment {
         Canvas canvas = myPage1.getCanvas();
 
         //dibujamos el formulario
-        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form4a);
+        bmp = BitmapFactory.decodeResource(getResources(),R.drawable.cosolpng);
         scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
         canvas.drawBitmap(scaledbmp,0,0,myPaint);
 

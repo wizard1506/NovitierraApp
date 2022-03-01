@@ -327,7 +327,7 @@ public class formulario1y3 extends Fragment {
         PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage1 = myPDF.startPage(myPageInfo1);
         Canvas canvas = myPage1.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1png);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //            bmp = BitmapFactory.decodeResource(getResources(),R.drawable.form1);
 //            scaledbmp = Bitmap.createScaledBitmap(bmp,2539,3874,false);
@@ -362,7 +362,7 @@ public class formulario1y3 extends Fragment {
         PdfDocument.PageInfo myPageInfo3 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
         PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
         Canvas canvas3 = myPage3.getCanvas();
-        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3);
+        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3png);
         scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 //        Bitmap imagen3,scaled3 ;
 //        imagen3 = BitmapFactory.decodeResource(getResources(),R.drawable.form3legal02);
