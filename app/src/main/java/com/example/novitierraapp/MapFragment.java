@@ -86,6 +86,8 @@ public class MapFragment extends Fragment {
                             }else {
                                 Address address = listaDir.get(0);
                                 LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+                                Global.gLat=latLng.latitude;
+                                Global.gLong=latLng.longitude;
                                 mMap.addMarker(new MarkerOptions().position(latLng).title(location));
                                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
                             }
@@ -157,6 +159,8 @@ public class MapFragment extends Fragment {
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.position(latLng);
                         markerOptions.title(latLng.latitude+" , "+latLng.longitude);
+                        Global.gLat=latLng.latitude;
+                        Global.gLong=latLng.longitude;
                         mMap.clear();
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
                         mMap.addMarker(markerOptions);

@@ -105,6 +105,7 @@ public class Formularios extends Fragment {
 
     private String URL_addtitular="http://wizardapps.xyz/novitierra/api/addTitular.php";
     private String URL_formulario="http://wizardapps.xyz/novitierra/api/cargarFormulario.php";
+    private String ubicacion = "https://www.google.es/maps?q=";
 //    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
 
     //***PARA PDF****
@@ -479,6 +480,9 @@ public class Formularios extends Fragment {
                     parametros.put("codigo_asesor",codigo_asesor.getText().toString());
                     parametros.put("observacion",observacion1.getText().toString());
                     parametros.put("observacion2",observacion2.getText().toString());
+                    parametros.put("latitud",Global.gLat.toString());
+                    parametros.put("longitud",Global.gLong.toString());
+                    parametros.put("ubicacion",ubicacion+Global.gLat.toString()+","+Global.gLong.toString());
                     parametros.put("fecha",fechaHoyBase());
 
                     return parametros;
@@ -774,6 +778,9 @@ public class Formularios extends Fragment {
         listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
         listaProyectos.add(new Proyectos(204,"AME TAUNA"));
         listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
+        listaProyectos.add(new Proyectos(206,"MACORORO I"));
+        listaProyectos.add(new Proyectos(207,"MACORORO II"));
+        listaProyectos.add(new Proyectos(208,"MACORORO III"));
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
     }
@@ -924,233 +931,233 @@ public class Formularios extends Fragment {
         return result;
     }
 
-    public void elegirSpinnerPrefijo(String valor){
-        Integer j = spinnerPrefijo.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerPrefijo.setSelection(i);
-            if(spinnerPrefijo.getItemAtPosition(i).toString().toLowerCase().equals(valor.toLowerCase())){
-                spinnerPrefijo.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerTipoIdentificacion(String valor){
-        Integer j = spinnerIdentificacion.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerIdentificacion.setSelection(i);
-            if(spinnerIdentificacion.getItemAtPosition(i).toString().contains(valor)){
-                spinnerIdentificacion.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerExtension(String valor){
-        Integer j = spinnerExtension.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerExtension.setSelection(i);
-            if(spinnerExtension.getItemAtPosition(i).toString().contains(valor)){
-                spinnerExtension.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerEstadoCivil(String valor){
-        Integer j = spinnerEstadoCivil.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerEstadoCivil.setSelection(i);
-            if(spinnerEstadoCivil.getItemAtPosition(i).toString().contains(valor)){
-                spinnerEstadoCivil.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerNivelEstudio(String valor){
-        Integer j = spinnerNivelEstudio.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerNivelEstudio.setSelection(i);
-            if(spinnerNivelEstudio.getItemAtPosition(i).toString().contains(valor)){
-                spinnerNivelEstudio.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerTipoVivienda(String valor){
-        Integer j = spinnerTipoVivienda.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerTipoVivienda.setSelection(i);
-            if(spinnerTipoVivienda.getItemAtPosition(i).toString().contains(valor)){
-                spinnerTipoVivienda.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerTenencia(String valor){
-        Integer j = spinnerTenencia.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerTenencia.setSelection(i);
-            if(spinnerTenencia.getItemAtPosition(i).toString().contains(valor)){
-                spinnerTenencia.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerMonedaCostoVivienda(String valor){
-        Integer j = spinnerMoneda.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerMoneda.setSelection(i);
-            if(spinnerMoneda.getItemAtPosition(i).toString().contains(valor)){
-                spinnerMoneda.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerDpto(String valor){
-        Integer j = spinnerDpto.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerDpto.setSelection(i);
-            if(spinnerDpto.getItemAtPosition(i).toString().contains(valor)){
-                spinnerDpto.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerUrbanizacion(String valor){
-        Integer j = spinner_urbanizacion.getCount();
-        for(int i=0;i<=j;i++){
-            spinner_urbanizacion.setSelection(i);
-            if(spinner_urbanizacion.getItemAtPosition(i).toString().contains(valor)){
-                spinner_urbanizacion.setSelection(i);
-                break;
-            }
-        }
-    }
-    public void elegirSpinnerCuotas(String valor){
-        Integer j = spinnerPlazo.getCount();
-        for(int i=0;i<=j;i++){
-            spinnerPlazo.setSelection(i);
-            if(spinnerPlazo.getItemAtPosition(i).toString().contains(valor)){
-                spinnerPlazo.setSelection(i);
-                break;
-            }
-        }
-    }
+//    public void elegirSpinnerPrefijo(String valor){
+//        Integer j = spinnerPrefijo.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerPrefijo.setSelection(i);
+//            if(spinnerPrefijo.getItemAtPosition(i).toString().toLowerCase().equals(valor.toLowerCase())){
+//                spinnerPrefijo.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerTipoIdentificacion(String valor){
+//        Integer j = spinnerIdentificacion.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerIdentificacion.setSelection(i);
+//            if(spinnerIdentificacion.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerIdentificacion.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerExtension(String valor){
+//        Integer j = spinnerExtension.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerExtension.setSelection(i);
+//            if(spinnerExtension.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerExtension.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerEstadoCivil(String valor){
+//        Integer j = spinnerEstadoCivil.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerEstadoCivil.setSelection(i);
+//            if(spinnerEstadoCivil.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerEstadoCivil.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerNivelEstudio(String valor){
+//        Integer j = spinnerNivelEstudio.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerNivelEstudio.setSelection(i);
+//            if(spinnerNivelEstudio.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerNivelEstudio.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerTipoVivienda(String valor){
+//        Integer j = spinnerTipoVivienda.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerTipoVivienda.setSelection(i);
+//            if(spinnerTipoVivienda.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerTipoVivienda.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerTenencia(String valor){
+//        Integer j = spinnerTenencia.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerTenencia.setSelection(i);
+//            if(spinnerTenencia.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerTenencia.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerMonedaCostoVivienda(String valor){
+//        Integer j = spinnerMoneda.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerMoneda.setSelection(i);
+//            if(spinnerMoneda.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerMoneda.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerDpto(String valor){
+//        Integer j = spinnerDpto.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerDpto.setSelection(i);
+//            if(spinnerDpto.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerDpto.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerUrbanizacion(String valor){
+//        Integer j = spinner_urbanizacion.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinner_urbanizacion.setSelection(i);
+//            if(spinner_urbanizacion.getItemAtPosition(i).toString().contains(valor)){
+//                spinner_urbanizacion.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
+//    public void elegirSpinnerCuotas(String valor){
+//        Integer j = spinnerPlazo.getCount();
+//        for(int i=0;i<=j;i++){
+//            spinnerPlazo.setSelection(i);
+//            if(spinnerPlazo.getItemAtPosition(i).toString().contains(valor)){
+//                spinnerPlazo.setSelection(i);
+//                break;
+//            }
+//        }
+//    }
 
-    public void seleccionarRbMasculinoFemenino(String valor){
-        if(valor.contains("Masculino")){
-            rbMasculino.setChecked(true);
-        }else {
-            rbFemenino.setChecked(true);
-        }
-    }
-    public void elegirRbMonedaIngresos(String valor){
-        if(valor.contains("Bs.")){
-            rbIngresosBs.setChecked(true);
-        }else {
-            rbIngresosDolar.setChecked(true);
-        }
-    }
-    public void elegirRbPlazoContado(String valor){
-        if(valor.contains("Contado")){
-            rb_contado.setChecked(true);
-        }else {
-            rb_plazo.setChecked(true);
-        }
-    }
-    public void cargarFormulario(){
-        RequestQueue requestQueue;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_formulario, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (!response.isEmpty()){
-                    try {
-                        JSONArray array = new JSONArray(response);
-                        for (int i = 0; i <array.length() ; i++) {
-                            JSONObject respuesta = array.getJSONObject(i);
-                            nombre_cliente.setText(respuesta.getString("nombres"));
-                            apellidoPaterno.setText(respuesta.getString("apellidoP"));
-                            apellidoMaterno.setText(respuesta.getString("apellidoM"));
-                            apellidoCasada.setText(respuesta.getString("apellidoC"));
-                            elegirSpinnerPrefijo(respuesta.getString("prefijo"));
-                            elegirSpinnerTipoIdentificacion(respuesta.getString("tipo_identificacion"));
-                            ci_cliente.setText(respuesta.getString("nro_documento"));
-                            elegirSpinnerExtension(respuesta.getString("extension"));
-                            nacionalidad.setText(respuesta.getString("nacionalidad"));
-                            tvfechaNacimiento.setText(respuesta.getString("fecha_nacimiento"));
-                            elegirSpinnerEstadoCivil(respuesta.getString("estado_civil"));
-                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
-                            elegirSpinnerNivelEstudio(respuesta.getString("nivel_estudio"));
-                            profesion.setText(respuesta.getString("profesion_ocupacion"));
-                            telFijo.setText(respuesta.getString("telf_fijo"));
-                            telMovil.setText(respuesta.getString("telf_movil"));
-                            telFijoOfc.setText(respuesta.getString("telf_fijoOficina"));
-                            telMovOfc.setText(respuesta.getString("telf_movilOficina"));
-                            correoPersonal.setText(respuesta.getString("correo"));
-                            primerReferencia.setText(respuesta.getString("referencia1"));
-                            parentesco.setText(respuesta.getString("relacion1"));
-                            telfReferencia1.setText(respuesta.getString("telf_referencia1"));
-                            segundaReferencia.setText(respuesta.getString("referencia2"));
-                            relacion.setText(respuesta.getString("relacion2"));
-                            telfReferencia2.setText(respuesta.getString("telf_referencia2"));
-                            elegirSpinnerTipoVivienda(respuesta.getString("tipo_vivienda"));
-                            elegirSpinnerTenencia(respuesta.getString("tenencia"));
-                            costoAprox.setText(respuesta.getString("costo_vivienda"));
-                            elegirSpinnerMonedaCostoVivienda(respuesta.getString("moneda_costoVivienda"));
-                            propietarioVivienta.setText(respuesta.getString("propietario_vivienda"));
-                            telefonoPropietario.setText(respuesta.getString("telf_propietario"));
-                            pais.setText(respuesta.getString("pais_vivienda"));
-                            elegirSpinnerDpto(respuesta.getString("departamento"));
-                            zona.setText(respuesta.getString("zona"));
-                            ciudad.setText(respuesta.getString("ciudad"));
-                            barrio.setText(respuesta.getString("barrio"));
-                            calle.setText(respuesta.getString("calle"));
-                            numero.setText(respuesta.getString("numero"));
-                            nombreEmpresa.setText(respuesta.getString("nombre_empresa"));
-                            direccionEmpresa.setText(respuesta.getString("direccion_empresa"));
-                            rubroEmpresa.setText(respuesta.getString("rubro"));
-                            ingresosEmpresa.setText(respuesta.getString("ingresos"));
-                            elegirRbMonedaIngresos(respuesta.getString("moneda_ingresos"));
-                            codigo_proyecto.setText(respuesta.getString("proyecto"));
-                            elegirSpinnerUrbanizacion(respuesta.getString("urbanizacion"));
-                            uv.setText(respuesta.getString("uv"));
-                            mz.setText(respuesta.getString("mz"));
-                            lt.setText(respuesta.getString("lt"));
-                            cat.setText(respuesta.getString("cat"));
-                            mts2.setText(respuesta.getString("metros2"));
-                            elegirRbPlazoContado(respuesta.getString("tipo_venta"));
-                            elegirSpinnerCuotas(respuesta.getString("cuotas"));
-                            asesor.setText(respuesta.getString("asesor"));
-                            codigo_asesor.setText(respuesta.getString("codigo_asesor"));
-                            observacion1.setText(respuesta.getString("observacion"));
-                            observacion2.setText(respuesta.getString("observacion2"));
-                        }
-                        if(tvfechaNacimiento.getText().toString().equals("1970-01-01")){
-                            tvfechaNacimiento.setText("Presionar boton Fecha");
-                        }
-                    }catch(JSONException e) {
-                        Toast.makeText(getContext(), "No se pudo cargar el formulario o no existe el codigo", Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
-                }else{
-                    Toast.makeText(getContext(), "Ocurrio algun error", Toast.LENGTH_LONG).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(),error.toString(), Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("codigo",codigoFormulario.getText().toString());
-                return parametros;
-            }
-        };
-        requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
-    }
+//    public void seleccionarRbMasculinoFemenino(String valor){
+//        if(valor.contains("Masculino")){
+//            rbMasculino.setChecked(true);
+//        }else {
+//            rbFemenino.setChecked(true);
+//        }
+//    }
+//    public void elegirRbMonedaIngresos(String valor){
+//        if(valor.contains("Bs.")){
+//            rbIngresosBs.setChecked(true);
+//        }else {
+//            rbIngresosDolar.setChecked(true);
+//        }
+//    }
+//    public void elegirRbPlazoContado(String valor){
+//        if(valor.contains("Contado")){
+//            rb_contado.setChecked(true);
+//        }else {
+//            rb_plazo.setChecked(true);
+//        }
+//    }
+//    public void cargarFormulario(){
+//        RequestQueue requestQueue;
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_formulario, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                if (!response.isEmpty()){
+//                    try {
+//                        JSONArray array = new JSONArray(response);
+//                        for (int i = 0; i <array.length() ; i++) {
+//                            JSONObject respuesta = array.getJSONObject(i);
+//                            nombre_cliente.setText(respuesta.getString("nombres"));
+//                            apellidoPaterno.setText(respuesta.getString("apellidoP"));
+//                            apellidoMaterno.setText(respuesta.getString("apellidoM"));
+//                            apellidoCasada.setText(respuesta.getString("apellidoC"));
+//                            elegirSpinnerPrefijo(respuesta.getString("prefijo"));
+//                            elegirSpinnerTipoIdentificacion(respuesta.getString("tipo_identificacion"));
+//                            ci_cliente.setText(respuesta.getString("nro_documento"));
+//                            elegirSpinnerExtension(respuesta.getString("extension"));
+//                            nacionalidad.setText(respuesta.getString("nacionalidad"));
+//                            tvfechaNacimiento.setText(respuesta.getString("fecha_nacimiento"));
+//                            elegirSpinnerEstadoCivil(respuesta.getString("estado_civil"));
+//                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
+//                            elegirSpinnerNivelEstudio(respuesta.getString("nivel_estudio"));
+//                            profesion.setText(respuesta.getString("profesion_ocupacion"));
+//                            telFijo.setText(respuesta.getString("telf_fijo"));
+//                            telMovil.setText(respuesta.getString("telf_movil"));
+//                            telFijoOfc.setText(respuesta.getString("telf_fijoOficina"));
+//                            telMovOfc.setText(respuesta.getString("telf_movilOficina"));
+//                            correoPersonal.setText(respuesta.getString("correo"));
+//                            primerReferencia.setText(respuesta.getString("referencia1"));
+//                            parentesco.setText(respuesta.getString("relacion1"));
+//                            telfReferencia1.setText(respuesta.getString("telf_referencia1"));
+//                            segundaReferencia.setText(respuesta.getString("referencia2"));
+//                            relacion.setText(respuesta.getString("relacion2"));
+//                            telfReferencia2.setText(respuesta.getString("telf_referencia2"));
+//                            elegirSpinnerTipoVivienda(respuesta.getString("tipo_vivienda"));
+//                            elegirSpinnerTenencia(respuesta.getString("tenencia"));
+//                            costoAprox.setText(respuesta.getString("costo_vivienda"));
+//                            elegirSpinnerMonedaCostoVivienda(respuesta.getString("moneda_costoVivienda"));
+//                            propietarioVivienta.setText(respuesta.getString("propietario_vivienda"));
+//                            telefonoPropietario.setText(respuesta.getString("telf_propietario"));
+//                            pais.setText(respuesta.getString("pais_vivienda"));
+//                            elegirSpinnerDpto(respuesta.getString("departamento"));
+//                            zona.setText(respuesta.getString("zona"));
+//                            ciudad.setText(respuesta.getString("ciudad"));
+//                            barrio.setText(respuesta.getString("barrio"));
+//                            calle.setText(respuesta.getString("calle"));
+//                            numero.setText(respuesta.getString("numero"));
+//                            nombreEmpresa.setText(respuesta.getString("nombre_empresa"));
+//                            direccionEmpresa.setText(respuesta.getString("direccion_empresa"));
+//                            rubroEmpresa.setText(respuesta.getString("rubro"));
+//                            ingresosEmpresa.setText(respuesta.getString("ingresos"));
+//                            elegirRbMonedaIngresos(respuesta.getString("moneda_ingresos"));
+//                            codigo_proyecto.setText(respuesta.getString("proyecto"));
+//                            elegirSpinnerUrbanizacion(respuesta.getString("urbanizacion"));
+//                            uv.setText(respuesta.getString("uv"));
+//                            mz.setText(respuesta.getString("mz"));
+//                            lt.setText(respuesta.getString("lt"));
+//                            cat.setText(respuesta.getString("cat"));
+//                            mts2.setText(respuesta.getString("metros2"));
+//                            elegirRbPlazoContado(respuesta.getString("tipo_venta"));
+//                            elegirSpinnerCuotas(respuesta.getString("cuotas"));
+//                            asesor.setText(respuesta.getString("asesor"));
+//                            codigo_asesor.setText(respuesta.getString("codigo_asesor"));
+//                            observacion1.setText(respuesta.getString("observacion"));
+//                            observacion2.setText(respuesta.getString("observacion2"));
+//                        }
+//                        if(tvfechaNacimiento.getText().toString().equals("1970-01-01")){
+//                            tvfechaNacimiento.setText("Presionar boton Fecha");
+//                        }
+//                    }catch(JSONException e) {
+//                        Toast.makeText(getContext(), "No se pudo cargar el formulario o no existe el codigo", Toast.LENGTH_LONG).show();
+//                        e.printStackTrace();
+//                    }
+//                }else{
+//                    Toast.makeText(getContext(), "Ocurrio algun error", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getContext(),error.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> parametros = new HashMap<String, String>();
+//                parametros.put("codigo",codigoFormulario.getText().toString());
+//                return parametros;
+//            }
+//        };
+//        requestQueue = Volley.newRequestQueue(getContext());
+//        requestQueue.add(stringRequest);
+//    }
 
 
 /////boton generador de pdf/////
