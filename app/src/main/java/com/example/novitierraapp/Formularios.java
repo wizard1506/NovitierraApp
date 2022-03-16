@@ -482,7 +482,11 @@ public class Formularios extends Fragment {
                     parametros.put("observacion2",observacion2.getText().toString());
                     parametros.put("latitud",Global.gLat.toString());
                     parametros.put("longitud",Global.gLong.toString());
-                    parametros.put("ubicacion",ubicacion+Global.gLat.toString()+","+Global.gLong.toString());
+                    if(Global.gLong==0.0 && Global.gLat==0.0){
+                        parametros.put("ubicacion","");
+                    }else{
+                        parametros.put("ubicacion",ubicacion+Global.gLat.toString()+","+Global.gLong.toString());
+                    }
                     parametros.put("fecha",fechaHoyBase());
 
                     return parametros;
