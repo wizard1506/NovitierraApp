@@ -100,6 +100,7 @@ public class Formularios extends Fragment {
     ArrayList<String> listaPrefijo = new ArrayList<>();
     ArrayList<String> listaMoneda = new ArrayList<>();
     ArrayList<String> listaPlazo = new ArrayList<>();
+    metodos metodos = new metodos();
 
     Bitmap imagen,scaled;
 
@@ -219,17 +220,8 @@ public class Formularios extends Fragment {
         asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
 
         /////cargamos los spinners
-        cargarListaTipoIdentificacion();
-        cargarListaEstadoCivil();
+        cargarComponentes();
         cargarListaUrbanizacion();
-        cargarListaNivelEstudio();
-        cargarListaTipoVivienda();
-        cargarListaDpto();
-        cargarListaTenencia();
-        cargarListaPrefijo();
-        cargarListaExtensiones();
-        cargarListaMoneda();
-        cargarListaPlazo();
 
         ////boton fecha nacimiento
         btFechaNac.setOnClickListener(new View.OnClickListener() {
@@ -320,8 +312,6 @@ public class Formularios extends Fragment {
             }
         });
 
-
-
         spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -359,24 +349,6 @@ public class Formularios extends Fragment {
             }
         });
 
-
-//        registrarForm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (validarCamposObligatorios()) {
-//                    if(validarForm()){
-//                        if(EsDependiente()){
-//                            registrarTitular();
-//                            Toast.makeText(getContext(),"Registrando Datos espere un momento...", Toast.LENGTH_SHORT).show();
-//                        }else{
-//                            Toast.makeText(getContext(), "Rellene Nombre Empresa y Direccion Empresa.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }else {
-//                    }
-//                }
-//            }
-//        });
-
     }
 
     @Override
@@ -391,6 +363,49 @@ public class Formularios extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(FormulariosViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    public void cargarComponentes(){
+        metodos.cargarExtensiones(listaExtension);
+        ArrayAdapter<String> adapterExtension = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
+        spinnerExtension.setAdapter(adapterExtension);
+
+        metodos.cargarMoneda(listaMoneda);
+        ArrayAdapter<String> adapterMoneda = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaMoneda);
+        spinnerMoneda.setAdapter(adapterMoneda);
+
+        metodos.cargarListaPlazo(listaPlazo);
+        ArrayAdapter<String> adapterPlazo = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPlazo);
+        spinnerPlazo.setAdapter(adapterPlazo);
+
+        metodos.cargarTipoIdentificacion(listaIdentificacion);
+        ArrayAdapter<String> adapterTipoIdent = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaIdentificacion);
+        spinnerIdentificacion.setAdapter(adapterTipoIdent);
+
+        metodos.cargarEstadoCivil(listaEstadoCivil);
+        ArrayAdapter<String> adapterEstadoCivil = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaEstadoCivil);
+        spinnerEstadoCivil.setAdapter(adapterEstadoCivil);
+
+        metodos.cargarNivelEstudio(listaNivelEstudio);
+        ArrayAdapter<String> adapterNivelEstudio = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaNivelEstudio);
+        spinnerNivelEstudio.setAdapter(adapterNivelEstudio);
+
+        metodos.cargarTipoVivienda(listaTipoVivienda);
+        ArrayAdapter<String> adapterTipoVivienda = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTipoVivienda);
+        spinnerTipoVivienda.setAdapter(adapterTipoVivienda);
+
+        metodos.cargarDpto(listaDpto);
+        ArrayAdapter<String> adapterDpto = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
+        spinnerDpto.setAdapter(adapterDpto);
+
+        metodos.cargarTenencia(listaTenencia);
+        ArrayAdapter<String> adapterTenencia = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTenencia);
+        spinnerTenencia.setAdapter(adapterTenencia);
+
+        metodos.cargarPrefijo(listaPrefijo);
+        ArrayAdapter<String> adapterPrefijo = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPrefijo);
+        spinnerPrefijo.setAdapter(adapterPrefijo);
+
     }
 
     public void DeshabilitarBoton(){
@@ -496,9 +511,6 @@ public class Formularios extends Fragment {
             requestQueue.add(request);
             habilitarBoton();
     }
-
-
-
 
     public String tresDigitos(String numero){
         int digitos = numero.length();
@@ -779,119 +791,18 @@ public class Formularios extends Fragment {
         listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
         listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
         listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
+        listaProyectos.add(new Proyectos(206,"LA PASCANA DE COTOCA III"));
+        listaProyectos.add(new Proyectos(207,"LA PASCANA DE COTOCA IV"));
+        listaProyectos.add(new Proyectos(208,"LA PASCANA DE COTOCA V"));
         listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
         listaProyectos.add(new Proyectos(204,"AME TAUNA"));
         listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
-        listaProyectos.add(new Proyectos(206,"MACORORO I"));
-        listaProyectos.add(new Proyectos(207,"MACORORO II"));
-        listaProyectos.add(new Proyectos(208,"MACORORO III"));
+
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
     }
 
-    public void cargarListaExtensiones(){
-        listaExtension.add("--");
-        listaExtension.add("SC");
-        listaExtension.add("LP");
-        listaExtension.add("CB");
-        listaExtension.add("PO");
-        listaExtension.add("CH");
-        listaExtension.add("TJ");
-        listaExtension.add("OR");
-        listaExtension.add("BE");
-        listaExtension.add("PD");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
-        spinnerExtension.setAdapter(adapter);
-    }
-    public void cargarListaMoneda(){
-        listaMoneda.add("Ninguno");
-        listaMoneda.add("Bs");
-        listaMoneda.add("$us");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaMoneda);
-        spinnerMoneda.setAdapter(adapter);
-    }
-    public void cargarListaPlazo(){
-        listaPlazo.add("--");
-        listaPlazo.add("12");
-        listaPlazo.add("24");
-        listaPlazo.add("36");
-        listaPlazo.add("48");
-        listaPlazo.add("60");
-        listaPlazo.add("72");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPlazo);
-        spinnerPlazo.setAdapter(adapter);
-    }
 
-
-
-    public void cargarListaTipoIdentificacion(){
-        listaIdentificacion.add("Carnet de Identidad");
-        listaIdentificacion.add("Pasaporte");
-        listaIdentificacion.add("Carnet Extranjero");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaIdentificacion);
-        spinnerIdentificacion.setAdapter(adapter);
-    }
-
-    public void cargarListaEstadoCivil(){
-        listaEstadoCivil.add("Casado(a)");
-        listaEstadoCivil.add("Soltero(a)");
-        listaEstadoCivil.add("Divorciado(a)");
-        listaEstadoCivil.add("Viudo(a)");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaEstadoCivil);
-        spinnerEstadoCivil.setAdapter(adapter);
-    }
-
-    public void cargarListaNivelEstudio(){
-        listaNivelEstudio.add("Primaria");
-        listaNivelEstudio.add("Secundaria");
-        listaNivelEstudio.add("Tecnico Medio");
-        listaNivelEstudio.add("Tecnico Superior");
-        listaNivelEstudio.add("Licenciatura");
-        listaNivelEstudio.add("Ninguno");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaNivelEstudio);
-        spinnerNivelEstudio.setAdapter(adapter);
-    }
-
-    public void cargarListaTipoVivienda(){
-        listaTipoVivienda.add("Dpto");
-        listaTipoVivienda.add("Casa");
-        listaTipoVivienda.add("Cuarto");
-        listaTipoVivienda.add("Terreno");
-        listaTipoVivienda.add("Otro");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTipoVivienda);
-        spinnerTipoVivienda.setAdapter(adapter);
-    }
-
-    public void cargarListaDpto(){
-        listaDpto.add("Santa Cruz");
-        listaDpto.add("La Paz");
-        listaDpto.add("Cochabamba");
-        listaDpto.add("Beni");
-        listaDpto.add("Pando");
-        listaDpto.add("Oruro");
-        listaDpto.add("Potosi");
-        listaDpto.add("Tarija");
-        listaDpto.add("Chuquisaca");
-        listaDpto.add("Ninguno");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaDpto);
-        spinnerDpto.setAdapter(adapter);
-    }
-
-    public void cargarListaTenencia() {
-        listaTenencia.add("Propia");
-        listaTenencia.add("Alquiler");
-        listaTenencia.add("Anticretico");
-        listaTenencia.add("Otro");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaTenencia);
-        spinnerTenencia.setAdapter(adapter);
-    }
-    public void cargarListaPrefijo() {
-        listaPrefijo.add("Ninguno");
-        listaPrefijo.add("VDA DE");
-        listaPrefijo.add("DE");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPrefijo);
-        spinnerPrefijo.setAdapter(adapter);
-    }
     public String mesLiteral(Integer mes){
         String result="";
         switch (mes){
@@ -934,234 +845,6 @@ public class Formularios extends Fragment {
         }
         return result;
     }
-
-//    public void elegirSpinnerPrefijo(String valor){
-//        Integer j = spinnerPrefijo.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerPrefijo.setSelection(i);
-//            if(spinnerPrefijo.getItemAtPosition(i).toString().toLowerCase().equals(valor.toLowerCase())){
-//                spinnerPrefijo.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerTipoIdentificacion(String valor){
-//        Integer j = spinnerIdentificacion.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerIdentificacion.setSelection(i);
-//            if(spinnerIdentificacion.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerIdentificacion.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerExtension(String valor){
-//        Integer j = spinnerExtension.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerExtension.setSelection(i);
-//            if(spinnerExtension.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerExtension.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerEstadoCivil(String valor){
-//        Integer j = spinnerEstadoCivil.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerEstadoCivil.setSelection(i);
-//            if(spinnerEstadoCivil.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerEstadoCivil.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerNivelEstudio(String valor){
-//        Integer j = spinnerNivelEstudio.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerNivelEstudio.setSelection(i);
-//            if(spinnerNivelEstudio.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerNivelEstudio.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerTipoVivienda(String valor){
-//        Integer j = spinnerTipoVivienda.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerTipoVivienda.setSelection(i);
-//            if(spinnerTipoVivienda.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerTipoVivienda.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerTenencia(String valor){
-//        Integer j = spinnerTenencia.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerTenencia.setSelection(i);
-//            if(spinnerTenencia.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerTenencia.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerMonedaCostoVivienda(String valor){
-//        Integer j = spinnerMoneda.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerMoneda.setSelection(i);
-//            if(spinnerMoneda.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerMoneda.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerDpto(String valor){
-//        Integer j = spinnerDpto.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerDpto.setSelection(i);
-//            if(spinnerDpto.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerDpto.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerUrbanizacion(String valor){
-//        Integer j = spinner_urbanizacion.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinner_urbanizacion.setSelection(i);
-//            if(spinner_urbanizacion.getItemAtPosition(i).toString().contains(valor)){
-//                spinner_urbanizacion.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-//    public void elegirSpinnerCuotas(String valor){
-//        Integer j = spinnerPlazo.getCount();
-//        for(int i=0;i<=j;i++){
-//            spinnerPlazo.setSelection(i);
-//            if(spinnerPlazo.getItemAtPosition(i).toString().contains(valor)){
-//                spinnerPlazo.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
-
-//    public void seleccionarRbMasculinoFemenino(String valor){
-//        if(valor.contains("Masculino")){
-//            rbMasculino.setChecked(true);
-//        }else {
-//            rbFemenino.setChecked(true);
-//        }
-//    }
-//    public void elegirRbMonedaIngresos(String valor){
-//        if(valor.contains("Bs.")){
-//            rbIngresosBs.setChecked(true);
-//        }else {
-//            rbIngresosDolar.setChecked(true);
-//        }
-//    }
-//    public void elegirRbPlazoContado(String valor){
-//        if(valor.contains("Contado")){
-//            rb_contado.setChecked(true);
-//        }else {
-//            rb_plazo.setChecked(true);
-//        }
-//    }
-//    public void cargarFormulario(){
-//        RequestQueue requestQueue;
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_formulario, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                if (!response.isEmpty()){
-//                    try {
-//                        JSONArray array = new JSONArray(response);
-//                        for (int i = 0; i <array.length() ; i++) {
-//                            JSONObject respuesta = array.getJSONObject(i);
-//                            nombre_cliente.setText(respuesta.getString("nombres"));
-//                            apellidoPaterno.setText(respuesta.getString("apellidoP"));
-//                            apellidoMaterno.setText(respuesta.getString("apellidoM"));
-//                            apellidoCasada.setText(respuesta.getString("apellidoC"));
-//                            elegirSpinnerPrefijo(respuesta.getString("prefijo"));
-//                            elegirSpinnerTipoIdentificacion(respuesta.getString("tipo_identificacion"));
-//                            ci_cliente.setText(respuesta.getString("nro_documento"));
-//                            elegirSpinnerExtension(respuesta.getString("extension"));
-//                            nacionalidad.setText(respuesta.getString("nacionalidad"));
-//                            tvfechaNacimiento.setText(respuesta.getString("fecha_nacimiento"));
-//                            elegirSpinnerEstadoCivil(respuesta.getString("estado_civil"));
-//                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
-//                            elegirSpinnerNivelEstudio(respuesta.getString("nivel_estudio"));
-//                            profesion.setText(respuesta.getString("profesion_ocupacion"));
-//                            telFijo.setText(respuesta.getString("telf_fijo"));
-//                            telMovil.setText(respuesta.getString("telf_movil"));
-//                            telFijoOfc.setText(respuesta.getString("telf_fijoOficina"));
-//                            telMovOfc.setText(respuesta.getString("telf_movilOficina"));
-//                            correoPersonal.setText(respuesta.getString("correo"));
-//                            primerReferencia.setText(respuesta.getString("referencia1"));
-//                            parentesco.setText(respuesta.getString("relacion1"));
-//                            telfReferencia1.setText(respuesta.getString("telf_referencia1"));
-//                            segundaReferencia.setText(respuesta.getString("referencia2"));
-//                            relacion.setText(respuesta.getString("relacion2"));
-//                            telfReferencia2.setText(respuesta.getString("telf_referencia2"));
-//                            elegirSpinnerTipoVivienda(respuesta.getString("tipo_vivienda"));
-//                            elegirSpinnerTenencia(respuesta.getString("tenencia"));
-//                            costoAprox.setText(respuesta.getString("costo_vivienda"));
-//                            elegirSpinnerMonedaCostoVivienda(respuesta.getString("moneda_costoVivienda"));
-//                            propietarioVivienta.setText(respuesta.getString("propietario_vivienda"));
-//                            telefonoPropietario.setText(respuesta.getString("telf_propietario"));
-//                            pais.setText(respuesta.getString("pais_vivienda"));
-//                            elegirSpinnerDpto(respuesta.getString("departamento"));
-//                            zona.setText(respuesta.getString("zona"));
-//                            ciudad.setText(respuesta.getString("ciudad"));
-//                            barrio.setText(respuesta.getString("barrio"));
-//                            calle.setText(respuesta.getString("calle"));
-//                            numero.setText(respuesta.getString("numero"));
-//                            nombreEmpresa.setText(respuesta.getString("nombre_empresa"));
-//                            direccionEmpresa.setText(respuesta.getString("direccion_empresa"));
-//                            rubroEmpresa.setText(respuesta.getString("rubro"));
-//                            ingresosEmpresa.setText(respuesta.getString("ingresos"));
-//                            elegirRbMonedaIngresos(respuesta.getString("moneda_ingresos"));
-//                            codigo_proyecto.setText(respuesta.getString("proyecto"));
-//                            elegirSpinnerUrbanizacion(respuesta.getString("urbanizacion"));
-//                            uv.setText(respuesta.getString("uv"));
-//                            mz.setText(respuesta.getString("mz"));
-//                            lt.setText(respuesta.getString("lt"));
-//                            cat.setText(respuesta.getString("cat"));
-//                            mts2.setText(respuesta.getString("metros2"));
-//                            elegirRbPlazoContado(respuesta.getString("tipo_venta"));
-//                            elegirSpinnerCuotas(respuesta.getString("cuotas"));
-//                            asesor.setText(respuesta.getString("asesor"));
-//                            codigo_asesor.setText(respuesta.getString("codigo_asesor"));
-//                            observacion1.setText(respuesta.getString("observacion"));
-//                            observacion2.setText(respuesta.getString("observacion2"));
-//                        }
-//                        if(tvfechaNacimiento.getText().toString().equals("1970-01-01")){
-//                            tvfechaNacimiento.setText("Presionar boton Fecha");
-//                        }
-//                    }catch(JSONException e) {
-//                        Toast.makeText(getContext(), "No se pudo cargar el formulario o no existe el codigo", Toast.LENGTH_LONG).show();
-//                        e.printStackTrace();
-//                    }
-//                }else{
-//                    Toast.makeText(getContext(), "Ocurrio algun error", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getContext(),error.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> parametros = new HashMap<String, String>();
-//                parametros.put("codigo",codigoFormulario.getText().toString());
-//                return parametros;
-//            }
-//        };
-//        requestQueue = Volley.newRequestQueue(getContext());
-//        requestQueue.add(stringRequest);
-//    }
 
 
 /////boton generador de pdf/////

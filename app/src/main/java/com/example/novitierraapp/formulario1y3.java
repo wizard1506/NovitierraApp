@@ -212,12 +212,13 @@ public class formulario1y3 extends Fragment {
         listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
         listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
         listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
+        listaProyectos.add(new Proyectos(206,"LA PASCANA DE COTOCA III"));
+        listaProyectos.add(new Proyectos(207,"LA PASCANA DE COTOCA IV"));
+        listaProyectos.add(new Proyectos(208,"LA PASCANA DE COTOCA V"));
         listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
         listaProyectos.add(new Proyectos(204,"AME TAUNA"));
         listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
-        listaProyectos.add(new Proyectos(206,"MACORORO I"));
-        listaProyectos.add(new Proyectos(207,"MACORORO II"));
-        listaProyectos.add(new Proyectos(208,"MACORORO III"));
+
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
     }

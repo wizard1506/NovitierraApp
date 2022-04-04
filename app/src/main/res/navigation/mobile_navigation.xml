@@ -68,6 +68,16 @@
         android:name="com.example.novitierraapp.cargarFormulario"
         android:label="Cargar Formulario"
         tools:layout="@layout/cargar_formulario_fragment" />
+    <fragment
+        android:id="@+id/prospectos"
+        android:name="com.example.novitierraapp.prospectos"
+        android:label="Nuevo Prospecto"
+        tools:layout="@layout/prospectos_fragment" />
+    <fragment
+        android:id="@+id/prospectosHoy"
+        android:name="com.example.novitierraapp.prospectosHoy"
+        android:label="prospectos_hoy_fragment"
+        tools:layout="@layout/prospectos_hoy_fragment" />
 
     <!--    <navigation android:id="@+id/navigation3"-->
 <!--        app:startDestination="@id/navigation2">-->

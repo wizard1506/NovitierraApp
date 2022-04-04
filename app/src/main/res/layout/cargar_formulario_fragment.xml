@@ -1042,6 +1042,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:maxLength="50"
                     android:inputType="textCapSentences"></EditText>
             </LinearLayout>
 
