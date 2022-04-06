@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"
-                android:inputType="textCapCharacters"
+                android:inputType="textCapWords"
                 >
             </EditText>
         <TextView

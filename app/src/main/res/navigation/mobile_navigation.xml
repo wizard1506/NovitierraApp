@@ -76,7 +76,7 @@
     <fragment
         android:id="@+id/prospectosHoy"
         android:name="com.example.novitierraapp.prospectosHoy"
-        android:label="prospectos_hoy_fragment"
+        android:label="Prospectos de Hoy"
         tools:layout="@layout/prospectos_hoy_fragment" />
 
     <!--    <navigation android:id="@+id/navigation3"-->

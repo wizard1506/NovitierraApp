@@ -400,95 +400,95 @@ public class cargarFormulario extends Fragment {
         guardar.setEnabled(true);
     }
 
-    private void registrarTitular() {
-        StringRequest request = new StringRequest(Request.Method.POST, URL_addtitular, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (!response.isEmpty()){
-                    if(response.contains("algo salio mal")){
-                        Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
-                    }
-                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
-
-                }else{
-                    Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("nombres",nombre_cliente.getText().toString());
-                parametros.put("apellidoP",apellidoPaterno.getText().toString());
-                parametros.put("apellidoM",apellidoMaterno.getText().toString());
-                parametros.put("apellidoC",apellidoCasada.getText().toString());
-                parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
-                parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
-                parametros.put("nro_documento",ci_cliente.getText().toString());
-                parametros.put("extension",spinnerExtension.getSelectedItem().toString());
-                parametros.put("nacionalidad",nacionalidad.getText().toString());
-                parametros.put("fecha_nacimiento",tvfechaNacimiento.getText().toString());
-                parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
-                parametros.put("sexo",rbSelectedGenero.getText().toString());
-                parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
-                parametros.put("profesion_ocupacion",profesion.getText().toString());
-                parametros.put("telf_fijo",telFijo.getText().toString());
-                parametros.put("telf_movil",telMovil.getText().toString());
-                parametros.put("telf_fijoOficina",telFijoOfc.getText().toString());
-                parametros.put("telf_movilOficina",telMovOfc.getText().toString());
-                parametros.put("correo",correoPersonal.getText().toString());
-                parametros.put("referencia1",primerReferencia.getText().toString());
-                parametros.put("relacion1",parentesco.getText().toString());
-                parametros.put("telf_referencia1",telfReferencia1.getText().toString());
-                parametros.put("referencia2",segundaReferencia.getText().toString());
-                parametros.put("relacion2",relacion.getText().toString());
-                parametros.put("telf_referencia2",telfReferencia2.getText().toString());
-                parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
-                parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
-                parametros.put("costo_vivienda",costoAprox.getText().toString());
-                parametros.put("moneda_costoVivienda",spinnerMoneda.getSelectedItem().toString());
-                parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
-                parametros.put("telf_propietario",telefonoPropietario.getText().toString());
-                parametros.put("pais_vivienda",pais.getText().toString());
-                parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
-                parametros.put("zona",zona.getText().toString());
-                parametros.put("ciudad",ciudad.getText().toString());
-                parametros.put("barrio",barrio.getText().toString());
-                parametros.put("avenida",avenida.getText().toString());
-                parametros.put("calle",calle.getText().toString());
-                parametros.put("numero",numero.getText().toString());
-                parametros.put("nombre_empresa",nombreEmpresa.getText().toString());
-                parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
-                parametros.put("rubro",rubroEmpresa.getText().toString());
-                parametros.put("ingresos",ingresosEmpresa.getText().toString());
-                parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
-                parametros.put("proyecto",codigo_proyecto.getText().toString());
-                parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
-                parametros.put("uv",uv.getText().toString());
-                parametros.put("mz",mz.getText().toString());
-                parametros.put("lt",lt.getText().toString());
-                parametros.put("cat",cat.getText().toString());
-                parametros.put("metros2",mts2.getText().toString());
-                parametros.put("tipo_venta",rbSelected.getText().toString());
-                parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
-                parametros.put("asesor",asesor.getText().toString());
-                parametros.put("codigo_asesor",codigo_asesor.getText().toString());
-                parametros.put("observacion",observacion1.getText().toString());
-                parametros.put("observacion2",observacion2.getText().toString());
-                parametros.put("fecha",fechaHoy());
-
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(request);
-        habilitarBoton();
-    }
+//    private void registrarTitular() {
+//        StringRequest request = new StringRequest(Request.Method.POST, URL_addtitular, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                if (!response.isEmpty()){
+//                    if(response.contains("algo salio mal")){
+//                        Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
+//                    }
+//                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
+//
+//                }else{
+//                    Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> parametros = new HashMap<String, String>();
+//                parametros.put("nombres",nombre_cliente.getText().toString());
+//                parametros.put("apellidoP",apellidoPaterno.getText().toString());
+//                parametros.put("apellidoM",apellidoMaterno.getText().toString());
+//                parametros.put("apellidoC",apellidoCasada.getText().toString());
+//                parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
+//                parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
+//                parametros.put("nro_documento",ci_cliente.getText().toString());
+//                parametros.put("extension",spinnerExtension.getSelectedItem().toString());
+//                parametros.put("nacionalidad",nacionalidad.getText().toString());
+//                parametros.put("fecha_nacimiento",tvfechaNacimiento.getText().toString());
+//                parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
+//                parametros.put("sexo",rbSelectedGenero.getText().toString());
+//                parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
+//                parametros.put("profesion_ocupacion",profesion.getText().toString());
+//                parametros.put("telf_fijo",telFijo.getText().toString());
+//                parametros.put("telf_movil",telMovil.getText().toString());
+//                parametros.put("telf_fijoOficina",telFijoOfc.getText().toString());
+//                parametros.put("telf_movilOficina",telMovOfc.getText().toString());
+//                parametros.put("correo",correoPersonal.getText().toString());
+//                parametros.put("referencia1",primerReferencia.getText().toString());
+//                parametros.put("relacion1",parentesco.getText().toString());
+//                parametros.put("telf_referencia1",telfReferencia1.getText().toString());
+//                parametros.put("referencia2",segundaReferencia.getText().toString());
+//                parametros.put("relacion2",relacion.getText().toString());
+//                parametros.put("telf_referencia2",telfReferencia2.getText().toString());
+//                parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
+//                parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
+//                parametros.put("costo_vivienda",costoAprox.getText().toString());
+//                parametros.put("moneda_costoVivienda",spinnerMoneda.getSelectedItem().toString());
+//                parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
+//                parametros.put("telf_propietario",telefonoPropietario.getText().toString());
+//                parametros.put("pais_vivienda",pais.getText().toString());
+//                parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
+//                parametros.put("zona",zona.getText().toString());
+//                parametros.put("ciudad",ciudad.getText().toString());
+//                parametros.put("barrio",barrio.getText().toString());
+//                parametros.put("avenida",avenida.getText().toString());
+//                parametros.put("calle",calle.getText().toString());
+//                parametros.put("numero",numero.getText().toString());
+//                parametros.put("nombre_empresa",nombreEmpresa.getText().toString());
+//                parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
+//                parametros.put("rubro",rubroEmpresa.getText().toString());
+//                parametros.put("ingresos",ingresosEmpresa.getText().toString());
+//                parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
+//                parametros.put("proyecto",codigo_proyecto.getText().toString());
+//                parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
+//                parametros.put("uv",uv.getText().toString());
+//                parametros.put("mz",mz.getText().toString());
+//                parametros.put("lt",lt.getText().toString());
+//                parametros.put("cat",cat.getText().toString());
+//                parametros.put("metros2",mts2.getText().toString());
+//                parametros.put("tipo_venta",rbSelected.getText().toString());
+//                parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
+//                parametros.put("asesor",asesor.getText().toString());
+//                parametros.put("codigo_asesor",codigo_asesor.getText().toString());
+//                parametros.put("observacion",observacion1.getText().toString());
+//                parametros.put("observacion2",observacion2.getText().toString());
+//                parametros.put("fecha",fechaHoy());
+//
+//                return parametros;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+//        requestQueue.add(request);
+//        habilitarBoton();
+//    }
 
 
     private String fechaHoy(){

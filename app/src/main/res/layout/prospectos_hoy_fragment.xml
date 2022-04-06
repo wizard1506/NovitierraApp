@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".prospectosHoy">
-
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:text="Prospectos"
+        android:textSize="24sp"
+        android:textColor="@color/azul_novi"
+        android:textStyle="bold"
+        android:gravity="center">
+    </TextView>
+    <TextView
+        android:id="@+id/prospectoFechaHoy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha"
+        android:textSize="14sp"
+        android:textColor="@color/azul_novi"
+        android:textStyle="bold"
+        android:layout_marginStart="15dp"
+        >
+    </TextView>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerProspectosHoyID"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E6E9EF"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    >
 
-</FrameLayout>
+</androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>
