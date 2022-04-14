@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Prospectos;
 
 import org.json.JSONArray;
@@ -54,23 +55,24 @@ public class prospectosHoy extends Fragment {
         return new prospectosHoy();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fechaHoy = view.findViewById(R.id.prospectoFechaHoy);
-        fechaHoy.setText("Fecha: "+LocalDate.now().toString());
-        recycler = view.findViewById(R.id.recyclerProspectosHoyID);
-        recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        cargarProspectosHoy();
-//        listProspectos.add(new Prospectos(1,"Jose Andres Jimenez Cespedes",79007191,"Si","La tierra prometida","ninguna asdasdas dasdas das dasd asdasdasdasdasd asdas d","asesor",123123,LocalDate.now().toString() ));
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.prospectos_hoy_fragment, container, false);
-
+        View view = inflater.inflate(R.layout.prospectos_hoy_fragment, container, false);
+        fechaHoy = view.findViewById(R.id.prospectoFechaHoy);
+        fechaHoy.setText(LocalDate.now().toString());
+        recycler = view.findViewById(R.id.recyclerProspectosHoyID);
+        recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        cargarProspectosHoy();
+        return view;
     }
 
     @Override
@@ -121,7 +123,8 @@ public class prospectosHoy extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("fecha","2022-04-06");
+                parametros.put("fecha",fechaHoy.getText().toString());
+                parametros.put("codigo",Global.codigo.toString());
                 return parametros;
             }
         };

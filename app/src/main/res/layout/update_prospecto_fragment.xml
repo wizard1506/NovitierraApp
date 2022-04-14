@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".updateProspecto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modificar Prospecto"
+                android:textSize="24sp"
+                android:textColor="@color/azul_novi"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/updprospectoFecha"
+                android:text="Fecha"
+                android:textSize="16sp"
+                android:textColor="@color/azul_novi"
+                android:textStyle="bold"
+                android:gravity="right"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/updprospectoUser"
+                android:text="Usuario"
+                android:textSize="16sp"
+                android:textColor="@color/azul_novi"
+                android:textStyle="bold"
+                android:gravity="right"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombres y Apellidos del Cliente"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+            </TextView>
+            <EditText
+                android:id="@+id/updprospectoNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:inputType="textCapWords"
+                >
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Telefono"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+            </TextView>
+            <EditText
+                android:id="@+id/updprospectoTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/azul_novi"
+                android:inputType="number"
+                android:textSize="14sp">
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Llamada contestada"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+            </TextView>
+            <Spinner
+                android:id="@+id/updspinnerLlamada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/SpinnerGenerico"
+                android:spinnerMode="dialog">
+            </Spinner>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Proyecto interesado"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+            </TextView>
+            <Spinner
+                android:id="@+id/updspinnerProspectoUrb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/SpinnerGenerico"
+                android:spinnerMode="dialog">
+            </Spinner>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Observaciones"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+            </TextView>
+            <EditText
+                android:id="@+id/updprospectoObservacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/azul_novi"
+                android:inputType="textCapCharacters"
+                android:textSize="14sp">
+            </EditText>
+            <Button
+                android:id="@+id/btmodificarProspecto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modificar Prospecto"
+                android:textColor="@color/white">
+            </Button>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/logo"
+                >
+            </ImageView>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

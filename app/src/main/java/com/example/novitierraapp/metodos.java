@@ -1,9 +1,20 @@
 package com.example.novitierraapp;
 
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Proyectos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class metodos {
 
@@ -14,6 +25,8 @@ public class metodos {
         lista.add("LA PASCANA DE COTOCA III");
         lista.add("LA PASCANA DE COTOCA IV");
         lista.add("LA PASCANA DE COTOCA V");
+        lista.add("LA PASCANA DE COTOCA VI");
+        lista.add("LA PASCANA DE COTOCA VII");
         lista.add("LA TIERRA PROMETIDA");
         lista.add("AME TAUNA");
         lista.add("AME TAUNA I");
@@ -28,6 +41,8 @@ public class metodos {
         lista.add("LA PASCANA DE COTOCA III");
         lista.add("LA PASCANA DE COTOCA IV");
         lista.add("LA PASCANA DE COTOCA V");
+        lista.add("LA PASCANA DE COTOCA VI");
+        lista.add("LA PASCANA DE COTOCA VII");
         lista.add("LA TIERRA PROMETIDA");
         lista.add("AME TAUNA");
         lista.add("AME TAUNA I");
@@ -124,4 +139,6 @@ public class metodos {
         lista.add("DE");
         return lista;
     }
+
+
 }

@@ -78,6 +78,11 @@
         android:name="com.example.novitierraapp.prospectosHoy"
         android:label="Prospectos de Hoy"
         tools:layout="@layout/prospectos_hoy_fragment" />
+    <fragment
+        android:id="@+id/fragmentUpdateProspecto"
+        android:name="com.example.novitierraapp.updateProspecto"
+        android:label="Modificar Prospecto"
+        tools:layout="@layout/update_prospecto_fragment" />
 
     <!--    <navigation android:id="@+id/navigation3"-->
 <!--        app:startDestination="@id/navigation2">-->

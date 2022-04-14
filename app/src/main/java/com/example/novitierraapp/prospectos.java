@@ -89,9 +89,18 @@ public class prospectos extends Fragment {
             @Override
             public void onClick(View v) {
                 registrarProspecto();
+//                vaciarCampos();
             }
         });
 
+    }
+
+    public void vaciarCampos(){
+        nombre.setText("");
+        telefono.setText("");
+        observacion.setText("");
+        spinnerLlamada.setSelection(0);
+        spinnerUrb.setSelection(0);
     }
 
     public void cargarComponentes(){
@@ -112,7 +121,13 @@ public class prospectos extends Fragment {
                     if(response.contains("algo salio mal")){
                         Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
                     }
-                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
+                    else{
+                        if(response.contains("Existe")){
+                            Toast.makeText(getContext(),"Este numero de telefono ya fue prospectado",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();
+                        }
+                    }
 
                 }else{
                     Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
