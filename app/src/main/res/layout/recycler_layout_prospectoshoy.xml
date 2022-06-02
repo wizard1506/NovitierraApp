@@ -67,7 +67,34 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Zona:"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul_novi"
+                    android:layout_marginRight="10dp"
+                    >
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lugar:"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul_novi"
+                    android:layout_marginRight="10dp"
+                    >
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Contesto llamada:"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul_novi"
+                    android:layout_marginRight="10dp"
+                    >
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vigencia:"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -117,11 +144,35 @@
 
                 </TextView>
                 <TextView
+                    android:id="@+id/zonaProspectos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_novi"
+                    android:text="zona"
+                    >
+                </TextView>
+                <TextView
+                    android:id="@+id/lugarProspectos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_novi"
+                    android:text="Lugar"
+                    >
+                </TextView>
+                <TextView
                     android:id="@+id/llamadaProspecto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
                     android:text="Llamada"
+                    >
+                </TextView>
+                <TextView
+                    android:id="@+id/vigenciaProspecto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_novi"
+                    android:text="Vigencia"
                     >
                 </TextView>
                 <TextView

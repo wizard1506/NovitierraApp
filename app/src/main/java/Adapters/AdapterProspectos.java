@@ -62,9 +62,12 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
         holder.numero.setText(String.valueOf(position+1)+".-");
         holder.nombre.setText(prospecto.getNombre_completo());
         holder.telefono.setText(String.valueOf(prospecto.getTelefono()));
+        holder.zona.setText(prospecto.getZona());
+        holder.lugar.setText(prospecto.getLugar());
         holder.urbanizacion.setText(prospecto.getUrbanizacion());
         holder.observacion.setText(prospecto.getObservacion());
         holder.llamada.setText(prospecto.getLlamada());
+        holder.vigencia.setText(prospecto.getVigencia());
 
         holder.updateProspecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +76,8 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
                 bundle.putInt("id",listProspectos.get(i).getId_prospectos());
                 bundle.putString("nombre",listProspectos.get(i).getNombre_completo());
                 bundle.putInt("telefono",listProspectos.get(i).getTelefono());
+                bundle.putString("zona",listProspectos.get(i).getZona());
+                bundle.putString("lugar",listProspectos.get(i).getLugar());
                 bundle.putString("urbanizacion",listProspectos.get(i).getUrbanizacion());
                 bundle.putString("observacion",listProspectos.get(i).getObservacion());
                 bundle.putString("llamada",listProspectos.get(i).getLlamada());
@@ -88,7 +93,6 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
                 id=listProspectos.get(i).getId_prospectos();
                 Navigation.findNavController(v).popBackStack();
                 eliminarProspecto(v);
-
 //                Navigation.findNavController(v).navigate(R.id.prospectosHoy);
             }
         });
@@ -101,7 +105,7 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
     }
 
     public class ViewHolderProspectos extends RecyclerView.ViewHolder {
-        TextView nombre,telefono,numero,urbanizacion,observacion,llamada;
+        TextView nombre,telefono,numero,urbanizacion,observacion,llamada,zona,lugar,vigencia;
         Button updateProspecto, deleteProspecto;
 
         public ViewHolderProspectos(@NonNull View itemView) {
@@ -111,7 +115,10 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
             numero = itemView.findViewById(R.id.numeracionProspectos);
             urbanizacion = itemView.findViewById(R.id.urbanizacionProspectos);
             observacion = itemView.findViewById(R.id.observacionProspectos);
+            zona = itemView.findViewById(R.id.zonaProspectos);
+            lugar = itemView.findViewById(R.id.lugarProspectos);
             llamada = itemView.findViewById(R.id.llamadaProspecto);
+            vigencia = itemView.findViewById(R.id.vigenciaProspecto);
             updateProspecto = itemView.findViewById(R.id.updateProspecto);
             deleteProspecto = itemView.findViewById(R.id.deleteProspecto);
 

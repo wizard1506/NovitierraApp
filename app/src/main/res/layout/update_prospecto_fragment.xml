@@ -104,6 +104,49 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Zona"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+
+            </TextView>
+            <EditText
+                android:id="@+id/updprospectoZona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/azul_novi"
+                android:inputType="textCapCharacters"
+                android:textSize="14sp"
+                >
+
+            </EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lugar (donde fue prospectado)"
+                android:textColor="@color/azul_novi"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                >
+
+            </TextView>
+            <EditText
+                android:id="@+id/updprospectoLugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/azul_novi"
+                android:inputType="textCapCharacters"
+                android:textSize="14sp"
+                >
+
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Proyecto interesado"
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"

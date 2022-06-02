@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
+import com.example.novitierraapp.entidades.Prospectos;
 import com.example.novitierraapp.entidades.Proyectos;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,10 +44,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Adapters.AdapterProspectos;
+
 public class prospectos extends Fragment {
     String hoy="";
     TextView fecha,usuario;
-    EditText nombre,telefono,observacion;
+    EditText nombre,telefono,observacion,lugar,zona,grupo;
     Spinner spinnerLlamada,spinnerUrb;
     Button btRegistrarProspecto;
     ArrayList<String> listaUrbanizacion = new ArrayList<>();
@@ -77,8 +85,11 @@ public class prospectos extends Fragment {
         nombre=view.findViewById(R.id.prospectoNombre);
         telefono=view.findViewById(R.id.prospectoTelefono);
         observacion=view.findViewById(R.id.prospectoObservacion);
+        lugar=view.findViewById(R.id.prospectoLugar);
+        zona=view.findViewById(R.id.prospectoZona);
         spinnerLlamada=view.findViewById(R.id.spinnerLlamada);
         spinnerUrb=view.findViewById(R.id.spinnerProspectoUrb);
+        grupo =  view.findViewById(R.id.prospectoGrupo);
         btRegistrarProspecto = view.findViewById(R.id.prospectoRegistrar);
 
         cargarComponentes();
@@ -88,17 +99,36 @@ public class prospectos extends Fragment {
         btRegistrarProspecto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registrarProspecto();
-//                vaciarCampos();
+                if(camposVacios()){
+                    registrarProspecto();
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            vaciarCampos();
+//                        }
+//                    },500);
+                }else {
+                    mensaje("Grupo, Nombre , Telefono y Proyecto de interes son obligatorios");
+                }
             }
         });
-
     }
-
+    public Boolean camposVacios(){
+        if(nombre.length()==0 || telefono.length()==0 || spinnerUrb.getSelectedItemPosition()==0 || grupo.length()==0){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    public void mensaje(String mensaje){
+        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+    }
     public void vaciarCampos(){
         nombre.setText("");
         telefono.setText("");
         observacion.setText("");
+        zona.setText("");
+        lugar.setText("");
         spinnerLlamada.setSelection(0);
         spinnerUrb.setSelection(0);
     }
@@ -120,15 +150,21 @@ public class prospectos extends Fragment {
                 if (!response.isEmpty()){
                     if(response.contains("algo salio mal")){
                         Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(response.contains("se inserto correctamente")){
+                            mensaje("Datos Registrados");
+                            vaciarCampos();
+                            return;
+                    }
+                    if(response.contains("vencida")){
+                            mensaje("puede prospectar");
+                            return;
                     }
                     else{
-                        if(response.contains("Existe")){
-                            Toast.makeText(getContext(),"Este numero de telefono ya fue prospectado",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();
-                        }
+                        mensaje("Telefono prospectado y tiene vigencia hasta la fecha "+response);
+                        return;
                     }
-
                 }else{
                     Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
                 }
@@ -146,10 +182,13 @@ public class prospectos extends Fragment {
                 parametros.put("cliente",nombre.getText().toString());
                 parametros.put("telefono",telefono.getText().toString());
                 parametros.put("llamada",spinnerLlamada.getSelectedItem().toString());
+                parametros.put("zona",zona.getText().toString());
+                parametros.put("lugar",lugar.getText().toString());
                 parametros.put("urbanizacion",spinnerUrb.getSelectedItem().toString());
                 parametros.put("observacion",observacion.getText().toString());
                 parametros.put("asesor",Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
                 parametros.put("codigo",Global.codigo.toString());
+                parametros.put("grupo",grupo.getText().toString());
                 parametros.put("fecha", LocalDateTime.now().toString());
                 return parametros;
             }

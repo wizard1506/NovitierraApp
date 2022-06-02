@@ -62,10 +62,6 @@
                 android:id="@+id/prospectosHoy"
                 android:icon="@drawable/ic_baseline_view_list_24"
                 android:title="2.- Prospectos hoy" />
-            <item
-                android:id="@+id/misProspectos"
-                android:icon="@drawable/ic_baseline_view_list_24"
-                android:title="3.- Mis prospectos" />
         </menu>
     </item>
 </menu>

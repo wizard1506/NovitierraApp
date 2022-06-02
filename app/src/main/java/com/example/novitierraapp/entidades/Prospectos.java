@@ -8,25 +8,31 @@ public class Prospectos {
     String nombre_completo;
     Integer telefono;
     String llamada;
+    String zona;
+    String lugar;
     String urbanizacion;
     String observacion;
     String asesor;
     Integer codigo;
+    String vigencia;
     String fecha;
 
 
     public Prospectos() {
     }
 
-    public Prospectos(Integer id_prospectos, String nombre_completo, Integer telefono, String llamada, String urbanizacion, String observacion, String asesor, Integer codigo, String fecha) {
+    public Prospectos(Integer id_prospectos, String nombre_completo, Integer telefono, String llamada, String zona, String lugar, String urbanizacion, String observacion, String asesor, Integer codigo, String vigencia, String fecha) {
         this.id_prospectos = id_prospectos;
         this.nombre_completo = nombre_completo;
         this.telefono = telefono;
         this.llamada = llamada;
+        this.zona = zona;
+        this.lugar = lugar;
         this.urbanizacion = urbanizacion;
         this.observacion = observacion;
         this.asesor = asesor;
         this.codigo = codigo;
+        this.vigencia = vigencia;
         this.fecha = fecha;
     }
 
@@ -100,5 +106,29 @@ public class Prospectos {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
     }
 }

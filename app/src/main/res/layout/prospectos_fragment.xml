@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -42,11 +42,26 @@
             android:textStyle="bold"
             android:gravity="right"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*Grupo"
+            android:textSize="16sp"
+            android:textColor="@color/azul_novi"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prospectoGrupo"
+            android:hint="Grupo al que pertenece el asesor"
+            android:inputType="textCapCharacters"
+            ></EditText>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombres y Apellidos del Cliente"
+                android:text="*Nombres y Apellidos"
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -59,13 +74,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"
+                android:hint="Nombre completo del prospecto"
                 android:inputType="textCapWords"
                 >
             </EditText>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Telefono"
+            android:text="*Telefono"
             android:textColor="@color/azul_novi"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -83,7 +99,26 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Llamada contestada"
+            android:text="*Proyecto de Interes"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+
+
+        <Spinner
+            android:id="@+id/spinnerProspectoUrb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/SpinnerGenerico"
+            android:spinnerMode="dialog">
+        </Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Llamada contestada?"
             android:textColor="@color/azul_novi"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -97,23 +132,52 @@
             android:prompt="@string/SpinnerGenerico"
             android:spinnerMode="dialog">
         </Spinner>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Proyecto interesado"
+            android:text="Zona"
             android:textColor="@color/azul_novi"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             >
+
         </TextView>
-        <Spinner
-            android:id="@+id/spinnerProspectoUrb"
+        <EditText
+            android:id="@+id/prospectoZona"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/SpinnerGenerico"
-            android:spinnerMode="dialog">
-        </Spinner>
+            android:textColor="@color/azul_novi"
+            android:inputType="textCapCharacters"
+            android:textSize="14sp"
+            >
+
+        </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lugar"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            >
+
+        </TextView>
+        <EditText
+            android:id="@+id/prospectoLugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/azul_novi"
+            android:inputType="textCapCharacters"
+            android:textSize="14sp"
+            android:hint="(donde fue prospectado)"
+            >
+
+        </EditText>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,10 +205,10 @@
         </Button>
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:src="@drawable/logo"
             >
         </ImageView>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

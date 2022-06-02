@@ -97,10 +97,13 @@ public class prospectosHoy extends Fragment {
                                             ,respuesta.getString("nombre_completo")
                                             ,respuesta.getInt("telefono")
                                             ,respuesta.getString("llamada")
+                                            ,respuesta.getString("zona")
+                                            ,respuesta.getString("lugar")
                                             ,respuesta.getString("urbanizacion")
                                             ,respuesta.getString("observacion")
                                             ,respuesta.getString("asesor")
                                             ,respuesta.getInt("codigo")
+                                            ,respuesta.getString("vigencia")
                                             ,respuesta.getString("fecha")));
                         }
                         AdapterProspectos adapterprospectos = new AdapterProspectos(listProspectos);

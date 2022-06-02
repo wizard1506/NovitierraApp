@@ -1,5 +1,8 @@
 package com.example.novitierraapp;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -139,6 +142,9 @@ public class metodos {
         lista.add("DE");
         return lista;
     }
+
+
+
 
 
 }

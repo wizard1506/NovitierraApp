@@ -42,7 +42,7 @@ public class updateProspecto extends Fragment {
 
     private UpdateProspectoViewModel mViewModel;
     TextView fecha,usuario;
-    EditText nombre,telefono,observacion;
+    EditText nombre,telefono,observacion,zona,lugar;
     Spinner llamada,urbanizacion;
     ArrayList<String> listaLlamada,listaUrbanizacion;
     metodos metodos = new metodos();
@@ -63,6 +63,8 @@ public class updateProspecto extends Fragment {
         telefono = view.findViewById(R.id.updprospectoTelefono);
         observacion = view.findViewById(R.id.updprospectoObservacion);
         llamada = view.findViewById(R.id.updspinnerLlamada);
+        zona = view.findViewById(R.id.updprospectoZona);
+        lugar = view.findViewById(R.id.updprospectoLugar);
         urbanizacion = view.findViewById(R.id.updspinnerProspectoUrb);
         fecha = view.findViewById(R.id.updprospectoFecha);
         usuario = view.findViewById(R.id.updprospectoUser);
@@ -77,6 +79,8 @@ public class updateProspecto extends Fragment {
         id=getArguments().getInt("id");
         nombre.setText(getArguments().getString("nombre"));
         telefono.setText(String.valueOf(getArguments().getInt("telefono")));
+        zona.setText(getArguments().getString("zona"));
+        lugar.setText(getArguments().getString("lugar"));
         observacion.setText(getArguments().getString("observacion"));
         elegirSpinnerLlamada(getArguments().getString("llamada"));
         elegirSpinnerUrbanizacion(getArguments().getString("urbanizacion"));
@@ -168,6 +172,8 @@ public class updateProspecto extends Fragment {
                 parametros.put("nombre_completo",nombre.getText().toString());
                 parametros.put("telefono",telefono.getText().toString());
                 parametros.put("llamada",llamada.getSelectedItem().toString());
+                parametros.put("zona",zona.getText().toString());
+                parametros.put("lugar",lugar.getText().toString());
                 parametros.put("urbanizacion",urbanizacion.getSelectedItem().toString());
                 parametros.put("observacion",observacion.getText().toString());
                 parametros.put("asesor",Global.userSesion);
