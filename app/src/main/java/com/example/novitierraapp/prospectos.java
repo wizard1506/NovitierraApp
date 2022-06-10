@@ -48,8 +48,8 @@ import Adapters.AdapterProspectos;
 
 public class prospectos extends Fragment {
     String hoy="";
-    TextView fecha,usuario;
-    EditText nombre,telefono,observacion,lugar,zona,grupo;
+    TextView fecha,usuario,grupo;
+    EditText nombre,telefono,observacion,lugar,zona;
     Spinner spinnerLlamada,spinnerUrb;
     Button btRegistrarProspecto;
     ArrayList<String> listaUrbanizacion = new ArrayList<>();
@@ -95,6 +95,7 @@ public class prospectos extends Fragment {
         cargarComponentes();
         fecha.setText("Fecha: "+LocalDate.now().toString());
         usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
+        grupo.setText(Global.grupo.toUpperCase());
 
         btRegistrarProspecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,13 +109,13 @@ public class prospectos extends Fragment {
 //                        }
 //                    },500);
                 }else {
-                    mensaje("Grupo, Nombre , Telefono y Proyecto de interes son obligatorios");
+                    mensaje("Nombre , Telefono y Proyecto de interes son obligatorios");
                 }
             }
         });
     }
     public Boolean camposVacios(){
-        if(nombre.length()==0 || telefono.length()==0 || spinnerUrb.getSelectedItemPosition()==0 || grupo.length()==0){
+        if(nombre.length()==0 || telefono.length()==0 || spinnerUrb.getSelectedItemPosition()==0){
             return false;
         }else {
             return true;
@@ -179,16 +180,16 @@ public class prospectos extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("cliente",nombre.getText().toString());
+                parametros.put("cliente",nombre.getText().toString().toUpperCase());
                 parametros.put("telefono",telefono.getText().toString());
                 parametros.put("llamada",spinnerLlamada.getSelectedItem().toString());
-                parametros.put("zona",zona.getText().toString());
-                parametros.put("lugar",lugar.getText().toString());
+                parametros.put("zona",zona.getText().toString().toUpperCase());
+                parametros.put("lugar",lugar.getText().toString().toUpperCase());
                 parametros.put("urbanizacion",spinnerUrb.getSelectedItem().toString());
-                parametros.put("observacion",observacion.getText().toString());
+                parametros.put("observacion",observacion.getText().toString().toUpperCase());
                 parametros.put("asesor",Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
                 parametros.put("codigo",Global.codigo.toString());
-                parametros.put("grupo",grupo.getText().toString());
+                parametros.put("grupo",Global.grupo.toUpperCase());
                 parametros.put("fecha", LocalDateTime.now().toString());
                 return parametros;
             }

@@ -9,9 +9,11 @@
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_list_24.xml" value="0.2866666666666667" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.2866666666666667" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_people_alt_24.xml" value="0.2866666666666667" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/drawable/ic_menu_formulario.xml" value="0.2866666666666667" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/activity_nav_menu.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/activity_registrarse_login.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/cargar_formulario_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/content_main.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/encuesta_fragment.xml" value="0.275" />
@@ -26,10 +28,15 @@
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/map_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/mis_formularios_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/nav_header_main.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/perfil_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/prospectos_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/prospectos_hoy_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/prospectos_lista_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/recycler_layout_prospectoshoy.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/recycler_layout_titular.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/test_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/titulares_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/update_password_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/update_prospecto_fragment.xml" value="0.275" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/layout/x.xml" value="0.14375" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/NovitierraApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.275" />

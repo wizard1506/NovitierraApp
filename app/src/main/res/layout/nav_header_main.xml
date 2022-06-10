@@ -37,4 +37,10 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="Usuario" />
+    <TextView
+        android:id="@+id/grupoSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Grupo" />
 </LinearLayout>

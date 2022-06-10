@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Telefono"
+                android:text="Telefono (No modificable)"
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -82,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/azul_novi"
                 android:inputType="number"
+                android:enabled="false"
                 android:textSize="14sp">
             </EditText>
             <TextView

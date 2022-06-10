@@ -8,6 +8,14 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Inicio" />
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Datos Perfil" />
+        <item
+            android:id="@+id/updatePassword"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Cambiar Contraseña" />
     </group>
     <item android:title="Formularios">
         <menu>
@@ -57,11 +65,15 @@
             <item
                 android:id="@+id/prospectos"
                 android:icon="@drawable/ic_baseline_people_alt_24"
-                android:title="1.- Nuevos Prospectos" />
+                android:title="1.- Nuevo Prospecto" />
             <item
                 android:id="@+id/prospectosHoy"
                 android:icon="@drawable/ic_baseline_view_list_24"
-                android:title="2.- Prospectos hoy" />
+                android:title="2.-Modificar Prospectos" />
+            <item
+                android:id="@+id/prospectosLista"
+                android:icon="@drawable/ic_baseline_view_list_24"
+                android:title="3.- Lista Prospectos" />
         </menu>
     </item>
 </menu>

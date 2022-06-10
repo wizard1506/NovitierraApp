@@ -45,18 +45,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="*Grupo"
+            android:id="@+id/prospectoGrupo"
+            android:text="Grupo"
             android:textSize="16sp"
             android:textColor="@color/azul_novi"
             android:textStyle="bold"
+            android:gravity="right"
             />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/prospectoGrupo"
-            android:hint="Grupo al que pertenece el asesor"
-            android:inputType="textCapCharacters"
-            ></EditText>
 
             <TextView
                 android:layout_width="match_parent"
@@ -94,6 +89,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/azul_novi"
             android:inputType="number"
+            android:maxLength="14"
             android:textSize="14sp">
         </EditText>
         <TextView

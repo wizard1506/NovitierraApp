@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class RegistrarseLogin extends AppCompatActivity {
 
-    EditText nombres,apellidos,ci,telf,codigo,usuario,password,passwordRepeat;
+    EditText nombres,apellidos,ci,telf,codigo,usuario,password,passwordRepeat,grupo;
     Button registrarUsuario;
     private String url="http://wizardapps.xyz/novitierra/api/addUser.php";
 //    private String url="https://novitierra.000webhostapp.com/api/addUser.php";
@@ -37,6 +37,7 @@ public class RegistrarseLogin extends AppCompatActivity {
         ci=findViewById(R.id.ciRegistro);
         telf=findViewById(R.id.telefonoRegistro);
         codigo=findViewById(R.id.codigoRegistro);
+        grupo=findViewById(R.id.grupo);
         usuario=findViewById(R.id.usuarioRegistro);
         password=findViewById(R.id.passwordRegistro);
         passwordRepeat=findViewById(R.id.passwordRepeatRegistro);
@@ -99,6 +100,7 @@ public class RegistrarseLogin extends AppCompatActivity {
                         parametros.put("ci",ci.getText().toString());
                         parametros.put("telefono",telf.getText().toString());
                         parametros.put("codigo",codigo.getText().toString());
+                        parametros.put("grupo",grupo.getText().toString());
                         parametros.put("usuario",usuario.getText().toString());
                         parametros.put("password",password.getText().toString());
                         return parametros;
@@ -119,6 +121,7 @@ public class RegistrarseLogin extends AppCompatActivity {
         ci.setText("");
         telf.setText("");
         codigo.setText("");
+        grupo.setText("");
         usuario.setText("");
         password.setText("");
         passwordRepeat.setText("");

@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class navMenu extends AppCompatActivity {
-    TextView nombreSesion,userSesion;
+    TextView nombreSesion,userSesion,grupoSesion;
 
 //    ImageView casita;
 
@@ -42,7 +42,7 @@ public class navMenu extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home,R.id.formularios,R.id.formCoSolicitante,R.id.mapFragment,R.id.encuesta,R.id.formularioMapa,R.id.cargarFormulario,R.id.misFormularios,R.id.prospectos,R.id.prospectosHoy)
+                R.id.nav_home,R.id.formularios,R.id.formCoSolicitante,R.id.mapFragment,R.id.encuesta,R.id.formularioMapa,R.id.cargarFormulario,R.id.misFormularios,R.id.prospectos,R.id.prospectosHoy,R.id.perfil,R.id.updatePassword,R.id.prospectosLista)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -65,14 +65,22 @@ public class navMenu extends AppCompatActivity {
 //        Global.apellidoSesion="";
 //    }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.nav_menu, menu);
         nombreSesion = findViewById(R.id.nombreSesion);
         userSesion = findViewById(R.id.usuarioSesion);
+        grupoSesion = findViewById(R.id.grupoSesion);
+
         nombreSesion.setText(Global.nombreSesion+" "+Global.apellidoSesion);
         userSesion.setText(Global.userSesion);
+        if(Global.grupo.contains("NINGUNO")){
+            grupoSesion.setVisibility(View.GONE);
+        }else {
+            grupoSesion.setText(Global.grupo);
+        }
         return true;
     }
 

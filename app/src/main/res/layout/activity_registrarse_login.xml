@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistrarseLogin"
-    android:background="@color/azul_novi"
+    android:background="@color/white"
     android:padding="10dp"
     android:orientation="vertical">
 
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:textColor="@color/amarillo"
+            android:textColor="@color/azul_novi"
             android:text="Registro de Usuario"
             android:textStyle="bold"
             android:gravity="center"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="Nombres"
             android:textStyle="bold"
             >
@@ -43,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nombreRegistro"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
+            android:inputType="textCapWords"
             ></EditText>
 
     </LinearLayout>
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="Apellidos"
             android:textStyle="bold"
             >
@@ -65,7 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/apellidoRegistro"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
+            android:inputType="textCapWords"
             ></EditText>
 
     </LinearLayout>
@@ -78,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="C.I."
             android:textStyle="bold"
             >
@@ -87,8 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ciRegistro"
-            android:inputType="number"
-            android:textColor="@color/white"
+            android:inputType="textCapCharacters"
+            android:textColor="@color/azul_novi"
             ></EditText>
 
     </LinearLayout>
@@ -102,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="Telefono"
             android:textStyle="bold"
             >
@@ -112,7 +114,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/telefonoRegistro"
             android:inputType="number"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             ></EditText>
 
     </LinearLayout>
@@ -125,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="Codigo"
             android:textStyle="bold"
             >
@@ -135,7 +137,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/codigoRegistro"
             android:inputType="number"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             ></EditText>
 
     </LinearLayout>
@@ -148,7 +150,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
+            android:text="Grupo"
+            android:textStyle="bold"
+            >
+        </TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grupo"
+            android:inputType="textCapCharacters"
+            android:textColor="@color/azul_novi"
+            ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/azul_novi"
             android:text="Usuario"
             android:textStyle="bold"
             >
@@ -157,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/usuarioRegistro"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             ></EditText>
 
     </LinearLayout>
@@ -170,7 +195,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="Contraseña"
             android:textStyle="bold"
             >
@@ -180,7 +205,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/passwordRegistro"
             android:inputType="textPassword"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             ></EditText>
 
     </LinearLayout>
@@ -193,7 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             android:text="Repetir Contraseña"
             android:textStyle="bold"
             >
@@ -203,7 +228,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/passwordRepeatRegistro"
             android:inputType="textPassword"
-            android:textColor="@color/white"
+            android:textColor="@color/azul_novi"
             ></EditText>
 
     </LinearLayout>
@@ -216,8 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrar"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/azul_novi"
+            android:textColor="@color/white"
             android:textStyle="bold"
             >
         </Button>

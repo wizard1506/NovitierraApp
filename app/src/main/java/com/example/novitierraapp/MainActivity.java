@@ -127,10 +127,15 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i <array.length() ; i++) {
                             JSONObject respuesta = array.getJSONObject(i);
 //                            Global.id_user=respuesta.getInt("id_usuario");
+                            Global.useridSesion=respuesta.getString("id_usuario");
                             Global.nombreSesion=respuesta.getString("nombres");
                             Global.apellidoSesion=respuesta.getString("apellidos");
-                            Global.userSesion=respuesta.getString("usuario");
+                            Global.ciSesion = respuesta.getString("ci");
+                            Global.telefonoSesion = respuesta.getString("telefono");
                             Global.codigo=respuesta.getInt("codigo");
+                            Global.grupo = respuesta.getString("grupo");
+                            Global.userSesion=respuesta.getString("usuario");
+                            Global.upass=respuesta.getString("upassword");
                             usu=respuesta.getString("usuario");
                             pass=respuesta.getString("upassword");
                             usu2=userLogin.getText().toString();

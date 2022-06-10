@@ -16,33 +16,33 @@ import android.webkit.WebViewClient;
 
 import com.example.novitierraapp.entidades.Global;
 
-public class misFormularios extends Fragment {
+public class prospectosLista extends Fragment {
     WebView web;
 
-    private MisFormulariosViewModel mViewModel;
+    private ProspectosListaViewModel mViewModel;
 
-    public static misFormularios newInstance() {
-        return new misFormularios();
+    public static prospectosLista newInstance() {
+        return new prospectosLista();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.mis_formularios_fragment, container, false);
+        return inflater.inflate(R.layout.prospectos_lista_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MisFormulariosViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ProspectosListaViewModel.class);
         // TODO: Use the ViewModel
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        web = view.findViewById(R.id.webviewForms);
+        web=view.findViewById(R.id.wvProspecto);
         web.setWebViewClient(new WebViewClient());
-        web.loadUrl("http://wizardapps.xyz/novitierra/consulta/misFormularios.php?codigo="+ Global.codigo);
+        web.loadUrl("http://wizardapps.xyz/novitierra/consulta/misProspectos.php?codigo="+ Global.codigo);
     }
 }

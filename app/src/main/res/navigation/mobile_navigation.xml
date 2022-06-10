@@ -83,6 +83,26 @@
         android:name="com.example.novitierraapp.updateProspecto"
         android:label="Modificar Prospecto"
         tools:layout="@layout/update_prospecto_fragment" />
+    <fragment
+        android:id="@+id/titulares"
+        android:name="com.example.novitierraapp.titulares"
+        android:label="Clientes"
+        tools:layout="@layout/titulares_fragment" />
+    <fragment
+        android:id="@+id/perfil"
+        android:name="com.example.novitierraapp.perfil"
+        android:label="Datos Perfil"
+        tools:layout="@layout/perfil_fragment" />
+    <fragment
+        android:id="@+id/updatePassword"
+        android:name="com.example.novitierraapp.updatePassword"
+        android:label="Cambiar Contraseña"
+        tools:layout="@layout/update_password_fragment" />
+    <fragment
+        android:id="@+id/prospectosLista"
+        android:name="com.example.novitierraapp.prospectosLista"
+        android:label="Lista Prospectos"
+        tools:layout="@layout/prospectos_lista_fragment" />
 
     <!--    <navigation android:id="@+id/navigation3"-->
 <!--        app:startDestination="@id/navigation2">-->

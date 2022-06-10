@@ -142,6 +142,11 @@ public class metodos {
         lista.add("DE");
         return lista;
     }
+    public ArrayList<String>cargarReserva(ArrayList<String> lista){
+        lista.add("SI");
+        lista.add("NO");
+        return lista;
+    }
 
 
 
