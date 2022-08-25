@@ -25,6 +25,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.os.Handler;
@@ -60,8 +61,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,12 +77,16 @@ public class cargarFormulario extends Fragment {
     EditText observacion1, observacion2, codigoFormulario;
     RadioGroup radioGroup, radioGroupGenero, radioGroupVivienda, radioGroupIngresos, radioGroupIndependienteDependiente;
     RadioButton rb_plazo, rb_contado, rbSelected, rbMasculino, rbFemenino, rbSelectedGenero, rbIngresosBs, rbIngresosDolar,rbSelectedIngresos, rbDependiende, rbIndependiente, rbSelectedIndependienteDependiente;
+    Integer idTitular=0;
+    int flag=0;
+    String fechaNacBD="";
+
     //    rbSelectedMonedaVivienda
 //    rbViviendaBs,rbViviendaDolar,
     RadioGroup radioGroupSinConUbicacion;
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda, spinnerPlazo, spinnerReserva;
-    TextView codigo_proyecto,tvfechaNacimiento,tvplazo;
+    TextView codigo_proyecto,tvfechaNacimiento,tvplazo,tvtitulo;
     Button guardar, btFechaNac, cargar; //registrarForm;
     //    Proyectos proyectos;
     DatePickerDialog datePickerDialog;
@@ -100,6 +108,8 @@ public class cargarFormulario extends Fragment {
 
     private String URL_addtitular="http://wizardapps.xyz/novitierra/api/addTitular.php";
     private String URL_formulario="http://wizardapps.xyz/novitierra/api/cargarFormulario.php";
+    private String urlActualizar= "http://wizardapps.xyz/novitierra/api/updateTitular.php";
+    private String ubicacion = "https://www.google.es/maps?q=";
 //    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
 
     //***PARA PDF****
@@ -137,7 +147,21 @@ public class cargarFormulario extends Fragment {
 //        builder.detectFileUriExposure();
         /////
         ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+        codigoFormulario = view.findViewById(R.id.codigoformulario);
+        if(getArguments()!=null){
+            idTitular = getArguments().getInt("id");
+            flag = getArguments().getInt("flag");
+        }
 
+        tvtitulo = view.findViewById(R.id.tvtitulocargar);
+        cargar = view.findViewById(R.id.btcargarformulario);
+        codigoFormulario.setText(Integer.valueOf(idTitular).toString());
+        if(flag==1){
+            codigoFormulario.setEnabled(false);
+            codigoFormulario.setVisibility(view.GONE);
+            cargar.setVisibility(view.GONE);
+            tvtitulo.setVisibility(view.GONE);
+        }
         nombre_cliente = view.findViewById(R.id.nombreCliente);
         //nombre_cliente.setRawInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         apellidoPaterno= view.findViewById(R.id.apellidoPCliente);
@@ -181,7 +205,7 @@ public class cargarFormulario extends Fragment {
         codigo_asesor= view.findViewById(R.id.codigoAsesor);
         observacion1 = view.findViewById(R.id.observacion1);
         observacion2 = view.findViewById(R.id.observacion2);
-        codigoFormulario = view.findViewById(R.id.codigoformulario);
+
         ////radioButtons y RadioGroups
         radioGroup = view.findViewById(R.id.radiogroup);
         radioGroupGenero=view.findViewById(R.id.radiogroupGenero);
@@ -223,7 +247,7 @@ public class cargarFormulario extends Fragment {
         tvplazo = view.findViewById(R.id.tvplazo);
         guardar = view.findViewById(R.id.btguardar);
         btFechaNac = view.findViewById(R.id.btDatePickerFechaNac);
-        cargar = view.findViewById(R.id.btcargarformulario);
+
 //        registrarForm = view.findViewById((R.id.btRegistrarDatosForm));
         //fechaNac.setText(fechaHoy());
 
@@ -343,9 +367,10 @@ public class cargarFormulario extends Fragment {
                 if(validarCamposObligatorios()){
                     if(validarForm()){
                         if(EsDependiente()){
-                            DeshabilitarBoton();
                             new Handler().postDelayed(new Runnable(){
                                 public void run(){
+                                    actualizar();
+//                                    Navigation.findNavController(v).navigate(R.id.titulares);
                                     generarPDF();
                                 }
                             }, 1000); //1000 millisegundos = 1 segundo.
@@ -367,6 +392,9 @@ public class cargarFormulario extends Fragment {
                 cargarFormulario();
             }
         });
+        if(idTitular>0){
+            cargarFormulario();
+        }
 
 
 //        registrarForm.setOnClickListener(new View.OnClickListener() {
@@ -753,6 +781,7 @@ public class cargarFormulario extends Fragment {
                 month = month+1;
                 String date = makeDateString(day,month,year);
                 tvfechaNacimiento.setText(date);
+                fechaNacBD=makeDateStringBase(day,month,year);
             }
         };
         Calendar cal = Calendar.getInstance();
@@ -810,15 +839,15 @@ public class cargarFormulario extends Fragment {
         listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
         listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
         listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
+        listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
+        listaProyectos.add(new Proyectos(204,"AME TAUNA"));
+        listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
         listaProyectos.add(new Proyectos(206,"LA PASCANA DE COTOCA III"));
         listaProyectos.add(new Proyectos(207,"LA PASCANA DE COTOCA IV"));
         listaProyectos.add(new Proyectos(208,"LA PASCANA DE COTOCA V"));
         listaProyectos.add(new Proyectos(209,"LA PASCANA DE COTOCA VI"));
         listaProyectos.add(new Proyectos(210,"LA PASCANA DE COTOCA VII"));
-        listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
-        listaProyectos.add(new Proyectos(204,"AME TAUNA"));
-        listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
-
+        listaProyectos.add(new Proyectos(212,"LA PASCANA DE COTOCA I"));
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
     }
@@ -961,7 +990,7 @@ public class cargarFormulario extends Fragment {
         Integer j = spinner_urbanizacion.getCount();
         for(int i=0;i<=j;i++){
             spinner_urbanizacion.setSelection(i);
-            if(spinner_urbanizacion.getItemAtPosition(i).toString().contains(valor)){
+            if(spinner_urbanizacion.getItemAtPosition(i).toString().equals(valor)){
                 spinner_urbanizacion.setSelection(i);
                 break;
             }
@@ -1008,6 +1037,7 @@ public class cargarFormulario extends Fragment {
 //        }
 //    }
     public void cargarFormulario(){
+
         RequestQueue requestQueue;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_formulario, new Response.Listener<String>() {
@@ -1028,6 +1058,7 @@ public class cargarFormulario extends Fragment {
                             elegirSpinnerExtension(respuesta.getString("extension"));
                             nacionalidad.setText(esNull(respuesta.getString("nacionalidad")));
                             tvfechaNacimiento.setText(esNull(respuesta.getString("fecha_nacimiento")));
+                            fechaNacBD=tvfechaNacimiento.getText().toString();
                             elegirSpinnerEstadoCivil(respuesta.getString("estado_civil"));
 //                            seleccionarRbMasculinoFemenino(respuesta.getString("sexo"));
                             elegirSpinnerNivelEstudio(respuesta.getString("nivel_estudio"));
@@ -1140,6 +1171,98 @@ public class cargarFormulario extends Fragment {
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
+    }
+    private String makeDateStringBase(int day, int month, int year) {
+        return year+"-"+month+"-"+day;
+    }
+
+    public void actualizar(){
+        idTitular = Integer.valueOf(codigoFormulario.getText().toString());
+        StringRequest request = new StringRequest(Request.Method.POST, urlActualizar, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    if(response.contains("algo salio mal")){
+                        Toast.makeText(getContext(),"No se pudo modificar, ocurrio un error",Toast.LENGTH_LONG).show();
+                    }
+                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
+
+                }else{
+                    Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("id",idTitular.toString());
+                parametros.put("nombres",nombre_cliente.getText().toString());
+                parametros.put("apellidoP",apellidoPaterno.getText().toString());
+                parametros.put("apellidoM",apellidoMaterno.getText().toString());
+                parametros.put("apellidoC",apellidoCasada.getText().toString());
+                parametros.put("prefijo",spinnerPrefijo.getSelectedItem().toString());
+                parametros.put("tipo_identificacion",spinnerIdentificacion.getSelectedItem().toString());
+                parametros.put("nro_documento",ci_cliente.getText().toString());
+                parametros.put("extension",spinnerExtension.getSelectedItem().toString());
+                parametros.put("nacionalidad",nacionalidad.getText().toString());
+                parametros.put("fecha_nacimiento",fechaNacBD);
+                parametros.put("estado_civil",spinnerEstadoCivil.getSelectedItem().toString());
+                parametros.put("sexo",rbSelectedGenero.getText().toString());
+                parametros.put("nivel_estudio",spinnerNivelEstudio.getSelectedItem().toString());
+                parametros.put("profesion_ocupacion",profesion.getText().toString());
+                parametros.put("telf_fijo",telFijo.getText().toString());
+                parametros.put("telf_movil",telMovil.getText().toString());
+                parametros.put("telf_fijoOficina",telFijoOfc.getText().toString());
+                parametros.put("telf_movilOficina",telMovOfc.getText().toString());
+                parametros.put("correo",correoPersonal.getText().toString());
+                parametros.put("referencia1",primerReferencia.getText().toString());
+                parametros.put("relacion1",parentesco.getText().toString());
+                parametros.put("telf_referencia1",telfReferencia1.getText().toString());
+                parametros.put("referencia2",segundaReferencia.getText().toString());
+                parametros.put("relacion2",relacion.getText().toString());
+                parametros.put("telf_referencia2",telfReferencia2.getText().toString());
+                parametros.put("tipo_vivienda",spinnerTipoVivienda.getSelectedItem().toString());
+                parametros.put("tenencia",spinnerTenencia.getSelectedItem().toString());
+                parametros.put("costo_vivienda",costoAprox.getText().toString());
+                parametros.put("moneda_costoVivienda",spinnerMoneda.getSelectedItem().toString());
+                parametros.put("propietario_vivienda",propietarioVivienta.getText().toString());
+                parametros.put("telf_propietario",telefonoPropietario.getText().toString());
+                parametros.put("pais_vivienda",pais.getText().toString());
+                parametros.put("departamento",spinnerDpto.getSelectedItem().toString());
+                parametros.put("zona",zona.getText().toString());
+                parametros.put("ciudad",ciudad.getText().toString());
+                parametros.put("barrio",barrio.getText().toString());
+                parametros.put("avenida",avenida.getText().toString());
+                parametros.put("calle",calle.getText().toString());
+                parametros.put("numero",numero.getText().toString());
+                parametros.put("nombre_empresa",nombreEmpresa.getText().toString());
+                parametros.put("direccion_empresa",direccionEmpresa.getText().toString());
+                parametros.put("rubro",rubroEmpresa.getText().toString());
+                parametros.put("ingresos",ingresosEmpresa.getText().toString());
+                parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
+                parametros.put("proyecto",codigo_proyecto.getText().toString());
+                parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
+                parametros.put("uv",uv.getText().toString());
+                parametros.put("mz",mz.getText().toString());
+                parametros.put("lt",lt.getText().toString());
+                parametros.put("cat",cat.getText().toString());
+                parametros.put("metros2",mts2.getText().toString());
+                parametros.put("tipo_venta",rbSelected.getText().toString());
+                parametros.put("cuotas",spinnerPlazo.getSelectedItem().toString());
+                parametros.put("asesor",asesor.getText().toString());
+                parametros.put("codigo_asesor",codigo_asesor.getText().toString());
+                parametros.put("observacion",observacion1.getText().toString());
+                parametros.put("observacion2",observacion2.getText().toString());
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
     }
 
 
@@ -1340,7 +1463,7 @@ public class cargarFormulario extends Fragment {
         canvas3.drawText(tresDigitos(lt.getText().toString()),787,592,titlePaint);
         canvas3.drawText(cat.getText().toString().toUpperCase(),1027,592,titlePaint);
         canvas3.drawText(rbSelected.getText().toString(),120,780,titlePaint);
-        canvas3.drawText(mts2.getText().toString(),335,780,titlePaint);
+        canvas3.drawText(mts2.getText().toString(),345,780,titlePaint);
         if(plazoContado.contains("Contado")){
             canvas3.drawText("",790,780,titlePaint);
         }else {

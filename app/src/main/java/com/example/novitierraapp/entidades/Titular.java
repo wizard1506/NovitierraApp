@@ -13,7 +13,7 @@ public class Titular {
     String nro_documento;
     String extension;
     String nacionalidad;
-    Date fecha_nacimiento;
+    String fecha_nacimiento;
     String estado_civil;
     String sexo;
     String nivel_estudio;
@@ -69,7 +69,7 @@ public class Titular {
 
     }
 
-    public Titular(Integer id_titular, String nombres, String apellidoP, String apellidoM, String apellidoC, String prefijo, String tipo_identificacion, String nro_documento, String extension, String nacionalidad, Date fecha_nacimiento, String estado_civil, String sexo, String nivel_estudio, String profesion_ocupacion, String telf_fijo, String telf_movil, String telf_fijoOficina, String telf_movilOficina, String correo, String referencia1, String relacion1, String telf_referencia1, String referencia2, String relacion2, String telf_referencia2, String tipo_vivienda, String tenencia, String costo_vivienda, String moneda_costoVivienda, String propietario_vivienda, String telf_propietario, String pais_vivienda, String departamento, String zona, String ciudad, String barrio, String avenida, String calle, String numero, String nombre_empresa, String direccion_empresa, String rubro, String ingresos, String moneda_ingresos, Integer proyecto, String urbanizacion, String uv, String mz, Integer lt, String cat, String metros2, String tipo_venta, String cuotas, String asesor, Integer codigo_asesor, String observacion, String observacion2, String latitud, String longitud, String ubicacion) {
+    public Titular(Integer id_titular, String nombres, String apellidoP, String apellidoM, String apellidoC, String prefijo, String tipo_identificacion, String nro_documento, String extension, String nacionalidad, String fecha_nacimiento, String estado_civil, String sexo, String nivel_estudio, String profesion_ocupacion, String telf_fijo, String telf_movil, String telf_fijoOficina, String telf_movilOficina, String correo, String referencia1, String relacion1, String telf_referencia1, String referencia2, String relacion2, String telf_referencia2, String tipo_vivienda, String tenencia, String costo_vivienda, String moneda_costoVivienda, String propietario_vivienda, String telf_propietario, String pais_vivienda, String departamento, String zona, String ciudad, String barrio, String avenida, String calle, String numero, String nombre_empresa, String direccion_empresa, String rubro, String ingresos, String moneda_ingresos, Integer proyecto, String urbanizacion, String uv, String mz, Integer lt, String cat, String metros2, String tipo_venta, String cuotas, String asesor, Integer codigo_asesor, String observacion, String observacion2, String latitud, String longitud, String ubicacion) {
         this.id_titular = id_titular;
         this.nombres = nombres;
         this.apellidoP = apellidoP;
@@ -213,11 +213,11 @@ public class Titular {
         this.nacionalidad = nacionalidad;
     }
 
-    public Date getFecha_nacimiento() {
+    public String getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
+    public void setFecha_nacimiento(String fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

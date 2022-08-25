@@ -39,7 +39,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Codigo:"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul_novi"
+                    android:layout_marginRight="10dp"
+                    >
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Nombre Completo:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -49,6 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Documento:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -58,6 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Urbanizacion:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -67,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Proyecto:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -77,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="UV:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -86,6 +101,7 @@
                     android:layout_height="wrap_content"
                     android:text="Mz:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -95,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="Lote:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -104,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:text="Metros2:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -117,10 +135,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/codigoTitular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
+                    android:text="codigo Cliente">
+                </TextView>
+                <TextView
                     android:id="@+id/nombreTitular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
 
                     android:text="Nombre Cliente">
                 </TextView>
@@ -129,6 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="Documento">
                 </TextView>
                 <TextView
@@ -136,6 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
 
                     android:text="Urbanizacion">
 
@@ -146,6 +175,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
                     android:text="proyecto"
+                    android:textSize="11sp"
                     >
                 </TextView>
                 <TextView
@@ -153,6 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="UV"
                     >
                 </TextView>
@@ -161,6 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="MZ"
                     >
                 </TextView>
@@ -169,6 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="Lote"
                     >
                 </TextView>
@@ -177,6 +210,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
 
                     android:text="Metros2"
                     >
@@ -199,23 +233,35 @@
         android:layout_marginBottom="10dp">
 
         <Button
-            android:id="@+id/updateProspecto"
+            android:id="@+id/updateTitular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Modificar"
-            android:textStyle="bold"
+            android:textSize="10sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFC107"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            >
+        </Button>
+        <Button
+            android:id="@+id/eliminarTitular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"
+            android:textSize="10sp"
+            android:backgroundTint="#F44336"
+            android:textColor="@color/white"
             android:layout_marginRight="10dp"
             >
         </Button>
         <Button
-            android:id="@+id/generarProspecto"
+            android:id="@+id/ubicacionTitular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Generar"
-            android:backgroundTint="#009688"
+            android:text="Ubicacion"
+            android:textSize="10sp"
+            android:backgroundTint="#2196F3"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
             >

@@ -33,7 +33,7 @@ public class metodos {
         lista.add("LA TIERRA PROMETIDA");
         lista.add("AME TAUNA");
         lista.add("AME TAUNA I");
-
+        lista.add("LA PASCANA DE COTOCA I");
         return lista;
     }
     public ArrayList<String> cargarUrbanizacionProspectos(ArrayList<String> lista){
@@ -49,7 +49,7 @@ public class metodos {
         lista.add("LA TIERRA PROMETIDA");
         lista.add("AME TAUNA");
         lista.add("AME TAUNA I");
-
+        lista.add("LA PASCANA DE COTOCA I");
         return lista;
     }
     public ArrayList<String>cargarLlamada(ArrayList<String> lista){

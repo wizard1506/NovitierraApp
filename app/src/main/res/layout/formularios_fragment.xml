@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Formulario con ubicacion?:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Formularios con Reserva?:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Cliente es:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -292,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="*Documento de identidad:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -316,7 +316,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Extension: (Carnet QR sin extension)"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -697,7 +697,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Dpto:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -720,7 +720,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="*Ciudad:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -1278,7 +1278,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Lote a : "
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -1342,7 +1342,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Urbanizacion:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="14sp"></TextView>
 
@@ -1373,7 +1373,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Proyecto: "
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -1487,7 +1487,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Mts2:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -1511,7 +1511,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="*Asesor de Venta:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -1533,7 +1533,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="*Codigo Asesor:"
-                    android:textColor="@color/azul_novi"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:textStyle="bold"></TextView>
 
@@ -1597,6 +1597,23 @@
                     android:maxLength="80"
                     android:inputType="textAutoComplete"></EditText>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:text="Nota: Revisar bien lo marcado en rojo"
+                    android:textColor="@color/red"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"></TextView>
             </LinearLayout>
 
             <LinearLayout

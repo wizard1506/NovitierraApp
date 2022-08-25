@@ -1,8 +1,10 @@
 package Adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -90,9 +92,25 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
         holder.deleteProspecto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                id=listProspectos.get(i).getId_prospectos();
-                Navigation.findNavController(v).popBackStack();
-                eliminarProspecto(v);
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(v.getContext());
+                alerta.setMessage("Desea eliminar el Prospecto?").setCancelable(false)
+                        .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                id=listProspectos.get(i).getId_prospectos();
+                                Navigation.findNavController(v).popBackStack();
+                                eliminarProspecto(v);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog titulo = alerta.create();
+                titulo.setTitle("Eliminar");
+                titulo.show();
 //                Navigation.findNavController(v).navigate(R.id.prospectosHoy);
             }
         });

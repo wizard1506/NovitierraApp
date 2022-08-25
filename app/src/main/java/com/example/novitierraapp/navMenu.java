@@ -42,7 +42,7 @@ public class navMenu extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home,R.id.formularios,R.id.formCoSolicitante,R.id.mapFragment,R.id.encuesta,R.id.formularioMapa,R.id.cargarFormulario,R.id.misFormularios,R.id.prospectos,R.id.prospectosHoy,R.id.perfil,R.id.updatePassword,R.id.prospectosLista)
+                R.id.nav_home,R.id.formularios,R.id.formCoSolicitante,R.id.mapFragment,R.id.encuesta,R.id.formularioMapa,R.id.cargarFormulario,R.id.misFormularios,R.id.prospectos,R.id.prospectosHoy,R.id.perfil,R.id.updatePassword,R.id.prospectosLista,R.id.titulares,R.id.informacion)
                 .setDrawerLayout(drawer)
                 .build();
 

@@ -103,6 +103,11 @@
         android:name="com.example.novitierraapp.prospectosLista"
         android:label="Lista Prospectos"
         tools:layout="@layout/prospectos_lista_fragment" />
+    <fragment
+        android:id="@+id/informacion"
+        android:name="com.example.novitierraapp.informacion"
+        android:label="Informacion"
+        tools:layout="@layout/informacion_fragment" />
 
     <!--    <navigation android:id="@+id/navigation3"-->
 <!--        app:startDestination="@id/navigation2">-->

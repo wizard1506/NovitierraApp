@@ -89,6 +89,8 @@ public class formularioMapa extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         nombre_cliente = view.findViewById(R.id.nombreCliente);
@@ -127,6 +129,35 @@ public class formularioMapa extends Fragment {
 
         cargarListaPrefijo();
         cargarListaExtensiones();
+
+
+
+        nombre_cliente.setText(getArguments().getString("nombre"));
+        apellidoPaterno.setText(getArguments().getString("apellidop"));
+        apellidoMaterno.setText(getArguments().getString("apellidom"));
+        apellidoCasada.setText(getArguments().getString("apellidoc"));
+        ci_cliente.setText(getArguments().getString("nrodocumento"));
+        zona.setText(getArguments().getString("zona"));
+        barrio.setText(getArguments().getString("barrio"));
+        avenida.setText(getArguments().getString("avenida"));
+        calle.setText(getArguments().getString("calle"));
+        numero.setText(getArguments().getString("numero"));
+        telMovil.setText(getArguments().getString("telfmovil"));
+        primerReferencia.setText(getArguments().getString("referencia1"));
+        segundaReferencia.setText(getArguments().getString("referencia2"));
+        telfReferencia1.setText(getArguments().getString("telefono1"));
+        telfReferencia2.setText(getArguments().getString("telefono2"));
+
+        uv.setText(getArguments().getString("uv"));
+        mz.setText(getArguments().getString("mz"));
+        lt.setText(String.valueOf(getArguments().getInt("lt")));
+        cat.setText(getArguments().getString("cat"));
+        observacion1.setText(getArguments().getString("obs1"));
+        observacion2.setText(getArguments().getString("obs2"));
+
+        elegirSpinnerExtension(getArguments().getString("extension"));
+        elegirSpinnerPrefijo(getArguments().getString("prefijo"));
+
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +240,27 @@ public class formularioMapa extends Fragment {
         listaPrefijo.add("DE");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPrefijo);
         spinnerPrefijo.setAdapter(adapter);
+    }
+
+    public void elegirSpinnerPrefijo(String valor){
+        Integer j = spinnerPrefijo.getCount();
+        for(int i=0;i<=j;i++){
+            spinnerPrefijo.setSelection(i);
+            if(spinnerPrefijo.getItemAtPosition(i).toString().toLowerCase().equals(valor.toLowerCase())){
+                spinnerPrefijo.setSelection(i);
+                break;
+            }
+        }
+    }
+    public void elegirSpinnerExtension(String valor){
+        Integer j = spinnerExtension.getCount();
+        for(int i=0;i<=j;i++){
+            spinnerExtension.setSelection(i);
+            if(spinnerExtension.getItemAtPosition(i).toString().equals(valor)){
+                spinnerExtension.setSelection(i);
+                break;
+            }
+        }
     }
 
     /////boton generador de pdf/////

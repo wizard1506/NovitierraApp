@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Inicio" />
         <item
+            android:id="@+id/informacion"
+            android:icon="@drawable/ic_baseline_view_list_24"
+            android:title="Informacion" />
+        <item
             android:id="@+id/perfil"
             android:icon="@drawable/ic_baseline_person_24"
             android:title="Datos Perfil" />
@@ -23,6 +27,7 @@
                 android:id="@+id/encuesta"
                 android:icon="@drawable/ic_baseline_analytics_24"
                 android:title="1.- Encuesta" />
+
             <item
                 android:id="@+id/mapFragment"
                 android:icon="@drawable/ic_baseline_map_24"
@@ -32,31 +37,24 @@
                 android:id="@+id/formularios"
                 android:icon="@drawable/ic_menu_formulario"
                 android:title="3.- Registrar Titular Completo" />
-            <item
-                android:id="@+id/cargarFormulario"
-                android:icon="@drawable/ic_menu_formulario"
-                android:title="3.1 .- Modificar Titular" />
+
             <item
                 android:id="@+id/formCoSolicitante"
                 android:icon="@drawable/ic_menu_formulario"
                 android:title="4.- Co-Solicitante" />
-            <!--        <item-->
-            <!--            android:id="@+id/formulario1y3"-->
-            <!--            android:icon="@drawable/ic_menu_formulario"-->
-            <!--            android:title=" Solo Formularios 1 y 3" />-->
-            <!--        <item-->
-            <!--            android:id="@+id/formulario4"-->
-            <!--            android:icon="@drawable/ic_menu_formulario"-->
-            <!--            android:title=" Solo Formulario 4" />-->
-
+            <item
+                android:id="@+id/titulares"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:title="5.-Mis Formularios" />
             <item
                 android:id="@+id/misFormularios"
                 android:icon="@drawable/ic_baseline_list_24"
-                android:title="5.- Mis Formularios" />
+                android:title="6.- Mis Clientes" />
             <item
-                android:id="@+id/formularioMapa"
-                android:icon="@drawable/ic_baseline_map_24"
-                android:title="Formulario Mapa" />
+                android:id="@+id/cargarFormulario"
+                android:icon="@drawable/ic_menu_formulario"
+                android:title="7.- Modificar por Codigo" />
+
         </menu>
     </item>
 

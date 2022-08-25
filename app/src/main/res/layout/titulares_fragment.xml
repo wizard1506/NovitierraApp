@@ -15,6 +15,28 @@
         android:textStyle="bold"
         android:gravity="center">
     </TextView>
+    <TextView
+        android:id="@+id/fechatitularHoy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha Hoy"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/azul_novi"
+        android:textStyle="bold"
+
+        >
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mas recientes (20)"
+        android:textSize="16sp"
+        android:textColor="@color/azul_novi"
+        android:textStyle="bold"
+android:layout_marginStart="20dp"
+        >
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTitular"
         android:layout_width="match_parent"

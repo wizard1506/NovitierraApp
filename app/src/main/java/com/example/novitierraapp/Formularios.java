@@ -798,15 +798,15 @@ public class Formularios extends Fragment {
         listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
         listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
         listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
+        listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
+        listaProyectos.add(new Proyectos(204,"AME TAUNA"));
+        listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
         listaProyectos.add(new Proyectos(206,"LA PASCANA DE COTOCA III"));
         listaProyectos.add(new Proyectos(207,"LA PASCANA DE COTOCA IV"));
         listaProyectos.add(new Proyectos(208,"LA PASCANA DE COTOCA V"));
         listaProyectos.add(new Proyectos(209,"LA PASCANA DE COTOCA VI"));
         listaProyectos.add(new Proyectos(210,"LA PASCANA DE COTOCA VII"));
-        listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
-        listaProyectos.add(new Proyectos(204,"AME TAUNA"));
-        listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
-
+        listaProyectos.add(new Proyectos(212,"LA PASCANA DE COTOCA I"));
         ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
         spinner_urbanizacion.setAdapter(adapter);
     }
@@ -1090,7 +1090,7 @@ public class Formularios extends Fragment {
         canvas3.drawText(tresDigitos(lt.getText().toString()),787,592,titlePaint);
         canvas3.drawText(cat.getText().toString().toUpperCase(),1027,592,titlePaint);
         canvas3.drawText(rbSelected.getText().toString(),120,780,titlePaint);
-        canvas3.drawText(mts2.getText().toString(),335,780,titlePaint);
+        canvas3.drawText(mts2.getText().toString(),345,780,titlePaint);
         if(plazoContado.contains("Contado")){
             canvas3.drawText("",790,780,titlePaint);
         }else {

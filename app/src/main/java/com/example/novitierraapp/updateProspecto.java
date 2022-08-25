@@ -120,7 +120,7 @@ public class updateProspecto extends Fragment {
         Integer j = urbanizacion.getCount();
         for(int i=0;i<=j;i++){
             urbanizacion.setSelection(i);
-            if(urbanizacion.getItemAtPosition(i).toString().contains(valor)){
+            if(urbanizacion.getItemAtPosition(i).toString().equals(valor)){
                 urbanizacion.setSelection(i);
                 break;
             }

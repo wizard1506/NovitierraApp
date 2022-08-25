@@ -101,7 +101,12 @@ public class prospectos extends Fragment {
             @Override
             public void onClick(View v) {
                 if(camposVacios()){
-                    registrarProspecto();
+                    if(telefono.getText().length()>9){
+                        mensaje("Hubo un problema con el telefono, excede el numero de digitos o se ha copiado/pegado");
+                    }else{
+                        registrarProspecto();
+                    }
+
 //                    new Handler().postDelayed(new Runnable() {
 //                        @Override
 //                        public void run() {
