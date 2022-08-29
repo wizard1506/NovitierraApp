@@ -245,23 +245,23 @@
             >
         </Button>
         <Button
-            android:id="@+id/eliminarTitular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:textSize="10sp"
-            android:backgroundTint="#F44336"
-            android:textColor="@color/white"
-            android:layout_marginRight="10dp"
-            >
-        </Button>
-        <Button
             android:id="@+id/ubicacionTitular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ubicacion"
             android:textSize="10sp"
             android:backgroundTint="#2196F3"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            >
+        </Button>
+        <Button
+            android:id="@+id/eliminarTitular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"
+            android:textSize="10sp"
+            android:backgroundTint="#F44336"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
             >

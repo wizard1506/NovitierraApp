@@ -41,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre Completo:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -50,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Telefono:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -59,6 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Urbanizacion:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -69,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:text="Zona:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -78,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:text="Lugar:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -86,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contesto llamada:"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
@@ -96,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:text="Vigencia:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -105,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="Observacion:"
                     android:textStyle="bold"
+                    android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
                     >
@@ -122,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
-
+                    android:textSize="11sp"
                     android:text="Nombre Cliente">
                 </TextView>
                 <TextView
@@ -130,6 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
 
 
                     android:text="Telefono">
@@ -139,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
-
+                    android:textSize="11sp"
                     android:text="Urbanizacion">
 
                 </TextView>
@@ -148,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="zona"
                     >
                 </TextView>
@@ -156,6 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="Lugar"
                     >
                 </TextView>
@@ -164,6 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="Llamada"
                     >
                 </TextView>
@@ -172,6 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
+                    android:textSize="11sp"
                     android:text="Vigencia"
                     >
                 </TextView>
@@ -180,7 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
-
+                    android:textSize="11sp"
                     android:text="Observacion"
                     >
                 </TextView>
@@ -207,6 +220,7 @@
             android:layout_height="wrap_content"
             android:text="Modificar"
             android:textStyle="bold"
+            android:textSize="11sp"
             android:textColor="@color/white"
             android:backgroundTint="#FFC107"
             android:layout_marginRight="10dp"
@@ -218,6 +232,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Eliminar"
+            android:textSize="11sp"
             android:backgroundTint="#F44336"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
