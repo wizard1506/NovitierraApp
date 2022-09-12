@@ -131,7 +131,8 @@ public class AdapterTitulares extends RecyclerView.Adapter<AdapterTitulares.View
                 bundle.putString("obs1",listTitulares.get(i).getObservacion());
                 bundle.putString("obs2",listTitulares.get(i).getObservacion2());
                 Navigation.findNavController(v).popBackStack();
-                Navigation.findNavController(v).navigate(R.id.formularioMapa,bundle);
+//                Navigation.findNavController(v).navigate(R.id.formularioMapa,bundle);
+                Navigation.findNavController(v).navigate(R.id.mapFragment,bundle);
             }
         });
 

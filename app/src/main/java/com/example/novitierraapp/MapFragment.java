@@ -15,6 +15,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -50,8 +51,12 @@ public class MapFragment extends Fragment {
     SupportMapFragment mapFragment;
     SearchView searchView;
     OutputStream outputStream;
+    Integer id,lt;
+    String nombre,apellidop,apellidom,apellidoc,prefijo,nrodocumento,extension,zona,barrio,avenida,calle,numero,telfmovil,referencia1,telefono1,referencia2,telefono2,uv,mz,cat,obs1,obs2;
+
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/UbicacionCliente.jpg";
     private File file = new File(path);
+
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -107,6 +112,34 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                if(getArguments()!=null){
+                    id=getArguments().getInt("id");
+                    nombre=getArguments().getString("nombre");
+                    apellidop=getArguments().getString("apellidop");
+                    apellidom=getArguments().getString("apellidom");
+                    apellidoc=getArguments().getString("apellidoc");
+                    prefijo = getArguments().getString("prefijo");
+                    nrodocumento = getArguments().getString("nrodocumento");
+                    extension = getArguments().getString("extension");
+                    zona = getArguments().getString("zona");
+                    barrio = getArguments().getString("barrio");
+                    avenida = getArguments().getString("avenida");
+                    calle = getArguments().getString("calle");
+                    numero = getArguments().getString("numero");
+                    telfmovil = getArguments().getString("telfmovil");
+                    referencia1 = getArguments().getString("referencia1");
+                    telefono1 = getArguments().getString("telefono1");
+                    referencia2 = getArguments().getString("referencia2");
+                    telefono2 = getArguments().getString("telefono2");
+                    uv=getArguments().getString("uv");
+                    mz=getArguments().getString("mz");
+                    lt = getArguments().getInt("lt");
+                    cat = getArguments().getString("cat");
+                    obs1 = getArguments().getString("obs1");
+                    obs2 = getArguments().getString("obs2");
+
+                }
+
                 mMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
                     @Override
                     public void onSnapshotReady(@Nullable Bitmap bitmap) {
@@ -127,6 +160,36 @@ public class MapFragment extends Fragment {
                             outputStream.close();
                         } catch (IOException e) {
                             e.printStackTrace();
+                        }
+
+                        if(getArguments()!=null){
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id",id);
+                            bundle.putString("nombre",nombre);
+                            bundle.putString("apellidop",apellidop);
+                            bundle.putString("apellidom",apellidom);
+                            bundle.putString("apellidoc",apellidoc);
+                            bundle.putString("prefijo",prefijo);
+                            bundle.putString("nrodocumento",nrodocumento);
+                            bundle.putString("extension",extension);
+                            bundle.putString("zona",zona);
+                            bundle.putString("barrio",barrio);
+                            bundle.putString("avenida",avenida);
+                            bundle.putString("calle",calle);
+                            bundle.putString("numero",numero);
+                            bundle.putString("telfmovil",telfmovil);
+                            bundle.putString("referencia1",referencia1);
+                            bundle.putString("telefono1",telefono1);
+                            bundle.putString("referencia2",referencia2);
+                            bundle.putString("telefono2",telefono2);
+                            bundle.putString("uv",uv);
+                            bundle.putString("mz",mz);
+                            bundle.putInt("lt",lt);
+                            bundle.putString("cat",cat);
+                            bundle.putString("obs1",obs1);
+                            bundle.putString("obs2",obs2);
+                            Navigation.findNavController(v).popBackStack();
+                            Navigation.findNavController(v).navigate(R.id.formularioMapa,bundle);
                         }
                     }
                 });
