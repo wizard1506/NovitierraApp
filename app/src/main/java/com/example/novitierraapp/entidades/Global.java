@@ -12,6 +12,14 @@ public class Global {
     public static String telefonoSesion = "";
     public static String grupo = "";
     public static Integer codigo = 0;
+    public static String nombreReferidor = "";
+    public static String apellidoReferidor = "";
+    public static String telfReferidor = "";
+    public static String ciReferidor = "";
+    public static String passReferidor = "";
+    public static String asesorReferidor = "";
+    public static String idReferidor = "";
+
 
     ///otros datos
     public static Double gLat=0.0;

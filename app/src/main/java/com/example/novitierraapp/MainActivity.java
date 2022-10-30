@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tvRegistro;
+    TextView tvRegistro,tvReferidor;
     EditText userLogin,passwordLogin;
     Button login;
     List<usuarios> userList;
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         passwordLogin=findViewById(R.id.passwordLogin);
         login = findViewById(R.id.btlogin);
         tvRegistro=findViewById(R.id.tvRegistrarme);
+        tvReferidor = findViewById(R.id.tvsoyReferidor);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),RegistrarseLogin.class);
                 startActivity(intent);
 
+            }
+        });
+        tvReferidor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),loginReferidor.class);
+                startActivity(intent);
             }
         });
     }

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/azul_novi"
     android:orientation="vertical"
-    >
+    android:background="@color/azul_novi"
+    tools:context=".loginReferidor">
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -18,12 +17,11 @@
         android:src="@drawable/logoblancofinal">
     </ImageView>
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Usuario"
+        android:text="Numero Carnet"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -38,7 +36,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:id="@+id/userLogin"
+        android:id="@+id/ciReferidor"
         android:textSize="16sp"
         android:background="@color/white"
         android:layout_marginStart="70dp"
@@ -69,7 +67,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:id="@+id/passwordLogin"
+        android:id="@+id/passReferidor"
         android:textSize="16sp"
         android:background="@color/white"
         android:layout_marginStart="70dp"
@@ -83,7 +81,7 @@
     </EditText>
 
     <Button
-        android:id="@+id/btlogin"
+        android:id="@+id/btloginReferidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -94,15 +92,15 @@
         android:background="@drawable/btlogin"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-    />
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvRegistrarme"
+        android:id="@+id/tvRegistroReferidor"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:text="Registrarme."
+        android:text="Registrarme como referidor."
         android:gravity="center"
         android:layout_marginTop="100dp"
         android:fontFamily="sans-serif-black"
@@ -114,24 +112,6 @@
         >
     </TextView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvsoyReferidor"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:text="Soy Referidor.."
-        android:gravity="center"
-        android:layout_marginTop="100dp"
-        android:fontFamily="sans-serif-black"
-        android:shadowColor="@color/white"
-        android:shadowRadius="20"
-        android:shadowDx="2"
-        android:textSize="18sp"
-        android:clickable="true"
-        >
-
-    </TextView>
 
 
 </LinearLayout>

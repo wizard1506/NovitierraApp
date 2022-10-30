@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/numeracionProspectos"
+                    android:id="@+id/numeracionReferidos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="#"
@@ -36,11 +35,22 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre Completo:"
+                    android:text="Nombres:"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/azul_novi"
+                    android:layout_marginRight="10dp"
+                    >
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellidos:"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
@@ -57,76 +67,16 @@
                     android:layout_marginRight="10dp"
                     >
                 </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Urbanizacion:"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/azul_novi"
-                    android:layout_marginRight="10dp"
-                    >
-                </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zona:"
-                    android:textStyle="bold"
-                    android:textSize="11sp"
-                    android:textColor="@color/azul_novi"
-                    android:layout_marginRight="10dp"
-                    >
-                </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lugar:"
-                    android:textStyle="bold"
-                    android:textSize="11sp"
-                    android:textColor="@color/azul_novi"
-                    android:layout_marginRight="10dp"
-                    >
-                </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contesto llamada:"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/azul_novi"
-                    android:layout_marginRight="10dp"
-                    >
-                </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vigencia:"
-                    android:textStyle="bold"
-                    android:textSize="11sp"
-                    android:textColor="@color/azul_novi"
-                    android:layout_marginRight="10dp"
-                    >
-                </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Observacion:"
-                    android:textStyle="bold"
-                    android:textSize="11sp"
-                    android:textColor="@color/azul_novi"
-                    android:layout_marginRight="10dp"
-                    >
-                </TextView>
-
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/nombreProspecto"
+                    android:id="@+id/recyclerReferidoNombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
@@ -134,68 +84,21 @@
                     android:text="Nombre Cliente">
                 </TextView>
                 <TextView
-                    android:id="@+id/telefonoProspecto"
+                    android:id="@+id/recyclerReferidoApellido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
-
-
                     android:text="Telefono">
                 </TextView>
                 <TextView
-                    android:id="@+id/urbanizacionProspectos"
+                    android:id="@+id/recyclerReferidoTelefono"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
                     android:text="Urbanizacion">
 
-                </TextView>
-                <TextView
-                    android:id="@+id/zonaProspectos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="11sp"
-                    android:text="zona"
-                    >
-                </TextView>
-                <TextView
-                    android:id="@+id/lugarProspectos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="11sp"
-                    android:text="Lugar"
-                    >
-                </TextView>
-                <TextView
-                    android:id="@+id/llamadaProspecto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="11sp"
-                    android:text="Llamada"
-                    >
-                </TextView>
-                <TextView
-                    android:id="@+id/vigenciaProspecto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="11sp"
-                    android:text="Vigencia"
-                    >
-                </TextView>
-                <TextView
-                    android:id="@+id/observacionProspectos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="11sp"
-                    android:text="Observacion"
-                    >
                 </TextView>
 
             </LinearLayout>
@@ -215,7 +118,7 @@
         android:layout_marginBottom="10dp">
 
         <Button
-            android:id="@+id/updateProspecto"
+            android:id="@+id/updateReferido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Modificar"
@@ -227,7 +130,18 @@
             >
         </Button>
         <Button
-            android:id="@+id/deleteProspecto"
+            android:id="@+id/verTerrenosReferido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Terrenos"
+            android:textSize="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#2196F3"
+            android:layout_marginRight="10dp"
+            >
+        </Button>
+        <Button
+            android:id="@+id/deleteReferido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Eliminar"

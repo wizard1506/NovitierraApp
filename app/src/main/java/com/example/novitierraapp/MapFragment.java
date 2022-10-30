@@ -150,6 +150,7 @@ public class MapFragment extends Fragment {
                             e.printStackTrace();
                         }
                         bitmap.compress(Bitmap.CompressFormat.JPEG,90,outputStream);
+
                         Toast.makeText(getContext(),"Ubicacion guardada",Toast.LENGTH_SHORT).show();
                         try {
                             outputStream.flush();

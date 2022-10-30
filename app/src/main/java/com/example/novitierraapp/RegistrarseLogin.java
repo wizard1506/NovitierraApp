@@ -24,8 +24,6 @@ public class RegistrarseLogin extends AppCompatActivity {
     EditText nombres,apellidos,ci,telf,codigo,usuario,password,passwordRepeat,grupo;
     Button registrarUsuario;
     private String url="http://wizardapps.xyz/novitierra/api/addUser.php";
-//    private String url="https://novitierra.000webhostapp.com/api/addUser.php";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
