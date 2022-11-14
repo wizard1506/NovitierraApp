@@ -121,6 +121,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/azul_novi"
+            android:text="Fui referido por:"
+            android:textStyle="bold"
+            >
+        </TextView>
+        <Spinner
+            android:id="@+id/spinnerAsesor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/SpinnerGenerico"
+            android:spinnerMode="dialog"
+            >
+
+        </Spinner>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -133,17 +159,6 @@
             >
         </TextView>
     </LinearLayout>
-
-    <Spinner
-        android:id="@+id/spinnerAsesor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:prompt="@string/SpinnerGenerico"
-        android:spinnerMode="dialog"
-        android:visibility="gone"
-        >
-
-    </Spinner>
 
     <LinearLayout
         android:layout_width="match_parent"

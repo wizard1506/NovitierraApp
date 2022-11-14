@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    tools:context=".updateReferido">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Datos del Referido"
+            android:textSize="24sp"
+            android:textColor="@color/azul_novi"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*Nombres"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/updateReferidoNombres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:hint="Nombre completo del prospecto"
+            android:inputType="textCapCharacters"
+            >
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*Apellido"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/updateReferidoApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/azul_novi"
+            android:inputType="textCapCharacters"
+            android:maxLength="9"
+            android:textSize="14sp">
+        </EditText>
+
+        <Button
+            android:id="@+id/referidoUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modificar Referido"
+            android:textColor="@color/white">
+        </Button>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/logo"
+            >
+        </ImageView>
+    </LinearLayout>
+
+
+</LinearLayout>

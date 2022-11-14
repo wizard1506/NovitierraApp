@@ -53,7 +53,6 @@ RecyclerView recycler ;
 
     public void cargarReferidos(){
         RequestQueue requestQueue;
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_referidos, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

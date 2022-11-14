@@ -31,6 +31,7 @@ import com.example.novitierraapp.entidades.Prospectos;
 import com.example.novitierraapp.entidades.Referidos;
 import com.example.novitierraapp.misReferidos;
 import com.example.novitierraapp.terrenosReferido;
+import com.example.novitierraapp.updateReferido;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,7 +97,16 @@ public class AdapterReferidos extends RecyclerView.Adapter<AdapterReferidos.View
             holder.btUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    id=listReferidos.get(i).getId_referido();
+                    nombre = listReferidos.get(i).getNombres();
+                    apellido = listReferidos.get(i).getApellidos();
+                    Intent intent = new Intent(view.getContext(), updateReferido.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("nombre", nombre);
+                    intent.putExtra("apellido", apellido);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    view.getContext().startActivity(intent);
                 }
             });
             holder.btverTerrenos.setOnClickListener(new View.OnClickListener() {
