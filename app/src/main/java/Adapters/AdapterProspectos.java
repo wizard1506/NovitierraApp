@@ -42,7 +42,7 @@ import java.util.Map;
 public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.ViewHolderProspectos> {
     ArrayList<Prospectos> listProspectos;
     Integer id=0;
-    Context mcontext;
+
     private static  String URL_deleteprospecto="http://wizardapps.xyz/novitierra/api/deleteProspecto.php";
     public AdapterProspectos(ArrayList<Prospectos> listProspectos) {
         this.listProspectos = listProspectos;

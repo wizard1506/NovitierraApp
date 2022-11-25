@@ -53,6 +53,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
+import com.example.novitierraapp.entidades.Proyectos2;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,11 +87,12 @@ public class cargarFormulario extends Fragment {
     RadioGroup radioGroupSinConUbicacion;
     RadioButton rbconUbicacion, rbsinUbicacion, rbSelectedSinConUbicacion;
     Spinner spinner_urbanizacion, spinnerIdentificacion,spinnerEstadoCivil,spinnerNivelEstudio, spinnerTipoVivienda, spinnerDpto, spinnerTenencia, spinnerPrefijo, spinnerExtension, spinnerMoneda, spinnerPlazo, spinnerReserva;
+    Spinner spinnerProyectos;
     TextView codigo_proyecto,tvfechaNacimiento,tvplazo,tvtitulo;
     Button guardar, btFechaNac, cargar; //registrarForm;
     //    Proyectos proyectos;
     DatePickerDialog datePickerDialog;
-    ArrayList<Proyectos> listaProyectos = new ArrayList<>();
+//    ArrayList<Proyectos> listaProyectos = new ArrayList<>();
     ArrayList<String> listaExtension = new ArrayList<>();
     ArrayList<String> listaIdentificacion = new ArrayList<>();
     ArrayList<String> listaEstadoCivil = new ArrayList<>();
@@ -102,6 +104,9 @@ public class cargarFormulario extends Fragment {
     ArrayList<String> listaMoneda = new ArrayList<>();
     ArrayList<String> listaPlazo = new ArrayList<>();
     ArrayList<String> listaReserva = new ArrayList<>();
+
+
+    ArrayList<Proyectos2> listProyectos = new ArrayList<>();
     metodos metodos = new metodos();
 
     Bitmap imagen,scaled;
@@ -110,6 +115,8 @@ public class cargarFormulario extends Fragment {
     private String URL_formulario="http://wizardapps.xyz/novitierra/api/cargarFormulario.php";
     private String urlActualizar= "http://wizardapps.xyz/novitierra/api/updateTitular.php";
     private String ubicacion = "https://www.google.es/maps?q=";
+    private String URL_proyectos = "http://wizardapps.xyz/novitierra/api/getProyectos.php" ;
+
 //    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
 
     //***PARA PDF****
@@ -229,7 +236,7 @@ public class cargarFormulario extends Fragment {
 
 
 
-        spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
+//        spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
         spinnerIdentificacion= view.findViewById(R.id.tipoIdentificacion);
         spinnerEstadoCivil= view.findViewById(R.id.estadoCivil);
         spinnerNivelEstudio= view.findViewById(R.id.nivelEstudio);
@@ -241,6 +248,7 @@ public class cargarFormulario extends Fragment {
         spinnerMoneda=view.findViewById(R.id.spinnerMoneda);
         spinnerPlazo= view.findViewById(R.id.cuotasplazo);
         spinnerReserva= view.findViewById(R.id.spinnerReserva);
+        spinnerProyectos = view.findViewById(R.id.urbanizacionproyecto);
 
         codigo_proyecto = view.findViewById(R.id.idProyecto);
         tvfechaNacimiento = view.findViewById(R.id.fechaNacimiento);
@@ -256,7 +264,19 @@ public class cargarFormulario extends Fragment {
 
         /////cargamos los spinners
         cargarComponentes();
-        cargarListaUrbanizacion();
+//        cargarListaUrbanizacion();
+
+        spinnerProyectos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                codigo_proyecto.setText(listProyectos.get(position).getCodigo());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         ////boton fecha nacimiento
         btFechaNac.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -348,17 +368,17 @@ public class cargarFormulario extends Fragment {
 
 
 
-        spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                codigo_proyecto.setText(listaProyectos.get(position).getCodigo().toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinner_urbanizacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                codigo_proyecto.setText(listaProyectos.get(position).getCodigo().toString());
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -418,6 +438,8 @@ public class cargarFormulario extends Fragment {
 
     public void cargarComponentes(){
 
+        getUrbanizacionProyectos();
+
         metodos.cargarReserva(listaReserva);
         ArrayAdapter<String> adapterReserva = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaReserva);
         spinnerReserva.setAdapter(adapterReserva);
@@ -461,6 +483,49 @@ public class cargarFormulario extends Fragment {
         metodos.cargarListaPlazo(listaPlazo);
         ArrayAdapter<String> adapterPlazo = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaPlazo);
         spinnerPlazo.setAdapter(adapterPlazo);
+    }
+
+    public void getUrbanizacionProyectos(){
+        RequestQueue requestQueue;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_proyectos, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i <array.length() ; i++) {
+                            JSONObject respuesta = array.getJSONObject(i);
+                            Proyectos2 proyectos2 = new Proyectos2();
+                            proyectos2.setCodigo(respuesta.getString("codigo"));
+                            proyectos2.setProyecto(respuesta.getString("proyecto"));
+                            listProyectos.add(proyectos2);
+                        }
+                        ArrayAdapter<Proyectos2> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line,listProyectos);
+                        spinnerProyectos.setAdapter(adapter);
+                    }catch(JSONException e) {
+                        Toast.makeText(getContext(), "No se cargaron los referidores o no existen aun", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getContext(), "Ocurrio algun error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(),error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+//                parametros.put("id", Global.idReferidor);
+                return parametros;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
     }
 
     public void DeshabilitarBoton(){
@@ -835,22 +900,22 @@ public class cargarFormulario extends Fragment {
         rbSelectedIndependienteDependiente = v.findViewById(radiobtid);
     }
 
-    public void cargarListaUrbanizacion(){
-        listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
-        listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
-        listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
-        listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
-        listaProyectos.add(new Proyectos(204,"AME TAUNA"));
-        listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
-        listaProyectos.add(new Proyectos(206,"LA PASCANA DE COTOCA III"));
-        listaProyectos.add(new Proyectos(207,"LA PASCANA DE COTOCA IV"));
-        listaProyectos.add(new Proyectos(208,"LA PASCANA DE COTOCA V"));
-        listaProyectos.add(new Proyectos(209,"LA PASCANA DE COTOCA VI"));
-        listaProyectos.add(new Proyectos(210,"LA PASCANA DE COTOCA VII"));
-        listaProyectos.add(new Proyectos(212,"LA PASCANA DE COTOCA I"));
-        ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
-        spinner_urbanizacion.setAdapter(adapter);
-    }
+//    public void cargarListaUrbanizacion(){
+//        listaProyectos.add(new Proyectos(100,"LA ENCONADA II"));
+//        listaProyectos.add(new Proyectos(101,"LA PASCANA DE COTOCA"));
+//        listaProyectos.add(new Proyectos(200,"LA PASCANA DE COTOCA II"));
+//        listaProyectos.add(new Proyectos(201,"LA TIERRA PROMETIDA"));
+//        listaProyectos.add(new Proyectos(204,"AME TAUNA"));
+//        listaProyectos.add(new Proyectos(205,"AME TAUNA I"));
+//        listaProyectos.add(new Proyectos(206,"LA PASCANA DE COTOCA III"));
+//        listaProyectos.add(new Proyectos(207,"LA PASCANA DE COTOCA IV"));
+//        listaProyectos.add(new Proyectos(208,"LA PASCANA DE COTOCA V"));
+//        listaProyectos.add(new Proyectos(209,"LA PASCANA DE COTOCA VI"));
+//        listaProyectos.add(new Proyectos(210,"LA PASCANA DE COTOCA VII"));
+//        listaProyectos.add(new Proyectos(212,"LA PASCANA DE COTOCA I"));
+//        ArrayAdapter<Proyectos> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaProyectos);
+//        spinner_urbanizacion.setAdapter(adapter);
+//    }
 
 
     public String mesLiteral(Integer mes){
@@ -987,11 +1052,11 @@ public class cargarFormulario extends Fragment {
         }
     }
     public void elegirSpinnerUrbanizacion(String valor){
-        Integer j = spinner_urbanizacion.getCount();
+        Integer j = spinnerProyectos.getCount();
         for(int i=0;i<=j;i++){
-            spinner_urbanizacion.setSelection(i);
-            if(spinner_urbanizacion.getItemAtPosition(i).toString().equals(valor)){
-                spinner_urbanizacion.setSelection(i);
+            spinnerProyectos.setSelection(i);
+            if(spinnerProyectos.getItemAtPosition(i).toString().equals(valor)){
+                spinnerProyectos.setSelection(i);
                 break;
             }
         }
@@ -1246,7 +1311,7 @@ public class cargarFormulario extends Fragment {
                 parametros.put("ingresos",ingresosEmpresa.getText().toString());
                 parametros.put("moneda_ingresos",rbSelectedIngresos.getText().toString());
                 parametros.put("proyecto",codigo_proyecto.getText().toString());
-                parametros.put("urbanizacion",spinner_urbanizacion.getSelectedItem().toString());
+                parametros.put("urbanizacion",spinnerProyectos.getSelectedItem().toString());
                 parametros.put("uv",uv.getText().toString());
                 parametros.put("mz",mz.getText().toString());
                 parametros.put("lt",lt.getText().toString());
@@ -1328,7 +1393,7 @@ public class cargarFormulario extends Fragment {
         check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
         scaledcheck = Bitmap.createScaledBitmap(check,45,45,false);
 
-        canvas.drawText(spinner_urbanizacion.getSelectedItem().toString(),450,154,titlePaint);
+        canvas.drawText(spinnerProyectos.getSelectedItem().toString(),450,154,titlePaint);
         canvas.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),270,229,titlePaint);
         canvas.drawText(ci_cliente.getText().toString(),352,289,titlePaint);
         canvas.drawText(extensionObtenida,705,289,titlePaint);
@@ -1450,7 +1515,7 @@ public class cargarFormulario extends Fragment {
         myPaint.setTextSize(30f);
         myPaint.setColor(Color.BLACK);
         myPaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.NORMAL));
-        canvas3.drawText(spinner_urbanizacion.getSelectedItem().toString(),330,450,myPaint);
+        canvas3.drawText(spinnerProyectos.getSelectedItem().toString(),330,450,myPaint);
         myPaint.setTextAlign(Paint.Align.LEFT);
         myPaint.setTextSize(28f);
         canvas3.drawText(day.toString(),108,285,myPaint);
@@ -1559,7 +1624,7 @@ public class cargarFormulario extends Fragment {
             canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),480,393,titlePaint);
             canvas5.drawText(ci_cliente.getText().toString().toUpperCase(),435,429,titlePaint);
             canvas5.drawText(extensionObtenida,780,429,titlePaint);
-            canvas5.drawText(spinner_urbanizacion.getSelectedItem().toString(),120,498,titlePaint);
+            canvas5.drawText(spinnerProyectos.getSelectedItem().toString(),120,498,titlePaint);
             canvas5.drawText(codigo_proyecto.getText().toString(),180,532,titlePaint);
             canvas5.drawText(tresDigitos(uv.getText().toString().toUpperCase()),390,534,titlePaint);
             canvas5.drawText(tresDigitos(mz.getText().toString().toUpperCase()),570,534,titlePaint);

@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Prospectos;
 import com.example.novitierraapp.entidades.Proyectos;
+import com.example.novitierraapp.entidades.Proyectos2;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,12 +51,15 @@ public class prospectos extends Fragment {
     String hoy="";
     TextView fecha,usuario,grupo;
     EditText nombre,telefono,observacion,lugar,zona;
-    Spinner spinnerLlamada,spinnerUrb;
+    Spinner spinnerLlamada;
+    Spinner spinnerProyectos;
     Button btRegistrarProspecto;
     ArrayList<String> listaUrbanizacion = new ArrayList<>();
     ArrayList<String> listaLlamada = new ArrayList<>();
+    ArrayList<Proyectos2> listProyectos = new ArrayList<>();
     metodos metodos = new metodos();
     private String URL_Prospecto="http://wizardapps.xyz/novitierra/api/addProspecto.php";
+    private String URL_proyectos = "http://wizardapps.xyz/novitierra/api/getProyectos.php" ;
 
     private ProspectosViewModel mViewModel;
 
@@ -88,7 +92,8 @@ public class prospectos extends Fragment {
         lugar=view.findViewById(R.id.prospectoLugar);
         zona=view.findViewById(R.id.prospectoZona);
         spinnerLlamada=view.findViewById(R.id.spinnerLlamada);
-        spinnerUrb=view.findViewById(R.id.spinnerProspectoUrb);
+//        spinnerUrb=view.findViewById(R.id.spinnerProspectoUrb);
+        spinnerProyectos = view.findViewById(R.id.spinnerProspectoUrb2);
         grupo =  view.findViewById(R.id.prospectoGrupo);
         btRegistrarProspecto = view.findViewById(R.id.prospectoRegistrar);
 
@@ -119,8 +124,52 @@ public class prospectos extends Fragment {
             }
         });
     }
+
+    public void getUrbanizacionProyectos(){
+        RequestQueue requestQueue;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_proyectos, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i <array.length() ; i++) {
+                            JSONObject respuesta = array.getJSONObject(i);
+                            Proyectos2 proyectos2 = new Proyectos2();
+                            proyectos2.setCodigo(respuesta.getString("codigo"));
+                            proyectos2.setProyecto(respuesta.getString("proyecto"));
+                            listProyectos.add(proyectos2);
+                        }
+                        ArrayAdapter<Proyectos2> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line,listProyectos);
+                        spinnerProyectos.setAdapter(adapter);
+                    }catch(JSONException e) {
+                        Toast.makeText(getContext(), "No se cargaron los referidores o no existen aun", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getContext(), "Ocurrio algun error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(),error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+//                parametros.put("id", Global.idReferidor);
+                return parametros;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+    }
+
     public Boolean camposVacios(){
-        if(nombre.length()==0 || telefono.length()==0 || spinnerUrb.getSelectedItemPosition()==0){
+        if(nombre.length()==0 || telefono.length()==0){
             return false;
         }else {
             return true;
@@ -136,14 +185,12 @@ public class prospectos extends Fragment {
         zona.setText("");
         lugar.setText("");
         spinnerLlamada.setSelection(0);
-        spinnerUrb.setSelection(0);
+
     }
 
     public void cargarComponentes(){
+        getUrbanizacionProyectos();
         metodos.cargarUrbanizacionProspectos(listaUrbanizacion);
-        ArrayAdapter<String> adapterurb = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaUrbanizacion);
-        spinnerUrb.setAdapter(adapterurb);
-
         metodos.cargarLlamada(listaLlamada);
         ArrayAdapter<String> adapterLlamada = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaLlamada);
         spinnerLlamada.setAdapter(adapterLlamada);
@@ -190,7 +237,7 @@ public class prospectos extends Fragment {
                 parametros.put("llamada",spinnerLlamada.getSelectedItem().toString());
                 parametros.put("zona",zona.getText().toString().toUpperCase());
                 parametros.put("lugar",lugar.getText().toString().toUpperCase());
-                parametros.put("urbanizacion",spinnerUrb.getSelectedItem().toString());
+                parametros.put("urbanizacion",spinnerProyectos.getSelectedItem().toString());
                 parametros.put("observacion",observacion.getText().toString().toUpperCase());
                 parametros.put("asesor",Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
                 parametros.put("codigo",Global.codigo.toString());

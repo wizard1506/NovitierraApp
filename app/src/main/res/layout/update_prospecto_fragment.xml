@@ -155,8 +155,9 @@
                 android:layout_marginTop="10dp"
                 >
             </TextView>
+
             <Spinner
-                android:id="@+id/updspinnerProspectoUrb"
+                android:id="@+id/updspinnerProspectoUrb2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:prompt="@string/SpinnerGenerico"

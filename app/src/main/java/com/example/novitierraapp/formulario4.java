@@ -188,7 +188,7 @@ public class formulario4 extends Fragment {
 
 
 
-        spinner_urbanizacion= view.findViewById(R.id.urbanizacion);
+
         spinnerIdentificacion= view.findViewById(R.id.tipoIdentificacion);
         spinnerEstadoCivil= view.findViewById(R.id.estadoCivil);
         spinnerNivelEstudio= view.findViewById(R.id.nivelEstudio);

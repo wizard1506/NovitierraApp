@@ -60,6 +60,7 @@ public class registrarReferidor extends AppCompatActivity {
         spinnerAsesor = findViewById(R.id.spinnerAsesor);
 
         llenarSpinner();
+
         spinnerAsesor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

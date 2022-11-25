@@ -3,7 +3,11 @@ package com.example.novitierraapp;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,7 +16,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.novitierraapp.entidades.Asesor;
 import com.example.novitierraapp.entidades.Proyectos;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class metodos {
+
 
     public ArrayList<String> cargarUrbanizacion(ArrayList<String> lista){
         lista.add("LA ENCONADA II");
@@ -147,6 +157,8 @@ public class metodos {
         lista.add("NO");
         return lista;
     }
+
+
 
 
 
