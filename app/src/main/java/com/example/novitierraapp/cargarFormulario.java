@@ -71,7 +71,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class cargarFormulario extends Fragment {
-
+    TextView day,month,year;
     EditText nombre_cliente, apellidoPaterno, apellidoMaterno, ci_cliente,uv,mz,lt,cat,asesor,codigo_asesor, apellidoCasada,nacionalidad,profesion,costoAprox;
     EditText propietarioVivienta,telefonoPropietario,pais,ciudad,barrio,avenida,calle,numero,telFijo,telMovil,telFijoOfc,telMovOfc,correoPersonal,expedido,mts2;
     EditText nombreEmpresa, rubroEmpresa, direccionEmpresa, ingresosEmpresa,primerReferencia,segundaReferencia,telfReferencia1,telfReferencia2,parentesco,relacion,zona;
@@ -169,6 +169,9 @@ public class cargarFormulario extends Fragment {
             cargar.setVisibility(view.GONE);
             tvtitulo.setVisibility(view.GONE);
         }
+        day = view.findViewById(R.id.formDay);
+        month = view.findViewById(R.id.formMonth);
+        year = view.findViewById(R.id.formYear);
         nombre_cliente = view.findViewById(R.id.nombreCliente);
         //nombre_cliente.setRawInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         apellidoPaterno= view.findViewById(R.id.apellidoPCliente);
@@ -264,6 +267,8 @@ public class cargarFormulario extends Fragment {
 
         /////cargamos los spinners
         cargarComponentes();
+
+        cargarFechaFormulario();
 //        cargarListaUrbanizacion();
 
         spinnerProyectos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -389,9 +394,11 @@ public class cargarFormulario extends Fragment {
                         if(EsDependiente()){
                             new Handler().postDelayed(new Runnable(){
                                 public void run(){
-                                    actualizar();
-//                                    Navigation.findNavController(v).navigate(R.id.titulares);
-                                    generarPDF();
+                                    if(actualizarDatos()){
+                                        generarPDF();
+                                    }else{
+                                        Toast.makeText(getContext(), "Error, volver a intentar.", Toast.LENGTH_LONG).show();
+                                    }
                                 }
                             }, 1000); //1000 millisegundos = 1 segundo.
                             Toast.makeText(getContext(), "Generando Formularios verifique bien todo los datos...", Toast.LENGTH_LONG).show();
@@ -434,6 +441,22 @@ public class cargarFormulario extends Fragment {
 //            }
 //        });
 
+    }
+
+    public Boolean actualizarDatos(){
+        actualizar();
+        return true;
+    }
+
+    public void cargarFechaFormulario(){
+        Calendar cal = Calendar.getInstance();
+        Integer year2 = cal.get(Calendar.YEAR);
+        year.setText(year2.toString());
+        Integer month2 = cal.get(Calendar.MONTH);
+        month2=month2+1;
+        month.setText(month2.toString());
+        Integer day2= cal.get(Calendar.DAY_OF_MONTH);
+        day.setText(day2.toString());
     }
 
     public void cargarComponentes(){
@@ -858,7 +881,7 @@ public class cargarFormulario extends Fragment {
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
-    private String makeDateString(Integer day, Integer month, int year) {
+    private String makeDateString(Integer day, Integer month, Integer year) {
         String day2=day.toString(),month2=month.toString();
         if(day.toString().length()==1){
             day2="0"+day;
@@ -1336,12 +1359,12 @@ public class cargarFormulario extends Fragment {
     public void generarPDF (){
         String prefijoObtenido,monedaCostoAproximado, extensionObtenida;
         String plazoContado = rbSelected.getText().toString();
-        Calendar cal = Calendar.getInstance();
-        Integer year = cal.get(Calendar.YEAR);
-        Integer month = cal.get(Calendar.MONTH);
-        month=month+1;
-        Integer day= cal.get(Calendar.DAY_OF_MONTH);
-        String fechaActual = makeDateString(day,month,year);
+//        Calendar cal = Calendar.getInstance();
+//        Integer year = cal.get(Calendar.YEAR);
+//        Integer month = cal.get(Calendar.MONTH);
+//        month=month+1;
+//        Integer day= cal.get(Calendar.DAY_OF_MONTH);
+        String fechaActual = makeDateString(Integer.valueOf(day.getText().toString()),Integer.valueOf(month.getText().toString()),Integer.valueOf(year.getText().toString()));
 //            String fechaActual= day.toString()+"/"+month.toString()+"/"+year.toString();
 
         PdfDocument myPDF = new PdfDocument();
@@ -1518,9 +1541,9 @@ public class cargarFormulario extends Fragment {
         canvas3.drawText(spinnerProyectos.getSelectedItem().toString(),330,450,myPaint);
         myPaint.setTextAlign(Paint.Align.LEFT);
         myPaint.setTextSize(28f);
-        canvas3.drawText(day.toString(),108,285,myPaint);
-        canvas3.drawText(month.toString(),225,285,myPaint);
-        canvas3.drawText(year.toString(),313,285,myPaint);
+        canvas3.drawText(day.getText().toString(),108,285,myPaint);
+        canvas3.drawText(month.getText().toString(),225,285,myPaint);
+        canvas3.drawText(year.getText().toString(),313,285,myPaint);
         titlePaint.setTextSize(26f);
         canvas3.drawText(codigo_proyecto.getText().toString(),135,592,titlePaint);
         canvas3.drawText(tresDigitos(uv.getText().toString()),360,592,titlePaint);
@@ -1635,9 +1658,9 @@ public class cargarFormulario extends Fragment {
             canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),150,1158,titlePaint);
             canvas5.drawText(extensionObtenida,825,1195,titlePaint);
             canvas5.drawText(ci_cliente.getText().toString().toUpperCase(),435,1195,titlePaint);
-            canvas5.drawText(day.toString(),585,1263,titlePaint);
-            canvas5.drawText(mesLiteral(month),900,1263,titlePaint);
-            canvas5.drawText(year.toString(),195,1297,titlePaint);
+            canvas5.drawText(day.getText().toString(),585,1263,titlePaint);
+            canvas5.drawText(mesLiteral(Integer.valueOf(month.getText().toString())),900,1263,titlePaint);
+            canvas5.drawText(year.getText().toString(),195,1297,titlePaint);
             canvas5.drawText(ci_cliente.getText().toString()+" "+extensionObtenida,570,1677,titlePaint);
 
             myPDF.finishPage(myPage5);

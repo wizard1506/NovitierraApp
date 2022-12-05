@@ -21,10 +21,12 @@ public class Global {
     public static String idReferidor = "";
 
 
+
     ///otros datos
     public static Double gLat=0.0;
     public  static  Double gLong=0.0;
     public static Bitmap ubicacion;
+
 
 
 }

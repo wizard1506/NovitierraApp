@@ -21,8 +21,9 @@ import java.util.Map;
 
 public class RegistrarseLogin extends AppCompatActivity {
 
-    EditText nombres,apellidos,ci,telf,codigo,usuario,password,passwordRepeat,grupo;
+    EditText nombres,apellidos,ci,telf,codigo,usuario,password,passwordRepeat,grupo,acceso;
     Button registrarUsuario;
+    String codigoacceso = "2111";
     private String url="http://wizardapps.xyz/novitierra/api/addUser.php";
 
     @Override
@@ -40,6 +41,7 @@ public class RegistrarseLogin extends AppCompatActivity {
         password=findViewById(R.id.passwordRegistro);
         passwordRepeat=findViewById(R.id.passwordRepeatRegistro);
         registrarUsuario=findViewById(R.id.btRegistrarRegistro);
+        acceso = findViewById(R.id.codigoAcceso);
 
         Toast.makeText(getApplicationContext(),"Llenar todo los campos para proceder al registro",Toast.LENGTH_LONG).show();
 
@@ -47,13 +49,27 @@ public class RegistrarseLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!RegistrosVacios()){
-                    registrar();
+                    if(acceso()){
+                        registrar();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Codigo de acceso incorrecto",Toast.LENGTH_LONG).show();
+                    }
                 }else {
                     Toast.makeText(getApplicationContext(),"LLenar todo los campos para proceder a registrar",Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+    }
+
+    public Boolean acceso(){
+        Boolean result = true;
+        if(acceso.getText().toString().equals(codigoacceso)){
+            return result;
+        }else {
+            result = false;
+            return result;
+        }
     }
 
     public Boolean RegistrosVacios(){
