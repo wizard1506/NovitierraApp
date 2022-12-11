@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -31,6 +32,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.system.ErrnoException;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -381,6 +383,68 @@ public class Formularios extends Fragment {
         });
 
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if(!Utils.isPermissionGranted(getContext())){
+//            new AlertDialog.Builder(getContext()).setTitle("Permiso de aplicacion").setMessage("Debido a la version de android es necesario otorgar permisos").setPositiveButton("Permitir", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    otorgarPermisos();
+//                }
+//            }).setNegativeButton("Denegar", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                }
+//            }).setIcon(R.drawable.casita_sola).show();
+//        }
+//        else{
+//            mensaje("Permisos de aplicacion ya otorgados");
+//        }
+//    }
+
+//    private void otorgarPermisos(){
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+//            try {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+//                intent.addCategory("android.intent.category.DEFAULT");
+//                Uri uri = Uri.fromParts("package",getActivity().getPackageName(),null);
+//                intent.setData(uri);
+//                startActivityForResult(intent,101);
+//
+//            }catch (Exception e){
+//                e.printStackTrace();
+//                Intent intent = new Intent();
+//                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+//                startActivityForResult(intent,101);
+//
+//            }
+//        }else  {
+//            ActivityCompat.requestPermissions(getActivity(), new String[]{
+//                    Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE
+//            },101);
+//        }
+//    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if(grantResults.length>0){
+//
+//            if(requestCode==101){
+//
+//                boolean readExt  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+//                if(!readExt){
+//                    otorgarPermisos();
+//                }
+//            }
+//
+//
+//
+//        }
+//    }
 
     public Boolean registrarDatos(){
         registrarTitular();
