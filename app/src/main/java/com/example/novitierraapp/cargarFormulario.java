@@ -57,6 +57,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
 import com.example.novitierraapp.entidades.Proyectos2;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -115,15 +120,21 @@ public class cargarFormulario extends Fragment {
     ArrayList<Proyectos2> listProyectos = new ArrayList<>();
     metodos metodos = new metodos();
 
-    Bitmap imagen,scaled;
+//    Bitmap imagen,scaled,bitmapQr;
 
     private String URL_addtitular="http://wizardapps.xyz/novitierra/api/addTitular.php";
     private String URL_formulario="http://wizardapps.xyz/novitierra/api/cargarFormulario.php";
     private String urlActualizar= "http://wizardapps.xyz/novitierra/api/updateTitular.php";
+
     private String ubicacion = "https://www.google.es/maps?q=";
+    private String ubicacion2 = "https://www.google.com/maps/search/?api=1&query=";
     private String URL_proyectos = "http://wizardapps.xyz/novitierra/api/getProyectos.php" ;
 
 //    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
+
+    ///para QR
+
+    private String latitud,longitud;
 
     //***PARA PDF****
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormularioNovitierra.pdf";
@@ -734,25 +745,25 @@ public class cargarFormulario extends Fragment {
         return now;
     }
 
-    public String tresDigitos(String numero){
-        int digitos = numero.length();
-        String result="";
-        switch (digitos){
-            case 1:
-                result="00"+numero;
-                break;
-            case 2:
-                result="0"+numero;
-                break;
-            case 3:
-                result=numero;
-                break;
-            case 4:
-                result=numero;
-                break;
-        }
-        return result;
-    }
+//    public String tresDigitos(String numero){
+//        int digitos = numero.length();
+//        String result="";
+//        switch (digitos){
+//            case 1:
+//                result="00"+numero;
+//                break;
+//            case 2:
+//                result="0"+numero;
+//                break;
+//            case 3:
+//                result=numero;
+//                break;
+//            case 4:
+//                result=numero;
+//                break;
+//        }
+//        return result;
+//    }
 
     public Boolean validarForm(){
         Boolean valor;
@@ -1425,11 +1436,36 @@ public class cargarFormulario extends Fragment {
     }
 
 
+    ///funcion addLogo
+    private Bitmap addLogoToQRCode(Bitmap qrBitmap, Bitmap logoBitmap) {
+        int qrBitmapWidth = qrBitmap.getWidth();
+        int qrBitmapHeight = qrBitmap.getHeight();
+        int logoBitmapWidth = logoBitmap.getWidth();
+        int logoBitmapHeight = logoBitmap.getHeight();
+
+        // Calcula la posición en la que se superpondrá el logo
+        int logoX = (qrBitmapWidth - logoBitmapWidth) / 2;
+        int logoY = (qrBitmapHeight - logoBitmapHeight) / 2;
+
+        // Crea un nuevo bitmap para combinar el código QR y el logo
+        Bitmap combinedBitmap = Bitmap.createBitmap(qrBitmapWidth, qrBitmapHeight, qrBitmap.getConfig());
+
+        // Crea un lienzo para dibujar los bitmaps en el nuevo bitmap
+        Canvas canvas = new Canvas(combinedBitmap);
+        canvas.drawBitmap(qrBitmap, 0, 0, null);
+        canvas.drawBitmap(logoBitmap, logoX, logoY, null);
+
+        return combinedBitmap;
+    }
+///// fin de la funcion
+
+
     /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (){
         String prefijoObtenido,monedaCostoAproximado, extensionObtenida;
         String plazoContado = rbSelected.getText().toString();
+        Bitmap bitmapForm,bitmapScaledForm,bitmapQr = null;
 //        Calendar cal = Calendar.getInstance();
 //        Integer year = cal.get(Calendar.YEAR);
 //        Integer month = cal.get(Calendar.MONTH);
@@ -1477,11 +1513,15 @@ public class cargarFormulario extends Fragment {
 
 
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1png);
-        imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.f1png,1200,1927);
-        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+        bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.f1png,1200,1927);
+        bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 
-        canvas.drawBitmap(scaled,0,0,myPaint);
+        canvas.drawBitmap(bitmapScaledForm,0,0,myPaint);
+        bitmapForm.recycle();
+        bitmapForm=null;
+        bitmapScaledForm.recycle();
+        bitmapScaledForm=null;
 
         Bitmap check,scaledcheck;
         check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
@@ -1498,13 +1538,18 @@ public class cargarFormulario extends Fragment {
             canvas.drawBitmap(scaledcheck,690,319,myPaint);
         }
         canvas.drawText(codigo_proyecto.getText().toString(),195,412,titlePaint);
-        canvas.drawText(tresDigitos(uv.getText().toString()),402,412,titlePaint);
-        canvas.drawText(tresDigitos(mz.getText().toString()),630,412,titlePaint);
-        canvas.drawText(tresDigitos(lt.getText().toString()),825,412,titlePaint);
+        canvas.drawText(uv.getText().toString(),402,412,titlePaint);
+        canvas.drawText(mz.getText().toString(),630,412,titlePaint);
+        canvas.drawText(lt.getText().toString(),825,412,titlePaint);
         canvas.drawText(cat.getText().toString(),1074,412,titlePaint);
         canvas.drawText(asesor.getText().toString().toUpperCase(),120,495,titlePaint);
         canvas.drawText(codigo_asesor.getText().toString(),825,495,titlePaint);
 
+
+        check.recycle();
+        check=null;
+        scaledcheck.recycle();
+        scaledcheck=null;
         myPDF.finishPage(myPage1);
         //// FIN PAGINA 1/////
 
@@ -1515,11 +1560,15 @@ public class cargarFormulario extends Fragment {
         Canvas canvas2 = myPage2.getCanvas();
 
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4png);
-        imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.f4png,1200,1927);
-        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+        bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.f4png,1200,1927);
+        bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 
-        canvas2.drawBitmap(scaled,0,0,myPaint);
+        canvas2.drawBitmap(bitmapScaledForm,0,0,myPaint);
+        bitmapForm.recycle();
+        bitmapForm=null;
+        bitmapScaledForm.recycle();
+        bitmapScaledForm=null;
 
         canvas2.drawText(apellidoPaterno.getText().toString().toUpperCase(),120,255,titlePaint);
         canvas2.drawText(apellidoMaterno.getText().toString().toUpperCase(),675,255,titlePaint);
@@ -1545,7 +1594,7 @@ public class cargarFormulario extends Fragment {
         canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),810,571,titlePaint);
         canvas2.drawText(costoAprox.getText().toString()+" "+monedaCostoAproximado,120,633,titlePaint);
         canvas2.drawText(propietarioVivienta.getText().toString().toUpperCase(),345,633,titlePaint);
-        canvas2.drawText(telefonoPropietario.getText().toString(),930,633,titlePaint);
+        canvas2.drawText(telefonoPropietario.getText().toString(),910,633,titlePaint);
 
         canvas2.drawText(pais.getText().toString(),120,699,titlePaint);
         if(spinnerDpto.getSelectedItem().toString().contains("Ninguno")){
@@ -1561,7 +1610,7 @@ public class cargarFormulario extends Fragment {
 
         canvas2.drawText(telFijo.getText().toString(),105,933,titlePaint);
         canvas2.drawText(telFijoOfc.getText().toString(),105,1008,titlePaint);
-        canvas2.drawText(telMovil.getText().toString(),337,933,titlePaint);
+        canvas2.drawText(telMovil.getText().toString(),317,933,titlePaint);
         canvas2.drawText(telMovOfc.getText().toString(),337,1008,titlePaint);
         canvas2.drawText(correoPersonal.getText().toString(),105,1084,titlePaint);
 
@@ -1597,14 +1646,17 @@ public class cargarFormulario extends Fragment {
         PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
         Canvas canvas3 = myPage3.getCanvas();
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3png);
-        imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.f3png,1200,1927);
+        bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.f3png,1200,1927);
         //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+        bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
+        canvas3.drawBitmap(bitmapScaledForm,0,0,myPaint);
 
+        bitmapForm.recycle();
+        bitmapForm=null;
+        bitmapScaledForm.recycle();
+        bitmapScaledForm=null;
 
 //          bmp = BitmapFactory.decodeResource(getResources(),R.drawable.newentrega);
-
-        canvas3.drawBitmap(scaled,0,0,myPaint);
         myPaint.setTextAlign(Paint.Align.CENTER);
         myPaint.setTextSize(30f);
         myPaint.setColor(Color.BLACK);
@@ -1617,9 +1669,9 @@ public class cargarFormulario extends Fragment {
         canvas3.drawText(year.getText().toString(),313,285,myPaint);
         titlePaint.setTextSize(26f);
         canvas3.drawText(codigo_proyecto.getText().toString(),135,592,titlePaint);
-        canvas3.drawText(tresDigitos(uv.getText().toString()),360,592,titlePaint);
-        canvas3.drawText(tresDigitos(mz.getText().toString()),570,592,titlePaint);
-        canvas3.drawText(tresDigitos(lt.getText().toString()),787,592,titlePaint);
+        canvas3.drawText(uv.getText().toString(),360,592,titlePaint);
+        canvas3.drawText(mz.getText().toString(),570,592,titlePaint);
+        canvas3.drawText(lt.getText().toString(),787,592,titlePaint);
         canvas3.drawText(cat.getText().toString().toUpperCase(),1027,592,titlePaint);
         canvas3.drawText(rbSelected.getText().toString(),120,780,titlePaint);
         canvas3.drawText(mts2.getText().toString(),345,780,titlePaint);
@@ -1642,6 +1694,8 @@ public class cargarFormulario extends Fragment {
                 202,1470,titlePaint);
 //            canvas3.drawText(asesor.getText().toString(),1910,2960,titlePaint);
 
+
+
         myPDF.finishPage(myPage3);
         /////FIN PAGINA 3/////////
 
@@ -1658,23 +1712,56 @@ public class cargarFormulario extends Fragment {
                 PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
                 Canvas canvas4 = myPage4.getCanvas();
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
-                imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.mapapng,1200,1927);
+                /// IMPLEMENTACION DEL QR
+                latitud = Global.gLat.toString();
+                longitud = Global.gLong.toString();
+                String textoQR = ubicacion2+latitud+","+longitud;
+                MultiFormatWriter writer = new MultiFormatWriter();
+                try{
+                    BitMatrix matrix = writer.encode(textoQR, BarcodeFormat.QR_CODE,200,200);
+                    BarcodeEncoder encoder = new BarcodeEncoder();
+                    bitmapQr= encoder.createBitmap(matrix);
 
+                }catch (WriterException e ){
+                    e.printStackTrace();
+                };
+                    ///************MODIFICACIONES LOGO QR
+                Bitmap logoBitmap, logoscaled;
+                logoBitmap = decodeSampledBitmapFromResource(getResources(),R.drawable.logoqrbordes,50,50);
+                logoscaled = Bitmap.createScaledBitmap(logoBitmap,50,50,false);
+                bitmapQr = addLogoToQRCode(bitmapQr,logoscaled);
+                    ///************MODIFICACIONES
+
+                /// FIN DE IMPLEMENTACION QR
+
+                bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.mapapng,1200,1927);
+                bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
+                canvas4.drawBitmap(bitmapScaledForm,0,0,myPaint);
+                bitmapForm.recycle();
+                bitmapForm=null;
+                bitmapScaledForm.recycle();
+                bitmapScaledForm=null;
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-                scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+
 //        if(Global.ubicacion==null){
 //            Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
 //        }
 //            Bitmap imagen4,scaled4;
 //            imagen4 = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
 //            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
-                canvas4.drawBitmap(scaled,0,0,myPaint);
-                canvas4.drawText(tresDigitos(uv.getText().toString()),255,228,titlePaint);
-                canvas4.drawText(tresDigitos(mz.getText().toString()),555,228,titlePaint);
-                canvas4.drawText(tresDigitos(lt.getText().toString()),817,228,titlePaint);
+
+
+//                canvas4.drawText(tresDigitos(uv.getText().toString()),255,228,titlePaint);
+//                canvas4.drawText(tresDigitos(mz.getText().toString()),555,228,titlePaint);
+//                canvas4.drawText(tresDigitos(lt.getText().toString()),817,228,titlePaint);
+
+
+                canvas4.drawText(uv.getText().toString(),255,228,titlePaint);
+                canvas4.drawText(mz.getText().toString(),555,228,titlePaint);
+                canvas4.drawText(lt.getText().toString(),817,228,titlePaint);
                 canvas4.drawText(cat.getText().toString(),1050,228,titlePaint);
                 canvas4.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),375,282,titlePaint);
-                canvas4.drawText(ci_cliente.getText().toString(),375,315,titlePaint);
+                canvas4.drawText(ci_cliente.getText().toString()+" "+extensionObtenida,375,315,titlePaint);
                 canvas4.drawText(telMovil.getText().toString()+" - "+telFijo.getText().toString(),780,315,titlePaint);
                 canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),375,348,titlePaint);
                 canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),375,382,titlePaint);
@@ -1682,8 +1769,19 @@ public class cargarFormulario extends Fragment {
                 canvas4.drawText(observacion1.getText().toString().toUpperCase(),120,1725,titlePaint);
                 canvas4.drawText(observacion2.getText().toString().toUpperCase(),120,1747,titlePaint);
 
-                scaled = Bitmap.createScaledBitmap(Global.ubicacion,1080,1252,false);
-                canvas4.drawBitmap(scaled,67,439,myPaint);
+                bitmapScaledForm = Bitmap.createScaledBitmap(Global.ubicacion,1080,1252,false);
+                canvas4.drawBitmap(bitmapScaledForm,67,439,myPaint);
+                canvas4.drawBitmap(bitmapQr,945,1490,myPaint);
+
+                logoBitmap.recycle();
+                logoscaled.recycle();
+                bitmapQr.recycle();
+                logoBitmap=null;
+                logoscaled=null;
+                bitmapQr=null;
+                bitmapScaledForm.recycle();
+                bitmapScaledForm=null;
+
                 myPDF.finishPage(myPage4);
 
 //            else {
@@ -1708,21 +1806,24 @@ public class cargarFormulario extends Fragment {
             titlePaint.setTextSize(20f);
             titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservapng);
-            imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.reservapng,1200,1927);
+            bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.reservapng,1200,1927);
+            bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
+            canvas5.drawBitmap(bitmapScaledForm,0,0,myPaint);
 
+            bitmapForm.recycle();
+            bitmapForm=null;
+            bitmapScaledForm.recycle();
+            bitmapScaledForm=null;
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-            scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
-
-            canvas5.drawBitmap(scaled,0,0,myPaint);
 
             canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),480,393,titlePaint);
             canvas5.drawText(ci_cliente.getText().toString().toUpperCase(),435,429,titlePaint);
             canvas5.drawText(extensionObtenida,780,429,titlePaint);
             canvas5.drawText(spinnerProyectos.getSelectedItem().toString(),120,498,titlePaint);
             canvas5.drawText(codigo_proyecto.getText().toString(),180,532,titlePaint);
-            canvas5.drawText(tresDigitos(uv.getText().toString().toUpperCase()),390,534,titlePaint);
-            canvas5.drawText(tresDigitos(mz.getText().toString().toUpperCase()),570,534,titlePaint);
-            canvas5.drawText(tresDigitos(lt.getText().toString()),742,534,titlePaint);
+            canvas5.drawText(uv.getText().toString().toUpperCase(),390,534,titlePaint);
+            canvas5.drawText(mz.getText().toString().toUpperCase(),570,534,titlePaint);
+            canvas5.drawText(lt.getText().toString(),742,534,titlePaint);
             canvas5.drawText(cat.getText().toString().toUpperCase(),892,534,titlePaint);
             canvas5.drawText(mts2.getText().toString(),1035,534,titlePaint);
             canvas5.drawText(fechaActual,195,730,titlePaint);

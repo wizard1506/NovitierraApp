@@ -77,7 +77,7 @@ public class metodos {
         lista.add("TJ");
         lista.add("OR");
         lista.add("BE");
-        lista.add("PD");
+        lista.add("PA");
         return lista;
     }
     public ArrayList<String>cargarMoneda(ArrayList<String> lista){
@@ -153,8 +153,8 @@ public class metodos {
         return lista;
     }
     public ArrayList<String>cargarReserva(ArrayList<String> lista){
-        lista.add("SI");
         lista.add("NO");
+        lista.add("SI");
         return lista;
     }
 

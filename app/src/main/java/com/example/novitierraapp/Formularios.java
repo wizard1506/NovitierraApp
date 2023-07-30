@@ -61,6 +61,11 @@ import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
 import com.example.novitierraapp.entidades.Proyectos2;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -115,12 +120,29 @@ public class Formularios extends Fragment {
     String URL_proyectos = "http://wizardapps.xyz/novitierra/api/getProyectos.php" ;
     ArrayList<Proyectos2> listProyectos = new ArrayList<>();
 
-    Bitmap imagen,scaled;
+//    Bitmap imagen,scaled,bitmapQr;
 
     private String URL_addtitular="http://wizardapps.xyz/novitierra/api/addTitular.php";
     private String URL_formulario="http://wizardapps.xyz/novitierra/api/cargarFormulario.php";
     private String ubicacion = "https://www.google.es/maps?q=";
-//    private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
+    private String ubicacion2 = "https://www.google.com/maps/search/?api=1&query=";
+
+//    https://www.google.com/maps/search/?api=1&query=" + location.getLatitude() + "," + location.getLongitude();
+
+    private String latitud,longitud;
+
+     //variables necesarias para la encuesta
+
+    ArrayList<String> pregunta1 = new ArrayList<>();
+    Spinner respuesta1 ;
+    RadioGroup rgRedesSociales;
+    RadioButton facebook,instagram,tiktok,paginaWeb,paginaAsesor, rbRedSocial;
+    String result="";
+    private String URL_voto="http://wizardapps.xyz/novitierra/api/updateEncuesta.php";
+
+    // fin variables encuesta
+
+    // private String URL_addtitular="https://novitierra.000webhostapp.com/api/addTitular.php";
 
     //***PARA PDF****
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormularioNovitierra.pdf";
@@ -134,11 +156,71 @@ public class Formularios extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ///necesario para poder compartir el pdf
+        ///necesario para poder compartir el pdf  (ya no necesitado por ahora)
 //        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
 //        StrictMode.setVmPolicy(builder.build());
 //        builder.detectFileUriExposure();
         /////
+
+        //// componentes para encuesta
+        respuesta1 = view.findViewById(R.id.spinnerRespuesta1);
+        cargarRespuestas1();
+        rgRedesSociales = view.findViewById(R.id.rgRedesSociales1);
+
+        facebook = view.findViewById(R.id.rbFacebook);
+        tiktok = view.findViewById(R.id.rbTiktok);
+        instagram = view.findViewById(R.id.rbInstagram);
+        paginaWeb = view.findViewById(R.id.rbPaginaWeb);
+        paginaAsesor = view.findViewById(R.id.rbPaginaAsesor);
+
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionRedSocial(v);
+            }
+        });
+        tiktok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionRedSocial(v);
+            }
+        });
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionRedSocial(v);
+            }
+        });
+        paginaWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionRedSocial(v);
+            }
+        });
+        paginaAsesor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionRedSocial(v);
+            }
+        });
+
+        respuesta1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(respuesta1.getSelectedItem().toString().contains("Redes Sociales")) {
+                    rgRedesSociales.setVisibility(View.VISIBLE);
+                }else {
+                    rgRedesSociales.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //// fin componentes para encuesta
+
         ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         day = view.findViewById(R.id.formDay);
         month = view.findViewById(R.id.formMonth);
@@ -245,8 +327,7 @@ public class Formularios extends Fragment {
             }
         });
 
-        codigo_asesor.setText(Global.codigo.toString());
-        asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
+
 
         /////cargamos los spinners
         cargarComponentes();
@@ -365,6 +446,7 @@ public class Formularios extends Fragment {
                             new Handler().postDelayed(new Runnable(){
                                 public void run(){
                                     if(registrarDatos()){
+                                        enviarEncuesta();
                                         generarPDF();
                                     }else {
                                         Toast.makeText(getContext(), "Error, revisar mis formularios", Toast.LENGTH_LONG).show();
@@ -384,67 +466,82 @@ public class Formularios extends Fragment {
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if(!Utils.isPermissionGranted(getContext())){
-//            new AlertDialog.Builder(getContext()).setTitle("Permiso de aplicacion").setMessage("Debido a la version de android es necesario otorgar permisos").setPositiveButton("Permitir", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    otorgarPermisos();
-//                }
-//            }).setNegativeButton("Denegar", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//
-//                }
-//            }).setIcon(R.drawable.casita_sola).show();
-//        }
-//        else{
-//            mensaje("Permisos de aplicacion ya otorgados");
+//    private void check() {
+//        if (Global.nombreSesion==null || Global.nombreSesion=="" || Global.apellidoSesion==null || Global.apellidoSesion=="" || Global.codigo==null || Global.codigo==0 || Global.codigo.toString()=="" || Global.grupo=="" || Global.grupo==null){
+//            codigo_asesor.setText("COLOCAR SU CODIGO");
+//            asesor.setText("NOMBRE APELLIDO DEL ASESOR");
+//        }else{
+//            codigo_asesor.setText(Global.codigo.toString());
+//            asesor.setText(Global.nombreSesion+" "+Global.apellidoSesion);
 //        }
 //    }
 
-//    private void otorgarPermisos(){
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-//            try {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-//                intent.addCategory("android.intent.category.DEFAULT");
-//                Uri uri = Uri.fromParts("package",getActivity().getPackageName(),null);
-//                intent.setData(uri);
-//                startActivityForResult(intent,101);
-//
-//            }catch (Exception e){
-//                e.printStackTrace();
-//                Intent intent = new Intent();
-//                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-//                startActivityForResult(intent,101);
-//
-//            }
-//        }else  {
-//            ActivityCompat.requestPermissions(getActivity(), new String[]{
-//                    Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE
-//            },101);
-//        }
-//    }
+    ///metodos y funciones necesarios para encuesta
+    public void cargarRespuestas1(){
+        pregunta1.add("Seleccionar");
+        pregunta1.add("Radio");
+        pregunta1.add("Panfleteo");
+        pregunta1.add("Referidor");
+        pregunta1.add("Redes Sociales");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,pregunta1);
+        respuesta1.setAdapter(adapter);
+    }
+    public void seleccionRedSocial(View v){
+        int radiobtid = rgRedesSociales.getCheckedRadioButtonId();
+        rbRedSocial = v.findViewById(radiobtid);
+    }
+    public String resultados(){
+        if(respuesta1.getSelectedItem().toString().contains("Redes Sociales")){
+            if(validarRedSocial()){
+                result=rbRedSocial.getText().toString();
+            }
+        }else {
+            result=respuesta1.getSelectedItem().toString();
+        }
+        return result;
+    }
+    public Boolean validarRedSocial(){
+        if(facebook.isChecked() || tiktok.isChecked() || instagram.isChecked() || paginaWeb.isChecked() || paginaAsesor.isChecked()){
+            return true;
+        }else {
+            Toast.makeText(getContext(),"Seleccionar una red social",Toast.LENGTH_LONG).show();
+            return false;
+        }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if(grantResults.length>0){
-//
-//            if(requestCode==101){
-//
-//                boolean readExt  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-//                if(!readExt){
-//                    otorgarPermisos();
-//                }
-//            }
-//
-//
-//
-//        }
-//    }
+    }
+
+    private void enviarEncuesta() {
+        StringRequest request = new StringRequest(Request.Method.POST, URL_voto, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    if(response.contains("algo salio mal")){
+                        Toast.makeText(getContext(),"No se pudo enviar el resultado",Toast.LENGTH_LONG).show();
+                    }
+                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();
+                    }
+
+                }else{
+                    Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("resultado",result);
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
+    }
+    /// fin metodos y funciones necesarios para encuesta
 
     public Boolean registrarDatos(){
         registrarTitular();
@@ -662,7 +759,7 @@ public class Formularios extends Fragment {
                     if(Global.gLong==0.0 && Global.gLat==0.0){
                         parametros.put("ubicacion","");
                     }else{
-                        parametros.put("ubicacion",ubicacion+Global.gLat.toString()+","+Global.gLong.toString());
+                        parametros.put("ubicacion",ubicacion2+Global.gLat.toString()+","+Global.gLong.toString());
                     }
                     parametros.put("fecha",fechaHoyBase());
 
@@ -674,25 +771,25 @@ public class Formularios extends Fragment {
             habilitarBoton();
     }
 
-    public String tresDigitos(String numero){
-        int digitos = numero.length();
-        String result="";
-        switch (digitos){
-            case 1:
-                result="00"+numero;
-                break;
-            case 2:
-                result="0"+numero;
-                break;
-            case 3:
-                result=numero;
-                break;
-            case 4:
-                result=numero;
-                break;
-        }
-        return result;
-    }
+//    public String tresDigitos(String numero){
+//        int digitos = numero.length();
+//        String result="";
+//        switch (digitos){
+//            case 1:
+//                result="00"+numero;
+//                break;
+//            case 2:
+//                result="0"+numero;
+//                break;
+//            case 3:
+//                result=numero;
+//                break;
+//            case 4:
+//                result=numero;
+//                break;
+//        }
+//        return result;
+//    }
 
     public Boolean validarForm(){
         Boolean valor;
@@ -732,6 +829,11 @@ public class Formularios extends Fragment {
     }
 
     public Boolean validarCamposObligatorios() {
+        if(resultados().equals("Seleccionar")){
+            mensaje("Realizar la encuesta (Obligatorio)");
+            return false;
+        }
+
         if (nombre_cliente.getText().toString().length() == 0) {
             mensaje("Falta nombre cliente");
             return false;
@@ -1049,11 +1151,35 @@ public class Formularios extends Fragment {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
+    ///funcion addLogo
+    private Bitmap addLogoToQRCode(Bitmap qrBitmap, Bitmap logoBitmap) {
+        int qrBitmapWidth = qrBitmap.getWidth();
+        int qrBitmapHeight = qrBitmap.getHeight();
+        int logoBitmapWidth = logoBitmap.getWidth();
+        int logoBitmapHeight = logoBitmap.getHeight();
+
+        // Calcula la posición en la que se superpondrá el logo
+        int logoX = (qrBitmapWidth - logoBitmapWidth) / 2;
+        int logoY = (qrBitmapHeight - logoBitmapHeight) / 2;
+
+        // Crea un nuevo bitmap para combinar el código QR y el logo
+        Bitmap combinedBitmap = Bitmap.createBitmap(qrBitmapWidth, qrBitmapHeight, qrBitmap.getConfig());
+
+        // Crea un lienzo para dibujar los bitmaps en el nuevo bitmap
+        Canvas canvas = new Canvas(combinedBitmap);
+        canvas.drawBitmap(qrBitmap, 0, 0, null);
+        canvas.drawBitmap(logoBitmap, logoX, logoY, null);
+
+        return combinedBitmap;
+    }
+///// fin de la funcion
+
     /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (){
         String prefijoObtenido,monedaCostoAproximado, extensionObtenida;
         String plazoContado = rbSelected.getText().toString();
+        Bitmap bitmapForm,bitmapScaledForm,bitmapQr = null;
 //        Calendar cal = Calendar.getInstance();
 //        Integer year = cal.get(Calendar.YEAR);
 //        Integer month = cal.get(Calendar.MONTH);
@@ -1101,11 +1227,15 @@ public class Formularios extends Fragment {
         Canvas canvas = myPage1.getCanvas();
 
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f1png);
-        imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.f1png,1200,1927);
-        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+        bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.f1png,1200,1927);
+        bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 
-        canvas.drawBitmap(scaled,0,0,myPaint);
+        canvas.drawBitmap(bitmapScaledForm,0,0,myPaint);
+        bitmapForm.recycle();
+        bitmapForm=null;
+        bitmapScaledForm.recycle();
+        bitmapScaledForm=null;
 
         Bitmap check,scaledcheck;
         check = BitmapFactory.decodeResource(getResources(),R.drawable.check1);
@@ -1122,12 +1252,22 @@ public class Formularios extends Fragment {
             canvas.drawBitmap(scaledcheck,690,319,myPaint);
         }
         canvas.drawText(codigo_proyecto.getText().toString(),195,412,titlePaint);
-        canvas.drawText(tresDigitos(uv.getText().toString()),402,412,titlePaint);
-        canvas.drawText(tresDigitos(mz.getText().toString()),630,412,titlePaint);
-        canvas.drawText(tresDigitos(lt.getText().toString()),825,412,titlePaint);
-        canvas.drawText(cat.getText().toString(),1074,412,titlePaint);
+//        canvas.drawText(tresDigitos(uv.getText().toString()),402,412,titlePaint);
+//        canvas.drawText(tresDigitos(mz.getText().toString()),630,412,titlePaint);
+//        canvas.drawText(tresDigitos(lt.getText().toString()),825,412,titlePaint);
+
+        canvas.drawText(uv.getText().toString().toUpperCase(),402,412,titlePaint);
+        canvas.drawText(mz.getText().toString().toUpperCase(),630,412,titlePaint);
+        canvas.drawText(lt.getText().toString(),825,412,titlePaint);
+
+        canvas.drawText(cat.getText().toString().toUpperCase(),1074,412,titlePaint);
         canvas.drawText(asesor.getText().toString().toUpperCase(),120,495,titlePaint);
         canvas.drawText(codigo_asesor.getText().toString(),825,495,titlePaint);
+
+        check.recycle();
+        check=null;
+        scaledcheck.recycle();
+        scaledcheck=null;
 
         myPDF.finishPage(myPage1);
         //// FIN PAGINA 1/////
@@ -1139,11 +1279,17 @@ public class Formularios extends Fragment {
         Canvas canvas2 = myPage2.getCanvas();
 
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f4png);
-        imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.f4png,1200,1927);
-        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+        bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.f4png,1200,1927);
+        bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
 
-        canvas2.drawBitmap(scaled,0,0,myPaint);
+        canvas2.drawBitmap(bitmapScaledForm,0,0,myPaint);
+
+        bitmapForm.recycle();
+        bitmapForm=null;
+        bitmapScaledForm.recycle();
+        bitmapScaledForm=null;
+
 
         canvas2.drawText(apellidoPaterno.getText().toString().toUpperCase(),120,255,titlePaint);
         canvas2.drawText(apellidoMaterno.getText().toString().toUpperCase(),675,255,titlePaint);
@@ -1169,7 +1315,8 @@ public class Formularios extends Fragment {
         canvas2.drawText(spinnerTenencia.getSelectedItem().toString(),810,571,titlePaint);
         canvas2.drawText(costoAprox.getText().toString()+" "+monedaCostoAproximado,120,633,titlePaint);
         canvas2.drawText(propietarioVivienta.getText().toString().toUpperCase(),345,633,titlePaint);
-        canvas2.drawText(telefonoPropietario.getText().toString(),930,633,titlePaint);
+
+        canvas2.drawText(telefonoPropietario.getText().toString(),910,633,titlePaint);
 
         canvas2.drawText(pais.getText().toString(),120,699,titlePaint);
         if(spinnerDpto.getSelectedItem().toString().contains("Ninguno")){
@@ -1185,7 +1332,9 @@ public class Formularios extends Fragment {
 
         canvas2.drawText(telFijo.getText().toString(),105,933,titlePaint);
         canvas2.drawText(telFijoOfc.getText().toString(),105,1008,titlePaint);
-        canvas2.drawText(telMovil.getText().toString(),337,933,titlePaint);
+
+        canvas2.drawText(telMovil.getText().toString(),317,933,titlePaint);
+
         canvas2.drawText(telMovOfc.getText().toString(),337,1008,titlePaint);
         canvas2.drawText(correoPersonal.getText().toString(),105,1084,titlePaint);
 
@@ -1221,14 +1370,16 @@ public class Formularios extends Fragment {
         PdfDocument.Page myPage3 = myPDF.startPage(myPageInfo3);
         Canvas canvas3 = myPage3.getCanvas();
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.f3png);
-        imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.f3png,1200,1927);
+        bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.f3png,1200,1927);
         //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
-
-
+        bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
+        canvas3.drawBitmap(bitmapScaledForm,0,0,myPaint);
+        bitmapForm.recycle();
+        bitmapForm=null;
+        bitmapScaledForm.recycle();
+        bitmapScaledForm=null;
 //          bmp = BitmapFactory.decodeResource(getResources(),R.drawable.newentrega);
 
-        canvas3.drawBitmap(scaled,0,0,myPaint);
         myPaint.setTextAlign(Paint.Align.CENTER);
         myPaint.setTextSize(30f);
         myPaint.setColor(Color.BLACK);
@@ -1241,9 +1392,9 @@ public class Formularios extends Fragment {
         canvas3.drawText(year.getText().toString(),313,285,myPaint);
         titlePaint.setTextSize(26f);
         canvas3.drawText(codigo_proyecto.getText().toString(),135,592,titlePaint);
-        canvas3.drawText(tresDigitos(uv.getText().toString()),360,592,titlePaint);
-        canvas3.drawText(tresDigitos(mz.getText().toString()),570,592,titlePaint);
-        canvas3.drawText(tresDigitos(lt.getText().toString()),787,592,titlePaint);
+        canvas3.drawText(uv.getText().toString().toUpperCase(),360,592,titlePaint);
+        canvas3.drawText(mz.getText().toString().toUpperCase(),570,592,titlePaint);
+        canvas3.drawText(lt.getText().toString(),787,592,titlePaint);
         canvas3.drawText(cat.getText().toString().toUpperCase(),1027,592,titlePaint);
         canvas3.drawText(rbSelected.getText().toString(),120,780,titlePaint);
         canvas3.drawText(mts2.getText().toString(),345,780,titlePaint);
@@ -1281,29 +1432,66 @@ public class Formularios extends Fragment {
                 PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(1200,1927,1).create();
                 PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
                 Canvas canvas4 = myPage4.getCanvas();
-//        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
-                imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.mapapng,1200,1927);
+                /// IMPLEMENTACION DEL QR
+                latitud = Global.gLat.toString();
+                longitud = Global.gLong.toString();
+                String textoQR = ubicacion2+latitud+","+longitud;
+                MultiFormatWriter writer = new MultiFormatWriter();
+                try{
+                    BitMatrix matrix = writer.encode(textoQR, BarcodeFormat.QR_CODE,200,200);
+                    BarcodeEncoder encoder = new BarcodeEncoder();
+                    bitmapQr= encoder.createBitmap(matrix);
 
+                }catch (WriterException e ){
+                    e.printStackTrace();
+                };
+
+                ///************MODIFICACIONES LOGO QR
+                Bitmap logoBitmap, logoscaled;
+                logoBitmap = decodeSampledBitmapFromResource(getResources(),R.drawable.logoqrbordes,50,50);
+                logoscaled = Bitmap.createScaledBitmap(logoBitmap,50,50,false);
+                bitmapQr = addLogoToQRCode(bitmapQr,logoscaled);
+                ///************MODIFICACIONES
+
+                /// FIN IMPLEMENTACION QR
+//        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
+                bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.mapapng,1200,1927);
+                bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
+                canvas4.drawBitmap(bitmapScaledForm,0,0,myPaint);
+                bitmapForm.recycle();
+                bitmapForm=null;
+                bitmapScaledForm.recycle();
+                bitmapScaledForm=null;
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-                scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+
 //            Bitmap imagen4,scaled4;
 //            imagen4 = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
 //            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
-                canvas4.drawBitmap(scaled,0,0,myPaint);
-                canvas4.drawText(tresDigitos(uv.getText().toString()),255,228,titlePaint);
-                canvas4.drawText(tresDigitos(mz.getText().toString()),555,228,titlePaint);
-                canvas4.drawText(tresDigitos(lt.getText().toString()),817,228,titlePaint);
-                canvas4.drawText(cat.getText().toString(),1050,228,titlePaint);
+                canvas4.drawText(uv.getText().toString().toUpperCase(),255,228,titlePaint);
+                canvas4.drawText(mz.getText().toString().toUpperCase(),555,228,titlePaint);
+                canvas4.drawText(lt.getText().toString(),817,228,titlePaint);
+                canvas4.drawText(cat.getText().toString().toUpperCase(),1050,228,titlePaint);
                 canvas4.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),375,282,titlePaint);
-                canvas4.drawText(ci_cliente.getText().toString(),375,315,titlePaint);
+                canvas4.drawText(ci_cliente.getText().toString()+" "+extensionObtenida,375,315,titlePaint);
                 canvas4.drawText(telMovil.getText().toString()+" - "+telFijo.getText().toString(),780,315,titlePaint);
                 canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),375,348,titlePaint);
                 canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),375,382,titlePaint);
                 canvas4.drawText(zona.getText().toString(),375,420,titlePaint);
                 canvas4.drawText(observacion1.getText().toString().toUpperCase(),120,1725,titlePaint);
                 canvas4.drawText(observacion2.getText().toString().toUpperCase(),120,1747,titlePaint);
-                scaled = Bitmap.createScaledBitmap(Global.ubicacion,1080,1252,false);
-                canvas4.drawBitmap(scaled,67,439,myPaint);
+                bitmapScaledForm = Bitmap.createScaledBitmap(Global.ubicacion,1080,1252,false);
+                canvas4.drawBitmap(bitmapScaledForm,67,439,myPaint);
+                canvas4.drawBitmap(bitmapQr,945,1490,myPaint);
+
+                logoBitmap.recycle();
+                logoscaled.recycle();
+                bitmapQr.recycle();
+                logoBitmap=null;
+                logoscaled=null;
+                bitmapQr=null;
+                bitmapScaledForm.recycle();
+                bitmapScaledForm=null;
+
                 myPDF.finishPage(myPage4);
             }
         }else{
@@ -1324,21 +1512,26 @@ public class Formularios extends Fragment {
             titlePaint.setTextSize(20f);
             titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD));
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.reservapng);
-            imagen = decodeSampledBitmapFromResource(getResources(),R.drawable.reservapng,1200,1927);
+            bitmapForm = decodeSampledBitmapFromResource(getResources(),R.drawable.reservapng,1200,1927);
 
 //        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
-            scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
+            bitmapScaledForm = Bitmap.createScaledBitmap(bitmapForm,1200,1927,false);
 
-            canvas5.drawBitmap(scaled,0,0,myPaint);
+            canvas5.drawBitmap(bitmapScaledForm,0,0,myPaint);
+
+            bitmapForm.recycle();
+            bitmapForm=null;
+            bitmapScaledForm.recycle();
+            bitmapScaledForm=null;
 
             canvas5.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),480,393,titlePaint);
             canvas5.drawText(ci_cliente.getText().toString().toUpperCase(),435,429,titlePaint);
             canvas5.drawText(extensionObtenida,780,429,titlePaint);
             canvas5.drawText(spinnerProyectos.getSelectedItem().toString(),120,498,titlePaint);
             canvas5.drawText(codigo_proyecto.getText().toString(),180,532,titlePaint);
-            canvas5.drawText(tresDigitos(uv.getText().toString().toUpperCase()),390,534,titlePaint);
-            canvas5.drawText(tresDigitos(mz.getText().toString().toUpperCase()),570,534,titlePaint);
-            canvas5.drawText(tresDigitos(lt.getText().toString()),742,534,titlePaint);
+            canvas5.drawText(uv.getText().toString().toUpperCase(),390,534,titlePaint);
+            canvas5.drawText(mz.getText().toString().toUpperCase(),570,534,titlePaint);
+            canvas5.drawText(lt.getText().toString(),742,534,titlePaint);
             canvas5.drawText(cat.getText().toString().toUpperCase(),892,534,titlePaint);
             canvas5.drawText(mts2.getText().toString(),1035,534,titlePaint);
             canvas5.drawText(fechaActual,195,730,titlePaint);

@@ -44,7 +44,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class updateProspecto extends Fragment {
-    TextView fecha,usuario;
+    TextView fecha;
+//    TextView usuario;
     EditText nombre,telefono,observacion,zona,lugar;
     Spinner llamada;
     Spinner spinnerProyectos;
@@ -78,7 +79,7 @@ public class updateProspecto extends Fragment {
 
         spinnerProyectos = view.findViewById(R.id.updspinnerProspectoUrb2);
         fecha = view.findViewById(R.id.updprospectoFecha);
-        usuario = view.findViewById(R.id.updprospectoUser);
+//        usuario = view.findViewById(R.id.updprospectoUser);
         modificar = view.findViewById(R.id.btmodificarProspecto);
         listaLlamada = new ArrayList<>();
         listProyectos = new ArrayList<>();
@@ -88,7 +89,7 @@ public class updateProspecto extends Fragment {
 //        }
 
         fecha.setText("Fecha: "+ LocalDate.now().toString());
-        usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
+//        usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
         cargarListas();
         getUrbanizacionProyectos();
 
@@ -240,8 +241,8 @@ public class updateProspecto extends Fragment {
                 parametros.put("lugar",lugar.getText().toString());
                 parametros.put("urbanizacion",spinnerProyectos.getSelectedItem().toString());
                 parametros.put("observacion",observacion.getText().toString());
-                parametros.put("asesor",Global.userSesion);
-                parametros.put("codigo",Global.codigo.toString());
+//                parametros.put("asesor",Global.userSesion);
+//                parametros.put("codigo",Global.codigo.toString());
 
                 return parametros;
             }

@@ -32,26 +32,90 @@
             android:textStyle="bold"
             android:gravity="right"
             />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/prospectoUser"-->
+<!--            android:text="Usuario"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/azul_novi"-->
+<!--            android:textStyle="bold"-->
+<!--            android:gravity="right"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/prospectoGrupo"-->
+<!--            android:text="Grupo"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/azul_novi"-->
+<!--            android:textStyle="bold"-->
+<!--            android:gravity="right"-->
+<!--            />-->
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prospectoUser"
-            android:text="Usuario"
-            android:textSize="16sp"
+            android:text="*Asesor"
             android:textColor="@color/azul_novi"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:gravity="right"
-            />
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/prospectoAsesor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:hint="Nombre del Asesor de ventas"
+            android:inputType="textCapCharacters"
+            >
+        </EditText>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="*Grupo"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+        <EditText
             android:id="@+id/prospectoGrupo"
-            android:text="Grupo"
-            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:hint="Grupo del Asesor"
+            android:inputType="textCapCharacters"
+            >
+        </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*Codigo del Asesor"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:gravity="right"
-            />
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/prospectoCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/azul_novi"
+            android:textSize="14sp"
+            android:hint="Codigo del asesor, importante colocar bien"
+            android:inputType="number"
+            >
+        </EditText>
 
             <TextView
                 android:layout_width="match_parent"
@@ -69,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"
-                android:hint="Nombre completo del prospecto"
+                android:hint="Nombre completo del prospecto/cliente"
                 android:inputType="textCapWords"
                 >
             </EditText>

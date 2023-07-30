@@ -108,9 +108,9 @@ public class AdapterTitulares extends RecyclerView.Adapter<AdapterTitulares.View
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",listTitulares.get(i).getId_titular());
                 bundle.putString("nombre",listTitulares.get(i).getNombres());
-                bundle.putString("apellidop",listTitulares.get(i).getNombres());
-                bundle.putString("apellidom",listTitulares.get(i).getNombres());
-                bundle.putString("apellidoc",listTitulares.get(i).getNombres());
+                bundle.putString("apellidop",listTitulares.get(i).getApellidoP());
+                bundle.putString("apellidom",listTitulares.get(i).getApellidoM());
+                bundle.putString("apellidoc",listTitulares.get(i).getApellidoC());
                 bundle.putString("prefijo",listTitulares.get(i).getPrefijo());
                 bundle.putString("nrodocumento",listTitulares.get(i).getNro_documento());
                 bundle.putString("extension",listTitulares.get(i).getExtension());

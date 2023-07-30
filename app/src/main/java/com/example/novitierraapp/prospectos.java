@@ -49,7 +49,8 @@ import Adapters.AdapterProspectos;
 
 public class prospectos extends Fragment {
     String hoy="";
-    TextView fecha,usuario,grupo;
+    TextView fecha,etAsesor,etGrupo,etCodigo;
+//    TextView usuario,grupo;
     EditText nombre,telefono,observacion,lugar,zona;
     Spinner spinnerLlamada;
     Spinner spinnerProyectos;
@@ -84,8 +85,15 @@ public class prospectos extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        check();
+
         fecha = view.findViewById(R.id.prospectoFecha);
-        usuario= view.findViewById(R.id.prospectoUser);
+//        usuario= view.findViewById(R.id.prospectoUser);
+//        grupo =  view.findViewById(R.id.prospectoGrupo);
+        etAsesor = view.findViewById(R.id.prospectoAsesor);
+        etGrupo = view.findViewById(R.id.prospectoGrupo);
+        etCodigo = view.findViewById(R.id.prospectoCodigo);
         nombre=view.findViewById(R.id.prospectoNombre);
         telefono=view.findViewById(R.id.prospectoTelefono);
         observacion=view.findViewById(R.id.prospectoObservacion);
@@ -94,13 +102,13 @@ public class prospectos extends Fragment {
         spinnerLlamada=view.findViewById(R.id.spinnerLlamada);
 //        spinnerUrb=view.findViewById(R.id.spinnerProspectoUrb);
         spinnerProyectos = view.findViewById(R.id.spinnerProspectoUrb2);
-        grupo =  view.findViewById(R.id.prospectoGrupo);
+
         btRegistrarProspecto = view.findViewById(R.id.prospectoRegistrar);
 
         cargarComponentes();
         fecha.setText("Fecha: "+LocalDate.now().toString());
-        usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
-        grupo.setText(Global.grupo.toUpperCase());
+//        usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
+//        grupo.setText(Global.grupo.toUpperCase());
 
         btRegistrarProspecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,10 +127,17 @@ public class prospectos extends Fragment {
 //                        }
 //                    },500);
                 }else {
-                    mensaje("Nombre , Telefono y Proyecto de interes son obligatorios");
+                    mensaje("Nombre , Telefono y Proyecto de interes son obligatorios ; Datos Asesor obligatorios");
                 }
             }
         });
+    }
+
+    private void check() {
+        if (Global.nombreSesion==null || Global.nombreSesion=="" || Global.apellidoSesion==null || Global.apellidoSesion=="" || Global.codigo==null || Global.codigo==0 || Global.codigo.toString()=="" || Global.grupo=="" || Global.grupo==null){
+            Toast.makeText(getContext(), "Sesion expirada.", Toast.LENGTH_LONG).show();
+            getActivity().finishAffinity ();
+        }
     }
 
     public void getUrbanizacionProyectos(){
@@ -169,7 +184,7 @@ public class prospectos extends Fragment {
     }
 
     public Boolean camposVacios(){
-        if(nombre.length()==0 || telefono.length()==0){
+        if(nombre.length()==0 || telefono.length()==0 || etAsesor.length()==0 || etCodigo.length()==0 || etGrupo.length()==0){
             return false;
         }else {
             return true;
@@ -239,9 +254,9 @@ public class prospectos extends Fragment {
                 parametros.put("lugar",lugar.getText().toString().toUpperCase());
                 parametros.put("urbanizacion",spinnerProyectos.getSelectedItem().toString());
                 parametros.put("observacion",observacion.getText().toString().toUpperCase());
-                parametros.put("asesor",Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
-                parametros.put("codigo",Global.codigo.toString());
-                parametros.put("grupo",Global.grupo.toUpperCase());
+                parametros.put("asesor",etAsesor.getText().toString().toUpperCase());
+                parametros.put("codigo",etCodigo.getText().toString().toUpperCase());
+                parametros.put("grupo",etGrupo.getText().toString().toUpperCase());
                 parametros.put("fecha", LocalDateTime.now().toString());
                 return parametros;
             }

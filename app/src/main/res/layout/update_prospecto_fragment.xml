@@ -36,16 +36,16 @@
                 android:textStyle="bold"
                 android:gravity="right"
                 />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/updprospectoUser"
-                android:text="Usuario"
-                android:textSize="16sp"
-                android:textColor="@color/azul_novi"
-                android:textStyle="bold"
-                android:gravity="right"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/updprospectoUser"-->
+<!--                android:text="Usuario"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/azul_novi"-->
+<!--                android:textStyle="bold"-->
+<!--                android:gravity="right"-->
+<!--                />-->
 
             <TextView
                 android:layout_width="match_parent"

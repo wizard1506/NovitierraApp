@@ -399,7 +399,7 @@ public class FormCoSolicitante extends Fragment {
         listaExtension.add("TJ");
         listaExtension.add("OR");
         listaExtension.add("BE");
-        listaExtension.add("PD");
+        listaExtension.add("PA");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
         spinnerExtension.setAdapter(adapter);
     }

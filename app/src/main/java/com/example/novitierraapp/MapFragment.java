@@ -5,10 +5,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -189,6 +192,8 @@ public class MapFragment extends Fragment {
                             bundle.putString("cat",cat);
                             bundle.putString("obs1",obs1);
                             bundle.putString("obs2",obs2);
+                            bundle.putString("latitud",Global.gLat.toString());
+                            bundle.putString("longitud",Global.gLong.toString());
                             Navigation.findNavController(v).popBackStack();
                             Navigation.findNavController(v).navigate(R.id.formularioMapa,bundle);
                         }
@@ -209,6 +214,7 @@ public class MapFragment extends Fragment {
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
 //                // Add a marker in Santa Cruz and move the camera
                 LatLng centro = new LatLng(-17.783438157398255, -63.18229459226132);
                 mMap.addMarker(new MarkerOptions()

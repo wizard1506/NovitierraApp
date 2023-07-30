@@ -39,14 +39,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.novitierraapp.entidades.Global;
 import com.example.novitierraapp.entidades.Proyectos;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class formularioMapa extends Fragment {
 
@@ -57,11 +72,17 @@ public class formularioMapa extends Fragment {
     EditText observacion1, observacion2;
     Spinner spinnerPrefijo, spinnerExtension;
     Button guardar;
+    /// para QR
+    private String ubicacion = "https://www.google.es/maps?q=";
+    private String ubicacion2 = "https://www.google.com/maps/search/?api=1&query=";
+    private String URL_updateUbicacion= "http://wizardapps.xyz/novitierra/api/updateUbicacionApp.php";
+    private String latitud,longitud;
+    private String idTitular;
 
     ArrayList<String> listaExtension = new ArrayList<>();
     ArrayList<String> listaPrefijo = new ArrayList<>();
 
-    Bitmap imagen,scaled;
+    Bitmap imagen,scaled,bitmapQr;
     //***PARA PDF****
     private String path = Environment.getExternalStorageDirectory().getPath() + "/Download/FormularioMapa.pdf";
     private File file = new File(path);
@@ -131,7 +152,7 @@ public class formularioMapa extends Fragment {
         cargarListaExtensiones();
 
 
-
+        idTitular = Integer.valueOf(getArguments().getInt("id")).toString();
         nombre_cliente.setText(getArguments().getString("nombre"));
         apellidoPaterno.setText(getArguments().getString("apellidop"));
         apellidoMaterno.setText(getArguments().getString("apellidom"));
@@ -154,6 +175,8 @@ public class formularioMapa extends Fragment {
         cat.setText(getArguments().getString("cat"));
         observacion1.setText(getArguments().getString("obs1"));
         observacion2.setText(getArguments().getString("obs2"));
+        latitud = getArguments().getString("latitud");
+        longitud = getArguments().getString("longitud");
 
         elegirSpinnerExtension(getArguments().getString("extension"));
         elegirSpinnerPrefijo(getArguments().getString("prefijo"));
@@ -163,6 +186,7 @@ public class formularioMapa extends Fragment {
             @Override
             public void onClick(View v) {
                 DeshabilitarBoton();
+                actualizarUbicacion();
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         generarPDF();
@@ -171,6 +195,8 @@ public class formularioMapa extends Fragment {
             }
         });
     }
+
+
 
     public void mensaje(String mensaje){
         Toast.makeText(getContext(),mensaje,Toast.LENGTH_LONG).show();
@@ -230,7 +256,7 @@ public class formularioMapa extends Fragment {
         listaExtension.add("TJ");
         listaExtension.add("OR");
         listaExtension.add("BE");
-        listaExtension.add("PD");
+        listaExtension.add("PA");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaExtension);
         spinnerExtension.setAdapter(adapter);
     }
@@ -288,34 +314,49 @@ public class formularioMapa extends Fragment {
         }
 
         ///INICIO DE PAGINA 4 ////
-        PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(2539,3874,1).create();
+        titlePaint.setTextSize(20f);
+        PdfDocument.PageInfo myPageInfo4 = new PdfDocument.PageInfo.Builder(1200,1927,1).create();
         PdfDocument.Page myPage4 = myPDF.startPage(myPageInfo4);
         Canvas canvas4 = myPage4.getCanvas();
         imagen = BitmapFactory.decodeResource(getResources(),R.drawable.mapapng);
 //        imagen = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
-        scaled = Bitmap.createScaledBitmap(imagen,2539,3874,false);
+        scaled = Bitmap.createScaledBitmap(imagen,1200,1927,false);
         if(Global.ubicacion==null){
             Global.ubicacion=BitmapFactory.decodeResource(getResources(),R.drawable.nomap);
         }
 //            Bitmap imagen4,scaled4;
 //            imagen4 = BitmapFactory.decodeResource(getResources(),R.drawable.nuevoformmapa);
 //            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
-        canvas4.drawBitmap(scaled,0,0,myPaint);
-        canvas4.drawText(tresDigitos(uv.getText().toString()),600,460,titlePaint);
-        canvas4.drawText(tresDigitos(mz.getText().toString()),1190,460,titlePaint);
-        canvas4.drawText(tresDigitos(lt.getText().toString()),1780,460,titlePaint);
-        canvas4.drawText(cat.getText().toString(),2250,460,titlePaint);
-        canvas4.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),800,575,titlePaint);
-        canvas4.drawText(ci_cliente.getText().toString(),800,637,titlePaint);
-        canvas4.drawText(telMovil.getText().toString(),1700,637,titlePaint);
-        canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),800,705,titlePaint);
-        canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),800,775,titlePaint);
-        canvas4.drawText(zona.getText().toString(),800,850,titlePaint);
-        canvas4.drawText(observacion1.getText().toString(),350,3475,titlePaint);
-        canvas4.drawText(observacion2.getText().toString(),350,3525,titlePaint);
 
-        scaled = Bitmap.createScaledBitmap(Global.ubicacion,2280,2500,false);
-        canvas4.drawBitmap(scaled,150,900,myPaint);
+        /// QR
+        String textoQR = ubicacion2+latitud+","+longitud;
+        MultiFormatWriter writer = new MultiFormatWriter();
+        try{
+            BitMatrix matrix = writer.encode(textoQR, BarcodeFormat.QR_CODE,200,200);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            bitmapQr= encoder.createBitmap(matrix);
+
+        }catch (WriterException e ){
+            e.printStackTrace();
+        };
+        /// QR
+
+        canvas4.drawBitmap(scaled,0,0,myPaint);
+        canvas4.drawText(uv.getText().toString().toUpperCase(),255,228,titlePaint);
+        canvas4.drawText(mz.getText().toString().toUpperCase(),555,228,titlePaint);
+        canvas4.drawText(lt.getText().toString(),817,228,titlePaint);
+        canvas4.drawText(cat.getText().toString().toUpperCase(),1050,228,titlePaint);
+        canvas4.drawText(nombre_cliente.getText().toString().toUpperCase()+" "+apellidoPaterno.getText().toString().toUpperCase()+" "+apellidoMaterno.getText().toString().toUpperCase()+" "+prefijoObtenido.toUpperCase()+" "+apellidoCasada.getText().toString().toUpperCase(),375,282,titlePaint);
+        canvas4.drawText(ci_cliente.getText().toString()+" "+spinnerExtension.getSelectedItem().toString(),375,315,titlePaint);
+        canvas4.drawText(telMovil.getText().toString(),780,315,titlePaint);
+        canvas4.drawText("Barrio:"+" "+barrio.getText().toString()+" Avenida: "+avenida.getText().toString()+" Calle: "+calle.getText().toString()+" Numero: "+numero.getText().toString(),375,348,titlePaint);
+        canvas4.drawText(primerReferencia.getText().toString()+" "+telfReferencia1.getText().toString()+" - "+segundaReferencia.getText().toString()+" "+telfReferencia2.getText().toString(),375,382,titlePaint);
+        canvas4.drawText(zona.getText().toString(),375,420,titlePaint);
+        canvas4.drawText(observacion1.getText().toString().toUpperCase(),120,1725,titlePaint);
+        canvas4.drawText(observacion2.getText().toString().toUpperCase(),120,1747,titlePaint);
+        scaled = Bitmap.createScaledBitmap(Global.ubicacion,1080,1252,false);
+        canvas4.drawBitmap(scaled,67,439,myPaint);
+        canvas4.drawBitmap(bitmapQr,945,1490,myPaint);
         myPDF.finishPage(myPage4);
         ///FIN DE PAGINA 4/////
         try {
@@ -334,6 +375,46 @@ public class formularioMapa extends Fragment {
         share.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(share);
+        habilitarBoton();
+    }
+
+
+    private void actualizarUbicacion() {
+        StringRequest request = new StringRequest(Request.Method.POST, URL_updateUbicacion, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    if(response.contains("algo salio mal")){
+                        Toast.makeText(getContext(),"No se pudo completar el registro debido a un error",Toast.LENGTH_LONG).show();
+                    }
+                    else{Toast.makeText(getContext(),"Datos registrados",Toast.LENGTH_LONG).show();}
+
+                }else{
+                    Toast.makeText(getContext(), "No se ha registrado a la base de datos", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("id",idTitular);
+                parametros.put("latitud",Global.gLat.toString());
+                parametros.put("longitud",Global.gLong.toString());
+                if(Global.gLong==0.0 && Global.gLat==0.0){
+                    parametros.put("ubicacion","");
+                }else{
+                    parametros.put("ubicacion",ubicacion2+Global.gLat.toString()+","+Global.gLong.toString());
+                }
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(request);
         habilitarBoton();
     }
 

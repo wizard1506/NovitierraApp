@@ -121,6 +121,7 @@
         android:src="@drawable/btnreferidor"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:backgroundTint="@color/azul_novi">
 
     </ImageButton>

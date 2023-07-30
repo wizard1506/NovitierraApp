@@ -827,7 +827,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
             </LinearLayout>
@@ -1056,7 +1056,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
                 <TextView
@@ -1075,7 +1075,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
             </LinearLayout>
@@ -1101,7 +1101,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
                 <TextView
@@ -1120,7 +1120,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
             </LinearLayout>
 

@@ -9,6 +9,7 @@
     android:orientation="vertical"
     >
 
+
     <ScrollView
         android:id="@+id/scrollViewForm"
         android:layout_width="match_parent"
@@ -24,18 +25,125 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                >
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="*Encuesta Novitierra"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:layout_marginStart="10dp"
-                    android:text="Fecha Formulario"
-                    android:textColor="@color/azul_novi"
-                    android:textSize="18sp"
-                    android:textStyle="bold"></TextView>
+                    android:textColor="@color/red"
+                    >
+                </TextView>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.- A través  de que medio de Comunicacion publicitario conoce el producto?."
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/azul_novi"
+                    >
+                </TextView>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerRespuesta1"
+                    android:prompt="@string/SpinnerGenerico"
+                    android:spinnerMode="dialog"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    >
+
+                </Spinner>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rgRedesSociales1"
+                        android:layout_marginStart="50dp"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        >
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rbFacebook"
+                            android:textColor="@color/azul_novi"
+                            android:textStyle="bold"
+                            android:text="Facebook">
+                        </RadioButton>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rbTiktok"
+                            android:textColor="@color/azul_novi"
+                            android:textStyle="bold"
+                            android:text="TikTok">
+                        </RadioButton>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rbInstagram"
+                            android:textColor="@color/azul_novi"
+                            android:textStyle="bold"
+                            android:text="Instagram">
+                        </RadioButton>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rbPaginaWeb"
+                            android:textColor="@color/azul_novi"
+                            android:textStyle="bold"
+                            android:text="Pagina Web">
+                        </RadioButton>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rbPaginaAsesor"
+                            android:textColor="@color/azul_novi"
+                            android:textStyle="bold"
+                            android:text="Pagina-Asesor">
+                        </RadioButton>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha para Formularios"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/azul_novi"
+                    >
+                </TextView>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -753,7 +861,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
             </LinearLayout>
@@ -982,7 +1090,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
                 <TextView
@@ -1001,7 +1109,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
             </LinearLayout>
@@ -1027,7 +1135,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
 
                 <TextView
@@ -1046,7 +1154,7 @@
                     android:layout_marginEnd="10dp"
                     android:hint="0000"
                     android:inputType="number"
-                    android:maxLength="8"
+                    android:maxLength="16"
                     ></EditText>
             </LinearLayout>
 
