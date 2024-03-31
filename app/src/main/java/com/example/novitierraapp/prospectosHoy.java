@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.service.autofill.DateTransformation;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +48,13 @@ import Adapters.AdapterProspectos;
 public class prospectosHoy extends Fragment {
 
     ArrayList<Prospectos> listProspectos = new ArrayList<>();
-    RecyclerView recycler;
+
     TextView fechaHoy;
+    EditText etbuscarProspecto;
+    RecyclerView recycler;
+    AdapterProspectos madapter;
     private  static String URL_prospectosHoy="http://wizardapps.xyz/novitierra/api/cargarProspectoFechaHoy.php";
+
 
     private ProspectosHoyViewModel mViewModel;
 
@@ -67,12 +74,44 @@ public class prospectosHoy extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.prospectos_hoy_fragment, container, false);
-        fechaHoy = view.findViewById(R.id.prospectoFechaHoy);
-        fechaHoy.setText(LocalDate.now().toString());
         recycler = view.findViewById(R.id.recyclerProspectosHoyID);
         recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        madapter=new AdapterProspectos(listProspectos);
+        recycler.setAdapter(madapter);
+        fechaHoy = view.findViewById(R.id.prospectoFechaHoy);
+        fechaHoy.setText(LocalDate.now().toString());
         cargarProspectosHoy();
+        etbuscarProspecto = view.findViewById(R.id.etbuscarProspecto);
+        etbuscarProspecto.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
         return view;
+    }
+
+    private void filter(String text){
+
+        ArrayList<Prospectos> filteredList = new ArrayList<>();
+        for (Prospectos item: listProspectos ){
+            if (item.getId_prospectos().toString().contains(text.toLowerCase()) || item.getNombre_completo().toLowerCase().contains(text.toLowerCase()) || item.getTelefono().toString().contains(text.toLowerCase()) ){
+                filteredList.add(item);
+            }
+        }
+        madapter.filterList(filteredList);
+        recycler.setAdapter(madapter);
     }
 
     @Override
@@ -81,6 +120,8 @@ public class prospectosHoy extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ProspectosHoyViewModel.class);
         // TODO: Use the ViewModel
     }
+
+
     public void cargarProspectosHoy(){
         RequestQueue requestQueue;
 
@@ -95,7 +136,7 @@ public class prospectosHoy extends Fragment {
                             listProspectos.add(new Prospectos
                                     (respuesta.getInt("id_prospecto")
                                             ,respuesta.getString("nombre_completo")
-                                            ,respuesta.getInt("telefono")
+                                            ,respuesta.getString("telefono")
                                             ,respuesta.getString("llamada")
                                             ,respuesta.getString("zona")
                                             ,respuesta.getString("lugar")
@@ -107,6 +148,7 @@ public class prospectosHoy extends Fragment {
                                             ,respuesta.getString("fecha")));
                         }
                         AdapterProspectos adapterprospectos = new AdapterProspectos(listProspectos);
+                        madapter=new AdapterProspectos(listProspectos); ///importante
                         recycler.setAdapter(adapterprospectos);
                     }catch(JSONException e) {
                         Toast.makeText(getContext(), "No se cargaron los prospectos o no existen de esta fecha", Toast.LENGTH_LONG).show();

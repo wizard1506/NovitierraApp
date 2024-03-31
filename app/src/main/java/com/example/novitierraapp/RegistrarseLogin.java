@@ -1,11 +1,18 @@
 package com.example.novitierraapp;
 
+import static java.security.AccessController.getContext;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -15,7 +22,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.novitierraapp.entidades.Grupos;
+import com.example.novitierraapp.entidades.Proyectos2;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +38,10 @@ public class RegistrarseLogin extends AppCompatActivity {
     EditText nombres,apellidos,ci,telf,codigo,usuario,password,passwordRepeat,grupo,acceso;
     Button registrarUsuario;
     String codigoacceso = "2111";
-    private String url="http://wizardapps.xyz/novitierra/api/addUser.php";
+    Spinner spinnerGrupo;
+    String URL_grupos = "http://wizardapps.xyz/novitierra/api/getGrupos.php" ;
+    ArrayList<Grupos> listGrupos = new ArrayList<>();
+    private String url="http://wizardapps.xyz/novitierra/api/addUser2.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +59,8 @@ public class RegistrarseLogin extends AppCompatActivity {
         passwordRepeat=findViewById(R.id.passwordRepeatRegistro);
         registrarUsuario=findViewById(R.id.btRegistrarRegistro);
         acceso = findViewById(R.id.codigoAcceso);
+        spinnerGrupo = findViewById(R.id.spinnerGrupo);
+        getGrupos();
 
         Toast.makeText(getApplicationContext(),"Llenar todo los campos para proceder al registro",Toast.LENGTH_LONG).show();
 
@@ -93,12 +112,19 @@ public class RegistrarseLogin extends AppCompatActivity {
                 StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         if (!response.isEmpty()){
-                            Toast.makeText(getApplicationContext(),"Usuario registrado correctamente",Toast.LENGTH_LONG).show();
-                            limpiarEdits();
+                            if (response.contains("usuario existe")){
+                                Toast.makeText(RegistrarseLogin.this, "Usuario existe", Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Usuario registrado correctamente",Toast.LENGTH_LONG).show();
+                                limpiarEdits();
+                            }
                         }else{
-                            Toast.makeText(RegistrarseLogin.this, "Se ha producido un error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegistrarseLogin.this, "Error, no hay respuesta del servidor", Toast.LENGTH_LONG).show();
                         }
+
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -114,7 +140,7 @@ public class RegistrarseLogin extends AppCompatActivity {
                         parametros.put("ci",ci.getText().toString());
                         parametros.put("telefono",telf.getText().toString());
                         parametros.put("codigo",codigo.getText().toString());
-                        parametros.put("grupo",grupo.getText().toString());
+                        parametros.put("grupo",spinnerGrupo.getSelectedItem().toString());
                         parametros.put("usuario",usuario.getText().toString());
                         parametros.put("password",password.getText().toString());
                         return parametros;
@@ -139,5 +165,52 @@ public class RegistrarseLogin extends AppCompatActivity {
         usuario.setText("");
         password.setText("");
         passwordRepeat.setText("");
+    }
+
+    public void getGrupos(){
+        RequestQueue requestQueue;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_grupos, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()) {
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject respuesta = array.getJSONObject(i);
+                            Grupos grupo = new Grupos();
+                            grupo.setNombre(respuesta.getString("nombre"));
+                            listGrupos.add(grupo);
+                        }
+                        // Crear un ArrayAdapter con los nombres de los grupos
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line);
+                        for (Grupos grupo : listGrupos) {
+                            adapter.add(grupo.getNombre());
+                        }
+                        // Asignar el adaptador al Spinner
+                        spinnerGrupo.setAdapter(adapter);
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(), "No se cargaron los grupos", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Ocurrió algún error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<>();
+                // Agrega los parámetros necesarios aquí
+                return parametros;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 }

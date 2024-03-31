@@ -74,6 +74,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 >
             </TextView>
             <EditText
@@ -83,7 +84,9 @@
                 android:textColor="@color/azul_novi"
                 android:inputType="number"
                 android:enabled="false"
-                android:textSize="14sp">
+                android:textSize="14sp"
+                android:visibility="gone"
+                >
             </EditText>
             <TextView
                 android:layout_width="match_parent"

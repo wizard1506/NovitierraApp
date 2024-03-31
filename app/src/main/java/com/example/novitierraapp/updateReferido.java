@@ -57,7 +57,7 @@ public class updateReferido extends AppCompatActivity {
             public void onResponse(String response) {
                 if (!response.isEmpty()){
                     if(response.contains("algo salio mal")){
-                        Toast.makeText(v.getContext(),"No se pudo modificar el registro debido a un error",Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(),"No fue posible actualizar el registro debido a una excepcion",Toast.LENGTH_LONG).show();
                     }
                     else{Toast.makeText(v.getContext(),"Referido modificado",Toast.LENGTH_LONG).show();}
 

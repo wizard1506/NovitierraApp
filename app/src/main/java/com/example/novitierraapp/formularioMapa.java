@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -289,6 +290,67 @@ public class formularioMapa extends Fragment {
         }
     }
 
+    ///funcion addLogo
+    private Bitmap addLogoToQRCode(Bitmap qrBitmap, Bitmap logoBitmap) {
+        int qrBitmapWidth = qrBitmap.getWidth();
+        int qrBitmapHeight = qrBitmap.getHeight();
+        int logoBitmapWidth = logoBitmap.getWidth();
+        int logoBitmapHeight = logoBitmap.getHeight();
+
+        // Calcula la posición en la que se superpondrá el logo
+        int logoX = (qrBitmapWidth - logoBitmapWidth) / 2;
+        int logoY = (qrBitmapHeight - logoBitmapHeight) / 2;
+
+        // Crea un nuevo bitmap para combinar el código QR y el logo
+        Bitmap combinedBitmap = Bitmap.createBitmap(qrBitmapWidth, qrBitmapHeight, qrBitmap.getConfig());
+
+        // Crea un lienzo para dibujar los bitmaps en el nuevo bitmap
+        Canvas canvas = new Canvas(combinedBitmap);
+        canvas.drawBitmap(qrBitmap, 0, 0, null);
+        canvas.drawBitmap(logoBitmap, logoX, logoY, null);
+
+        return combinedBitmap;
+    }
+///// fin de la funcion
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
     /////boton generador de pdf/////
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generarPDF (){
@@ -329,6 +391,9 @@ public class formularioMapa extends Fragment {
 //            scaled4 = Bitmap.createScaledBitmap(imagen4,2539,3874,false);
 
         /// QR
+
+
+
         String textoQR = ubicacion2+latitud+","+longitud;
         MultiFormatWriter writer = new MultiFormatWriter();
         try{
@@ -339,6 +404,12 @@ public class formularioMapa extends Fragment {
         }catch (WriterException e ){
             e.printStackTrace();
         };
+        ///************MODIFICACIONES LOGO QR
+        Bitmap logoBitmap, logoscaled;
+        logoBitmap = decodeSampledBitmapFromResource(getResources(),R.drawable.logoqrbordes,50,50);
+        logoscaled = Bitmap.createScaledBitmap(logoBitmap,50,50,false);
+        bitmapQr = addLogoToQRCode(bitmapQr,logoscaled);
+        ///************MODIFICACIONES
         /// QR
 
         canvas4.drawBitmap(scaled,0,0,myPaint);
@@ -357,6 +428,12 @@ public class formularioMapa extends Fragment {
         scaled = Bitmap.createScaledBitmap(Global.ubicacion,1080,1252,false);
         canvas4.drawBitmap(scaled,67,439,myPaint);
         canvas4.drawBitmap(bitmapQr,945,1490,myPaint);
+
+        scaled.recycle();
+        scaled=null;
+        imagen.recycle();
+        imagen=null;
+
         myPDF.finishPage(myPage4);
         ///FIN DE PAGINA 4/////
         try {

@@ -12,9 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,8 @@ public class titulares extends Fragment {
    ArrayList<Titular> listTitulares = new ArrayList<>();
    RecyclerView recycler;
    TextView fechaHoy;
+   EditText etbuscarTitular;
+    AdapterTitulares madapter;
     private  static String urltitular="http://wizardapps.xyz/novitierra/api/cargarTitularFechaHoy.php";
 
 
@@ -62,10 +67,39 @@ public class titulares extends Fragment {
         View view = inflater.inflate(R.layout.titulares_fragment, container, false);
         fechaHoy = view.findViewById(R.id.fechatitularHoy);
         fechaHoy.setText(LocalDate.now().toString());
+        etbuscarTitular = view.findViewById(R.id.etbuscarTitular);
+        etbuscarTitular.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         recycler = view.findViewById(R.id.recyclerTitular);
         recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         cargarTitularesHoy();
         return view;
+    }
+
+    private void filter(String text){
+        ArrayList<Titular> filteredListTitular = new ArrayList<>();
+
+        for (Titular item: listTitulares ){
+            if (item.getId_titular().toString().contains(text.toLowerCase()) || item.getNombres().toLowerCase().contains(text.toLowerCase()) || item.getNro_documento().contains(text.toLowerCase()) || item.getApellidoP().toLowerCase().contains(text.toLowerCase()) || item.getApellidoM().toLowerCase().contains(text.toLowerCase()) ){
+                filteredListTitular.add(item);
+            }
+        }
+        madapter.filterListTitular(filteredListTitular);
+        recycler.setAdapter(madapter);
     }
 
 
@@ -152,6 +186,7 @@ public class titulares extends Fragment {
                                             ,respuesta.getString("ubicacion")));
                         }
                         AdapterTitulares adaptertitulares = new AdapterTitulares(listTitulares);
+                        madapter=new AdapterTitulares(listTitulares); ///importante
                         recycler.setAdapter(adaptertitulares);
                     }catch(JSONException e) {
                         Toast.makeText(getContext(), "No se cargaron los datos o no existen de esta fecha", Toast.LENGTH_LONG).show();

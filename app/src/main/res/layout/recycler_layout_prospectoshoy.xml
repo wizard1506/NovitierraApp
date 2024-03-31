@@ -65,6 +65,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
@@ -75,6 +76,7 @@
                     android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
@@ -85,6 +87,7 @@
                     android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
@@ -95,12 +98,13 @@
                     android:textStyle="bold"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vigencia:"
+                    android:text="Vigencia hasta:"
                     android:textStyle="bold"
                     android:textSize="11sp"
                     android:textColor="@color/azul_novi"
@@ -115,6 +119,7 @@
                     android:textSize="11sp"
                     android:textColor="@color/azul_novi"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
                     >
                 </TextView>
 
@@ -149,7 +154,9 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
-                    android:text="Urbanizacion">
+                    android:text="Urbanizacion"
+                    android:visibility="gone"
+                    >
 
                 </TextView>
                 <TextView
@@ -159,6 +166,7 @@
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
                     android:text="zona"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
@@ -168,6 +176,7 @@
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
                     android:text="Lugar"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
@@ -177,6 +186,7 @@
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
                     android:text="Llamada"
+                    android:visibility="gone"
                     >
                 </TextView>
                 <TextView
@@ -195,6 +205,7 @@
                     android:textColor="@color/azul_novi"
                     android:textSize="11sp"
                     android:text="Observacion"
+                    android:visibility="gone"
                     >
                 </TextView>
 
@@ -221,7 +232,19 @@
             android:text="Modificar"
             android:textSize="10dp"
             android:textColor="@color/white"
-            android:backgroundTint="#FFC107"
+            android:backgroundTint="#009688"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            >
+        </Button>
+        <Button
+            android:id="@+id/addSeguimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seguimiento"
+            android:textSize="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#3F51B5"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="20dp"
             >
@@ -235,6 +258,7 @@
             android:backgroundTint="#F44336"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
             >
         </Button>
 

@@ -153,6 +153,7 @@
             android:textColor="@color/azul_novi"
             android:text="Grupo"
             android:textStyle="bold"
+            android:visibility="gone"
             >
         </TextView>
         <EditText
@@ -161,7 +162,30 @@
             android:id="@+id/grupo"
             android:inputType="textCapCharacters"
             android:textColor="@color/azul_novi"
+            android:visibility="gone"
             ></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/azul_novi"
+            android:text="Grupo"
+            android:textStyle="bold"
+            >
+        </TextView>
+        <Spinner
+            android:id="@+id/spinnerGrupo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/SpinnerGenerico"
+            android:spinnerMode="dialog" />
 
     </LinearLayout>
 

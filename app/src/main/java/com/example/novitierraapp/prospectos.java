@@ -49,7 +49,7 @@ import Adapters.AdapterProspectos;
 
 public class prospectos extends Fragment {
     String hoy="";
-    TextView fecha,etAsesor,etGrupo,etCodigo;
+    TextView fecha,etAsesor,etGrupo,etCodigo, tvErrorProspecto;
 //    TextView usuario,grupo;
     EditText nombre,telefono,observacion,lugar,zona;
     Spinner spinnerLlamada;
@@ -59,7 +59,7 @@ public class prospectos extends Fragment {
     ArrayList<String> listaLlamada = new ArrayList<>();
     ArrayList<Proyectos2> listProyectos = new ArrayList<>();
     metodos metodos = new metodos();
-    private String URL_Prospecto="http://wizardapps.xyz/novitierra/api/addProspecto.php";
+    private String URL_Prospecto="http://wizardapps.xyz/novitierra/api/addProspecto2.php";
     private String URL_proyectos = "http://wizardapps.xyz/novitierra/api/getProyectos.php" ;
 
     private ProspectosViewModel mViewModel;
@@ -86,14 +86,13 @@ public class prospectos extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        check();
-
         fecha = view.findViewById(R.id.prospectoFecha);
 //        usuario= view.findViewById(R.id.prospectoUser);
 //        grupo =  view.findViewById(R.id.prospectoGrupo);
         etAsesor = view.findViewById(R.id.prospectoAsesor);
         etGrupo = view.findViewById(R.id.prospectoGrupo);
         etCodigo = view.findViewById(R.id.prospectoCodigo);
+        tvErrorProspecto = view.findViewById(R.id.errorProspecto);
         nombre=view.findViewById(R.id.prospectoNombre);
         telefono=view.findViewById(R.id.prospectoTelefono);
         observacion=view.findViewById(R.id.prospectoObservacion);
@@ -106,6 +105,7 @@ public class prospectos extends Fragment {
         btRegistrarProspecto = view.findViewById(R.id.prospectoRegistrar);
 
         cargarComponentes();
+        datosIniciales();
         fecha.setText("Fecha: "+LocalDate.now().toString());
 //        usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
 //        grupo.setText(Global.grupo.toUpperCase());
@@ -113,12 +113,15 @@ public class prospectos extends Fragment {
         btRegistrarProspecto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(camposVacios()){
-                    if(telefono.getText().length()>9){
-                        mensaje("Hubo un problema con el telefono, excede el numero de digitos o se ha copiado/pegado");
-                    }else{
+
+                // Dentro de tu fragmento
+                if (Global.verificarDatosSesion(requireContext())) {
+                    if(camposVacios()){
+//                    if(telefono.getText().length()>20){
+//                        mensaje("Hubo un problema con el telefono, excede el numero de digitos o se ha copiado/pegado");
+//                    }else{
                         registrarProspecto();
-                    }
+//                    }
 
 //                    new Handler().postDelayed(new Runnable() {
 //                        @Override
@@ -126,18 +129,36 @@ public class prospectos extends Fragment {
 //                            vaciarCampos();
 //                        }
 //                    },500);
-                }else {
-                    mensaje("Nombre , Telefono y Proyecto de interes son obligatorios ; Datos Asesor obligatorios");
+                    }else {
+                        mensaje("Nombre , Telefono y Proyecto de interes son obligatorios ; Datos Asesor obligatorios");
+                    }
+                    // Los datos de sesión están disponibles, puedes continuar con el registro
+                    // Escribe aquí el código para realizar el proceso de registro
+                } else {
+                    // Los datos de sesión no están disponibles, muestra un mensaje al usuario o realiza alguna otra acción
+                    Toast.makeText(requireContext(), "Sesion expirada, por favor inicia sesión nuevamente", Toast.LENGTH_SHORT).show();
+                    // También puedes redirigir al usuario a la pantalla de inicio de sesión, por ejemplo:
+                    // Navigation.findNavController(requireView()).navigate(R.id.action_fragmento_registro_to_fragmento_inicio_sesion);
                 }
+
+
             }
         });
     }
 
-    private void check() {
-        if (Global.nombreSesion==null || Global.nombreSesion=="" || Global.apellidoSesion==null || Global.apellidoSesion=="" || Global.codigo==null || Global.codigo==0 || Global.codigo.toString()=="" || Global.grupo=="" || Global.grupo==null){
-            Toast.makeText(getContext(), "Sesion expirada.", Toast.LENGTH_LONG).show();
-            getActivity().finishAffinity ();
+    private void datosIniciales() {
+// Dentro de tu fragmento
+        if (Global.verificarDatosSesion(requireContext())) {
+            etGrupo.setText(Global.getGrupo());
+            etCodigo.setText(Global.getCodigo().toString());
+            etAsesor.setText(Global.getNombreSesion().concat(" ").concat(Global.getApellidoSesion()));
+        } else {
+            // Los datos de sesión no están disponibles, muestra un mensaje al usuario o realiza alguna otra acción
+            Toast.makeText(requireContext(), "Datos de sesion expirados inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+            // También puedes redirigir al usuario a la pantalla de inicio de sesión, por ejemplo:
+            // Navigation.findNavController(requireView()).navigate(R.id.action_fragmento_registro_to_fragmento_inicio_sesion);
         }
+
     }
 
     public void getUrbanizacionProyectos(){
@@ -223,6 +244,7 @@ public class prospectos extends Fragment {
                     if(response.contains("se inserto correctamente")){
                             mensaje("Datos Registrados");
                             vaciarCampos();
+                            tvErrorProspecto.setVisibility(View.GONE);
                             return;
                     }
                     if(response.contains("vencida")){
@@ -230,7 +252,9 @@ public class prospectos extends Fragment {
                             return;
                     }
                     else{
-                        mensaje("Telefono prospectado y tiene vigencia hasta la fecha "+response);
+                        mensaje("Telefono Prospectado por: "+response);
+                        tvErrorProspecto.setText("Telefono Prospectado por: "+response );
+                        tvErrorProspecto.setVisibility(View.VISIBLE);
                         return;
                     }
                 }else{

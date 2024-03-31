@@ -37,13 +37,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.ViewHolderProspectos> {
     ArrayList<Prospectos> listProspectos;
+    ArrayList<Prospectos> listProspectosTodos;
+
     Integer id=0;
 
     private static  String URL_deleteprospecto="http://wizardapps.xyz/novitierra/api/deleteProspecto.php";
+
     public AdapterProspectos(ArrayList<Prospectos> listProspectos) {
         this.listProspectos = listProspectos;
     }
@@ -77,7 +81,7 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",listProspectos.get(i).getId_prospectos());
                 bundle.putString("nombre",listProspectos.get(i).getNombre_completo());
-                bundle.putInt("telefono",listProspectos.get(i).getTelefono());
+                bundle.putString("telefono",listProspectos.get(i).getTelefono());
                 bundle.putString("zona",listProspectos.get(i).getZona());
                 bundle.putString("lugar",listProspectos.get(i).getLugar());
                 bundle.putString("urbanizacion",listProspectos.get(i).getUrbanizacion());
@@ -115,6 +119,23 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
             }
         });
 
+        holder.addSeguimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",listProspectos.get(i).getId_prospectos());
+                bundle.putString("nombre",listProspectos.get(i).getNombre_completo());
+                bundle.putString("telefono",listProspectos.get(i).getTelefono());
+                bundle.putString("zona",listProspectos.get(i).getZona());
+                bundle.putString("lugar",listProspectos.get(i).getLugar());
+                bundle.putString("urbanizacion",listProspectos.get(i).getUrbanizacion());
+                bundle.putString("observacion",listProspectos.get(i).getObservacion());
+                bundle.putString("llamada",listProspectos.get(i).getLlamada());
+                Navigation.findNavController(v).popBackStack();
+                Navigation.findNavController(v).navigate(R.id.nuevoSeguimiento,bundle);
+            }
+        });
+
     }
 
     @Override
@@ -122,9 +143,14 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
         return listProspectos.size();
     }
 
+    public void filterList(ArrayList<Prospectos> filteredList){
+        listProspectos = filteredList;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolderProspectos extends RecyclerView.ViewHolder {
         TextView nombre,telefono,numero,urbanizacion,observacion,llamada,zona,lugar,vigencia;
-        Button updateProspecto, deleteProspecto;
+        Button updateProspecto, deleteProspecto, addSeguimiento;
 
         public ViewHolderProspectos(@NonNull View itemView) {
             super(itemView);
@@ -139,6 +165,7 @@ public class AdapterProspectos extends RecyclerView.Adapter<AdapterProspectos.Vi
             vigencia = itemView.findViewById(R.id.vigenciaProspecto);
             updateProspecto = itemView.findViewById(R.id.updateProspecto);
             deleteProspecto = itemView.findViewById(R.id.deleteProspecto);
+            addSeguimiento = itemView.findViewById(R.id.addSeguimiento);
 
         }
 

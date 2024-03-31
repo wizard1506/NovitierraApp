@@ -1,5 +1,7 @@
 package com.example.novitierraapp;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +57,7 @@ public class updateProspecto extends Fragment {
     metodos metodos = new metodos();
     Integer id = 0;
     Button modificar;
+    String datoURB="";
 
     private UpdateProspectoViewModel mViewModel;
 
@@ -70,6 +74,7 @@ public class updateProspecto extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         nombre = view.findViewById(R.id.updprospectoNombre);
         telefono = view.findViewById(R.id.updprospectoTelefono);
         observacion = view.findViewById(R.id.updprospectoObservacion);
@@ -84,9 +89,9 @@ public class updateProspecto extends Fragment {
         listaLlamada = new ArrayList<>();
         listProyectos = new ArrayList<>();
 
-//        if(getArguments()!=null){
-//            urb = getArguments().getString("urbanizacion");
-//        }
+        if(getArguments()!=null){
+            datoURB = getArguments().getString("urbanizacion");
+        }
 
         fecha.setText("Fecha: "+ LocalDate.now().toString());
 //        usuario.setText(Global.nombreSesion.toUpperCase().toString()+" "+Global.apellidoSesion.toUpperCase().toString());
@@ -100,7 +105,7 @@ public class updateProspecto extends Fragment {
         lugar.setText(getArguments().getString("lugar"));
         observacion.setText(getArguments().getString("observacion"));
         elegirSpinnerLlamada(getArguments().getString("llamada"));
-//        elegirSpinnerUrbanizacion(getArguments().getString("urbanizacion"));
+//        datoURB= getArguments().getString("urbanizacion");
 
 
         modificar.setOnClickListener(new View.OnClickListener() {
@@ -111,13 +116,11 @@ public class updateProspecto extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Navigation.findNavController(v).navigate(R.id.prospectosHoy);
+                        Navigation.findNavController(v).navigate(R.id.nav_home);
                     }
                 },500);
             }
         });
-
-
 
     }
 
@@ -132,9 +135,7 @@ public class updateProspecto extends Fragment {
         metodos.cargarLlamada(listaLlamada);
         ArrayAdapter<String> adapterLLamada = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaLlamada);
         llamada.setAdapter(adapterLLamada);
-//        metodos.cargarUrbanizacionProspectos(listaUrbanizacion);
-//        ArrayAdapter<String> adapterURB = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,listaUrbanizacion);
-//        urbanizacion.setAdapter(adapterURB);
+
     }
 
     public void getUrbanizacionProyectos(){
@@ -154,6 +155,17 @@ public class updateProspecto extends Fragment {
                         }
                         ArrayAdapter<Proyectos2> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line,listProyectos);
                         spinnerProyectos.setAdapter(adapter);
+
+
+                        Integer j = spinnerProyectos.getCount();
+                        for(Integer i=0;i<=j;i++){
+                            spinnerProyectos.setSelection(i);
+                            if(spinnerProyectos.getItemAtPosition(i).toString().contains(datoURB)){
+                                spinnerProyectos.setSelection(i);
+                                break;
+                            }
+                        }
+
                     }catch(JSONException e) {
                         Toast.makeText(getContext(), "No se cargaron los referidores o no existen aun", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
@@ -186,16 +198,7 @@ public class updateProspecto extends Fragment {
         mViewModel = new ViewModelProvider(this).get(UpdateProspectoViewModel.class);
         // TODO: Use the ViewModel
     }
-//    public void elegirSpinnerUrbanizacion(String valor){
-//        Integer j = spinnerProyectos.getCount();
-//        for(int i=1;i<=j;i++){
-//            spinnerProyectos.setSelection(i);
-//            if(spinnerProyectos.getItemAtPosition(i).toString().equals(valor)){
-//                spinnerProyectos.setSelection(i);
-//                break;
-//            }
-//        }
-//    }
+
     public void elegirSpinnerLlamada(String valor){
         Integer j = llamada.getCount();
         for(int i=0;i<=j;i++){
@@ -206,9 +209,6 @@ public class updateProspecto extends Fragment {
             }
         }
     }
-
-
-
 
     public void updateProspecto(){
         StringRequest request = new StringRequest(Request.Method.POST, URL_updateprospecto, new Response.Listener<String>() {
@@ -251,5 +251,7 @@ public class updateProspecto extends Fragment {
         requestQueue.add(request);
 
     }
+
+
 
 }

@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="*Asesor"
-            android:textColor="@color/azul_novi"
+            android:textColor="@color/red"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -72,6 +72,7 @@
             android:textSize="14sp"
             android:hint="Nombre del Asesor de ventas"
             android:inputType="textCapCharacters"
+
             >
         </EditText>
 
@@ -79,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="*Grupo"
-            android:textColor="@color/azul_novi"
+            android:textColor="@color/red"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -100,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="*Codigo del Asesor"
-            android:textColor="@color/azul_novi"
+            android:textColor="@color/red"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -134,7 +135,7 @@
                 android:textColor="@color/azul_novi"
                 android:textSize="14sp"
                 android:hint="Nombre completo del prospecto/cliente"
-                android:inputType="textCapWords"
+                android:inputType="textCapCharacters"
                 >
             </EditText>
         <TextView
@@ -153,9 +154,24 @@
             android:layout_height="wrap_content"
             android:textColor="@color/azul_novi"
             android:inputType="number"
-            android:maxLength="9"
+            android:maxLength="20"
             android:textSize="14sp">
         </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/errorProspecto"
+            android:text="******PROSPECTO YA REGISTRADO******"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:gravity="center"
+            >
+        </TextView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -255,6 +271,35 @@
             android:inputType="textCapCharacters"
             android:textSize="14sp">
         </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*Recordatorio: El telefono registrado debe ser tal cual es el numero del cliente sin alteracion alguna ni codigo pais a menos de que se tratara de un telefono extranjero*"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="**Revisar si el o los prospectos fueron registrado con exito con la informacion correcta (asesor y codigo)*"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            >
+        </TextView>
         <Button
             android:id="@+id/prospectoRegistrar"
             android:layout_width="match_parent"

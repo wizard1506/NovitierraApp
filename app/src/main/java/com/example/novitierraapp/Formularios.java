@@ -445,12 +445,9 @@ public class Formularios extends Fragment {
                             DeshabilitarBoton();
                             new Handler().postDelayed(new Runnable(){
                                 public void run(){
-                                    if(registrarDatos()){
-                                        enviarEncuesta();
-                                        generarPDF();
-                                    }else {
-                                        Toast.makeText(getContext(), "Error, revisar mis formularios", Toast.LENGTH_LONG).show();
-                                    }
+                                    registrarTitular();
+                                    enviarEncuesta();
+                                    generarPDF();
                                 }
                             }, 1000); //1000 millisegundos = 1 segundo.
                             Toast.makeText(getContext(), "Generando Formularios verifique bien todo los datos...", Toast.LENGTH_LONG).show();
@@ -543,10 +540,6 @@ public class Formularios extends Fragment {
     }
     /// fin metodos y funciones necesarios para encuesta
 
-    public Boolean registrarDatos(){
-        registrarTitular();
-        return true;
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

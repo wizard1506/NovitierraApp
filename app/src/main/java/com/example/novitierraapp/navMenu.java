@@ -1,5 +1,6 @@
 package com.example.novitierraapp;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import com.google.android.material.internal.NavigationMenu;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -90,5 +92,40 @@ public class navMenu extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+    @Override
+    public void onBackPressed() {
+        // Aquí puedes poner la lógica para manejar el botón de atrás
+        // Obtén el NavController de tu actividad
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+// Verifica si el fragmento actual es nav_home
+        if (navController.getCurrentDestination().getId() == R.id.nav_home) {
+            // Por ejemplo, si quieres mostrar un diálogo de confirmación antes de cerrar la actividad
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Estás seguro de que quieres salir?");
+            builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish(); // Cierra la actividad actual
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss(); // Descarta el diálogo sin cerrar la actividad
+                }
+            });
+            builder.show();
+        } else {
+            super.onBackPressed();
+        }
+
+
+    }
+
+
+
 
 }

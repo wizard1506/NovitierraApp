@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -35,8 +38,10 @@ import Adapters.AdapterProspectos;
 import Adapters.AdapterReferidos;
 
 public class misReferidos extends AppCompatActivity {
-ArrayList<Referidos> listReferidos = new ArrayList<>();
-RecyclerView recycler ;
+    ArrayList<Referidos> listReferidos = new ArrayList<>();
+    RecyclerView recycler ;
+    EditText etbuscarReferidos;
+    AdapterReferidos madapter;
 
     private  static String URL_referidos="http://wizardapps.xyz/novitierra/api/cargarReferidos.php";
 
@@ -44,12 +49,40 @@ RecyclerView recycler ;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_referidos);
+        etbuscarReferidos = findViewById(R.id.etbuscarReferidos);
+        etbuscarReferidos.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         recycler = findViewById(R.id.recyclerReferidos);
         recycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
         cargarReferidos();
 
     }
 
+    private void filter(String text){
+        ArrayList<Referidos> filteredListReferidos = new ArrayList<>();
+
+        for (Referidos item: listReferidos ){
+            if (item.getNombres().toLowerCase().contains(text.toLowerCase()) || item.getApellidos().toLowerCase().contains(text.toLowerCase()) || item.getTelf().toString().toLowerCase().contains(text.toLowerCase()) ){
+                filteredListReferidos.add(item);
+            }
+        }
+        madapter.filterListReferidos(filteredListReferidos);
+        recycler.setAdapter(madapter);
+    }
 
     public void cargarReferidos(){
         RequestQueue requestQueue;
@@ -68,6 +101,7 @@ RecyclerView recycler ;
                                             ,respuesta.getInt("telf")));
                         }
                         AdapterReferidos adapterReferidos = new AdapterReferidos(listReferidos);
+                        madapter=new AdapterReferidos(listReferidos); ///importante
                         recycler.setAdapter(adapterReferidos);
                     }catch(JSONException e) {
                         Toast.makeText(getApplicationContext(), "No se cargaron los referidos o no existen aun", Toast.LENGTH_LONG).show();

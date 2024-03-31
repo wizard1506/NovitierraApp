@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/misFormularios"
         android:name="com.example.novitierraapp.misFormularios"
-        android:label="Mis Formularios"
+        android:label="Clientes"
         tools:layout="@layout/mis_formularios_fragment" />
     <fragment
         android:id="@+id/encuesta"
@@ -108,6 +108,11 @@
         android:name="com.example.novitierraapp.informacion"
         android:label="Informacion"
         tools:layout="@layout/informacion_fragment" />
+    <fragment
+        android:id="@+id/nuevoSeguimiento"
+        android:name="com.example.novitierraapp.nuevoSeguimiento"
+        android:label="Seguimiento"
+        tools:layout="@layout/fragment_nuevo_seguimiento" />
 
     <!--    <navigation android:id="@+id/navigation3"-->
 <!--        app:startDestination="@id/navigation2">-->

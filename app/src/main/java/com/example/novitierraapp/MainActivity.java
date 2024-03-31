@@ -6,8 +6,10 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -212,19 +214,54 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i <array.length() ; i++) {
                             JSONObject respuesta = array.getJSONObject(i);
 //                            Global.id_user=respuesta.getInt("id_usuario");
-                            Global.useridSesion=respuesta.getString("id_usuario");
-                            Global.nombreSesion=respuesta.getString("nombres");
-                            Global.apellidoSesion=respuesta.getString("apellidos");
-                            Global.ciSesion = respuesta.getString("ci");
-                            Global.telefonoSesion = respuesta.getString("telefono");
-                            Global.codigo=respuesta.getInt("codigo");
-                            Global.grupo = respuesta.getString("grupo");
-                            Global.userSesion=respuesta.getString("usuario");
-                            Global.upass=respuesta.getString("upassword");
+
+                            Global.setUseridSesion(respuesta.getString("id_usuario"));
+                            Global.setNombreSesion(respuesta.getString("nombres"));
+                            Global.setApellidoSesion(respuesta.getString("apellidos"));
+                            Global.setCiSesion(respuesta.getString("ci"));
+                            Global.setTelefonoSesion(respuesta.getString("telefono"));
+                            Global.setCodigo(respuesta.getInt("codigo"));
+                            Global.setGrupo(respuesta.getString("grupo"));
+                            Global.setUserSesion(respuesta.getString("usuario"));
+                            Global.setUpass(respuesta.getString("upassword"));
+
+                            SharedPreferences preferences = getSharedPreferences("sesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+
+                            // Guardar el ID del usuario en SharedPreferences
+                            editor.putString("userID", respuesta.getString("id_usuario"));
+
+                            // Guardar nombres y apellidos en SharedPreferences
+                            editor.putString("nombre", respuesta.getString("nombres"));
+                            editor.putString("apellido", respuesta.getString("apellidos"));
+
+                            // Guardar CI, teléfono, código, grupo, usuario y contraseña en SharedPreferences
+                            editor.putString("ci", respuesta.getString("ci"));
+                            editor.putString("telefono", respuesta.getString("telefono"));
+                            editor.putInt("codigo", respuesta.getInt("codigo"));
+                            editor.putString("grupo", respuesta.getString("grupo"));
+                            editor.putString("usuario", respuesta.getString("usuario"));
+                            editor.putString("upassword", respuesta.getString("upassword"));
+
+                            // Aplicar los cambios en SharedPreferences
+                            editor.apply();
+
+
+//                            Global.useridSesion=respuesta.getString("id_usuario");
+//                            Global.nombreSesion=respuesta.getString("nombres");
+//                            Global.apellidoSesion=respuesta.getString("apellidos");
+//                            Global.ciSesion = respuesta.getString("ci");
+//                            Global.telefonoSesion = respuesta.getString("telefono");
+//                            Global.codigo=respuesta.getInt("codigo");
+//                            Global.grupo = respuesta.getString("grupo");
+//                            Global.userSesion=respuesta.getString("usuario");
+//                            Global.upass=respuesta.getString("upassword");
                             usu=respuesta.getString("usuario");
                             pass=respuesta.getString("upassword");
                             usu2=userLogin.getText().toString();
                             pass2=passwordLogin.getText().toString();
+
+
                             if(usu2.equals(usu)&&pass2.equals(pass)){
                                 validarUsuario(URL);
                             }else {
@@ -256,5 +293,8 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    }
+
+
+
+}
 

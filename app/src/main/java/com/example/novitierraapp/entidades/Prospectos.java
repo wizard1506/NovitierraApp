@@ -6,7 +6,7 @@ import java.util.Date;
 public class Prospectos {
     Integer id_prospectos ;
     String nombre_completo;
-    Integer telefono;
+    String telefono;
     String llamada;
     String zona;
     String lugar;
@@ -21,7 +21,7 @@ public class Prospectos {
     public Prospectos() {
     }
 
-    public Prospectos(Integer id_prospectos, String nombre_completo, Integer telefono, String llamada, String zona, String lugar, String urbanizacion, String observacion, String asesor, Integer codigo, String vigencia, String fecha) {
+    public Prospectos(Integer id_prospectos, String nombre_completo, String telefono, String llamada, String zona, String lugar, String urbanizacion, String observacion, String asesor, Integer codigo, String vigencia, String fecha) {
         this.id_prospectos = id_prospectos;
         this.nombre_completo = nombre_completo;
         this.telefono = telefono;
@@ -52,11 +52,11 @@ public class Prospectos {
         this.nombre_completo = nombre_completo;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

@@ -61,7 +61,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/azul_novi"
             android:inputType="textCapCharacters"
-            android:maxLength="9"
             android:textSize="14sp">
         </EditText>
 

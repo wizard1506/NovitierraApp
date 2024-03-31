@@ -54,7 +54,7 @@ public class AdapterTitulares extends RecyclerView.Adapter<AdapterTitulares.View
         Titular titular = listTitulares.get(position);
         holder.numero.setText(String.valueOf(position+1)+".-");
         holder.codigot.setText(String.valueOf(titular.getId_titular()));
-        holder.nombret.setText(titular.getNombres());
+        holder.nombret.setText(titular.getNombres().toUpperCase()+" "+titular.getApellidoP().toUpperCase()+" "+ titular.getApellidoM().toUpperCase());
         holder.documentot.setText(String.valueOf(titular.getNro_documento()));
         holder.urbanizaciont.setText(titular.getUrbanizacion());
         holder.proyectot.setText(titular.getProyecto().toString());
@@ -141,6 +141,10 @@ public class AdapterTitulares extends RecyclerView.Adapter<AdapterTitulares.View
     @Override
     public int getItemCount() {
         return listTitulares.size();
+    }
+    public void filterListTitular(ArrayList<Titular> filteredListTitular){
+        listTitulares = filteredListTitular;
+        notifyDataSetChanged();
     }
 
     public class ViewHolderTitulares extends RecyclerView.ViewHolder {
